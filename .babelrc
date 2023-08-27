@@ -1,3 +1,6 @@
 {
-  "presets": ["@babel/preset-react", "@babel/preset-env"]
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }] // react의 preset의 runtime은 default가 classic(자동 jsx변환X)..따라서 automatic옵션을 줘야 사용때마다 React import하지 않음
+  ]
 }

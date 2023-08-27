@@ -14,6 +14,9 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./dist"),
   },
+  resolve: {
+    extensions: [".js", ".jsx", "..."],
+  },
   // 설치한 loader를 설정
   module: {
     rules: [

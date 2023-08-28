@@ -9,6 +9,7 @@ export const Register = () => {
           <FormInput placeholder="name" />
           <FormInput placeholder="password" />
           <FormInput placeholder="email" />
+          <button>Submit</button>
         </StyledForm>
       </Wrapper>
     </>

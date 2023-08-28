@@ -5,7 +5,7 @@ export const FormInput = ({ placeholder }) => {
     <>
       <StyledFormInputContainer className="formInput">
         <StyledLabel htmlFor={placeholder}>{placeholder}</StyledLabel>
-        <StyledInput type="text" placeholder={placeholder} />
+        <StyledInput type="text" placeholder={placeholder} id={placeholder} />
       </StyledFormInputContainer>
     </>
   );

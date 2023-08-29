@@ -1,5 +1,5 @@
 import React from "react";
-import "../src/css/style.css";
+import "./css/style.css";
 import { Route, Routes } from "react-router-dom";
 import { Register } from "./views/Register";
 import { Socket } from "./views/Socket";

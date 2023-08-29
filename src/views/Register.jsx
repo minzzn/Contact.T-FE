@@ -30,10 +30,15 @@ export const Register = () => {
         <StyledForm noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <StyledFormGroup>
-              <StyledFormControl
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
+              <StyledNameWrapper>
+                <StyledFormControl
+                  className="input"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <StyledLabel className="nameLabel">Name</StyledLabel>
+                <StyledSpan className="nameSpan" />
+              </StyledNameWrapper>
               <Form.Control.Feedback type="invalid">
                 이름을 입력해주세요
               </Form.Control.Feedback>
@@ -49,17 +54,19 @@ export const Register = () => {
 
 const StyledWrapper = styled.div`
   padding: 40px;
-
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
+const StyledNameWrapper = styled.div`
+  height: 50px;
+`;
+
 // form 태그
 const StyledForm = styled(Form)`
   width: max-content;
-  padding: 30px;
-
+  padding: 40px;
   box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 `;
@@ -68,15 +75,59 @@ const StyledForm = styled(Form)`
 const StyledFormGroup = styled(Form.Group)`
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 `;
 
 // input 태그
 const StyledFormControl = styled(Form.Control).attrs({
   required: true,
   type: "text",
-  placeholder: "User Name",
 })`
+  width: 100%;
   padding: 10px;
   border: none;
+  border-bottom: solid #aaaaaa 1px;
+  font-size: 16px;
+  color: #222222;
+  background: none;
+
+  &::placeholder {
+    color: #aaaaaa;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+const StyledLabel = styled.label`
+  position: relative;
+  font-size: 20px;
+  color: #aaa;
+  right: -9px;
+  top: -33px;
+  transition: all 0.2s;
+
+  ${StyledFormControl}:focus + & {
+    font-size: 16px;
+    bottom: 40px;
+    color: #666;
+    font-weight: bold;
+  }
+  ${StyledFormControl}:valid + & {
+    font-size: 16px;
+    bottom: 40px;
+    color: #666;
+    font-weight: bold;
+  }
+`;
+
+const StyledSpan = styled.span`
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #666;
+  border-radius: 2px;
+  position: relative;
+  top: -28px;
+  transition: 0.5s;
 `;

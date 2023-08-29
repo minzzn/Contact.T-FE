@@ -12,7 +12,7 @@ module.exports = {
   // 번들링 된 js 파일이 저장될 경로와 이름
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "/dist"),
   },
   resolve: {
     extensions: [".js", ".jsx", "..."],

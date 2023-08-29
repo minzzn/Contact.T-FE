@@ -9,7 +9,6 @@ export const Socket = () => {
 
   return (
     <>
-      {document.body.append(scripts)}
       <div class="wrapper">
         <div class="user-container">
           <label for="nickname">유저명</label>

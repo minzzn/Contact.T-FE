@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 import styled from "styled-components";
 
 export const Register = () => {
   const [validated, setValidated] = useState(false);
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   let navigate = useNavigate();
 
@@ -24,28 +26,55 @@ export const Register = () => {
     event.stopPropagation();
   };
 
+  console.log(userName);
+  console.log(password);
+  console.log(email);
+
   return (
     <>
       <StyledWrapper>
         <StyledForm noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <StyledFormGroup>
-              <StyledNameWrapper>
+              <StyledInnerWrapper>
                 <StyledFormControl
-                  className="input"
+                  type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                 />
-                <StyledLabel className="nameLabel">Name</StyledLabel>
-                <StyledSpan className="nameSpan" />
-              </StyledNameWrapper>
-              <Form.Control.Feedback type="invalid">
-                이름을 입력해주세요
-              </Form.Control.Feedback>
+                <StyledLabel>Name</StyledLabel>
+                <StyledSpan />
+              </StyledInnerWrapper>
+              {/* todo : 에러메시지 */}
+            </StyledFormGroup>
+
+            <StyledFormGroup>
+              <StyledInnerWrapper>
+                <StyledFormControl
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <StyledLabel>Password</StyledLabel>
+                <StyledSpan />
+              </StyledInnerWrapper>
+              {/* todo : 에러메시지 */}
+            </StyledFormGroup>
+
+            <StyledFormGroup>
+              <StyledInnerWrapper>
+                <StyledFormControl
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <StyledLabel>E-mail</StyledLabel>
+                <StyledSpan />
+              </StyledInnerWrapper>
+              {/* todo : 에러메시지 */}
             </StyledFormGroup>
           </Row>
-
-          <Button type="submit">Submit form</Button>
+          <StyledBtn type="submit">Submit</StyledBtn>
         </StyledForm>
       </StyledWrapper>
     </>
@@ -58,11 +87,10 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const StyledNameWrapper = styled.div`
+const StyledInnerWrapper = styled.div`
   height: 50px;
+  max-width: 298px;
 `;
-
 // form 태그
 const StyledForm = styled(Form)`
   width: max-content;
@@ -70,18 +98,32 @@ const StyledForm = styled(Form)`
   box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 `;
+const StyledBtn = styled(Button).attrs({
+  type: "button",
+})`
+  padding: 8px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 7px;
 
+  &:hover,
+  &:focus {
+    background-color: #aaa;
+  }
+`;
 // grouping 태그
 const StyledFormGroup = styled(Form.Group)`
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 `;
-
 // input 태그
 const StyledFormControl = styled(Form.Control).attrs({
   required: true,
-  type: "text",
 })`
   width: 100%;
   padding: 10px;
@@ -98,36 +140,44 @@ const StyledFormControl = styled(Form.Control).attrs({
     outline: none;
   }
 `;
-
 const StyledLabel = styled.label`
   position: relative;
   font-size: 20px;
   color: #aaa;
   right: -9px;
   top: -33px;
-  transition: all 0.2s;
+  transition: all 0.5s;
 
   ${StyledFormControl}:focus + & {
-    font-size: 16px;
-    bottom: 40px;
+    font-size: 20px;
+    top: -57px;
     color: #666;
     font-weight: bold;
   }
   ${StyledFormControl}:valid + & {
-    font-size: 16px;
-    bottom: 40px;
+    font-size: 20px;
+    top: -57px;
     color: #666;
     font-weight: bold;
   }
 `;
-
 const StyledSpan = styled.span`
   display: block;
-  width: 0;
-  height: 2px;
-  background-color: #666;
-  border-radius: 2px;
   position: relative;
   top: -28px;
-  transition: 0.5s;
+  width: 0;
+  height: 2px;
+  /* 왼 -> 오 */
+  left: 0;
+  background-color: #666;
+  border-radius: 2px;
+  transition: all 0.5s;
+
+  /* transition만 안 먹는 중 */
+  ${StyledFormControl}:focus + ${StyledLabel} + & {
+    width: 100%;
+  }
+  ${StyledFormControl}:valid + ${StyledLabel} + & {
+    width: 100%;
+  }
 `;

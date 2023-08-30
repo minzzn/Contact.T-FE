@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Row } from "react-bootstrap";
 import styled from "styled-components";
+import "../css/register.css";
 
 export const Register = () => {
   // 유저 정보 객체
@@ -62,6 +63,7 @@ export const Register = () => {
         <StyledForm noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <StyledFormGroup>
+<<<<<<< HEAD
               <StyledInnerWrapper>
                 <StyledFormControl
                   type="text"
@@ -110,6 +112,20 @@ export const Register = () => {
               {!isEmailValid && (
                 <StyledErrorMessage>{errorMsg.email}</StyledErrorMessage>
               )}
+=======
+              <StyledNameWrapper>
+                <StyledFormControl
+                  className="input"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <StyledLabel className="nameLabel">Name</StyledLabel>
+                <StyledSpan className="nameSpan" />
+              </StyledNameWrapper>
+              <Form.Control.Feedback type="invalid">
+                이름을 입력해주세요
+              </Form.Control.Feedback>
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
             </StyledFormGroup>
           </Row>
           <StyledBtn type="submit">Submit</StyledBtn>
@@ -121,15 +137,26 @@ export const Register = () => {
 
 const StyledWrapper = styled.div`
   padding: 40px;
+<<<<<<< HEAD
   height: 100vh;
+=======
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+<<<<<<< HEAD
 const StyledInnerWrapper = styled.div`
   height: 50px;
   max-width: 298px;
 `;
+=======
+
+const StyledNameWrapper = styled.div`
+  height: 50px;
+`;
+
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
 // form 태그
 const StyledForm = styled(Form)`
   width: max-content;
@@ -155,11 +182,19 @@ const StyledBtn = styled(Button)`
 const StyledFormGroup = styled(Form.Group)`
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   margin-bottom: 30px;
+=======
+  margin-bottom: 15px;
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
 `;
 // input 태그
 const StyledFormControl = styled(Form.Control).attrs({
   required: true,
+<<<<<<< HEAD
+=======
+  type: "text",
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
 })`
   width: 100%;
   padding: 10px;
@@ -176,27 +211,45 @@ const StyledFormControl = styled(Form.Control).attrs({
     outline: none;
   }
 `;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
 const StyledLabel = styled.label`
   position: relative;
   font-size: 20px;
   color: #aaa;
   right: -9px;
   top: -33px;
+<<<<<<< HEAD
   transition: all 0.5s;
 
   ${StyledFormControl}:focus + & {
     font-size: 20px;
     top: -57px;
+=======
+  transition: all 0.2s;
+
+  ${StyledFormControl}:focus + & {
+    font-size: 16px;
+    bottom: 40px;
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
     color: #666;
     font-weight: bold;
   }
   ${StyledFormControl}:valid + & {
+<<<<<<< HEAD
     font-size: 20px;
     top: -57px;
+=======
+    font-size: 16px;
+    bottom: 40px;
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
     color: #666;
     font-weight: bold;
   }
 `;
+<<<<<<< HEAD
 const StyledSpan = styled.span`
   display: block;
   position: relative;
@@ -221,4 +274,16 @@ const StyledErrorMessage = styled.p`
   font-size: 12px;
   font-weight: 400;
   color: red;
+=======
+
+const StyledSpan = styled.span`
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #666;
+  border-radius: 2px;
+  position: relative;
+  top: -28px;
+  transition: 0.5s;
+>>>>>>> 9c3338412548716e0d90128cd96f8f4e7591272f
 `;

@@ -1,42 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Row } from "react-bootstrap";
+import { auth } from "../firebase";
 import styled from "styled-components";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const Register = () => {
-  // 유저 정보 객체
-  const user = {
-    name: "",
-    password: "",
-    email: "",
-  };
-
-  const errorMsg = {
-    name: "2글자 이상 적어주세요",
-    password: "6글자 이상 적어주세요",
-    email: "이메일 형식을 제대로 적어주세요",
-  };
-
+  // 전체 form validation 여부
   const [validated, setValidated] = useState(false);
+  // 유저, 패스워드, 이메일 값 저장
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  // 각각의 input값들이 유효한 값을 지니고 있는지 여부 확인 상태
   const [isNameValid, setIsNameValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
+  // 구글 로그인 정보
+  const [googleUserData, setGoogleUserData] = useState(null);
 
   let navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    console.log("진입");
     event.preventDefault();
     event.stopPropagation();
     // form validation이 true
     if (checkValidity()) {
-      console.log("유효성 확인했어요");
+      // todo: data fetch 방식으로 변환
       setValidated(true);
       navigate("/login");
+    } else {
+      // 유효성 검사 실패한 경우
+      console.log(isNameValid);
+      setValidated(false);
     }
-    setValidated(true);
+  };
+
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        setGoogleUserData(data.user);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // todo : 화면 라우팅 : 메인 화면으로 이동
   };
 
   const checkValidity = () => {
@@ -64,55 +75,73 @@ export const Register = () => {
             <StyledFormGroup>
               <StyledInnerWrapper>
                 <StyledFormControl
+                  required
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   isValid={isNameValid}
+                  isInvalid={!isNameValid}
                 />
                 <StyledLabel>Name</StyledLabel>
                 <StyledSpan />
               </StyledInnerWrapper>
-              {/* todo : 에러메시지 */}
-              {!isNameValid && (
-                <StyledErrorMessage>{errorMsg.name}</StyledErrorMessage>
-              )}
+              {/* todo : 에러메시지 : 리액트 부트스트랩 Feedback 안 먹힘 */}
             </StyledFormGroup>
 
             <StyledFormGroup>
               <StyledInnerWrapper>
                 <StyledFormControl
+                  required
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   isValid={isPasswordValid}
+                  isInvalid={!isPasswordValid}
                 />
                 <StyledLabel>Password</StyledLabel>
                 <StyledSpan />
               </StyledInnerWrapper>
               {/* todo : 에러메시지 */}
-              {!isPasswordValid && (
-                <StyledErrorMessage>{errorMsg.password}</StyledErrorMessage>
-              )}
             </StyledFormGroup>
 
             <StyledFormGroup>
               <StyledInnerWrapper>
                 <StyledFormControl
-                  type="email"
+                  required
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   isValid={isEmailValid}
+                  isInvalid={!isEmailValid}
                 />
                 <StyledLabel>E-mail</StyledLabel>
                 <StyledSpan />
               </StyledInnerWrapper>
               {/* todo : 에러메시지 */}
-              {!isEmailValid && (
-                <StyledErrorMessage>{errorMsg.email}</StyledErrorMessage>
-              )}
             </StyledFormGroup>
           </Row>
-          <StyledBtn type="submit">Submit</StyledBtn>
+          <StyledBtn type="submit">SIGN UP</StyledBtn>
+          <div
+            style={{
+              width: "100%",
+              height: "2px",
+              backgroundColor: "black",
+              marginTop: "30px",
+            }}
+          ></div>
+          {/* todo : 구글 로그인 폼 */}
+          <StyledGoogleBtn onClick={handleGoogleLogin}>
+            <i
+              className="fab fa-google"
+              style={{
+                fontSize: "1.2rem",
+                lineHeight: "inherit",
+                marginRight: "0.8rem",
+                color: "orange",
+              }}
+            ></i>
+            <span>SIGN IN WITH GOOGLE</span>
+          </StyledGoogleBtn>
         </StyledForm>
       </StyledWrapper>
     </>
@@ -158,9 +187,7 @@ const StyledFormGroup = styled(Form.Group)`
   margin-bottom: 30px;
 `;
 // input 태그
-const StyledFormControl = styled(Form.Control).attrs({
-  required: true,
-})`
+const StyledFormControl = styled(Form.Control)`
   width: 100%;
   padding: 10px;
   border: none;
@@ -168,6 +195,7 @@ const StyledFormControl = styled(Form.Control).attrs({
   font-size: 16px;
   color: #222222;
   background: none;
+  font-weight: 600;
 
   &::placeholder {
     color: #aaaaaa;
@@ -217,8 +245,18 @@ const StyledSpan = styled.span`
     width: 100%;
   }
 `;
-const StyledErrorMessage = styled.p`
-  font-size: 12px;
-  font-weight: 400;
-  color: red;
+const StyledGoogleBtn = styled.button`
+  width: 100%;
+  height: 40px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  &:hover {
+    background-color: #aaa;
+  }
 `;

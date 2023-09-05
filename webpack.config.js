@@ -2,6 +2,8 @@ const path = require("path"); // output에서 사용할 path
 // 사용할 플러그인 불러오기
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// env 환경변수 처리 플러그인
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "development",
@@ -53,6 +55,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
+    // dotenv-webpack 플러그인 사용
+    new Dotenv(),
   ],
   devtool: "eval-cheap-source-map",
 };

@@ -1,5 +1,3 @@
-// import "../chat";
-
 export const Socket = () => {
   // todo : script 태그 동적으로 집어넣기
   const scripts = `

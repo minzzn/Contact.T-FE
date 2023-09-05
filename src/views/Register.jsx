@@ -4,8 +4,23 @@ import { Button, Form, Row } from "react-bootstrap";
 import { auth } from "../firebase";
 import styled from "styled-components";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import axios from "axios";
+const SERVER_URL = "http://localhost:8080"; // 로컬로 임시 설정함 (배포시 변경)
 
 export const Register = () => {
+  // api 테스트 (axios, fetch)
+  const [msg, setMsg] = useState(null);
+  const fetchData = async () => {
+    const response = await axios.get(SERVER_URL + "/api/msg");
+    setMsg(response.data);
+    //fetch()
+    //  .then((response) => response.json())
+    //  .then((data) => setMsg(data));
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   // 전체 form validation 여부
   const [validated, setValidated] = useState(false);
   // 유저, 패스워드, 이메일 값 저장

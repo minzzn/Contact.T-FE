@@ -47,6 +47,8 @@ module.exports = {
   devServer: {
     compress: true,
     port: 3000,
+    // 해당 항목 작성
+    historyApiFallback: true,
   },
   // 플러그인 적용
   plugins: [

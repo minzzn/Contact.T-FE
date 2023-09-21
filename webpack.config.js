@@ -46,7 +46,7 @@ module.exports = {
   // webpack-dev-server 옵션 설정
   devServer: {
     compress: true,
-    port: 3000,
+    port: 8080,
     // 해당 항목 작성
     historyApiFallback: true,
   },

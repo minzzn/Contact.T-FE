@@ -6,13 +6,62 @@ export const Register2 = () => {
             <StyledContainer>
                 <StyledRegisterWrapper>
                     <StyledH1>회원가입</StyledH1>
+                    {/* 여러 inputWrapper들을 묶기 위한 input's'Wrapper */}
                     <StyledInputsWrapper>
-                        <StyledInputBox>
+                        {/* 하나의 인풋 박스 형식 : styledInputWrapper*/}
+                        {/* user-name */}
+                        <StyledInputWrapper>  
                             <StyledLabel>이름</StyledLabel>
-                            <StyledInput />
-                        </StyledInputBox>
-                    </StyledInputsWrapper>
+                            {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
+                            <StyledInputBox>
+                                <StyledIcon className="fa-user"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* password */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>비밀번호</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-lock"></StyledIcon>
+                                <StyledInput type="password"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* email */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>이메일</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-envelope"></StyledIcon>
+                                <StyledInput type="email"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* 소속 학교 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>소속 학교</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-school"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* 학년 / 반 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>학년 & 반</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-table"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>  
+                        {/* 닉네임 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>닉네임</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-bullhorn"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>        
+                    </StyledInputsWrapper>                  
                 </StyledRegisterWrapper>
+
+                {/* <StyledButton></StyledButton> */}
             </StyledContainer>
         </>
     )
@@ -42,22 +91,49 @@ const StyledInputsWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 25px;
 `;
-const StyledInputBox = styled.div`
+const StyledInputWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: 20px;
 `
 const StyledLabel = styled.label`
-  width  : 100%;
-  font-size: 20px;
-  font-weight: 500;
+    width  : 100%;
+    font-size: 24px;
+    font-weight: 500;
 `;
-const StyledInput = styled.input`
+const StyledInputBox = styled.div`
     width: 100%;
-    height: 35px;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+`;
+const StyledIcon = styled.i.attrs(({className}) => ({
+    // className을 props로 전달 : 아이콘을 클래스명으로 처리하기 때문에
+    className: `fa-solid ${className}`,
+}))`
+    font-size: 24px;
+    // styledInputBox를 기준으로 배치
+    position: absolute;
+    top: 8.5px;
+    left: 7px;
+`;
+const StyledInput = styled.input.attrs(({type}) => ({
+    type: type,
+}))`
+    width: 100%;
+    height: 45px;
     font-size: 18px;
     font-weight: 500;
+    // outside section of border
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black;
+    transition: border-bottom 0.5s;
+    padding-left: 48px;
+    &:focus {
+        border-bottom: 2px solid orange;
+    }
 `;

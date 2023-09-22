@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-  mode: "development",
+  // mode: "development",
   // 최초 진입점
   entry: {
     main: "./src/index.js",
@@ -46,9 +46,12 @@ module.exports = {
   // webpack-dev-server 옵션 설정
   devServer: {
     compress: true,
-    port: 8080,
+    port: 3000,
     // 해당 항목 작성
     historyApiFallback: true,
+    proxy: {
+      "/api": "http://localhost:8080"
+    }
   },
   // 플러그인 적용
   plugins: [
@@ -60,5 +63,4 @@ module.exports = {
     // dotenv-webpack 플러그인 사용
     new Dotenv(),
   ],
-  devtool: "eval-cheap-source-map",
 };

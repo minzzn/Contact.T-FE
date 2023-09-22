@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Register2 = () => {
+export const Register = () => {
     return (
         <>
             <StyledContainer>
@@ -58,10 +58,9 @@ export const Register2 = () => {
                                 <StyledInput type="text"/>
                             </StyledInputBox>
                         </StyledInputWrapper>        
-                    </StyledInputsWrapper>                  
+                    </StyledInputsWrapper>
+                    <StyledButton>회원가입</StyledButton>           
                 </StyledRegisterWrapper>
-
-                {/* <StyledButton></StyledButton> */}
             </StyledContainer>
         </>
     )
@@ -73,7 +72,7 @@ const StyledContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding: 40px;
 `;
 const StyledRegisterWrapper = styled.div`
     width: 50%;
@@ -91,7 +90,9 @@ const StyledInputsWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
+    margin-top: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 `;
 const StyledInputWrapper = styled.div`
     width: 100%;
@@ -126,6 +127,7 @@ const StyledInput = styled.input.attrs(({type}) => ({
     width: 100%;
     height: 45px;
     font-size: 18px;
+    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     // outside section of border
     outline: none;
@@ -135,5 +137,24 @@ const StyledInput = styled.input.attrs(({type}) => ({
     padding-left: 48px;
     &:focus {
         border-bottom: 2px solid orange;
+    }
+`;
+const StyledButton = styled.button`
+    width: 60%;
+    height: 60px;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 25px;
+    background-color: orange;
+    color: black;
+    outline: none;
+    border: 2px solid #000;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+        background-color: #fdbc43;
     }
 `;

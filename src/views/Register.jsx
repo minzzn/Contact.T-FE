@@ -150,7 +150,7 @@ const StyledButton = styled.button`
     color: black;
     outline: none;
     border: 2px solid #000;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
     transition: all 0.5s;
 

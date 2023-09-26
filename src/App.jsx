@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/style.css";
+import "./css/public.css";
 import { Route, Routes } from "react-router-dom";
 import { Register } from "./views/Register";
 import { Login } from "./views/Login";

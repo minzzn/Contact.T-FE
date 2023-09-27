@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { useState } from "react";
 
 export const Register = () => {
 
     const [name, setName] = useState("");
-    const [password, setPassword] = useStae("");
-    const [email, setEmail] = useStae("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
     const onSumbit = (e) => {
         e.preventDefault();

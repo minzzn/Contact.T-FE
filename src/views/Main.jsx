@@ -50,7 +50,8 @@ const ChatListContainer = styled.div`
     // 세로로 쌓이도록
     flex-direction: column;
     // 가로 중앙 정렬
-    align-items: center
+    align-items: center;
+    border-right: 1px solid var(--bg-black);
 `;
 const ChatListHeader = styled.div`
   width: 100%;

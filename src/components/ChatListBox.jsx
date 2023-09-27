@@ -7,7 +7,7 @@ export const ChatListBox = ({username}) => {
         <>
             <Container>
                 <ImgContainer>
-                    <p>1</p>
+                    <p></p>
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{username}</h2>
@@ -37,10 +37,9 @@ const Container = styled.div`
 const ImgContainer = styled.div`
     overflow: hiddden;
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid var(--bg-white);
     border-radius: 10%;
     margin-right: 2vw;
-    color: black;
 `;
 
 const NameAndContentContainer = styled.div`

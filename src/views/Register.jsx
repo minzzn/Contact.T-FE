@@ -1,6 +1,16 @@
 import styled from "styled-components"
+import { useState } from "react";
 
 export const Register = () => {
+
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+
+    const onSumbit = (e) => {
+        e.preventDefault();
+    }
+
     return (
         <>
             <StyledContainer>
@@ -15,7 +25,7 @@ export const Register = () => {
                             {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
                             <StyledInputBox>
                                 <StyledIcon className="fa-user"></StyledIcon>
-                                <StyledInput type="text"/>
+                                <StyledInput type="text" onChange={(e)=> setName(e.target.value)}/>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* password */}
@@ -23,7 +33,7 @@ export const Register = () => {
                             <StyledLabel>비밀번호</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-lock"></StyledIcon>
-                                <StyledInput type="password"/>
+                                <StyledInput type="password" onChange={(e)=> setPassword(e.target.value)}/>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* email */}
@@ -31,7 +41,7 @@ export const Register = () => {
                             <StyledLabel>이메일</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-envelope"></StyledIcon>
-                                <StyledInput type="email"/>
+                                <StyledInput type="email" onChange={(e)=> setEmail(e.target.value)}/>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* 소속 학교 */}
@@ -49,17 +59,9 @@ export const Register = () => {
                                 <StyledIcon className="fa-table"></StyledIcon>
                                 <StyledInput type="text"/>
                             </StyledInputBox>
-                        </StyledInputWrapper>  
-                        {/* 닉네임 */}
-                        <StyledInputWrapper>  
-                            <StyledLabel>닉네임</StyledLabel>
-                            <StyledInputBox>
-                                <StyledIcon className="fa-bullhorn"></StyledIcon>
-                                <StyledInput type="text"/>
-                            </StyledInputBox>
-                        </StyledInputWrapper>        
+                        </StyledInputWrapper>       
                     </StyledInputsWrapper>
-                    <StyledButton>회원가입</StyledButton>           
+                    <StyledButton onSubmit={onSumbit}>회원가입</StyledButton>           
                 </StyledRegisterWrapper>
             </StyledContainer>
         </>

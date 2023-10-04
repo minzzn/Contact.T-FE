@@ -23,12 +23,13 @@ export const Main = () => {
                     </ChatListHeader>
                     {/* 채팅 목록 리스트 */}
                     <ChatListLiContainer>
+                        {/* components/ChatListBox.jsx */}
                         {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
                     </ChatListLiContainer>
                 </ChatListContainer>
                 {/* 실제 채팅하는 곳 */}
                 <ChatContainer>
-
+                    
                 </ChatContainer>
             </Container>
         </>
@@ -87,15 +88,15 @@ const StyledIcon = styled.i.attrs(({className}) => ({
     margin-right: 1.5vw;
 `;
 
-const ChatContainer = styled.div`
-    width: 70vw;
-    height: 100vh;
-`
-
 const ChatListLiContainer = styled.div`
     width: 100%;
     // 높이는 스크롤 가능하도록 무제한으로
     // 채팅목록 박스들이 세로로 쌓이도록
     display: flex;
     flex-direction: column;
+`
+
+const ChatContainer = styled.div`
+    width: 70vw;
+    height: 100vh;
 `

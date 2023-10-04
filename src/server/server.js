@@ -21,7 +21,7 @@ const io = new Server(server, {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"]
   }
-});
+}); 
 
 // 번들링을 통해 생성된 dist 폴더의 파일들을 서비스하도록 설정 : 개발 모드일 때는 정적으로 서비스하지 않고 클라이언트와 서버를 동시에 실행
 // 참고자료 : https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjok1122&logNo=221545195520

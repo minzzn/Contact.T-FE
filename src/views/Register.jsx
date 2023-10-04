@@ -1,13 +1,74 @@
 import styled from "styled-components"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+    const navigate = useNavigate();
 
+    // 값 상태관리
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [pwd, setPwd] = useState("");
     const [email, setEmail] = useState("");
+    
+    // 오류메시지 상태관리
+    const [nameMsg, setNameMsg] = useState("");
+    const [pwdMsg, setPwdMsg] = useState("");
+    const [emailMsg, setEmailMsg] = useState("");
 
-    const onSumbit = (e) => {
+    // 유효성 검사 상태관리
+    const [isValidName, setIsValidName] = useState(false);
+    const [isValidPwd, setIsValidPwd] = useState(false);
+    const [isValidEmail, setIsValidEmail] = useState(false);
+
+    const onChangeName = (e) => {
+        const currentName = e.target.value;
+        setName(currentName);
+
+        if(currentName.length < 2 || currentName.length > 11) {
+            setNameMsg("이름은 2 글자 이상 10 글자 이하입니다.");
+            setIsValidName(false);
+        } else {
+            setNameMsg("올바른 이름입니다.");
+            setIsValidName(true);
+        }
+    }
+
+    const onChangePwd = (e) => {
+        const currentPwd = e.target.value;
+        const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+        setPwd(currentPwd);
+
+        if(!passwordRegExp.test(currentPwd)) {
+            setPwdMsg("숫자+영문자+특수문자 조합의 8자리 이상 입력하세요");
+            setIsValidPwd(false);
+        } else {
+            setPwdMsg("안전한 비밀번호입니다");
+            setIsValidPwd(true);
+        }
+    }
+
+    const onChangeEmail = (e) => {
+        const currentEmail = e.target.value;
+        const emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+        // todo : 이메일 형식이 완벽하게 .com까지 입력되어야 사용가능한 이메일이라고 문구 뜨게 만들기
+        setEmail(currentEmail);
+
+        if(!emailRegExp.test(currentEmail)) {
+            setEmailMsg("이메일 형식을 올바르게 작성해주세요");
+            setIsValidEmail(false);
+        } else {
+            setEmailMsg("사용 가능한 이메일입니다.");
+            setIsValidEmail(true);
+        }
+    }
+
+
+    const onClick = (e) => {
+        console.log('진입');
+        if(isValidName && isValidPwd && isValidEmail) {
+            navigate('/login');
+            console.log('success');
+        }
         e.preventDefault();
     }
 
@@ -21,47 +82,50 @@ export const Register = () => {
                         {/* 하나의 인풋 박스 형식 : styledInputWrapper*/}
                         {/* user-name */}
                         <StyledInputWrapper>  
-                            <StyledLabel>이름</StyledLabel>
+                            <StyledLabel htmlFor="user">이름</StyledLabel>
                             {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
                             <StyledInputBox>
                                 <StyledIcon className="fa-user"></StyledIcon>
-                                <StyledInput type="text" onChange={(e)=> setName(e.target.value)}/>
+                                <StyledInput type="text" onChange={onChangeName} value={name} id="user"/>
+                                <p className="msg"> {nameMsg} </p>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* password */}
                         <StyledInputWrapper>  
-                            <StyledLabel>비밀번호</StyledLabel>
+                            <StyledLabel htmlFor="pwd">비밀번호</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-lock"></StyledIcon>
-                                <StyledInput type="password" onChange={(e)=> setPassword(e.target.value)}/>
+                                <StyledInput type="password" onChange={onChangePwd} value={pwd} id="pwd"/>
+                                <p className="msg"> {pwdMsg} </p>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* email */}
                         <StyledInputWrapper>  
-                            <StyledLabel>이메일</StyledLabel>
+                            <StyledLabel htmlFor="email">이메일</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-envelope"></StyledIcon>
-                                <StyledInput type="email" onChange={(e)=> setEmail(e.target.value)}/>
+                                <StyledInput type="email" onChange={onChangeEmail} value={email} id="email"/>
+                                <p className="msg"> {emailMsg} </p>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* 소속 학교 */}
                         <StyledInputWrapper>  
-                            <StyledLabel>소속 학교</StyledLabel>
+                            <StyledLabel htmlFor="school">소속 학교</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-school"></StyledIcon>
-                                <StyledInput type="text"/>
+                                <StyledInput type="text" id="school"/>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* 학년 / 반 */}
                         <StyledInputWrapper>  
-                            <StyledLabel>학년 & 반</StyledLabel>
+                            <StyledLabel htmlFor="class">학년 & 반</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-table"></StyledIcon>
-                                <StyledInput type="text"/>
+                                <StyledInput type="text" id="class"/>
                             </StyledInputBox>
                         </StyledInputWrapper>       
                     </StyledInputsWrapper>
-                    <StyledButton onSubmit={onSumbit}>회원가입</StyledButton>           
+                    <StyledButton type="button" onClick={onClick}>회원가입</StyledButton>           
                 </StyledRegisterWrapper>
             </StyledContainer>
         </>

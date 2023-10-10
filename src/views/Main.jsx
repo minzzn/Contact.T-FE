@@ -1,11 +1,30 @@
 import { io } from "socket.io-client"
 import styled from "styled-components";
 import { ChatListBox } from "../components/ChatListBox";
+import { useEffect, useState } from "react";
 
 export const Main = () => {
     // server/server.js에 열어놓은 포트로 연결
     const socket = io.connect('http://localhost:8080/');
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤']
+    const [msg, setMsg] = useState("");
+    const [chats, setChats] = useState([]);
+
+    const SendMsgHandler = () => {
+        // 서버에 메신지 
+        socket.emit("chat message", msg);
+        // 메시지 상태 초기화
+        setMsg("");
+    }
+
+    useEffect(()=>{
+        socket.on("chat message", (msg) => {
+            // 이전 채팅들을 배열에 풀고 새로 들어온 메시지를 배열에 담기
+            setChats([...chats, msg]);
+        })
+    },[chats])
+
+    console.log(msg);
 
     return (
         <>
@@ -29,7 +48,23 @@ export const Main = () => {
                 </ChatListContainer>
                 {/* 실제 채팅하는 곳 */}
                 <ChatContainer>
-                    
+                    <ChatContents>
+                        <ul className="chat_ul">
+                            {
+                                chats.map((data,idx)=> (
+                                    <li key={idx}>{data}</li>
+                                ))
+                            }
+                        </ul>
+                    </ChatContents>
+                    <ChatInputContainer>
+                        <ChatInputArea className="text-area" onChange={(e)=> {
+                            console.log(e.currentTarget.value);
+                        }}/>
+                        <ChatInputBtn onClick={SendMsgHandler}>
+                            <ChatBtnIcon className="fa-solid fa-arrow-up"></ChatBtnIcon>
+                        </ChatInputBtn>
+                    </ChatInputContainer>
                 </ChatContainer>
             </Container>
         </>
@@ -99,4 +134,54 @@ const ChatListLiContainer = styled.div`
 const ChatContainer = styled.div`
     width: 70vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const ChatContents = styled.div`
+    width: 100%;
+`
+
+// 보낼 채팅 입력받는 input, 채팅 보내는 submit btn을 감싸는 div
+const ChatInputContainer = styled.div`
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    position: relative;
+`
+
+const ChatInputArea = styled.textarea`
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    margin: 0 20px 20px 20px;
+    // 상/우/하/좌
+    padding: 13px 20px 13px 13px;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    resize: none;
+    /* 스크롤 안 생기도록 막기 */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`
+const ChatInputBtn = styled.button`
+    width: min-content;
+    height: min-content;
+    position: absolute;
+    right: 18px;
+    top: -3px;
+    margin: 10px 10px;
+    border-radius: 50%;
+    border: 3px solid black;
+`
+
+const ChatBtnIcon = styled.i`
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
 `

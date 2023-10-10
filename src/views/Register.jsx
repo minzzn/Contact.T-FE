@@ -1,262 +1,160 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Form, Row } from "react-bootstrap";
-import { auth } from "../firebase";
-import styled from "styled-components";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import styled from "styled-components"
 
 export const Register = () => {
-  // 전체 form validation 여부
-  const [validated, setValidated] = useState(false);
-  // 유저, 패스워드, 이메일 값 저장
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  // 각각의 input값들이 유효한 값을 지니고 있는지 여부 확인 상태
-  const [isNameValid, setIsNameValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  // 구글 로그인 정보
-  const [googleUserData, setGoogleUserData] = useState(null);
+    return (
+        <>
+            <StyledContainer>
+                <StyledRegisterWrapper>
+                    <StyledH1>회원가입</StyledH1>
+                    {/* 여러 inputWrapper들을 묶기 위한 input's'Wrapper */}
+                    <StyledInputsWrapper>
+                        {/* 하나의 인풋 박스 형식 : styledInputWrapper*/}
+                        {/* user-name */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>이름</StyledLabel>
+                            {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
+                            <StyledInputBox>
+                                <StyledIcon className="fa-user"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* password */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>비밀번호</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-lock"></StyledIcon>
+                                <StyledInput type="password"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* email */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>이메일</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-envelope"></StyledIcon>
+                                <StyledInput type="email"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* 소속 학교 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>소속 학교</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-school"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>
+                        {/* 학년 / 반 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>학년 & 반</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-table"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>  
+                        {/* 닉네임 */}
+                        <StyledInputWrapper>  
+                            <StyledLabel>닉네임</StyledLabel>
+                            <StyledInputBox>
+                                <StyledIcon className="fa-bullhorn"></StyledIcon>
+                                <StyledInput type="text"/>
+                            </StyledInputBox>
+                        </StyledInputWrapper>        
+                    </StyledInputsWrapper>
+                    <StyledButton>회원가입</StyledButton>           
+                </StyledRegisterWrapper>
+            </StyledContainer>
+        </>
+    )
+}
 
-  let navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    console.log("진입");
-    event.preventDefault();
-    event.stopPropagation();
-    // form validation이 true
-    if (checkValidity()) {
-      // todo: data fetch 방식으로 변환
-      setValidated(true);
-      navigate("/login");
-    } else {
-      // 유효성 검사 실패한 경우
-      console.log(isNameValid);
-      setValidated(false);
-    }
-  };
-
-  const handleGoogleLogin = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setGoogleUserData(data.user);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // todo : 화면 라우팅 : 메인 화면으로 이동
-  };
-
-  const checkValidity = () => {
-    // 이름이 2글자 이상이면 true
-    const nameValid = userName.length >= 2;
-    // 비밀번호가 6글자 이상이면 true
-    const pwdValid = password.length > 6;
-    // 이메일 유효 여부 정규표현식 조건을 만족하면 true
-    const emailValid = /^[a-z0-9%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(email);
-
-    // 그렇다면 valid state들을 true로 변경
-    setIsNameValid(nameValid);
-    setIsPasswordValid(pwdValid);
-    setIsEmailValid(emailValid);
-
-    // 세 경우를 모두 만족해야 validity함수는 true반환
-    return nameValid && pwdValid && emailValid;
-  };
-
-  return (
-    <>
-      <StyledWrapper>
-        <StyledForm noValidate validated={validated} onSubmit={handleSubmit}>
-          <Row>
-            <StyledFormGroup>
-              <StyledInnerWrapper>
-                <StyledFormControl
-                  required
-                  type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  isValid={isNameValid}
-                  isInvalid={!isNameValid}
-                />
-                <StyledLabel>Name</StyledLabel>
-                <StyledSpan />
-              </StyledInnerWrapper>
-              {/* todo : 에러메시지 : 리액트 부트스트랩 Feedback 안 먹힘 */}
-            </StyledFormGroup>
-
-            <StyledFormGroup>
-              <StyledInnerWrapper>
-                <StyledFormControl
-                  required
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  isValid={isPasswordValid}
-                  isInvalid={!isPasswordValid}
-                />
-                <StyledLabel>Password</StyledLabel>
-                <StyledSpan />
-              </StyledInnerWrapper>
-              {/* todo : 에러메시지 */}
-            </StyledFormGroup>
-
-            <StyledFormGroup>
-              <StyledInnerWrapper>
-                <StyledFormControl
-                  required
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  isValid={isEmailValid}
-                  isInvalid={!isEmailValid}
-                />
-                <StyledLabel>E-mail</StyledLabel>
-                <StyledSpan />
-              </StyledInnerWrapper>
-              {/* todo : 에러메시지 */}
-            </StyledFormGroup>
-          </Row>
-          <StyledBtn type="submit">SIGN UP</StyledBtn>
-          <div
-            style={{
-              width: "100%",
-              height: "2px",
-              backgroundColor: "black",
-              marginTop: "30px",
-            }}
-          ></div>
-          {/* todo : 구글 로그인 폼 */}
-          <StyledGoogleBtn onClick={handleGoogleLogin}>
-            <i
-              className="fab fa-google"
-              style={{
-                fontSize: "1.2rem",
-                lineHeight: "inherit",
-                marginRight: "0.8rem",
-                color: "orange",
-              }}
-            ></i>
-            <span>SIGN IN WITH GOOGLE</span>
-          </StyledGoogleBtn>
-        </StyledForm>
-      </StyledWrapper>
-    </>
-  );
-};
-
-const StyledWrapper = styled.div`
-  padding: 40px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const StyledContainer = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
 `;
-const StyledInnerWrapper = styled.div`
-  height: 50px;
-  max-width: 298px;
-`;
-// form 태그
-const StyledForm = styled(Form)`
-  width: max-content;
-  padding: 40px;
-  box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-`;
-const StyledBtn = styled(Button)`
-  padding: 8px;
+const StyledRegisterWrapper = styled.div`
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+const StyledH1 = styled.h1`
   width: 100%;
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  font-weight: 500;
-  border: none;
-  border-radius: 7px;
-
-  &:hover {
-    background-color: #aaa;
-  }
+  text-align: left;
+  font-size: 40px;
 `;
-// grouping 태그
-const StyledFormGroup = styled(Form.Group)`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
+const StyledInputsWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 `;
-// input 태그
-const StyledFormControl = styled(Form.Control)`
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-bottom: solid #aaaaaa 1px;
-  font-size: 16px;
-  color: #222222;
-  background: none;
-  font-weight: 600;
-
-  &::placeholder {
-    color: #aaaaaa;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
+const StyledInputWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+`
 const StyledLabel = styled.label`
-  position: relative;
-  font-size: 20px;
-  color: #aaa;
-  right: -9px;
-  top: -33px;
-  transition: all 0.5s;
-
-  ${StyledFormControl}:focus + & {
-    font-size: 20px;
-    top: -57px;
-    color: #666;
-    font-weight: bold;
-  }
-  ${StyledFormControl}:valid + & {
-    font-size: 20px;
-    top: -57px;
-    color: #666;
-    font-weight: bold;
-  }
+    width  : 100%;
+    font-size: 24px;
+    font-weight: 500;
 `;
-const StyledSpan = styled.span`
-  display: block;
-  position: relative;
-  top: -28px;
-  width: 0;
-  height: 2px;
-  /* 왼 -> 오 */
-  left: 0;
-  background-color: #666;
-  border-radius: 2px;
-  transition: all 0.5s;
-
-  /* transition만 안 먹는 중 */
-  ${StyledFormControl}:focus + ${StyledLabel} + & {
+const StyledInputBox = styled.div`
     width: 100%;
-  }
-  ${StyledFormControl}:valid + ${StyledLabel} + & {
-    width: 100%;
-  }
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
 `;
-const StyledGoogleBtn = styled.button`
-  width: 100%;
-  height: 40px;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  &:hover {
-    background-color: #aaa;
-  }
+const StyledIcon = styled.i.attrs(({className}) => ({
+    // className을 props로 전달 : 아이콘을 클래스명으로 처리하기 때문에
+    className: `fa-solid ${className}`,
+}))`
+    font-size: 24px;
+    // styledInputBox를 기준으로 배치
+    position: absolute;
+    top: 8.5px;
+    left: 7px;
+`;
+const StyledInput = styled.input.attrs(({type}) => ({
+    type: type,
+}))`
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    // outside section of border
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black;
+    transition: border-bottom 0.5s;
+    padding-left: 48px;
+    &:focus {
+        border-bottom: 2px solid orange;
+    }
+`;
+const StyledButton = styled.button`
+    width: 60%;
+    height: 60px;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 25px;
+    background-color: orange;
+    color: black;
+    outline: none;
+    border: 2px solid #000;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+        background-color: #fdbc43;
+    }
 `;

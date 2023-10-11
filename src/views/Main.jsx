@@ -10,11 +10,17 @@ export const Main = () => {
     const [msg, setMsg] = useState("");
     const [chats, setChats] = useState([]);
 
-    const SendMsgHandler = () => {
-        // 서버에 메신지 
+    const SendMsgHandler = (e) => {
+        e.preventDefault();
+        // console.log('진입');
+        // console.log(msg);
         socket.emit("chat message", msg);
-        // 메시지 상태 초기화
         setMsg("");
+        // msg를 ui에 표현해주는 함수 필요
+    }
+
+    function changeHandler(e) {
+        setMsg(e.target.value);
     }
 
     useEffect(()=>{
@@ -23,8 +29,6 @@ export const Main = () => {
             setChats([...chats, msg]);
         })
     },[chats])
-
-    console.log(msg);
 
     return (
         <>
@@ -57,14 +61,12 @@ export const Main = () => {
                             }
                         </ul>
                     </ChatContents>
-                    <ChatInputContainer>
-                        <ChatInputArea className="text-area" onChange={(e)=> {
-                            console.log(e.currentTarget.value);
-                        }}/>
-                        <ChatInputBtn onClick={SendMsgHandler}>
+                    <ChatInputForm onSubmit={SendMsgHandler}>
+                        <ChatInputArea value={msg} onChange={changeHandler}/>
+                        <ChatInputBtn>
                             <ChatBtnIcon className="fa-solid fa-arrow-up"></ChatBtnIcon>
                         </ChatInputBtn>
-                    </ChatInputContainer>
+                    </ChatInputForm>
                 </ChatContainer>
             </Container>
         </>
@@ -145,7 +147,7 @@ const ChatContents = styled.div`
 `
 
 // 보낼 채팅 입력받는 input, 채팅 보내는 submit btn을 감싸는 div
-const ChatInputContainer = styled.div`
+const ChatInputForm = styled.form`
     width: 100%;
     height: min-content;
     display: flex;
@@ -153,17 +155,16 @@ const ChatInputContainer = styled.div`
     position: relative;
 `
 
-const ChatInputArea = styled.textarea`
+const ChatInputArea = styled.input`
     width: 100%;
     height: 40px;
     border: none;
     outline: none;
     margin: 0 20px 20px 20px;
     // 상/우/하/좌
-    padding: 13px 20px 13px 13px;
+    padding: 13px 45px 13px 13px;
     border-radius: 20px;
     background-color: #f1f1f1;
-    resize: none;
     /* 스크롤 안 생기도록 막기 */
     &::-webkit-scrollbar {
         display: none;

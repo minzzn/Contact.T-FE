@@ -10,6 +10,7 @@
     "server": "nodemon --exec babel-node src/server/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {

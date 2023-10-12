@@ -12,18 +12,13 @@ export const Main = () => {
 
     const SendMsgHandler = (e) => {
         e.preventDefault();
-        // console.log('진입');
-        // console.log(msg);
+        // 서버로 메시지 보내기
         socket.emit("chat message", msg);
         setMsg("");
-        // msg를 ui에 표현해주는 함수 필요
-    }
-
-    function changeHandler(e) {
-        setMsg(e.target.value);
     }
 
     useEffect(()=>{
+        // 서버로부터 넘어온 메시지들을 받는 곳
         socket.on("chat message", (msg) => {
             // 이전 채팅들을 배열에 풀고 새로 들어온 메시지를 배열에 담기
             setChats([...chats, msg]);
@@ -50,19 +45,15 @@ export const Main = () => {
                         {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
                     </ChatListLiContainer>
                 </ChatListContainer>
-                {/* 실제 채팅하는 곳 */}
+                {/* 메인페이지 : 우측 : 채팅내역들과 채팅 입력 칸이 존재하는 공간 */}
                 <ChatContainer>
+                    {/* 채팅 내역들이 보여지는 곳 */}
                     <ChatContents>
-                        <ul className="chat_ul">
-                            {
-                                chats.map((data,idx)=> (
-                                    <li key={idx}>{data}</li>
-                                ))
-                            }
-                        </ul>
+                        <ChatContentsBox chatsHistory={chats}/>
                     </ChatContents>
+                    {/* 채팅을 입력하는 곳 */}
                     <ChatInputForm onSubmit={SendMsgHandler}>
-                        <ChatInputArea value={msg} onChange={changeHandler}/>
+                        <ChatInputArea value={msg} onChange={(e)=>setMsg(e.target.value)}/>
                         <ChatInputBtn>
                             <ChatBtnIcon className="fa-solid fa-arrow-up"></ChatBtnIcon>
                         </ChatInputBtn>

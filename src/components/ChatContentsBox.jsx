@@ -1,0 +1,9 @@
+const ChatContentsBox = ({ chatsHistory }) => {
+
+
+    return (
+        <>
+
+        </>
+    )
+}

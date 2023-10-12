@@ -49,7 +49,7 @@ export const Main = () => {
                 <ChatContainer>
                     {/* 채팅 내역들이 보여지는 곳 */}
                     <ChatContents>
-                        <ChatContentsBox chatsHistory={chats}/>
+                        {/* <ChatContentsBox chatsHistory={chats}/> */}
                     </ChatContents>
                     {/* 채팅을 입력하는 곳 */}
                     <ChatInputForm onSubmit={SendMsgHandler}>

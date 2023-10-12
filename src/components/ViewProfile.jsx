@@ -60,6 +60,8 @@ const SetContainer = styled.div`
   width: 697px;
   height: 816px;
   /* border: 1px solid #000000; */
+
+  flex:initial;
 `
 
 const SetBox = styled.div`
@@ -73,6 +75,9 @@ const SetBox = styled.div`
   background: #FFFFFF;
   border: 7px solid #FF9634;
   border-radius: 30px;
+
+  overflow: hidden;
+  flex: initial;
 `
 
 const ProfileImageBox = styled.div`
@@ -83,6 +88,9 @@ const ProfileImageBox = styled.div`
   width: 250px;
   height: 250px;
   /* border: 1px solid #000000; */
+
+  overflow: hidden;
+  flex: 4;
 `
 const ProfileImage = styled.img`
   box-sizing: border-box;
@@ -91,6 +99,7 @@ const ProfileImage = styled.img`
   background: #FFFFFF;
   border: 5px solid #FF9634;
   border-radius: 50%;
+
 `
 // const Thing = styled.div`
 //   color: blue;
@@ -116,6 +125,9 @@ const IdentifyName = styled.div`
     color: #000000;
     text-align: center;
 
+    overflow: hidden;
+    flex: 1;
+
 `
 const RealName = styled.div`
     box-sizing: border-box;
@@ -135,6 +147,9 @@ const RealName = styled.div`
     color: #000000;
     text-align: center;
 
+    overflow: hidden;
+    flex: 1;
+
 `
 const StateBox = styled.div`
 
@@ -147,9 +162,11 @@ const StateBox = styled.div`
     margin-top: 36px;
     /* border: 1px solid #000000; */
 
+    overflow: hidden;
+    flex: 1;
+
 `
 const StateMark = styled.div`
-    /* Ellipse 33 */
 
     width: 23px;
     height: 23px;
@@ -207,5 +224,8 @@ const ChatButton = styled.button`
     font-family: 'Inter';
     font-size: 36px;
     color: #000000;
+
+    overflow: hidden;
+    flex: 1;
 
 `

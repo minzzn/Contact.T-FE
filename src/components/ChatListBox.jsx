@@ -35,7 +35,7 @@ const Container = styled.div`
 `;
 
 const ImgContainer = styled.div`
-    overflow: hiddden;
+    overflow: hidden;
     flex: 1;
     border: 1px solid var(--bg-white);
     border-radius: 10%;

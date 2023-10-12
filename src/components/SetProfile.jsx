@@ -45,6 +45,7 @@ const Section = styled.section`
   align-items: center; /* 수직 가운데 정렬 */
   justify-content: center; /* 수평 가운데 정렬 */
   height: 100vh; /* 화면 높이 만큼 늘리기 */
+
 `;
 
 const ExplainContainer = styled.div`
@@ -53,6 +54,8 @@ const ExplainContainer = styled.div`
   width: 697px;
   height: 124px;
   /* border: 1px solid #000000; */
+
+  flex-basis: 200px;
 `
 
 const SetContainer = styled.div`

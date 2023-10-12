@@ -2,13 +2,14 @@ import { io } from "socket.io-client"
 import styled from "styled-components";
 import { ChatListBox } from "../components/ChatListBox";
 import { useEffect, useState } from "react";
+import { ChatContentsBox } from "../components/ChatContentsBox";
 
 export const Main = () => {
     // server/server.js에 열어놓은 포트로 연결
     const socket = io.connect('http://localhost:8080/');
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤']
     const [msg, setMsg] = useState("");
-    const [chats, setChats] = useState([]);
+    const [chats, setChats] = useState(['시영', '민정', '동원', '재현', '민주', '세윤']);
 
     const SendMsgHandler = (e) => {
         e.preventDefault();

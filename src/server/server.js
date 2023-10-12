@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     console.log('message: ' + msg);
     // 우선 그냥 전부에게 메세지가 보이도록 서버에서 클라이언트 측에 emit : 특정 방에만 보이도록 하려면 'broadcast' flag 이용
-    io.emit('chat message', msg);
+    socket.emit('chat message', msg);
   });
 
   // 클라이언트와 연결이 끊어지면 실행되는 구문

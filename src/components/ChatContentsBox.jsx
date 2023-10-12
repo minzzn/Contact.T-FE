@@ -8,11 +8,9 @@ export const ChatContentsBox = ({ chatsHistory }) => {
                 {
                     chatsHistory && chatsHistory.map((content,idx) => {
                         return (
-                            <>
-                                <ChatContentDiv key={idx}>
-                                    {content}
-                                </ChatContentDiv>
-                            </>
+                            <ChatContentDiv key={idx}>
+                                {content}
+                            </ChatContentDiv>
                         )
                     })
                 }

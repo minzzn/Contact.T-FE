@@ -1,13 +1,16 @@
 // Loading.jsx
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from './assets/spinner.gif';
+import Loading from './public/assets/Loading.gif';
 
 export const Loading = () => {
-  return <div>Loading</div>;
-};
-
-export default Loading;
+    return(
+        <Background>
+            <LoadingText>잠시만 기다려 주세요.</LoadingText>
+            <img src={Loading} alt="로딩중" width="5%" />
+        </Background>
+    );
+}
 
 export const Background = styled.div`
   position: absolute;
@@ -15,7 +18,7 @@ export const Background = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  background: #ffffffb7;
+  background: #ffffff;
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -24,6 +27,6 @@ export const Background = styled.div`
 `;
 
 export const LoadingText = styled.div`
-  font: 1rem 'Noto Sans KR';
+  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
 `;

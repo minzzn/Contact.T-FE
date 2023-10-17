@@ -1,8 +1,13 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 export const ViewProfile = () => {
   const navigate = useNavigate();
+
+  // 근무중, 채팅 가능 시간 상태관리
+  const [duty, setDuty] = useState("");
+  const [chatTime, setChattime] = useState("");
 
   return (
     <SetProfileBox>{/* 메인 컨테이너 박스 */}
@@ -43,7 +48,6 @@ const SetProfileBox = styled.div`
     margin: auto;
   }
 `;
-
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -51,7 +55,6 @@ const Section = styled.section`
   justify-content: center; /* 수평 가운데 정렬 */
   height: 100vh; /* 화면 높이 만큼 늘리기 */
 `;
-
 const SetContainer = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -62,8 +65,7 @@ const SetContainer = styled.div`
   /* border: 1px solid #000000; */
 
   flex:initial;
-`
-
+`;
 const SetBox = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -78,8 +80,7 @@ const SetBox = styled.div`
 
   overflow: hidden;
   flex: initial;
-`
-
+`;
 const ProfileImageBox = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -91,7 +92,7 @@ const ProfileImageBox = styled.div`
 
   overflow: hidden;
   flex: 4;
-`
+`;
 const ProfileImage = styled.img`
   box-sizing: border-box;
   width: 230px;
@@ -100,7 +101,7 @@ const ProfileImage = styled.img`
   border: 5px solid #FF9634;
   border-radius: 50%;
 
-`
+`;
 // const Thing = styled.div`
 //   color: blue;
 //   //컴포넌트 중첩
@@ -120,6 +121,7 @@ const IdentifyName = styled.div`
     margin-top: 18px;
     /* border: 1px solid #000000; */
     /* ㅇㅇ고 ㅇ-ㅇ 선생님 */
+    font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 36px;
     color: #000000;
@@ -128,7 +130,7 @@ const IdentifyName = styled.div`
     overflow: hidden;
     flex: 1;
 
-`
+`;
 const RealName = styled.div`
     box-sizing: border-box;
     display:flex;
@@ -139,18 +141,18 @@ const RealName = styled.div`
     /* border: 1px solid #000000; */
 
     /* 김ㅇㅇ */
+    font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
-    /* identical to box height */
     color: #000000;
     text-align: center;
 
     overflow: hidden;
     flex: 1;
 
-`
+`;
 const StateBox = styled.div`
 
     box-sizing: border-box;
@@ -165,7 +167,7 @@ const StateBox = styled.div`
     overflow: hidden;
     flex: 1;
 
-`
+`;
 const StateMark = styled.div`
 
     width: 23px;
@@ -174,7 +176,7 @@ const StateMark = styled.div`
     background: #FF9634;
     border-radius: 50%;
 
-`
+`;
 const DutyState = styled.div`
 
     box-sizing: border-box;
@@ -185,14 +187,13 @@ const DutyState = styled.div`
     height: 42px;
     /* border: 1px solid #000000; */
 
-
+    font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 36px;
     line-height: 44px;
     color: #000000;
 
-`
-
+`;
 const ChatState = styled.div`
 
     box-sizing: border-box;
@@ -204,11 +205,12 @@ const ChatState = styled.div`
     /* border: 1px solid #000000; */
 
     /* 채팅 가능 시간 */
+    font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 36px;
     color: #000000;
 
-`
+`;
 const ChatButton = styled.button`
 
     box-sizing: border-box;
@@ -221,6 +223,7 @@ const ChatButton = styled.button`
     /* border: 1px solid #000000; */
 
     /* 채팅 하기 */
+    font-family: 'Noto Sans KR', sans-serif;
     font-family: 'Inter';
     font-size: 36px;
     color: #000000;
@@ -228,4 +231,4 @@ const ChatButton = styled.button`
     overflow: hidden;
     flex: 1;
 
-`
+`;

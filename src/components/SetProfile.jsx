@@ -1,8 +1,21 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { darken, lighten } from 'polished';
 
 export const SetProfile = () => {
   const navigate = useNavigate();
+
+  // 근무중, 채팅 가능 시간 상태관리
+  const [duty, setDuty] = useState("");
+  const [chattime, setChattime] = useState("");
+
+  const goToMain = (e) => {
+    console.log('go to main');
+    navigate('/');
+    console.log('enter to main');
+    e.preventDefault();
+}
 
   return (
     <SetProfileBox>{/* 메인 컨테이너 박스 */}
@@ -11,7 +24,6 @@ export const SetProfile = () => {
         <ExplainContainer></ExplainContainer>
         <SetContainer>
             <SetBox>
-                {/* 프로필 설정하기 설명 박스 */}
                 <ProfileImageBox>
                     <ProfileImage></ProfileImage>
                 </ProfileImageBox>
@@ -19,7 +31,7 @@ export const SetProfile = () => {
                   <InputNickname type="text"/>
                   <InputIntroduce type="text"/>
                 </InputBox>
-                <StartButton>서비스 시작하기</StartButton>
+                <StartButton onClick={goToMain}>서비스 시작하기</StartButton>
             </SetBox>
         </SetContainer>
       </Section>  
@@ -38,7 +50,6 @@ const SetProfileBox = styled.div`
     margin: auto;
   }
 `;
-
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -47,7 +58,6 @@ const Section = styled.section`
   height: 100vh; /* 화면 높이 만큼 늘리기 */
 
 `;
-
 const ExplainContainer = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -56,8 +66,7 @@ const ExplainContainer = styled.div`
   /* border: 1px solid #000000; */
 
   flex-basis: 200px;
-`
-
+`;
 const SetContainer = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -66,8 +75,7 @@ const SetContainer = styled.div`
   width: 697px;
   height: 816px;
   /* border: 1px solid #000000; */
-`
-
+`;
 const SetBox = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -79,8 +87,7 @@ const SetBox = styled.div`
   background: #FFFFFF;
   border: 7px solid #B4B4B4;
   border-radius: 30px;
-`
-
+`;
 const ProfileImageBox = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -89,7 +96,7 @@ const ProfileImageBox = styled.div`
   width: 250px;
   height: 250px;
   /* border: 1px solid #000000; */
-`
+`;
 const ProfileImage = styled.img`
   box-sizing: border-box;
   width: 230px;
@@ -97,16 +104,7 @@ const ProfileImage = styled.img`
   background: #FFFFFF;
   border: 5px solid #B4B4B4;
   border-radius: 50%;
-`
-// const Thing = styled.div`
-//   color: blue;
-//   //컴포넌트 중첩
-//   ${Emoji} {
-// 		&:hover {
-// 			font-size: 100px;
-// 		}
-//   }
-
+`;
 const InputBox = styled.div`
   box-sizing: border-box;
   display:flex;
@@ -116,7 +114,7 @@ const InputBox = styled.div`
   width: 560px;
   height: 299px;
   /* border: 1px solid #000000; */
-`
+`;
 const StartButton = styled.button`
   box-sizing: border-box;
   display:flex;
@@ -128,27 +126,36 @@ const StartButton = styled.button`
   background: #F8E792;
   border-radius: 30px;
   border: none;
+  background: #F8E792;
+  &:hover {
+    background: ${lighten(0.1, '#F8E792')};
+  }
+  &:active {
+    background:  ${darken(0.1, '#F8E792')};
+  }
   /* 서비스 시작하기 */
+  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-weight: bold;
   font-size: 24px;
-
-`
+`;
 const InputNickname = styled.input`
   border: none;
   outline:none;
   border-bottom: 5px solid #B4B4B4;
   width: 480px;
   height: 50px;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
   font-size: 24px;
-`
+`;
 const InputIntroduce = styled.input`
   border: none;
   outline:none;
   border-bottom: 5px solid #B4B4B4;
   width: 480px;
   height: 50px;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
   font-size: 24px;
-`
+`;

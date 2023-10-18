@@ -6,7 +6,7 @@ import { ChatContentsBox } from "../components/ChatContentsBox";
 
 export const Main = () => {
     // server/server.js에 열어놓은 포트로 연결
-    const socket = io.connect('http://localhost:8080/');
+    const socket = io.connect('http://localhost:8080');
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤']
     const [msg, setMsg] = useState("");
     const [chats, setChats] = useState(['시영', '민정', '동원', '재현', '민주', '세윤']);
@@ -14,17 +14,18 @@ export const Main = () => {
     const SendMsgHandler = (e) => {
         e.preventDefault();
         // 서버로 메시지 보내기
-        socket.emit("chat message", msg);
+        socket.emit("from front", msg);
         setMsg("");
     }
 
     useEffect(()=>{
         // 서버로부터 넘어온 메시지들을 받는 곳
-        socket.on("chat message", (msg) => {
+        socket.on("from server", (serverData) => {
             // 이전 채팅들을 배열에 풀고 새로 들어온 메시지를 배열에 담기
-            setChats([...chats, msg]);
+            setChats((prev) => ([...prev, serverData]));
+            console.log(serverData);
         })
-    },[chats])
+    }, [])
 
     return (
         <>
@@ -53,7 +54,7 @@ export const Main = () => {
                         <ChatContentsBox chatsHistory={chats}/>
                     </ChatContents>
                     {/* 채팅을 입력하는 곳 */}
-                    <ChatInputForm onSubmit={SendMsgHandler}>
+                    <ChatInputForm onSubmit={SendMsgHandler} id="submit-form">
                         <ChatInputArea value={msg} onChange={(e)=>setMsg(e.target.value)}/>
                         <ChatInputBtn>
                             <ChatBtnIcon className="fa-solid fa-arrow-up"></ChatBtnIcon>

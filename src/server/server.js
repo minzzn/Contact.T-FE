@@ -25,16 +25,15 @@ const io = new Server(server, {
 
 // 번들링을 통해 생성된 dist 폴더의 파일들을 서비스하도록 설정 : 개발 모드일 때는 정적으로 서비스하지 않고 클라이언트와 서버를 동시에 실행
 // 참고자료 : https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjok1122&logNo=221545195520
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
+
 
 // 클라이언트가 서버와 연결되면 실행되는 구문
 io.on('connection', (socket) => {
-  console.log('a user connected');
-  // chat message event가 들어오면 메세지 콘솔 출력
-  socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
-    // 우선 그냥 전부에게 메세지가 보이도록 서버에서 클라이언트 측에 emit : 특정 방에만 보이도록 하려면 'broadcast' flag 이용
-    socket.emit('chat message', msg);
+  // 프론트에서 데이터가 넘어오면
+  socket.on('from front', (msg) => {
+    // 서버에서 프론트로 해당 메시지 데이터 넘김
+    io.emit('from server', msg);
   });
 
   // 클라이언트와 연결이 끊어지면 실행되는 구문

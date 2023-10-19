@@ -8,15 +8,17 @@ export const Container = styled.div`
 `;
 
 export const ChatListContainer = styled.div`
-    width: 30vw;
+    width: min-content;
     height: 100vh;
-    background-color: var(--bg-orange);
+    padding: 0 20px;
+    background-color: var(--bg-white);
     display: flex;
     // 세로로 쌓이도록
     flex-direction: column;
     // 가로 중앙 정렬
     align-items: center;
-    border-right: 1px solid var(--bg-black);
+    transition: all 0.4s linear;
+    border-right: 2px solid var(--bg-dark-gray);
 `;
 export const ChatListHeader = styled.div`
   width: 100%;
@@ -28,7 +30,7 @@ export const ChatListHeader = styled.div`
   justify-content: space-between;
   // top - horizontal - bottom
   padding: 3vh 1vw 0;
-  color: var(--bg-white);
+  color: var(--bg-dark-gray);
 `;
 
 export const ChatListHeaderH1 = styled.h1`
@@ -54,16 +56,24 @@ export const ChatListLiContainer = styled.div`
 `;
 
 export const ChatContainer = styled.div`
-    width: 70vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--bg-beige);
 `;
 
 export const ChatContents = styled.div`
     width: 100%;
+`;
+
+export const ChatInputContainer = styled.div`
+    width: 100%;
+    background-color: var(--bg-white);
+    display: flex;
+    flex-direction: column;
 `;
 
 // 보낼 채팅 입력받는 input, 채팅 보내는 submit btn을 감싸는 div
@@ -71,45 +81,68 @@ export const ChatInputForm = styled.form`
     width: 100%;
     height: min-content;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
 `;
 
-export const ChatInputArea = styled.input`
+export const ChatInput = styled.input`
     width: 100%;
     height: 40px;
     border: none;
     outline: none;
-    margin: 0 20px 20px 20px;
-    // 상/우/하/좌
-    padding: 13px 45px 13px 13px;
+    padding: 15px;
     border-radius: 20px;
-    background-color: #f1f1f1;
+    background-color: var(--bg-white);
+    margin-bottom: 10px;
     /* 스크롤 안 생기도록 막기 */
     &::-webkit-scrollbar {
         display: none;
     }
 `;
-export const ChatInputBtn = styled.button`
-    width: min-content;
-    height: min-content;
-    position: absolute;
-    right: 18px;
-    top: -3px;
-    margin: 10px 10px;
-    border-radius: 50%;
-    border: 3px solid black;
+export const ChatEtcContainer = styled.div`
+    width: 100%;
+    // 이하 자식 컴포넌트의 position은 이 녀석을 기준으로 설정됨
+    position: relative;
+    padding: 5px;
+    // 가로 배치
+    display: flex;
+    align-items: center;
+    // 양쪽 끝 배치
+    justify-content: space-between;
 `;
 
-export const ChatBtnIcon = styled.i`
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+export const IconsWrapper = styled.div`
+    background-color: var(--bg-white);
+    padding: 5px;
+    display: flex;
+    flex-direction: ${(props) => props.flexDirection ? props.flexDirection : 'row'};
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ChatInputBtn = styled.button`
+    border: 3px solid var(--dark-gray);
+    border-radius: 5px;
+    // vertical - horizontal
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const StyledIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
-    font-size: 25px;
-    margin-right: 1.5vw;
+    font-size: ${(props) => props.size ? props.size : '16px'};
+    margin-top: ${(props) => props.marginTop ? props.marginTop : 0};
+    margin-bottom: ${(props) => props.marginBottom ? props.marginBottom : 0};
+    margin-right: ${(props) => props.marginRight ? props.marginRight : 0};
+    color: ${(props) => props.color ? props.color : 'var(--bg-dark-gray)'};
+    transition: all 0.5s linear;
+
+    &:hover {
+        color: var(--bg-black);
+        text-shadow: 2px 2px 5px var(--bg-orange);
+    }
 `;

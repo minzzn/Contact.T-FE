@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 /* font-family: 'Noto Sans KR', sans-serif; */
 :root {
-  --bg-orange: rgb(255, 196, 86);
+  --bg-orange: #FF6000;
   --bg-white: white;
   --bg-black: black;
+  --bg-dark-gray: #5c5c5c;
+  --bg-beige: #FFE6C7;
 }
 * {
   margin: 0;

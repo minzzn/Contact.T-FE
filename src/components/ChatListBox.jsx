@@ -31,7 +31,7 @@ const Container = styled.div`
     padding: 2vh 2vw;
     /* vertical - horizontal */
     margin: 1.4vh 0;
-    color: var(--bg-white);
+    color: var(--bg-dark-gray);
 `;
 
 const ImgContainer = styled.div`

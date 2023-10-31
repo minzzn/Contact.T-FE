@@ -9,19 +9,22 @@ export const SetProfile = () => {
   // 근무중, 채팅 가능 시간 상태관리
   const [duty, setDuty] = useState("");
   const [chattime, setChattime] = useState("");
+  const [profileimg, setProfileimg] = useState(""); // img 상태관리 
 
+  {/* main으로 이동 함수 */}
   const goToMain = (e) => {
-    console.log('go to main');
+    console.log('go to main'); // main으로 이동하기 전 콘솔에 메시지 출력
     navigate('/');
-    console.log('enter to main');
-    e.preventDefault();
+    console.log('enter to main'); // main으로 이동 후 콘솔에 메시지 출력
+    e.preventDefault(); // 이동 혹은 새로고침 방지, event handling 처리 시 명시적으로 호출
 }
 
   return (
     <SetProfileBox>{/* 메인 컨테이너 박스 */}
       <Section>
         {/* 프로필 설정하기 설명 박스 */}
-        <ExplainContainer></ExplainContainer>
+        <ProfileSetText>프로필 설정하기</ProfileSetText>
+        <ExplainText>나중에도 언제든 변경할 수 있어요!</ExplainText>
         <SetContainer>
             <SetBox>
                 <ProfileImageBox>
@@ -56,21 +59,44 @@ const Section = styled.section`
   align-items: center; /* 수직 가운데 정렬 */
   justify-content: center; /* 수평 가운데 정렬 */
   height: 100vh; /* 화면 높이 만큼 늘리기 */
-
 `;
-const ExplainContainer = styled.div`
-  box-sizing: border-box;
-  display:flex;
-  width: 697px;
-  height: 124px;
-  /* border: 1px solid #000000; */
-
-  flex-basis: 200px;
-`;
-const SetContainer = styled.div`
+const ProfileSetText = styled.div`
   box-sizing: border-box;
   display:flex;
   align-items:center;
+  justify-content: center;
+  width: 333px;
+  /* border: 1px solid #000000; */
+
+  //flex-basis: 200px;
+  display: inline-block; 
+  white-space: nowrap;
+
+  /* 프로필 설정하기 */
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 600;
+  text-align: 'center';
+  font-size: 48px;
+`;
+const ExplainText = styled.div`
+  box-sizing: border-box;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+
+  display: inline-block; 
+  white-space: nowrap;
+
+  /* 프로필 설정하기 */
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: 'center';
+  font-weight: 400;
+  font-size: 28px;
+`;
+const SetContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
   justify-content: center;
   width: 697px;
   height: 816px;
@@ -78,8 +104,8 @@ const SetContainer = styled.div`
 `;
 const SetBox = styled.div`
   box-sizing: border-box;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 680px;

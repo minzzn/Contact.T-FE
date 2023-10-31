@@ -22,6 +22,7 @@ export const ChatListBox = ({username}) => {
 }
 
 const Container = styled.div`
+    min-width: 250px;
     width: 100%;
     // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
     height: 11vh;
@@ -43,7 +44,7 @@ const ImgContainer = styled.div`
 `;
 
 const NameAndContentContainer = styled.div`
-    flex: 4;
+    flex: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,4 +54,5 @@ const NameAndContentContainer = styled.div`
 
 const DateContainer = styled.div`
     flex: 1;
+    margin-top: 4px;
 `;

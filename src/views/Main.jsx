@@ -8,7 +8,7 @@ export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
     // server/server.js에 열어놓은 포트로 연결
     const socket = io.connect('http://localhost:8080');
-    const users = ['시영', '민정', '동원', '재현', '민주', '세윤']
+    const users = ['시영', '민정', '동원', '재현', '민주', '세윤', '준호', '현기', '지은', '은지'];
     const [msg, setMsg] = useState("");
     const [chats, setChats] = useState(['시영', '민정', '동원', '재현', '민주', '세윤']);
 
@@ -39,11 +39,6 @@ export const Main = () => {
                                 {/* 헤더 영역 */}
                                 <ChatListHeader>
                                     <ChatListHeaderH1>채팅</ChatListHeaderH1>
-                                    <ChatListHeaderIconContainer>
-                                        <StyledIcon className="fa-solid fa-magnifying-glass" />   
-                                        <StyledIcon className="fa-regular fa-comment" />
-                                        <StyledIcon className="fa-solid fa-gear" />
-                                    </ChatListHeaderIconContainer>
                                 </ChatListHeader>
                                 {/* 채팅 목록 리스트 */}
                                 <ChatListLiContainer>
@@ -54,10 +49,10 @@ export const Main = () => {
                         ) : (
                             // 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때
                             <IconsWrapper flexDirection="column">
-                                 <StyledIcon className="fas fa-user" size='20px' marginTop="20px" marginBottom="20px" onClick={()=> {
+                                 <StyledIcon className="fas fa-user" size='30px' marginTop="20px" marginBottom="20px" />
+                                 <StyledIcon className="fas fa-comment" size="30px" marginBottom="20px" onClick={()=> {
                                     setIsChatListActive(true);
                                 }}/>
-                                 <StyledIcon className="fas fa-comment" size="20px" marginBottom="20px" />
                             </IconsWrapper>
                         )
                     }

@@ -37,6 +37,7 @@ export const ChatListHeaderH1 = styled.h1`
     font-size: 40px;
     font-weight: 700;
     font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 5px;
 `;
 
 export const ChatListHeaderIconContainer = styled.div`
@@ -53,6 +54,7 @@ export const ChatListLiContainer = styled.div`
     // 채팅목록 박스들이 세로로 쌓이도록
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 `;
 
 export const ChatContainer = styled.div`

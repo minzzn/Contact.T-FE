@@ -9,11 +9,20 @@ export const ChatContentsContainer = styled.div`
     /* 가로 방향 메시지들 박스 배치 */
     align-items: flex-end;
 `
-// 실제 메시지 내용들이 담는 div tag
-export const ChatContentDiv = styled.div`
+// 실제 메시지 내용들이 담는 div tag의 wrapper
+export const ChatContentDivWrapper = styled.div`
     width: 100%;
     height: min-content;
     padding: 10px;
+    /* 메시지 내용 배치 결정 */
+    display: flex;
+    align-items: center;
+`
+export const ChatContentDiv = styled.div`
+    height: min-content;
+    padding: 5px;
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
+    font-weight: 600;
+    border: 2px solid black;
+    border-radius: 15px;
 `

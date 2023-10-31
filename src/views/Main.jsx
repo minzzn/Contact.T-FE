@@ -10,7 +10,7 @@ export const Main = () => {
     const socket = io.connect('http://localhost:8080');
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤', '준호', '현기', '지은', '은지'];
     const [msg, setMsg] = useState("");
-    const [chats, setChats] = useState(['시영', '민정', '동원', '재현', '민주', '세윤']);
+    const [chats, setChats] = useState([]);
 
     const SendMsgHandler = (e) => {
         e.preventDefault();
@@ -36,19 +36,21 @@ export const Main = () => {
 
                     {/* 헤더 영역 */}
                     <ChatListHeader>
-                        <ChatListHeaderH1>채팅</ChatListHeaderH1>
+                        <ChatListHeaderH1>
+                            {
+                                isChatListActive ? '채팅' : '목록'
+                            }
+                        </ChatListHeaderH1>
                     </ChatListHeader>
 
                     <IconsModalWrapper>
                         {/* 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때 */}
                         <IconsWrapper>
-                                <StyledIcon className="fas fa-user" size='30px' marginRight="20px" onClick={()=> {
+                                <StyledIcon className="fas fa-user" size='30px' marginright="20px" onClick={()=> {
                                     setIsChatListActive(false);
-                                    // console.log('false');
                                 }}/>
                                 <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
                                     setIsChatListActive(true);
-                                    // console.log('true');
                                 }}/>
                         </IconsWrapper>
                     </IconsModalWrapper>
@@ -56,7 +58,13 @@ export const Main = () => {
                     {/* 채팅 목록 리스트 */}
                     <ChatListLiContainer>
                         {/* components/ChatListBox.jsx */}
-                        {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
+                        {
+                            isChatListActive ? (
+                                users.map((user,idx) => <ChatListBox username={user} key={idx}/>)
+                            ) : (
+                                null
+                            )
+                        }
                     </ChatListLiContainer>
 
                 </ChatListContainer>
@@ -77,9 +85,9 @@ export const Main = () => {
                             <ChatEtcContainer>
                                 {/* 별도의 옵션 아이콘들 */}
                                 <IconsWrapper>
-                                    <StyledIcon className="fas fa-share-from-square" size="20px" marginRight="20px" />
-                                    <StyledIcon className="fas fa-image" size="20px" marginRight="20px" />
-                                    <StyledIcon className="fas fa-share-from-square" size="20px" marginRight="20px" />
+                                    <StyledIcon className="fas fa-share-from-square" size="20px" marginright="20px" />
+                                    <StyledIcon className="fas fa-image" size="20px" marginright="20px" />
+                                    <StyledIcon className="fas fa-share-from-square" size="20px" marginright="20px" />
                                 </IconsWrapper>
                                 {/* 전송 버튼 */}
                                 <ChatInputBtn>

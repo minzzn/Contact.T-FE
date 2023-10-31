@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: 100%;
   // 가로 정렬
   display: flex;
+  overflow: hidden;
 `;
 
 export const ChatListContainer = styled.div`
@@ -68,6 +69,8 @@ export const ChatContainer = styled.div`
 
 export const ChatContents = styled.div`
     width: 100%;
+    padding: 0 5px;
+    overflow-y: scroll;
 `;
 
 export const ChatInputContainer = styled.div`
@@ -147,9 +150,9 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
     font-size: ${(props) => props.size ? props.size : '16px'};
-    margin-top: ${(props) => props.marginTop ? props.marginTop : 0};
-    margin-bottom: ${(props) => props.marginBottom ? props.marginBottom : 0};
-    margin-right: ${(props) => props.marginRight ? props.marginRight : 0};
+    margin-top: ${(props) => props.margintop ? props.margintop : 0};
+    margin-bottom: ${(props) => props.marginbottom ? props.marginbottom : 0};
+    margin-right: ${(props) => props.marginright ? props.marginright : 0};
     color: ${(props) => props.color ? props.color : 'var(--bg-dark-gray)'};
     transition: all 0.5s linear;
 

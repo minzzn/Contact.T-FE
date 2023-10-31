@@ -1,8 +1,8 @@
 import { io } from "socket.io-client"
-import { ChatListBox } from "../components/ChatListBox";
+import { ChatListBox } from "../components/Main/ChatListBox";
 import { useEffect, useState } from "react";
-import { ChatContentsBox } from "../components/ChatContentsBox";
-import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListHeader, ChatListHeaderH1, ChatListHeaderIconContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
+import { ChatContentsBox } from "../components/Main/ChatContentsBox";
+import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
@@ -33,25 +33,15 @@ export const Main = () => {
             <Container>
                 {/* 채팅 목록: 왼쪽 영역 */}
                 <ChatListContainer className="left-pane">
-
-                    {/* 헤더 영역 */}
-                    <ChatListHeader>
-                        <ChatListHeaderH1>
-                            {
-                                isChatListActive ? '채팅' : '목록'
-                            }
-                        </ChatListHeaderH1>
-                    </ChatListHeader>
-
                     <IconsModalWrapper>
                         {/* 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때 */}
                         <IconsWrapper>
                                 <StyledIcon className="fas fa-user" size='30px' marginright="20px" onClick={()=> {
                                     setIsChatListActive(false);
-                                }}/>
+                                }} />
                                 <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
                                     setIsChatListActive(true);
-                                }}/>
+                                }} />
                         </IconsWrapper>
                     </IconsModalWrapper>
 
@@ -66,7 +56,6 @@ export const Main = () => {
                             )
                         }
                     </ChatListLiContainer>
-
                 </ChatListContainer>
 
                 {/* 메인페이지 : 우측 : 채팅내역들과 채팅 입력 칸이 존재하는 공간 */}

@@ -20,34 +20,7 @@ export const ChatListContainer = styled.div`
     transition: all 0.4s linear;
     border-right: 2px solid var(--bg-dark-gray);
 `;
-export const ChatListHeader = styled.div`
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  // 세로 중앙 정렬
-  align-items: center;
-  // 끝과 끝으로 배치
-  justify-content: center;
-  // top - horizontal - bottom
-  padding: 3vh 0 1svh;
-  color: var(--bg-dark-gray);
-`;
 
-export const ChatListHeaderH1 = styled.h1`
-    font-size: 40px;
-    font-weight: 700;
-    font-family: 'Noto Sans KR', sans-serif;
-    margin-bottom: 5px;
-`;
-
-export const ChatListHeaderIconContainer = styled.div`
-    width: min-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-`
 export const ChatListLiContainer = styled.div`
     width: 100%;
     // 높이는 스크롤 가능하도록 무제한으로
@@ -128,7 +101,8 @@ export const IconsWrapper = styled.div`
 export const IconsModalWrapper = styled.div`
     width: min-content;
     padding: 5px;
-    margin-bottom: 5px;
+    /* vertical horizontal */
+    margin: 3vh 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,10 +124,8 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
     font-size: ${(props) => props.size ? props.size : '16px'};
-    margin-top: ${(props) => props.margintop ? props.margintop : 0};
-    margin-bottom: ${(props) => props.marginbottom ? props.marginbottom : 0};
     margin-right: ${(props) => props.marginright ? props.marginright : 0};
-    color: ${(props) => props.color ? props.color : 'var(--bg-dark-gray)'};
+    color: var(--bg-dark-gray);
     transition: all 0.5s linear;
 
     &:hover {

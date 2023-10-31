@@ -8,10 +8,16 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     /* vertical - horizontal */
-    padding: 2vh 2vw;
+    padding: 10px 8px;
     /* vertical - horizontal */
     margin: 1.4vh 0;
     color: var(--bg-dark-gray);
+    transition: color 0.5s linear;
+
+    &:hover {
+        font-weight: 800;
+        color: var(--bg-orange);
+    }
 `;
 
 export const ImgContainer = styled.div`
@@ -19,7 +25,8 @@ export const ImgContainer = styled.div`
     flex: 1.5;
     border: 1px solid var(--bg-black);
     border-radius: 10%;
-    margin-right: 2vw;
+    margin-right: 7px;
+    object-fit: cover;
 `;
 
 export const NameAndContentContainer = styled.div`

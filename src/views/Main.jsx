@@ -2,7 +2,7 @@ import { io } from "socket.io-client"
 import { ChatListBox } from "../components/ChatListBox";
 import { useEffect, useState } from "react";
 import { ChatContentsBox } from "../components/ChatContentsBox";
-import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListHeader, ChatListHeaderH1, ChatListHeaderIconContainer, ChatListLiContainer, Container, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
+import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListHeader, ChatListHeaderH1, ChatListHeaderIconContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
@@ -33,29 +33,32 @@ export const Main = () => {
             <Container>
                 {/* 채팅 목록: 왼쪽 영역 */}
                 <ChatListContainer className="left-pane">
-                    {
-                        isChatListActive ? (
-                            <>
-                                {/* 헤더 영역 */}
-                                <ChatListHeader>
-                                    <ChatListHeaderH1>채팅</ChatListHeaderH1>
-                                </ChatListHeader>
-                                {/* 채팅 목록 리스트 */}
-                                <ChatListLiContainer>
-                                    {/* components/ChatListBox.jsx */}
-                                    {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
-                                </ChatListLiContainer>
-                            </>
-                        ) : (
-                            // 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때
-                            <IconsWrapper flexDirection="column">
-                                 <StyledIcon className="fas fa-user" size='30px' marginTop="20px" marginBottom="20px" />
-                                 <StyledIcon className="fas fa-comment" size="30px" marginBottom="20px" onClick={()=> {
-                                    setIsChatListActive(true);
+
+                    {/* 헤더 영역 */}
+                    <ChatListHeader>
+                        <ChatListHeaderH1>채팅</ChatListHeaderH1>
+                    </ChatListHeader>
+
+                    <IconsModalWrapper>
+                        {/* 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때 */}
+                        <IconsWrapper>
+                                <StyledIcon className="fas fa-user" size='30px' marginRight="20px" onClick={()=> {
+                                    setIsChatListActive(false);
+                                    // console.log('false');
                                 }}/>
-                            </IconsWrapper>
-                        )
-                    }
+                                <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
+                                    setIsChatListActive(true);
+                                    // console.log('true');
+                                }}/>
+                        </IconsWrapper>
+                    </IconsModalWrapper>
+
+                    {/* 채팅 목록 리스트 */}
+                    <ChatListLiContainer>
+                        {/* components/ChatListBox.jsx */}
+                        {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
+                    </ChatListLiContainer>
+
                 </ChatListContainer>
 
                 {/* 메인페이지 : 우측 : 채팅내역들과 채팅 입력 칸이 존재하는 공간 */}

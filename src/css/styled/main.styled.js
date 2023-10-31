@@ -10,7 +10,6 @@ export const Container = styled.div`
 export const ChatListContainer = styled.div`
     width: min-content;
     height: 100vh;
-    padding: 0 20px;
     background-color: var(--bg-white);
     display: flex;
     // 세로로 쌓이도록
@@ -27,9 +26,9 @@ export const ChatListHeader = styled.div`
   // 세로 중앙 정렬
   align-items: center;
   // 끝과 끝으로 배치
-  justify-content: space-between;
+  justify-content: center;
   // top - horizontal - bottom
-  padding: 3vh 1vw 0;
+  padding: 3vh 0 1svh;
   color: var(--bg-dark-gray);
 `;
 
@@ -122,6 +121,17 @@ export const IconsWrapper = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+export const IconsModalWrapper = styled.div`
+    width: min-content;
+    padding: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px var(--bg-dark-gray);
+`
 
 export const ChatInputBtn = styled.button`
     border: 3px solid var(--dark-gray);

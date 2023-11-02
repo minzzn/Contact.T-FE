@@ -6,37 +6,39 @@ import { Client } from '@stomp/stompjs';
 export const ChatMainContainer = () => {
 
     const client = useRef({});
-    const apply_id = 1;
     const [chat, setChat] = useState("");
     const [chatList, setChatList] = useState([]);
 
     function handleSubmit(event, chat) {
         event.preventDefault();
-        console.log('sended')
         publish(chat);
     }
 
     function subscribe() {
-        client.current.subscribe('/sub/chat/' + apply_id, (body) => {
+        client.current.subscribe('/sub/chat/', (body) => {
             const json_body = JSON.parse(body.body);
             setChatList((chatList) => [
                 ...chatList, json_body
             ]);
         });
+        console.log('subscribe');
     }
 
     function connect() {
         client.current = new Client({
             brokerURL: 'ws://43.202.161.139:8080/ws',
+            // 연결이 성공적이라면
             onConnect: () => {
                 console.log('success');
                 subscribe(); // 연결 성공 시 구독하는 로직 실행
             }
         });
+        // 연결 활성화
         client.current.activate();
     }
     function disconnect() {
         client.current.deactivate();
+        consol.log('종료');
     }
 
     function publish(chat) {
@@ -45,13 +47,12 @@ export const ChatMainContainer = () => {
         }
 
         client.current.publish({
-          destination: '/pub/chat',
-          body: JSON.stringify({
-            applyId: apply_id,
-            chat: chat,
-          }),
+            destination: '/pub/chat',
+            body: JSON.stringify({
+                chat: chat,
+            }), // 형식에 맞게 수정해서 보내야 함.
         });
-        
+        console.log('publish');
         setChat('');
     }
 

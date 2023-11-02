@@ -50,8 +50,12 @@ module.exports = {
     // 해당 항목 작성
     historyApiFallback: true,
     proxy: {
-      "/api": "http://localhost:8080"
-    }
+      '/api': {
+        target: '43.202.161.139:8080/',
+        ws: true,
+      },
+    },
+  
   },
   // 플러그인 적용
   plugins: [

@@ -1,16 +1,29 @@
 import { io } from "socket.io-client"
 import { ChatListBox } from "../components/ChatListBox";
+import { PeopleListBox } from "../components/PeopleListBox";
 import { useEffect, useState } from "react";
 import { ChatContentsBox } from "../components/ChatContentsBox";
-import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListHeader, ChatListHeaderH1, ChatListHeaderIconContainer, ChatListLiContainer, Container, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
+import { ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, ChatListContainer, ChatListHeader, ChatListHeaderH1, ChatListHeaderIconContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
 
-export const Main = () => { /*상태값 추가 후 기본값이 프로필 목록이 보이도록 추가   1*/
+import { ViewList } from "../components/ViewList"; {/*컴포넌트로 분리된 함수*/}
+
+
+export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
     // server/server.js에 열어놓은 포트로 연결
     const socket = io.connect('http://localhost:8080');
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤', '준호', '현기', '지은', '은지'];
     const [msg, setMsg] = useState("");
     const [chats, setChats] = useState(['시영', '민정', '동원', '재현', '민주', '세윤']);
+
+    const userInfo = [
+        {username: "민주", userimg: '../public/assets/userimg_02.png'},
+        {username: "시영", userimg: './public/assets/userimg_02.png'},
+        {username: "민정", userimg: './public/assets/userimg_02.png'},
+        {username: "동원", userimg: './public/assets/userimg_01.png'},
+        {username: "재현", userimg: './public/assets/userimg_01.png'},
+        {username: "세윤", userimg: './public/assets/userimg_01.png'}
+    ]
 
     const SendMsgHandler = (e) => {
         e.preventDefault();
@@ -33,30 +46,32 @@ export const Main = () => { /*상태값 추가 후 기본값이 프로필 목록
             <Container>
                 {/* 채팅 목록: 왼쪽 영역 */}
                 <ChatListContainer className="left-pane">
-                    {
-                        isChatListActive ? (
-                            <>
-                                {/* 헤더 영역 */}
-                                <ChatListHeader>
-                                    <ChatListHeaderH1>채팅</ChatListHeaderH1>
-                                </ChatListHeader>
-                                {/* 채팅 목록 리스트 */}
-                                <ChatListLiContainer>
-                                    {/* components/ChatListBox.jsx */}
-                                    {users.map((user,idx) => <ChatListBox username={user} key={idx}/>)}
-                                </ChatListLiContainer>
-                            </>
-                        ) : (
-                            // 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때
-                            <IconsWrapper flexDirection="column">
-                                 <StyledIcon className="fas fa-user" size='30px' marginTop="20px" marginBottom="20px" /> // main에서 건드릴 부분 - minju
-                                 <StyledIcon className="fas fa-comment" size="30px" marginBottom="20px" onClick={()=> {
-                                    setIsChatListActive(true);
+
+                    {/* 헤더 영역 - 안 건드려도 됨*/}
+                    <ChatListHeader>
+                        <ChatListHeaderH1>채팅</ChatListHeaderH1>
+                    </ChatListHeader>
+
+                    <IconsModalWrapper>
+                        {/* 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때 */}
+                        <IconsWrapper>
+                                <StyledIcon className="fas fa-user" size='30px' marginRight="20px" onClick={()=> {
+                                    setIsChatListActive(false);
+                                    // console.log('false');
                                 }}/>
-                            </IconsWrapper>
-                        )
-                    }
+                                <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
+                                    setIsChatListActive(true);
+                                    // console.log('true'); 
+                                }}/>
+                        </IconsWrapper>
+                    </IconsModalWrapper>
+
+                    <ViewList isChatListActive={isChatListActive} users={users} userInfo={userInfo} />
+                    {/* 채팅 목록 리스트 */} 
+                    
                 </ChatListContainer>
+                
+
 
                 {/* 메인페이지 : 우측 : 채팅내역들과 채팅 입력 칸이 존재하는 공간 */}
                 <ChatContainer className="right-pane">
@@ -90,4 +105,3 @@ export const Main = () => { /*상태값 추가 후 기본값이 프로필 목록
         </>
     )
 }
-

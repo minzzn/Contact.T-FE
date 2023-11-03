@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { darken, lighten } from 'polished';
+import { SelectBox } from './SetProfileSelectBox';
 
 export const SetProfile = () => {
   const navigate = useNavigate();
@@ -31,8 +32,8 @@ export const SetProfile = () => {
                     <ProfileImage></ProfileImage>
                 </ProfileImageBox>
                 <InputBox>
-                  <InputNickname type="text"/>
-                  <InputIntroduce type="text"/>
+                  <SelectBox></SelectBox>
+                  <SelectBox></SelectBox>
                 </InputBox>
                 <StartButton onClick={goToMain}>서비스 시작하기</StartButton>
             </SetBox>

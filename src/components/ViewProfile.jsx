@@ -10,30 +10,26 @@ export const ViewProfile = () => {
   const [chatTime, setChattime] = useState("");
 
   return (
-    <SetProfileBox>{/* 메인 컨테이너 박스 */}
-      <Section>
-        <SetContainer>
-            <SetBox>
-                <ProfileImageBox>
-                    <ProfileImage></ProfileImage>
-                </ProfileImageBox>
-                <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
-                <RealName>김ㅇㅇ</RealName>
-                <StateBox>
-                    <DutyState>
-                        <StateMark></StateMark>
-                        근무중
-                    </DutyState>
-                    <ChatState>
-                        <StateMark></StateMark>
-                        채팅 가능 시간
-                    </ChatState>
-                </StateBox>
-                <ChatButton>채팅하기</ChatButton>
-            </SetBox>
-        </SetContainer>
-      </Section>  
-    </SetProfileBox>
+    <>
+      <SetBox>
+        <ProfileImageBox>
+            <ProfileImage></ProfileImage>
+        </ProfileImageBox>
+        <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
+        <RealName>김ㅇㅇ</RealName>
+        <StateBox>
+            <DutyState>
+                <StateMark></StateMark>
+                근무중
+            </DutyState>
+            <ChatState>
+                <StateMark></StateMark>
+                채팅 가능 시간
+            </ChatState>
+        </StateBox>
+        <ChatButton>채팅하기</ChatButton>
+      </SetBox>
+    </>
   );
 }
 

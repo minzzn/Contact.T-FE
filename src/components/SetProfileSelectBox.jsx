@@ -1,81 +1,19 @@
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Select from "react-select"; //라이브러리 import
 
-const OPTIONS = [
-	{ value: "apple", name: "사과" },
-	{ value: "banana", name: "바나나" },
-	{ value: "orange", name: "오렌지" },
-];
+export const SelectBox = () => {
+    const onduty = [
+        { value: "offduty", label: "근무중 아님" },
+        { value: "onduty", label: "근무중" }
+    ] //원래는 select 태그 안에 들어가는 애들을 배열로 만들어준다.
 
-const SelectBoxWrapper = styled.div`
-	display: flex;
-`;
+    const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
+    //안에 들어가는 값을 받아야해서 state사용
 
-export const Select = styled.select`
-	margin: 0;
-	min-width: 0;
-	display: block;
-	width: 100%;
-	padding: 8px 8px;
-	font-size: inherit;
-	line-height: inherit;
-	border: 1px solid;
-	border-radius: 4px;
-	color: inherit;
-	background-color: transparent;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	&:focus {
-		border-color: red;
-	}
-`;
-
-const IconSVG = styled.svg`
-	margin-left: -28px;
-	align-self: center;
-	width: 24px;
-	height: 24px;
-`;
-
-const SelectBox = (props) => {
-	const handleChange = (e) => {
-		// event handler
-		console.log(e.target.value);
-	};
-
-	return (
-		<SelectBoxWrapper>
-			<Select onChange={handleChange}>
-				{props.options.map((option) => (
-					<option
-						key={option.value}
-						value={option.value}
-						defaultValue={props.defaultValue === option.value}
-					>
-						{option.name}
-					</option>
-				))}
-			</Select>
-			<IconSVG
-				width="20"
-				height="20"
-				viewBox="0 0 20 20"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M10 14L16 6H4L10 14Z"
-					fill="#1A1A1A"
-				/>
-			</IconSVG>
-		</SelectBoxWrapper>
-	);
-};
-
-export const SetProfile = () => {
-	return <SelectBox options={OPTIONS} defaultValue="banana"></SelectBox>;
+    return(
+        <Select options={onduty} //위에서 만든 배열을 select로 넣기
+            onChange={setSelectOnduty} //값이 바뀌면 setState되게
+            defaultValue={onduty[0]} /> //사용자가 값을 선택하지 않아도 기본 값으로 '온라인'=={online[0]}이 값으로 들어갈 수 있게
+    );
 }
-
-export default App;

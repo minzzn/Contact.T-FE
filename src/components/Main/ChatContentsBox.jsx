@@ -6,7 +6,7 @@ export const ChatContentsBox = ({ chatsHistory }) => {
         <>
             <ChatContentsContainer>
                 {
-                    chatsHistory && chatsHistory.map((content,idx) => {
+                    chatsHistory?.map((content,idx) => {
                         return (
                             <ChatContentDivWrapper key={idx}>
                                 <ChatContentDiv>

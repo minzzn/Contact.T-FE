@@ -11,17 +11,21 @@ export const ChatMainContainer = () => {
 
     function handleSubmit(event, chat) {
         event.preventDefault();
+        console.log('submited!')
         publish(chat);
     }
 
     function subscribe() {
-        client.current.subscribe('/sub/chat/', (body) => {
+        client.current.subscribe('/sub/chat', (body) => {
             const json_body = JSON.parse(body.body);
+
+            console.log(json_body);
+
             setChatList((chatList) => [
-                ...chatList, json_body
+                ...chatList, ...Object.values(json_body)
             ]);
         });
-        console.log('subscribe');
+        console.log('subscribed');
     }
 
     function connect() {
@@ -33,6 +37,7 @@ export const ChatMainContainer = () => {
                 subscribe(); // 연결 성공 시 구독하는 로직 실행
             }
         });
+        console.log('connected!');
         // 연결 활성화
         client.current.activate();
     }
@@ -47,20 +52,20 @@ export const ChatMainContainer = () => {
         }
 
         client.current.publish({
-            destination: '/pub/chat',
+            destination: '/sub/chat',
             body: JSON.stringify({
                 chat: chat,
             }), // 형식에 맞게 수정해서 보내야 함.
         });
-        console.log('publish');
+
+        console.log('published!');
         setChat('');
+        // 여기까진 작동
     }
 
     useEffect(() => {
         connect();
-
-        return ()=>disconnect();
-    },[])
+    },[]);
 
     return (
         <>  

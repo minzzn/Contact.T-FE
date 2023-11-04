@@ -25,4 +25,7 @@ export const ChatContentDiv = styled.div`
     font-weight: 600;
     border: 2px solid black;
     border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `

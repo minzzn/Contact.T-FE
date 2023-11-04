@@ -1,6 +1,6 @@
 import react, {useState} from "react"
 import styled from "styled-components"
-import { PeopleListBox } from "../components/PeopleListBox";
+import { PeopleListBox } from "../components/Main/PeopleListBox";
 import { ChatListBox } from "../components/ChatListBox";
 
 export const ViewList = ({isChatListActive, users, userInfo}) => { {/* index 값은 map함수의 파라미터, 사용할 데이터와 분리해서 적을것 */}

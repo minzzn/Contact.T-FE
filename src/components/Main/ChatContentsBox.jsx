@@ -1,4 +1,4 @@
-import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper } from "../css/styled/chatContentsBox.styled"
+import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper } from "../../css/styled/chatContentsBox.styled"
 
 export const ChatContentsBox = ({ chatsHistory }) => {
 
@@ -6,7 +6,7 @@ export const ChatContentsBox = ({ chatsHistory }) => {
         <>
             <ChatContentsContainer>
                 {
-                    chatsHistory && chatsHistory.map((content,idx) => {
+                    chatsHistory?.map((content,idx) => {
                         return (
                             <ChatContentDivWrapper key={idx}>
                                 <ChatContentDiv>

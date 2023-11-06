@@ -11,7 +11,6 @@ export const ChatMainContainer = () => {
 
     function handleSubmit(event, chat) {
         event.preventDefault();
-        console.log('submited!')
         publish(chat);
     }
 
@@ -25,19 +24,19 @@ export const ChatMainContainer = () => {
                 ...chatList, ...Object.values(json_body)
             ]);
         });
-        console.log('subscribed');
+        console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
     function connect() {
         client.current = new Client({
             brokerURL: 'ws://43.202.161.139:8080/ws',
+            reconnectDelay: 5000, // 5초마다 자동 재연결
             // 연결이 성공적이라면
             onConnect: () => {
-                console.log('success');
                 subscribe(); // 연결 성공 시 구독하는 로직 실행
             }
         });
-        console.log('connected!');
+        console.log('activated(연결되었다)');
         // 연결 활성화
         client.current.activate();
     }
@@ -53,19 +52,22 @@ export const ChatMainContainer = () => {
 
         client.current.publish({
             destination: '/sub/chat',
+            // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
+            // 형식에 맞게 수정해서 보내야 함.
             body: JSON.stringify({
                 chat: chat,
-            }), // 형식에 맞게 수정해서 보내야 함.
+            }),
         });
 
-        console.log('published!');
+        console.log('published!(채팅을 보낸다)');
         setChat('');
-        // 여기까진 작동
     }
 
     useEffect(() => {
         connect();
     },[]);
+
+    console.log(chatList);
 
     return (
         <>  

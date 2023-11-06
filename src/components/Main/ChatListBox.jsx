@@ -1,7 +1,7 @@
 import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../css/styled/chatListBox.styled";
 
 export const ChatListBox = ({username}) => {
-
+    
 
     return (
         <>

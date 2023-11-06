@@ -3,19 +3,20 @@ import { useState } from "react";
 import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
 import { ChatMainContainer } from "../components/Main/ChatMainContainer";
 import { PeopleListBox } from "../components/PeopleListBox";
-
+import img1 from "../assets/userimg_01.png"
+import img2 from "../assets/userimg_02.png"
 
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
     const users = ['시영', '민정', '동원', '재현', '민주', '세윤', '준호', '현기', '지은', '은지'];
     const userInfo = [
-        {username: "민주", userimg: '../public/assets/userimg_02.png'},
-        {username: "시영", userimg: './public/assets/userimg_02.png'},
-        {username: "민정", userimg: './public/assets/userimg_02.png'},
-        {username: "동원", userimg: './public/assets/userimg_01.png'},
-        {username: "재현", userimg: './public/assets/userimg_01.png'},
-        {username: "세윤", userimg: './public/assets/userimg_01.png'}
+        {username: "민주", userimg: img2},
+        {username: "시영", userimg: img2},
+        {username: "민정", userimg: img2},
+        {username: "동원", userimg: img1},
+        {username: "재현", userimg: img1},
+        {username: "세윤", userimg: img1}
     ]
 
     return (

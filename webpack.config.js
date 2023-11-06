@@ -22,25 +22,30 @@ module.exports = {
   // 설치한 loader를 설정
   module: {
     rules: [
+      // 자바스크립트 파일들 바벨 처리
       {
         test: /\.(js|jsx|ts|tsx)$/, // 해당 파일명으로 끝나면 babel-loader가 처리
         exclude: /node_modules/, // node_modules는 대상에서 제외
         loader: "babel-loader", // 바벨 로더 추가
       },
+      // css 처리
       {
         // css파일 확장자
         test: /\.css$/,
         // 로더가 2개 이상일 때 해당 파일에 적용할 로더의 배열
         use: ["style-loader", "css-loader"],
       },
+      // 이미지 파일 로더
       {
-        test: /\.jfif$/,
-        // 로더가 1개일 때 해당 파일에 적용할 로더
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]",
+        test: /\.(png|jpe?g|gif|svg|webp|jfif)$/i,
+        use: {
+          loader: 'file-loader',
+          options: {
+            // <파일 이름.확장자> 옵션 설정
+            name: '[name].[ext]',
+          },
         },
-      },
+      }
     ],
   },
   // webpack-dev-server 옵션 설정

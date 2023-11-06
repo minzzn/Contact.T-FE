@@ -10,7 +10,7 @@ export const PeopleListBox = ({username, userimg}) => {
         <>
             <Container onClick={()=> {setIsViewProfileActive(true)}}>
                 <ImgContainer>
-                    {userimg}
+                    <img src={userimg} alt="user-img"/>
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{username}</h2>

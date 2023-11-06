@@ -1,13 +1,13 @@
-import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../css/styled/chatListBox.styled";
+import { Container, ImgContainer, NameAndContentContainer, DateContainer, ChatListBoxLink } from "../../css/styled/chatListBox.styled";
 
-export const ChatListBox = ({username}) => {
+export const ChatListBox = ({username, profileimg}) => {
     
 
     return (
         <>
             <Container>
                 <ImgContainer>
-                    <p></p>
+                    <img src={profileimg} alt="profile-img" style={{objectFit: "coveer", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{username}</h2>

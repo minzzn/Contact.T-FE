@@ -1,6 +1,6 @@
 import { ChatListBox } from "../components/Main/ChatListBox";
 import { useState } from "react";
-import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
+import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, RightPane, StyledIcon } from "../css/styled/main.styled";
 import { ChatMainContainer } from "../components/Main/ChatMainContainer";
 import { PeopleListBox } from "../components/PeopleListBox";
 import img1 from "../assets/userimg_01.png"
@@ -93,7 +93,9 @@ export const Main = () => {
                 </ChatListContainer>
                 
                 {/* 채팅 치는 영역 */}
-                <ChatMainContainer className="right-pane"/>
+                <RightPane>
+                    <ChatMainContainer className="right-pane"/> 
+                </RightPane>
             </Container>
         </>
     )

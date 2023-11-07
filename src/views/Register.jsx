@@ -1,7 +1,6 @@
-import styled, { keyframes } from "styled-components"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledButton, StyledContainer, StyledContainerWrapper, StyledH1, StyledIcon, StyledInput, StyledInputBox, StyledInputWrapper, StyledInputsWrapper, StyledLabel, StyledSelect, StyledSelectWrapper } from "../css/styled/register.styled";
+import { StyledButton, StyledContainer, StyledContainerWrapper, StyledH1, StyledIcon, StyledInput, StyledInputBox, StyledInputWrapper, StyledInputsWrapper, StyledLabel, StyledP, StyledSelect, StyledSelectWrapper } from "../css/styled/signup.styled";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -22,6 +21,7 @@ export const Register = () => {
     const [nameMsg, setNameMsg] = useState("");
     const [pwdMsg, setPwdMsg] = useState("");
     const [emailMsg, setEmailMsg] = useState("");
+    const [schoolMsg, setSchoolMsg] = useState("");
 
     // 유효성 검사 상태관리
     const [isValidName, setIsValidName] = useState(false);
@@ -79,8 +79,11 @@ export const Register = () => {
         if(schoolName.length > 4) {
             setIsValidSchoolName(true);
             setDisabledSelectBox(false);
+            setSchoolMsg("올바른 정보");
         } else {
             setIsValidSchoolName(false);
+            setDisabledSelectBox(true);
+            setSchoolMsg("제대로 입력해주세요");
         }
     }
 
@@ -98,13 +101,14 @@ export const Register = () => {
 
     const onClick = (e) => {
         console.log('진입');
-        // 만약 모든 값들이 유효하다면 데이터를 서버에 전송하고 로그인 페이지로 이동
-        if(isValidName && isValidPwd && isValidEmail) {
-            // todo : 데이터를 서버에 전송해야함
-            navigate('/login');
-            console.log('success');
-        }
         e.preventDefault();
+        // 만약 모든 값들이 유효하다면 데이터를 서버에 전송하고 로그인 페이지로 이동
+        if(isValidName && isValidPwd && isValidEmail && isValidSchoolName) {
+            // todo : 데이터를 서버에 전송해야함
+            navigate('/');
+        } else {
+            alert("모든 정보를 올바르게 입력해주세요");
+        }
     }
 
     return (
@@ -121,8 +125,8 @@ export const Register = () => {
                             {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
                             <StyledInputBox>
                                 <StyledIcon className="fa-user"></StyledIcon>
-                                <StyledInput type="text" onChange={onChangeName} value={name} id="user"/>
-                                <p className="msg"> {nameMsg} </p>
+                                <StyledInput type="text" onChange={onChangeName} value={name} id="user" autoComplete="off" required/>
+                                <StyledP className="msg"> {nameMsg} </StyledP>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* password */}
@@ -130,8 +134,8 @@ export const Register = () => {
                             <StyledLabel htmlFor="pwd">비밀번호</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-lock"></StyledIcon>
-                                <StyledInput type="password" onChange={onChangePwd} value={pwd} id="pwd"/>
-                                <p className="msg"> {pwdMsg} </p>
+                                <StyledInput type="password" onChange={onChangePwd} value={pwd} id="pwd" autoComplete="off" required/>
+                                <StyledP className="msg"> {pwdMsg} </StyledP>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* email */}
@@ -139,8 +143,8 @@ export const Register = () => {
                             <StyledLabel htmlFor="email">이메일</StyledLabel>
                             <StyledInputBox>
                                 <StyledIcon className="fa-envelope"></StyledIcon>
-                                <StyledInput type="email" onChange={onChangeEmail} value={email} id="email"/>
-                                <p className="msg"> {emailMsg} </p>
+                                <StyledInput type="email" onChange={onChangeEmail} value={email} id="email" autoComplete="off" required/>
+                                <StyledP className="msg"> {emailMsg} </StyledP>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* 소속 학교 */}
@@ -149,6 +153,7 @@ export const Register = () => {
                             <StyledInputBox>
                                 <StyledIcon className="fa-school"></StyledIcon>
                                 <StyledInput type="text" id="school" value={schoolName} onChange={onChangeSchoolName}/>
+                                <StyledP className="msg">{schoolMsg}</StyledP>
                             </StyledInputBox>
                         </StyledInputWrapper>
                         {/* 학년 / 반 */}

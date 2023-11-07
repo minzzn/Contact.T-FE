@@ -89,10 +89,11 @@ export const ChatMainContainer = () => {
                             <IconsWrapper>
                                 <StyledIcon className="fas fa-share-from-square" size="20px" marginright="20px" />
                                 <StyledIcon className="fas fa-image" size="20px" marginright="20px" />
-                                <StyledIcon className="fas fa-share-from-square" size="20px" marginright="20px" />
+                                <StyledIcon className="fa-solid fa-paperclip" size="20px" marginright="20px" />
+                                <StyledIcon className="fa-solid fa-calendar-check" size="20px" marginright="20px" />
                             </IconsWrapper>
                             {/* 전송 버튼 */}
-                            <ChatInputBtn>
+                            <ChatInputBtn disabled={chat?.length < 1}>
                                 전송
                             </ChatInputBtn>
                         </ChatEtcContainer>

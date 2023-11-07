@@ -9,9 +9,9 @@ import { ViewProfile } from "./components/ViewProfile";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Main/>}/>
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/main" element={<Main/>}/>
       <Route path="/Setprofile" element={<SetProfile />} />
       <Route path="/Viewprofile" element={<ViewProfile />} />
     </Routes>

@@ -32,12 +32,14 @@ export const ChatListLiContainer = styled.div`
 
 export const ChatContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    /* rightpane(100vh 사이즈 상속) */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg-beige);
+    background-color: var(--bg-white);
+    border-radius: 25px;
 `;
 
 export const ChatContents = styled.div`
@@ -49,6 +51,7 @@ export const ChatContents = styled.div`
 export const ChatInputContainer = styled.div`
     width: 100%;
     background-color: var(--bg-white);
+    border-top: 1px solid black;
     display: flex;
     flex-direction: column;
 `;
@@ -133,3 +136,13 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
         text-shadow: 2px 2px 5px var(--bg-orange);
     }
 `;
+
+export const RightPane = styled.div`
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+    background-color: var(--bg-beige);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`

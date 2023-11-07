@@ -1,6 +1,5 @@
 import react, { useState } from "react"
 import styled from "styled-components"
-import { ModalProfile } from "../components/ModalProfile";
 import Modal from 'react-modal';
 import { darken, lighten } from 'polished';
 

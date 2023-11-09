@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
+import { EmailFormat } from "../constant/user.constraints";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,28 +15,18 @@ export const Login = () => {
         const {
           target: { name, value },
         } = e;
-    
-        if (name === "email") {
-          setEmail(value);
-    
-          const validRegex =
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    
-          if (!value?.match(validRegex)) {
-            setError("이메일 형식이 올바르지 않습니다.");
-          } else {
-            setError("");
-          }
-        }
-    
-        if (name === "password") {
-          setPassword(value);
-    
-          if (value?.length < 8) {
-            setError("비밀번호는 8자리 이상 입력해주세요");
-          } else {
-            setError("");
-          }
+
+        switch(name) {
+          case "email":
+            setEmail(value);
+          
+            (!value?.match(EmailFormat)) ? setError("이메일 형식이 올바르지 않습니다") : setError("");           
+            break;
+          case "password":
+            setPassword(value);
+          
+            (!value?.length < 8) ? setError("비밀번호는 8자리 이상 입력해주세요") : setError("");
+            break;
         }
       };
 

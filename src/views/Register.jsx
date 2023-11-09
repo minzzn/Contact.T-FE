@@ -40,42 +40,36 @@ export const Register = () => {
             case "name":
                 setName(value);
                 result = validation(value, [isRequired, MinimumLength(2), CantContainSpace]);
-                if(result === null) {
-                    setValid((prevState) => ({...prevState, name: true}));
-                } else {
-                    setValid((prevState) => ({...prevState, email: false}));
-                }
+
+                (result === null) ? setValid((prevState) => ({...prevState, name: true})) : setValid((prevState) => ({...prevState, name: false}));
                 break;
             case "email":
                 setEmail(value);
                 result = validation(value, [isRequired, CantContainSpace, EmailFormat]);
-                if(result === null) {
-                    setValid((prevState) => ({...prevState, email: true}));
-                } else {
-                    setValid((prevState) => ({...prevState, email: false}));
-                }
+
+                (result === null) ? setValid((prevState) => ({...prevState, email: true})) : setValid((prevState) => ({...prevState, email: false}));
                 break;
             case "password":
                 setPassword(value);
                 result = validation(value, [isRequired, CantContainSpace, MinimumLength(8), SpecialText]);
-                if(result === null) {
-                    setValid((prevState) => ({...prevState, password: true}));
-                } else {
-                    setValid((prevState) => ({...prevState, password: false}));
-                }
+
+                (result === null) ? setValid((prevState) => ({...prevState, password: true})) : setValid((prevState) => ({...prevState, password: false}));
                 break;
         }
         console.log(valid);
         setError(result);
     }
 
-    function onSubmit(event) {
+    async function onSubmit(event) {
         event.preventDefault();
         // 유효하지 않은 정보가 하나라도 있으면 안됨
         if(Object.values(valid).filter((value) => value === false).length > 0) {
             alert("모든 항목을 제대로 입력해주세요");
             return;
         }
+
+        // 해야할 일 : 서버에 유저 정보 데이터 전송
+
         // 모두 유효하다면, 로그인 페이지로
         navigate("/");
     }

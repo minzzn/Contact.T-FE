@@ -1,12 +1,16 @@
 import { useState } from "react"
-import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitInput, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin.styled";
+import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin_up.styled";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    const navigate = useNavigate();
+
     function onChange(e) {
+      // deconstructed obj
         const {
           target: { name, value },
         } = e;
@@ -36,10 +40,10 @@ export const Login = () => {
       };
 
     // 비동기 함수 : todo list : 토큰 방식으로 인증
-    async function onSubmit(e) {
-        e.preventDefault();
+    function onSubmit(e) {
+      e.preventDefault();
 
-
+      navigate('/main');
     }
 
     return (
@@ -82,11 +86,12 @@ export const Login = () => {
                     </StyledLink>
                 </FormInnerWrapper>
                 <FormInnerWrapper>
-                    <LoginSubmitInput 
-                        type="submit"
-                        value="로그인"
+                    <LoginSubmitButton
+                        type="button"
+                        value="login"
                         disabled={error?.length > 0}
-                    />
+                        onClick={onSubmit}
+                    >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
             </StyledForm>
         </>

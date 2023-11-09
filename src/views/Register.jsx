@@ -1,200 +1,140 @@
 import { useState } from "react";
+import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
-import { StyledButton, StyledContainer, StyledContainerWrapper, StyledH1, StyledIcon, StyledInput, StyledInputBox, StyledInputWrapper, StyledInputsWrapper, StyledLabel, StyledP, StyledSelect, StyledSelectWrapper } from "../css/styled/signup.styled";
+import { isRequired, MinimumLength, CantStartWithNumber, CantStartWithSpace, EmailFormat, SpecialText } from "../constant/user.constraints";
 
 export const Register = () => {
     const navigate = useNavigate();
-    const classList = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
-    const gradeList = ['1','2','3','4','5','6'];
-    const genderList = ['남', '여'];
-    
-    // 값 상태관리
+    const validRules = new Array(3).fill(false);
+
     const [name, setName] = useState("");
-    const [pwd, setPwd] = useState("");
     const [email, setEmail] = useState("");
-    const [schoolName, setSchoolName] = useState("");
-    const [grade, setGrade] = useState("");
-    const [classNumber, setClassNumber] = useState("");
-    const [gender, setGender] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    // 오류메시지 상태관리
-    const [nameMsg, setNameMsg] = useState("");
-    const [pwdMsg, setPwdMsg] = useState("");
-    const [emailMsg, setEmailMsg] = useState("");
-    const [schoolMsg, setSchoolMsg] = useState("");
-
-    // 유효성 검사 상태관리
-    const [isValidName, setIsValidName] = useState(false);
-    const [isValidPwd, setIsValidPwd] = useState(false);
-    const [isValidEmail, setIsValidEmail] = useState(false);
-    const [isValidSchoolName, setIsValidSchoolName] = useState(false);
-    const [disabledSelectBox, setDisabledSelectBox] = useState(true);
-
-    const onChangeName = (e) => {
-        const currentName = e.target.value;
-        setName(currentName);
-
-        if(currentName.length < 2 || currentName.length > 11) {
-            setNameMsg("이름은 2 글자 이상 10 글자 이하입니다.");
-            setIsValidName(false);
-        } else {
-            setNameMsg("올바른 이름입니다.");
-            setIsValidName(true);
-        }
-    }
-
-    const onChangePwd = (e) => {
-        const currentPwd = e.target.value;
-        const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-        setPwd(currentPwd);
-
-        if(!passwordRegExp.test(currentPwd)) {
-            setPwdMsg("숫자+영문자+특수문자 조합의 8자리 이상 입력하세요");
-            setIsValidPwd(false);
-        } else {
-            setPwdMsg("안전한 비밀번호입니다");
-            setIsValidPwd(true);
-        }
-    }
-
-    const onChangeEmail = (e) => {
-        const currentEmail = e.target.value;
-        const emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-        // todo : 이메일 형식이 완벽하게 .com까지 입력되어야 사용가능한 이메일이라고 문구 뜨게 만들기
-        setEmail(currentEmail);
-
-        if(!emailRegExp.test(currentEmail)) {
-            setEmailMsg("이메일 형식을 올바르게 작성해주세요");
-            setIsValidEmail(false);
-        } else {
-            setEmailMsg("사용 가능한 이메일입니다.");
-            setIsValidEmail(true);
-        }
-    }
-
-    const onChangeSchoolName = (e) => {
-        const currentSchoolName = e.target.value;
-        setSchoolName(currentSchoolName);
+    function validation(value, constraints) {
+        console.log('검증 작업 함수 진입');
+        const result = [];
         
-        if(schoolName.length > 4) {
-            setIsValidSchoolName(true);
-            setDisabledSelectBox(false);
-            setSchoolMsg("올바른 정보");
-        } else {
-            setIsValidSchoolName(false);
-            setDisabledSelectBox(true);
-            setSchoolMsg("제대로 입력해주세요");
+        // 만약 제한 조건으로 들어온 값들 중에 false로 넘어온 값들이 있으면 그걸 배열에 다시 담습니다.
+        constraints.map((constraint) => {
+            if(constraint.rule.test(value) === false) {
+                result.push(constraint.message);
+            }
+        })
+        
+        console.log(result);
+        
+        // 제한 조건에 해당 안 되는게 하나라도 있으면 배열 중 가장 앞 값을 반환
+        return (result.length > 0) ? result[0] : null;
+    }
+
+    function onChange(event) {
+        // deconstructed obj
+        const {
+            target: { name, value }
+        } = event;
+        let result = null;
+    
+        switch(name) {
+            case "name":
+                setName(value);
+                result = validation(value, [isRequired, MinimumLength(2), CantStartWithSpace, CantStartWithNumber]);
+                if(result === null) {
+                    validValues[0] = true;
+                }
+                break;
+            case "email":
+                setEmail(value);
+                result = validation(value, [isRequired, CantStartWithSpace, CantStartWithNumber, EmailFormat]);
+                if(result === null) {
+                    validValues[1] = true;
+                }
+                break;
+            case "password":
+                setPassword(value);
+                result = validation(value, [isRequired, MinimumLength(8), SpecialText]);
+                if(result === null) {
+                    validValues[2] = true;
+                }
+                break;
         }
+
+        setError(result);
     }
 
-    const onChangeClassNumberSelect = (e) => {
-        setClassNumber(e.target.value);
-    }
+    function onSubmit(event) {
+        event.preventDefault();
+        const isAllValid = validRules.filter((value) => value === true);
+        console.log(isAllValid);
 
-    const onChangeGradeSelect = (e) => {
-        setGrade(e.target.value);
-    }
-
-    const onChangeGenderSelect = (e) => {
-        setGender(e.target.value);
-    }
-
-    const onClick = (e) => {
-        console.log('진입');
-        e.preventDefault();
-        // 만약 모든 값들이 유효하다면 데이터를 서버에 전송하고 로그인 페이지로 이동
-        if(isValidName && isValidPwd && isValidEmail && isValidSchoolName) {
-            // todo : 데이터를 서버에 전송해야함
-            navigate('/');
-        } else {
-            alert("모든 정보를 올바르게 입력해주세요");
+        if(isAllValid.length === 3) {
+            // 로그인 페이지로
+            console.log('로그인 페이지로 이동하는 지점 진입');
+            navigate("/");
         }
+        alert("모든 항목을 제대로 작성해주세요");
     }
 
     return (
         <>
-            <StyledContainerWrapper>
-                <StyledContainer>
-                    <StyledH1>회원가입</StyledH1>
-                    {/* 여러 inputWrapper들을 묶기 위한 input's'Wrapper */}
-                    <StyledInputsWrapper>
-                        {/* 하나의 인풋 박스 형식 : styledInputWrapper*/}
-                        {/* user-name */}
-                        <StyledInputWrapper>  
-                            <StyledLabel htmlFor="user">이름</StyledLabel>
-                            {/* fontawesome icon과 인풋박스를 묶기 위한 styledInputBox */}
-                            <StyledInputBox>
-                                <StyledIcon className="fa-user"></StyledIcon>
-                                <StyledInput type="text" onChange={onChangeName} value={name} id="user" autoComplete="off" required/>
-                                <StyledP className="msg"> {nameMsg} </StyledP>
-                            </StyledInputBox>
-                        </StyledInputWrapper>
-                        {/* password */}
-                        <StyledInputWrapper>  
-                            <StyledLabel htmlFor="pwd">비밀번호</StyledLabel>
-                            <StyledInputBox>
-                                <StyledIcon className="fa-lock"></StyledIcon>
-                                <StyledInput type="password" onChange={onChangePwd} value={pwd} id="pwd" autoComplete="off" required/>
-                                <StyledP className="msg"> {pwdMsg} </StyledP>
-                            </StyledInputBox>
-                        </StyledInputWrapper>
-                        {/* email */}
-                        <StyledInputWrapper>  
-                            <StyledLabel htmlFor="email">이메일</StyledLabel>
-                            <StyledInputBox>
-                                <StyledIcon className="fa-envelope"></StyledIcon>
-                                <StyledInput type="email" onChange={onChangeEmail} value={email} id="email" autoComplete="off" required/>
-                                <StyledP className="msg"> {emailMsg} </StyledP>
-                            </StyledInputBox>
-                        </StyledInputWrapper>
-                        {/* 소속 학교 */}
-                        <StyledInputWrapper>  
-                            <StyledLabel htmlFor="school">소속 학교</StyledLabel>
-                            <StyledInputBox>
-                                <StyledIcon className="fa-school"></StyledIcon>
-                                <StyledInput type="text" id="school" value={schoolName} onChange={onChangeSchoolName}/>
-                                <StyledP className="msg">{schoolMsg}</StyledP>
-                            </StyledInputBox>
-                        </StyledInputWrapper>
-                        {/* 학년 / 반 */}
-                        <StyledInputWrapper>  
-                            <StyledLabel>학년 & 반</StyledLabel>
-                            <StyledSelectWrapper>
-                                <StyledSelect name="학년" disabled={disabledSelectBox} value={grade} onChange={onChangeGradeSelect}>
-                                    {
-                                        gradeList.map(function(grade, idx) {
-                                            return (
-                                                <option key={idx} value={grade}>{`${grade}학년`}</option>
-                                            )
-                                        })
-                                    }
-                                </StyledSelect>
-                                <StyledSelect name="반" disabled={disabledSelectBox} value={classNumber} onChange={onChangeClassNumberSelect}>
-                                    {classList.map(function(item,idx) {
-                                        return (
-                                            <option key={idx} value={item}>{`${item}반`}</option>
-                                        )
-                                    })}
-                                </StyledSelect>
-                            </StyledSelectWrapper>
-                        </StyledInputWrapper> 
-                        {/* 성별 */}
-                        <StyledInputWrapper>
-                            <StyledLabel>성별</StyledLabel>
-                            <StyledSelect name="성별" value={gender} onChange={onChangeGenderSelect} disabled={disabledSelectBox}>
-                                {
-                                    genderList.map(function(gender, idx) {
-                                        return (
-                                            <option key={idx} value={gender}>{`${gender}`}</option>
-                                        )
-                                    })
-                                }
-                            </StyledSelect>
-                        </StyledInputWrapper>
-                    </StyledInputsWrapper>
-                    <StyledButton type="button" onClick={onClick}>회원가입</StyledButton>           
-                </StyledContainer>
-            </StyledContainerWrapper>
+            <StyledForm>
+                <LoginTitle>회원가입</LoginTitle>
+                <FormInnerWrapper>
+                    <StyledLabel htmlFor="name">이름</StyledLabel>
+                    <LoginInput 
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        value={name}
+                        onChange={onChange}
+                    />
+                </FormInnerWrapper>
+                <FormInnerWrapper>
+                    <StyledLabel htmlFor="email">이메일</StyledLabel>
+                    <LoginInput 
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={email}
+                        onChange={onChange}
+                    />
+                </FormInnerWrapper>
+                <FormInnerWrapper>
+                    <StyledLabel htmlFor="password">비밀번호</StyledLabel>
+                    <LoginInput 
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        value={password}
+                        onChange={onChange}
+                    />
+                </FormInnerWrapper>
+                {
+                    error && error.length > 0 && (
+                        <FormInnerWrapper>
+                            <ErrorMsgContainer>{error}</ErrorMsgContainer>
+                        </FormInnerWrapper>
+                    )
+                }
+                <FormInnerWrapper>
+                    이미 계정이 있으신가요?
+                    <StyledLink to="/register">
+                        로그인하기
+                    </StyledLink>
+                </FormInnerWrapper>
+                <FormInnerWrapper>
+                    <LoginSubmitButton
+                        type="button"
+                        value="register"
+                        // disabled={error?.length > 0}
+                        onClick={onSubmit}
+                    >회원가입</LoginSubmitButton>
+                </FormInnerWrapper>
+            </StyledForm>  
         </>
     )
 }

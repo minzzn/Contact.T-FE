@@ -55,7 +55,7 @@ export const StyledLink = styled(Link)`
     }
 `
 
-export const LoginSubmitInput = styled.input`
+export const LoginSubmitButton = styled.button`
     width: 100%;
     height: 48px;
     font-weight: 600;

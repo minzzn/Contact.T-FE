@@ -5,12 +5,16 @@ import { isRequired, MinimumLength, CantStartWithNumber, CantContainSpace, Email
 
 export const Register = () => {
     const navigate = useNavigate();
-    const validRules = new Array(3).fill(false);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [valid, setValid] = useState({
+        name: false,
+        email: false,
+        password: false,
+    });
 
     function validation(value, constraints) {
         const result = [];
@@ -37,39 +41,43 @@ export const Register = () => {
                 setName(value);
                 result = validation(value, [isRequired, MinimumLength(2), CantContainSpace]);
                 if(result === null) {
-                    validRules[0] = true;
+                    setValid((prevState) => ({...prevState, name: true}));
+                } else {
+                    setValid((prevState) => ({...prevState, email: false}));
                 }
                 break;
             case "email":
                 setEmail(value);
                 result = validation(value, [isRequired, CantContainSpace, EmailFormat]);
                 if(result === null) {
-                    validRules[1] = true;
+                    setValid((prevState) => ({...prevState, email: true}));
+                } else {
+                    setValid((prevState) => ({...prevState, email: false}));
                 }
                 break;
             case "password":
                 setPassword(value);
                 result = validation(value, [isRequired, CantContainSpace, MinimumLength(8), SpecialText]);
                 if(result === null) {
-                    validRules[2] = true;
+                    setValid((prevState) => ({...prevState, password: true}));
+                } else {
+                    setValid((prevState) => ({...prevState, password: false}));
                 }
                 break;
         }
-
+        console.log(valid);
         setError(result);
     }
 
     function onSubmit(event) {
         event.preventDefault();
-        const isAllValid = validRules.filter((value) => value === true);
-        console.log(isAllValid);
-
-        if(isAllValid.length === 3) {
-            // 로그인 페이지로
-            console.log('로그인 페이지로 이동하는 지점 진입');
-            navigate("/");
+        // 유효하지 않은 정보가 하나라도 있으면 안됨
+        if(Object.values(valid).filter((value) => value === false).length > 0) {
+            alert("모든 항목을 제대로 입력해주세요");
+            return;
         }
-        alert("모든 항목을 제대로 작성해주세요");
+        // 모두 유효하다면, 로그인 페이지로
+        navigate("/");
     }
 
     return (
@@ -126,7 +134,7 @@ export const Register = () => {
                     <LoginSubmitButton
                         type="button"
                         value="register"
-                        // disabled={error?.length > 0}
+                        disabled={error?.length > 0}
                         onClick={onSubmit}
                     >회원가입</LoginSubmitButton>
                 </FormInnerWrapper>

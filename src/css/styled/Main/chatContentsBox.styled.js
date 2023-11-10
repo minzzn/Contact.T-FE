@@ -20,12 +20,13 @@ export const ChatContentDivWrapper = styled.div`
 `
 export const ChatContentDiv = styled.div`
     height: min-content;
-    padding: 5px;
+    padding: 10px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 600;
-    border: 2px solid black;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: ${(props) => props.ismine ? 'orange' : 'black'};
+    color: white;
 `

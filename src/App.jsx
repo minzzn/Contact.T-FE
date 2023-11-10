@@ -1,9 +1,9 @@
 import React from "react";
 import "./css/public.css";
 import { Route, Routes } from "react-router-dom";
-import { Register } from "./views/Register";
-import { Login } from "./views/Login";
-import { Main } from "./views/Main";
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
+import { Main } from "./pages/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 export default function App() {
   return (

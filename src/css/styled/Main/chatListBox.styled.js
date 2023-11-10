@@ -22,11 +22,11 @@ export const Container = styled.div`
 
 export const ImgContainer = styled.div`
     overflow: hiddden;
-    flex: 1.5;
-    border: 1px solid var(--bg-black);
+    width: 55px;
+    height: 55px;
     border-radius: 10%;
     margin-right: 7px;
-    object-fit: cover;
+    overflow: hidden;
 `;
 
 export const NameAndContentContainer = styled.div`

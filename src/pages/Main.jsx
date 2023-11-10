@@ -1,7 +1,7 @@
 import { ChatListBox } from "../components/Main/ChatListBox";
 import { useState } from "react";
-import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
-import { ChattingContainer } from "../components/Main/ChattingContainer";
+import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/Main/main.styled";
+import { ChattingPane } from "../components/Main/Chat/ChattingPane";
 import { PeopleListBox } from "../components/Profile/PeopleListBox";
 import { users } from "../constant/main.data";
 
@@ -10,6 +10,7 @@ export const Main = () => {
     
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
+    const choosedUser = USERS[0];
 
     return (
         <>
@@ -41,7 +42,7 @@ export const Main = () => {
                 </ChatListContainer>
                 
                 {/* 채팅 치는 영역 */}
-                <ChattingContainer className="right-pane"/> 
+                <ChattingPane className="right-pane" userdata={choosedUser}/> 
             </Container>
         </>
     )

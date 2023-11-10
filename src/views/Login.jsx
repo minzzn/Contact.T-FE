@@ -25,7 +25,7 @@ export const Login = () => {
           case "password":
             setPassword(value);
           
-            (!value?.length < 8) ? setError("비밀번호는 8자리 이상 입력해주세요") : setError("");
+            (value?.length < 8) ? setError("비밀번호는 8자리 이상 입력해주세요") : setError("");
             break;
         }
       };

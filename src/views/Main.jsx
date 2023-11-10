@@ -1,67 +1,15 @@
 import { ChatListBox } from "../components/Main/ChatListBox";
 import { useState } from "react";
-import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, RightPane, StyledIcon } from "../css/styled/main.styled";
-import { ChatMainContainer } from "../components/Main/ChatMainContainer";
-import { PeopleListBox } from "../components/PeopleListBox";
-import img1 from "../assets/userimg_01.png"
-import img2 from "../assets/userimg_02.png"
-import lion from "../assets/lion.jpeg"
-
+import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/main.styled";
+import { ChattingContainer } from "../components/Main/ChattingContainer";
+import { PeopleListBox } from "../components/Profile/PeopleListBox";
+import { users } from "../constant/main.data";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
-    const users = [
-        {
-            name: '민주',
-            img: img2,
-            profileImg: lion
-        },
-        {
-            name: '민정',
-            img: img1,
-            profileImg: lion
-        },
-        {
-            name: '동원',
-            img: img2,
-            profileImg: lion
-        },
-        {
-            name: '재현',
-            img: img1,
-            profileImg: lion
-        },
-        {
-            name: '세윤',
-            img: img2,
-            profileImg: lion
-        },
-        {
-            name: '재원',
-            img: img1,
-            profileImg: lion
-        },
-        {
-            name: '준호',
-            img: img2,
-            profileImg: lion
-        },
-        {
-            name: '민기',
-            img: img1,
-            profileImg: lion
-        },
-        {
-            name: '현기',
-            img: img2,
-            profileImg: lion
-        },
-        {
-            name: '남주',
-            img: img1,
-            profileImg: lion
-        },
-    ];
+    
+    // 서버로부터 받아온 데이터라고 가정
+    const USERS = users;
 
     return (
         <>
@@ -80,22 +28,20 @@ export const Main = () => {
                         </IconsWrapper>
                     </IconsModalWrapper>
                     {/* 채팅 목록 리스트 */}
-                    <ChatListLiContainer> 
+                    <ChatListLiContainer>
                         {/* components/ChatListBox.jsx */}
                         {
                             isChatListActive ? (
-                                users.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx}/>)
+                                USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx}/>)
                             ) : (
-                                users.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
+                                USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
                             )
                         }
                     </ChatListLiContainer>
                 </ChatListContainer>
                 
                 {/* 채팅 치는 영역 */}
-                <RightPane>
-                    <ChatMainContainer className="right-pane"/> 
-                </RightPane>
+                <ChattingContainer className="right-pane"/> 
             </Container>
         </>
     )

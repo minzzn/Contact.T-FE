@@ -56,7 +56,6 @@ export const Register = () => {
                 (result === null) ? setValid((prevState) => ({...prevState, password: true})) : setValid((prevState) => ({...prevState, password: false}));
                 break;
         }
-        console.log(valid);
         setError(result);
     }
 

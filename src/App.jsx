@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Register } from "./views/Register";
 import { Login } from "./views/Login";
 import { Main } from "./views/Main";
-import { SetProfile } from "./components/SetProfile";
+import { SetProfile } from "./components/Profile/SetProfile";
 export default function App() {
   return (
     <Routes>

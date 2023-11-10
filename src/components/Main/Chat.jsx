@@ -1,9 +1,10 @@
 import { ChatContentsBox } from "../Main/ChatContentsBox";
-import {ChatContainer, ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, IconsWrapper, StyledIcon } from "../../css/styled/main.styled"
+import { IconsWrapper, StyledIcon } from "../../css/styled/main.styled"
+import { ChatContents, ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../css/styled/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 
-export const ChatMainContainer = () => {
+export const Chat = () => {
 
     const client = useRef({});
     const [chat, setChat] = useState("");
@@ -67,13 +68,9 @@ export const ChatMainContainer = () => {
         connect();
     },[]);
 
-    console.log(chatList);
-
     return (
-        <>  
-            {/* 메인페이지 : 우측 : 채팅내역들과 채팅 입력 칸이 존재하는 공간 */}
-            <ChatContainer>
-                {/* 채팅 내역들이 보여지는 곳 */}
+        <>
+            <Container>
                 <ChatContents>
                     <ChatContentsBox chatsHistory={chatList}/>
                 </ChatContents>
@@ -99,7 +96,7 @@ export const ChatMainContainer = () => {
                         </ChatEtcContainer>
                     </ChatInputForm>
                 </ChatInputContainer>
-            </ChatContainer>
+            </Container>
         </>
     )
 }

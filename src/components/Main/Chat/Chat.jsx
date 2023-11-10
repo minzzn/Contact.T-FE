@@ -83,10 +83,10 @@ export const Chat = () => {
                         <ChatEtcContainer>
                             {/* 별도의 옵션 아이콘들 */}
                             <IconsWrapper>
-                                <StyledIcon className="fas fa-share-from-square" size="20px" marginright="20px" />
-                                <StyledIcon className="fas fa-image" size="20px" marginright="20px" />
-                                <StyledIcon className="fa-solid fa-paperclip" size="20px" marginright="20px" />
-                                <StyledIcon className="fa-solid fa-calendar-check" size="20px" marginright="20px" />
+                                <StyledIcon className="fas fa-share-from-square" size="20px" $marginright="20px" />
+                                <StyledIcon className="fas fa-image" size="20px" $marginright="20px" />
+                                <StyledIcon className="fa-solid fa-paperclip" size="20px" $marginright="20px" />
+                                <StyledIcon className="fa-solid fa-calendar-check" size="20px" $marginright="20px" />
                             </IconsWrapper>
                             {/* 전송 버튼 */}
                             <ChatInputBtn disabled={chat?.length < 1}>

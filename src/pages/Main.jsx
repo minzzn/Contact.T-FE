@@ -2,8 +2,8 @@ import { ChatListBox } from "../components/Main/ChatListBox";
 import { useState } from "react";
 import { ChatListContainer, ChatListLiContainer, Container, IconsModalWrapper, IconsWrapper, StyledIcon } from "../css/styled/Main/main.styled";
 import { ChattingPane } from "../components/Main/Chat/ChattingPane";
-import { PeopleListBox } from "../components/Profile/PeopleListBox";
-import { users } from "../constant/main.data";
+import { PeopleListBox } from "../components/Main/PeopleListBox";
+import { users } from "../constant/user.data";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
@@ -20,12 +20,12 @@ export const Main = () => {
                     <IconsModalWrapper>
                         {/* 처음 진입하거나 왼쪽부분 사이즈를 줄이고 싶을때 */}
                         <IconsWrapper>
-                                <StyledIcon className="fas fa-user" size='30px' marginright="20px" onClick={()=> {
+                                <StyledIcon className="fas fa-user" size='30px' $marginright="20px" onClick={()=> {
                                     setIsChatListActive(false);
-                                }} />
+                                }} $ischatlistactive={`${!isChatListActive}`} />
                                 <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
                                     setIsChatListActive(true);
-                                }} />
+                                }} $ischatlistactive={`${isChatListActive}`} />
                         </IconsWrapper>
                     </IconsModalWrapper>
                     {/* 채팅 목록 리스트 */}

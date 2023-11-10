@@ -6,7 +6,7 @@
   --bg-black: black;
   --bg-dark-gray: #5c5c5c;
   --bg-beige: #FFE6C7;
-  --bg-orangered: orangered;
+  --bg-orangered: rgb(255, 25, 0);
 }
 * {
   margin: 0;

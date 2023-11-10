@@ -65,14 +65,11 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
     font-size: ${(props) => props.size ? props.size : '16px'};
-    margin-right: ${(props) => props.marginright ? props.marginright : 0};
-    color: var(--bg-dark-gray);
+    margin-right: ${(props) => props.$marginright ? props.$marginright : 0};
+    color: ${(props) => props.$ischatlistactive === "true" ? 'var(--bg-black)' : 'var(--bg-dark-gray)'};
     transition: all 0.2s linear;
 
     &:hover {
-        color: var(--bg-orange);
-    }
-    &:active {
-        color: var(--bg-orangered);
+        color: var(--bg-beige);
     }
 `;

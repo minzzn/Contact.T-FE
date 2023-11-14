@@ -44,63 +44,61 @@ export const SetProfile = () => {
 }
 
 const SetProfileBox = styled.div`
-  @media only screen and (min-width: 430px) {
-    width: 365px;
-    margin: auto;
-  }
-
-  @media only screen and (max-width: 430px) {
-    max-width: auto;
-    margin: auto;
-  }
+    width: 70vh;
+    height: 85vh;
+    zIndex: 150;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    overflow: auto;
+   
 `;
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center; /* 수직 가운데 정렬 */
   justify-content: center; /* 수평 가운데 정렬 */
-  height: 100vh; /* 화면 높이 만큼 늘리기 */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  flex: initial;
 `;
 const ProfileSetText = styled.div`
   box-sizing: border-box;
   display:flex;
   align-items:center;
   justify-content: center;
-  width: 333px;
+  width: 33vh;
   /* border: 1px solid #000000; */
-
-  //flex-basis: 200px;
-  display: inline-block; 
-  white-space: nowrap;
 
   /* 프로필 설정하기 */
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 600;
   text-align: 'center';
-  font-size: 48px;
+  font-size: 4vh;
 `;
 const ExplainText = styled.div`
   box-sizing: border-box;
   display:flex;
   align-items:center;
   justify-content: center;
-
-  display: inline-block; 
-  white-space: nowrap;
+  padding: 0.7vh;
 
   /* 프로필 설정하기 */
   font-family: 'Noto Sans KR', sans-serif;
   text-align: 'center';
   font-weight: 400;
-  font-size: 28px;
+  font-size: 2.8vh;
 `;
 const SetContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 697px;
-  height: 816px;
+  width: 68vh; //697px
+  height: 80vh; //816px
   /* border: 1px solid #000000; */
 `;
 const SetBox = styled.div`
@@ -109,27 +107,28 @@ const SetBox = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 680px;
-  height: 800px;
+  width: 60vh;
+  height: 72vh;
   background: #FFFFFF;
-  border: 7px solid #B4B4B4;
-  border-radius: 30px;
+  border: 0.7vh solid #B4B4B4;
+  border-radius: 3vh;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;
 const ProfileImageBox = styled.div`
   box-sizing: border-box;
   display:flex;
   align-items:center;
   justify-content: center;
-  width: 250px;
-  height: 250px;
+  width: 25vh;
+  height: 25vh;
   /* border: 1px solid #000000; */
 `;
 const ProfileImage = styled.img`
   box-sizing: border-box;
-  width: 230px;
-  height: 230px;
+  width: 23vh;
+  height: 23vh;
   background: #FFFFFF;
-  border: 5px solid #B4B4B4;
+  border: 0.5vh solid #B4B4B4;
   border-radius: 50%;
 `;
 const InputBox = styled.div`
@@ -138,8 +137,8 @@ const InputBox = styled.div`
   align-items:center;
   justify-content: center;
   flex-direction: column;
-  width: 560px;
-  height: 299px;
+  width: 56vh;
+  height: 30vh;
   /* border: 1px solid #000000; */
 `;
 const StartButton = styled.button`
@@ -147,13 +146,14 @@ const StartButton = styled.button`
   display:flex;
   align-items:center;
   justify-content: center;
-  margin-top: 10px; 
-  width: 480px;
-  height: 86px;
+  margin-top: 1vh; 
+  width: 45vh;
+  height: 7vh;
   background: #F8E792;
-  border-radius: 30px;
+  border-radius: 3vh;
   border: none;
   background: #F8E792;
+  cursor: pointer;
   &:hover {
     background: ${lighten(0.1, '#F8E792')};
   }
@@ -164,25 +164,5 @@ const StartButton = styled.button`
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
-`;
-const InputNickname = styled.input`
-  border: none;
-  outline:none;
-  border-bottom: 5px solid #B4B4B4;
-  width: 480px;
-  height: 50px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: bold;
-  font-size: 24px;
-`;
-const InputIntroduce = styled.input`
-  border: none;
-  outline:none;
-  border-bottom: 5px solid #B4B4B4;
-  width: 480px;
-  height: 50px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: bold;
-  font-size: 24px;
+  font-size: 2.4vh;
 `;

@@ -28,8 +28,8 @@ export const Main = () => {
                         </IconsWrapper>
                     </IconsModalWrapper>
                     {/* 채팅 목록 리스트 */}
-                    <ChatListLiContainer>
-                        {/* components/ChatListBox.jsx */}
+                    <ChatListLiContainer>{/* components/Main/ChatListBox.jsx */}
+                        
                         {
                             isChatListActive ? (
                                 USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx}/>)

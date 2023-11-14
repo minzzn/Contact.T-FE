@@ -1,5 +1,4 @@
-import react, {useState} from "react"
-import styled from "styled-components"
+import react, { useState }  from "react"
 import { PeopleListBox } from "../components/Main/PeopleListBox";
 import { ChatListBox } from "../components/ChatListBox";
 

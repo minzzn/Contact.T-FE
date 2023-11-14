@@ -9,7 +9,7 @@ export const SelectBox = () => {
     ] //원래는 select 태그 안에 들어가는 애들을 배열로 만들어준다.
 
     const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
-    //안에 들어가는 값을 받아야해서 state사용
+    //안에 들어가는 값을 받아야해서 state 사용
 
     return(
         <Select options={onduty} //위에서 만든 배열을 select로 넣기

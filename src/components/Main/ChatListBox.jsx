@@ -1,11 +1,11 @@
 import { Container, ImgContainer, NameAndContentContainer, DateContainer, ChatListBoxLink } from "../../css/styled/chatListBox.styled";
 
-export const ChatListBox = ({username, profileimg}) => {
-    
+export const ChatListBox = ({username, profileimg, onClick}) => { 
+// 함수도 객체이므로 props로 전달 가능   
 
     return (
         <>
-            <Container>
+            <Container onClick={onClick}>
                 <ImgContainer>
                     <img src={profileimg} alt="profile-img" style={{objectFit: "coveer", width: "100%", height: "100%"}}/>
                 </ImgContainer>

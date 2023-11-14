@@ -110,7 +110,7 @@ const SetBox = styled.div`
   width: 60vh;
   height: 72vh;
   background: #FFFFFF;
-  border: 0.7vh solid #B4B4B4;
+  border: 0.5vh solid #B4B4B4;
   border-radius: 3vh;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;

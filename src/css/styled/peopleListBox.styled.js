@@ -25,6 +25,8 @@ const ImgContainer = styled.div`
     border: 1px solid var(--bg-white);
     border-radius: 10%;
     margin-right: 2vw;
+    justify-content: center;
+    align-items: center;
 `;
 
 const NameAndContentContainer = styled.div`

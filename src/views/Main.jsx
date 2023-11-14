@@ -7,9 +7,15 @@ import { users } from "../constant/main.data";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
+    const [isChatContentActive, setIsChatContentActive] = useState(false);//
     
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
+    
+    const chatListClick = () => {//
+        console.log('active');
+        setIsChatContentActive(true);
+    };
 
     return (
         <>
@@ -27,21 +33,26 @@ export const Main = () => {
                                 }} />
                         </IconsWrapper>
                     </IconsModalWrapper>
-                    {/* 채팅 목록 리스트 */}
-                    <ChatListLiContainer>{/* components/Main/ChatListBox.jsx */}
-                        
-                        {
-                            isChatListActive ? (
-                                USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx}/>)
-                            ) : (
-                                USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
-                            )
-                        }
-                    </ChatListLiContainer>
+                    
                 </ChatListContainer>
                 
                 {/* 채팅 치는 영역 */}
-                <ChattingContainer className="right-pane"/> 
+                {/* 채팅 목록 리스트 */}
+                <ChatListLiContainer>{/* components/Main/ChatListBox.jsx */}
+                    
+                    {
+                        isChatListActive ? (//1.onClick이벤트를 ChatListBox에 전달 2.isChatContentActive의 props를 ChattingContainer에 전달
+                            USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx} chatListClick={onClick}/>)
+                        ) : (
+                            USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
+                        )
+                    }
+                </ChatListLiContainer> 
+                {
+                    isChatContentActive ? (
+                        <ChattingContainer className="right-pane" />
+                    ) : null
+                }
             </Container>
         </>
     )

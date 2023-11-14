@@ -20,8 +20,6 @@ export const PeopleListBox = ({username, userimg, key}) => {//
                 null
             )
         }
-        // setModalIsOpen(true);
-        // console.log('Modal Open');
     };
     const closeModal = () => {
         setModalIsOpen(false);
@@ -32,13 +30,13 @@ export const PeopleListBox = ({username, userimg, key}) => {//
             <Container key1={key} onClick={openModal}> 
                 
                 <ImgContainer>
-                    <img src={userimg} alt="user-img"/>
+                    <img src={userimg} alt="user-img" style={{objectFit: "contain", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{username}</h2>
                 </NameAndContentContainer>
             </Container>
-            <Modal 
+            <Modal // 분리하거나 display 바꾸기
                 key2={key}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -133,6 +131,7 @@ const customStyles = {
       overflow: "auto",
       border: "7px solid #FF9634",
       overflow: "auto",
+      display: "none",
     },
   };
   const SetBox = styled.div`

@@ -4,22 +4,13 @@ import Modal from 'react-modal';
 import styled from "styled-components"
 import { darken, lighten } from 'polished';
 
-export const PeopleListBox = ({username, userimg, key}) => {//
+export const PeopleListBox = ({username, userimg, key}) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const userCheck = () => {//
+    const openModal = () => {
         setModalIsOpen(true);
         console.log('Modal Open');
-    };
-    const openModal = () => {//
-        {
-            key1 == key2 ? (
-                userCheck()
-            ) : (
-                null
-            )
-        }
     };
     const closeModal = () => {
         setModalIsOpen(false);
@@ -27,7 +18,7 @@ export const PeopleListBox = ({username, userimg, key}) => {//
     };
     return ( //방법 1. 클릭한 컴포넌트와 해당 보여줄 컴포넌트의 인덱스 키값을 비교 ...?
         <>
-            <Container key1={key} onClick={openModal}> 
+            <Container onClick={openModal}> 
                 
                 <ImgContainer>
                     <img src={userimg} alt="user-img" style={{objectFit: "contain", width: "100%", height: "100%"}}/>
@@ -37,7 +28,6 @@ export const PeopleListBox = ({username, userimg, key}) => {//
                 </NameAndContentContainer>
             </Container>
             <Modal // 분리하거나 display 바꾸기
-                key2={key}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
@@ -53,7 +43,7 @@ export const PeopleListBox = ({username, userimg, key}) => {//
                         <ProfileImage></ProfileImage>
                     </ProfileImageBox>
                     <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
-                    <RealName><p>{username}</p></RealName>//
+                    <RealName><p>{username}</p></RealName>
                     <StateBox>
                         <DutyState>
                             <StateMark></StateMark>
@@ -131,7 +121,6 @@ const customStyles = {
       overflow: "auto",
       border: "7px solid #FF9634",
       overflow: "auto",
-      display: "none",
     },
   };
   const SetBox = styled.div`

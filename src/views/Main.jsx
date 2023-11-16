@@ -12,7 +12,7 @@ export const Main = () => {
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
     
-    const chatListClick = () => {//
+    const onClick = () => {//
         console.log('active');
         setIsChatContentActive(true);
     };
@@ -42,7 +42,7 @@ export const Main = () => {
                     
                     {
                         isChatListActive ? (//1.onClick이벤트를 ChatListBox에 전달 2.isChatContentActive의 props를 ChattingContainer에 전달
-                            USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx} chatListClick={onClick}/>)
+                            USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx} onClick={onClick}/>)
                         ) : (
                             USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
                         )

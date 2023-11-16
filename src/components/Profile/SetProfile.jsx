@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { darken, lighten } from 'polished';
-import { SelectBox } from './SetProfileSelectBox';
+import { SelectDuty } from './SetProfileSelectDuty';
+// import { SelectChatTime } from './SetProfileSelectChatTime';
 
 export const SetProfile = () => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ export const Main = () => {
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
     const choosedUser = USERS[0];
-
+    
     return (
         <>
             <Container>

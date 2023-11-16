@@ -19,7 +19,7 @@ export const SetProfile = () => {
     navigate('/');
     console.log('enter to main'); // main으로 이동 후 콘솔에 메시지 출력
     e.preventDefault(); // 이동 혹은 새로고침 방지, event handling 처리 시 명시적으로 호출
-}
+ }
 
   return (
     <SetProfileBox>{/* 메인 컨테이너 박스 */}
@@ -33,8 +33,8 @@ export const SetProfile = () => {
                     <ProfileImage></ProfileImage>
                 </ProfileImageBox>
                 <InputBox>
-                  <SelectBox></SelectBox>
-                  <SelectBox></SelectBox>
+                  <SelectDuty></SelectDuty>
+                  <SelectDuty></SelectDuty>
                 </InputBox>
                 <StartButton onClick={goToMain}>서비스 시작하기</StartButton>
             </SetBox>
@@ -139,7 +139,7 @@ const InputBox = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 56vh;
-  height: 30vh;
+  height: 25vh;
   /* border: 1px solid #000000; */
 `;
 const StartButton = styled.button`
@@ -150,17 +150,16 @@ const StartButton = styled.button`
   margin-top: 1vh; 
   width: 45vh;
   height: 7vh;
-  background: #F8E792;
   border-radius: 3vh;
   border: none;
-  background: #F8E792;
+  background: #FF9634;
+    &:hover {
+      background: ${lighten(0.1, '#FF9634')};
+    }
+    &:active {
+      background:  ${darken(0.1, '#FF9634')};
+    }
   cursor: pointer;
-  &:hover {
-    background: ${lighten(0.1, '#F8E792')};
-  }
-  &:active {
-    background:  ${darken(0.1, '#F8E792')};
-  }
   /* 서비스 시작하기 */
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;

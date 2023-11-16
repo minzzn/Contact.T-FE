@@ -16,7 +16,7 @@ export const PeopleListBox = ({username, userimg, key}) => {
         setModalIsOpen(false);
         console.log('Modal Close');
     };
-    return ( //방법 1. 클릭한 컴포넌트와 해당 보여줄 컴포넌트의 인덱스 키값을 비교 ...?
+    return (
         <>
             <Container onClick={openModal}> 
                 
@@ -28,6 +28,7 @@ export const PeopleListBox = ({username, userimg, key}) => {
                 </NameAndContentContainer>
             </Container>
             <Modal // 분리하거나 display 바꾸기
+                display={modalIsOpen ? 'flex' : 'none'}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
@@ -97,6 +98,7 @@ const NameAndContentContainer = styled.div`
 `;
 
 const customStyles = {
+    display: "${(props) => props.display || 'none'}",
     overlay: {
       backgroundColor: " rgba(0, 0, 0, 0.4)",
       width: "100%",

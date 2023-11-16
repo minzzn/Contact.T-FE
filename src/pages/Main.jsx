@@ -7,11 +7,18 @@ import { users } from "../constant/user.data";
 
 export const Main = () => {
     const [isChatListActive, setIsChatListActive] = useState(false);
+    const [isChatContentActive, setIsChatContentActive] = useState(false);//
     
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
     const choosedUser = USERS[0];
     
+    
+    const onClick = () => {//
+        console.log('active');
+        setIsChatContentActive(true);
+    };
+
     return (
         <>
             <Container>
@@ -28,21 +35,26 @@ export const Main = () => {
                                 }} $ischatlistactive={`${isChatListActive}`} />
                         </IconsWrapper>
                     </IconsModalWrapper>
-                    {/* 채팅 목록 리스트 */}
-                    <ChatListLiContainer>
-                        {/* components/ChatListBox.jsx */}
-                        {
-                            isChatListActive ? (
-                                USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx}/>)
-                            ) : (
-                                USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
-                            )
-                        }
-                    </ChatListLiContainer>
+                    
                 </ChatListContainer>
                 
                 {/* 채팅 치는 영역 */}
-                <ChattingPane className="right-pane" userdata={choosedUser}/> 
+                {/* 채팅 목록 리스트 */}
+                <ChatListLiContainer>{/* components/Main/ChatListBox.jsx */}
+                    
+                    {
+                        isChatListActive ? (//1.onClick이벤트를 ChatListBox에 전달 2.isChatContentActive의 props를 ChattingContainer에 전달
+                            USERS.map(({name, profileImg},idx) => <ChatListBox username={name} profileimg={profileImg} key={idx} onClick={onClick}/>)
+                        ) : (
+                            USERS.map(({name, img},idx) => <PeopleListBox username={name} userimg={img} key={idx}/>)
+                        )
+                    }
+                </ChatListLiContainer> 
+                {
+                    isChatContentActive ? (
+                        <ChattingPane className="right-pane" userdata={choosedUser}/>
+                    ) : null
+                }
             </Container>
         </>
     )

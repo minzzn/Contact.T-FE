@@ -1,7 +1,7 @@
 import { StyledIcon, IconsWrapper } from "../../css/styled/Main/main.styled";
 import { ChatIconsContainer, IconsModalContainer} from "../../css/styled/common/header.styled";
 
-export const Header = ({setIsChatContentActive, setIsChatListActive, isChatListActive}) => {
+export const Header = ({ setIsChatContentActive, setIconsState, iconsState }) => {
 
     return (
         <ChatIconsContainer className="left-pane">
@@ -11,17 +11,31 @@ export const Header = ({setIsChatContentActive, setIsChatListActive, isChatListA
 
                     <div className="temporary_wrapper">
                         <StyledIcon className="fas fa-user" size='30px' $marginBottom="2vh" onClick={()=> {
-                            setIsChatListActive(false);
                             setIsChatContentActive(false);
-                        }} $ischatlistactive={`${!isChatListActive}`} />
+                            setIconsState(()=> ({
+                                chatList: false,
+                                peopleList: true,
+                                gear: false,
+                            }));
+                        }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'} />
 
                         <StyledIcon className="fas fa-comment" size="30px" $marginBottom="75vh" onClick={()=> {
-                            setIsChatListActive(true);
-                        }} $ischatlistactive={`${isChatListActive}`} />
+                            setIconsState(()=> ({
+                                chatList: true,
+                                peopleList: false,
+                                gear: false,
+                            }));
+                        }} $selected={iconsState["chatList"] === true ? 'true' : 'false'} />
                     </div>
 
                     {/* 매안 공간 : 차트, 알림 등등 보여주기 */}
-                    <StyledIcon className="fa-solid fa-gear" size="30px"/>
+                    <StyledIcon className="fa-solid fa-gear" size="30px" onClick={() => {
+                        setIconsState(()=> ({
+                            chatList: false,
+                            peopleList: false,
+                            gear: true,
+                        }));
+                    }} $selected={iconsState["gear"] === true ? 'true' : 'false'}/>
                     
                 </IconsWrapper>
             </IconsModalContainer>

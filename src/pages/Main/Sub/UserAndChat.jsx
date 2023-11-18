@@ -2,12 +2,12 @@ import { useState } from "react";
 import { ViewList } from "../../../components/Main/ViewList"
 import { ChattingPane } from "../../../components/Main/ChattingPane";
 
-export const UserAndChat = ({ isChatListActive, setIsChatContentActive, isChatContentActive, USERS }) => {
+export const UserAndChat = ({ setIsChatContentActive, isChatContentActive, USERS, iconsState }) => {
     const [choosedUser, setChoosedUser] = useState(null);
 
     return (
         <>
-            <ViewList isChatListActive={isChatListActive} setIsChatContentActive={setIsChatContentActive} users={USERS} setChoosedUser={setChoosedUser} />
+            <ViewList setIsChatContentActive={setIsChatContentActive} users={USERS} setChoosedUser={setChoosedUser} iconsState={iconsState} />
             {
                 isChatContentActive ? (
                     <ChattingPane className="right-pane" userdata={choosedUser}/>

@@ -17,5 +17,5 @@ export const IconsModalContainer = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin: 6vh 1vw;
+    margin: 3vh 1vw;
 `

@@ -3,7 +3,7 @@ import "./css/public.css";
 import { Route, Routes } from "react-router-dom";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-import { Main } from "./pages/Main";
+import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 export default function App() {
   return (

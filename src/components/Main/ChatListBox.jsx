@@ -1,10 +1,12 @@
 import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../css/styled/Main/chatListBox.styled";
+import { ToastifyWarn } from "../../function/toast";
 
 export const ChatListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { 
 
     function clickEventFn() {
         setChoosedUser(user);
         setIsChatContentActive(true);
+        ToastifyWarn();
     }
 
     return (

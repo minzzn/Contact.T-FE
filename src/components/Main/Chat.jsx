@@ -1,6 +1,6 @@
 import { ChatContentsBox } from "./ChatContentsBox";
-import { IconsWrapper, StyledIcon } from "../../../css/styled/Main/main.styled"
-import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../../css/styled/Main/chat.style";
+import { IconsWrapper, StyledIcon } from "../../css/styled/Main/main.styled"
+import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../css/styled/Main/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 

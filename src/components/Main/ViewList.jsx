@@ -1,6 +1,6 @@
-import { PeopleListBox } from "../components/Main/PeopleListBox";
-import { ChatListBox } from "../components/Main/ChatListBox";
-import { ChatAndPeopleListContainer } from "../css/styled/Main/main.styled";
+import { PeopleListBox } from "./PeopleListBox";
+import { ChatListBox } from "./ChatListBox";
+import { ChatAndPeopleListContainer } from "../../css/styled/Main/main.styled";
 
 {/* index 값은 map함수의 파라미터, 사용할 데이터와 분리해서 적을것 */}
 export const ViewList = ({isChatListActive, setIsChatContentActive, users, setChoosedUser }) => {

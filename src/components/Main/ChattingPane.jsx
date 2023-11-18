@@ -1,6 +1,8 @@
-import { ChatContainer } from "../../../css/styled/Main/chattingPane.style"
-import { ChatHeader } from "../ChatHeader";
+import { ChatContainer } from "../../css/styled/Main/chattingPane.style"
+import { ChatHeader } from "./ChatHeader";
 import { Chat } from "./Chat";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // 선택된 유저 데이터를 props로 받으면
 export const ChattingPane = ({userdata}) => {
@@ -14,6 +16,7 @@ export const ChattingPane = ({userdata}) => {
                 {/* 채팅 내역들이 보여지는 곳 : 높이 90vh로 설정 */}
                 <Chat />
             </ChatContainer>
+            <ToastContainer />
         </>
     )
 }

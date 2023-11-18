@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin_up.styled";
+import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
-import { EmailFormat } from "../constant/user.constraints";
+import { EmailFormat } from "../../constant/user.constraints";
 
 export const Login = () => {
     const [email, setEmail] = useState("");

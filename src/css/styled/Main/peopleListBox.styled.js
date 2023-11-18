@@ -11,8 +11,10 @@ export const Container = styled.div`
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */
-  margin: 1.4vh 0;
+  margin: 0.6vh 0;
   color: var(--bg-dark-gray);
+  border-radius: 10px;
+  background-color: white;
 
   &:hover {
       color: var(--bg-black);
@@ -22,11 +24,12 @@ export const Container = styled.div`
 `;
 
 export const ImgContainer = styled.div`
+    overflow: hiddden;
+    width: 55px;
+    height: 55px;
+    border-radius: 10%;
+    margin-right: 7px;
     overflow: hidden;
-    border-radius: 15px;
-    width: min-content;
-    height: min-content;
-    margin-right: 2vw;
 `;
 
 export const NameAndContentContainer = styled.div`

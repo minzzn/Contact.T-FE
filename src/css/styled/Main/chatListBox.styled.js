@@ -1,24 +1,25 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-    min-width: 250px;
-    width: 100%;
-    // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
-    height: 11vh;
-    display: flex;
-    justify-content: space-between;
-    /* vertical - horizontal */
-    padding: 10px 8px;
-    /* vertical - horizontal */
-    margin: 1.4vh 0;
-    color: var(--bg-dark-gray);
-    transition: color 0.5s linear;
+  min-width: 250px;
+  width: 100%;
+  // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
+  height: 11vh;
+  display: flex;
+  justify-content: space-between;
+  /* vertical - horizontal */
+  padding: 2vh 2vw;
+  /* vertical - horizontal */
+  margin: 0.6vh 0;
+  color: var(--bg-dark-gray);
+  border-radius: 10px;
+  background-color: white;
 
-    &:hover {
-        font-weight: 800;
-        color: var(--bg-beige);
-        cursor: pointer;
-    }
+  &:hover {
+      color: var(--bg-black);
+      text-shadow: 2px 2px 5px var(--bg-beige);
+      cursor: pointer;
+  }
 `;
 
 export const ImgContainer = styled.div`

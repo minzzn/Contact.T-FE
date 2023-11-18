@@ -18,6 +18,9 @@
 html,
 body {
   height: 100%;
+  width: 100%;
+  /* 스크롤 움직임 차단 */
+  overflow: hidden;
 }
 .wrapper {
   height: 100%;

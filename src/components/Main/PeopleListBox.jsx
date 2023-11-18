@@ -20,7 +20,7 @@ export const PeopleListBox = ({username, userimg}) => {
             <Container onClick={openModal}> 
                 
                 <ImgContainer>
-                    <img src={userimg} alt="user-img" style={{objectFit: "cover", width: "50px", height: "50px"}}/>
+                    <img src={userimg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{username}</h2>

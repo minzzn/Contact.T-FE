@@ -1,4 +1,4 @@
-import { ChatContainer } from "../../../css/styled/Main/main.styled"
+import { ChatContainer } from "../../../css/styled/Main/chattingPane.style"
 import { ChatHeader } from "../ChatHeader";
 import { Chat } from "./Chat";
 

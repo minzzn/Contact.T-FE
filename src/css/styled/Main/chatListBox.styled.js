@@ -16,7 +16,8 @@ export const Container = styled.div`
 
     &:hover {
         font-weight: 800;
-        color: var(--bg-orange);
+        color: var(--bg-beige);
+        cursor: pointer;
     }
 `;
 
@@ -41,4 +42,7 @@ export const NameAndContentContainer = styled.div`
 export const DateContainer = styled.div`
     flex: 1;
     margin-top: 4px;
+    display: flex;
+    padding-right: 5px;
+    justify-content: end;
 `;

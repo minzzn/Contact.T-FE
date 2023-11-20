@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../css/styled/signin_up.styled";
+import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
-import { isRequired, MinimumLength, CantStartWithNumber, CantContainSpace, EmailFormat, SpecialText } from "../constant/user.constraints";
+import { isRequired, MinimumLength, CantStartWithNumber, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
 
 export const Register = () => {
     const navigate = useNavigate();

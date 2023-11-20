@@ -1,16 +1,22 @@
-import { Container, ImgContainer, NameAndContentContainer, DateContainer, ChatListBoxLink } from "../../css/styled/Main/chatListBox.styled";
+import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../css/styled/Main/chatListBox.styled";
+import { ToastifyWarn } from "../../function/toast";
 
-export const ChatListBox = ({username, profileimg, onClick}) => { 
-// 함수도 객체이므로 props로 전달 가능   
+export const ChatListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { 
+
+    function clickEventFn() {
+        setChoosedUser(user);
+        setIsChatContentActive(true);
+        ToastifyWarn();
+    }
 
     return (
         <>
-            <Container onClick={onClick}>
+            <Container onClick={clickEventFn}>
                 <ImgContainer>
-                    <img src={profileimg} alt="profile-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
+                    <img src={user.profileImg} alt="profile-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
-                    <h2>{username}</h2>
+                    <h2>{user.name}</h2>
                     <p>상태</p>
                 </NameAndContentContainer>
                 <DateContainer>

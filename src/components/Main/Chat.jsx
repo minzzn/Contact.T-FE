@@ -1,11 +1,11 @@
 import { ChatContentsBox } from "./ChatContentsBox";
-import { IconsWrapper, StyledIcon } from "../../../css/styled/Main/main.styled"
-import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../../css/styled/Main/chat.style";
+import { IconsWrapper, StyledIcon } from "../../css/styled/Main/main.styled"
+import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../css/styled/Main/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 
 export const Chat = () => {
-
+    const BROKER_URL = process.env.REACT_APP_BROKER_URL;
     const client = useRef({});
     const [chat, setChat] = useState("");
     const [chatList, setChatList] = useState([]);
@@ -30,7 +30,7 @@ export const Chat = () => {
 
     function connect() {
         client.current = new Client({
-            brokerURL: 'ws://43.202.161.139:8080/ws',
+            brokerURL: BROKER_URL,
             reconnectDelay: 5000, // 5초마다 자동 재연결
             // 연결이 성공적이라면
             onConnect: () => {

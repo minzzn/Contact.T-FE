@@ -10,9 +10,11 @@ export const Container = styled.div`
 
 export const ChatContents = styled.div`
     width: 100%;
-    height: auto;
+    height: 100%;
+    max-height: 517px;
     padding: 0 5px;
     overflow-y: scroll;
+
 `;
 export const ChatEtcContainer = styled.div`
     width: 100%;
@@ -54,9 +56,10 @@ export const ChatInputBtn = styled.button`
 export const ChatInputContainer = styled.div`
     width: 100%;
     background-color: var(--bg-white);
-    border-top: 1px solid black;
     display: flex;
     flex-direction: column;
+    /* 왼쪽위 부터 시계방향 */
+    border-radius: 0 0 15px 15px; 
 `;
 
 // 보낼 채팅 입력받는 input, 채팅 보내는 submit btn을 감싸는 div

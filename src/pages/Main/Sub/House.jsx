@@ -1,3 +1,4 @@
+import { Bell } from "../../../components/Main/House/Bell"
 import { AlarmIcon, HouseContainer, InnerPane } from "../../../css/styled/Main/House/house.style"
 
 export const House = () => {
@@ -14,7 +15,7 @@ export const House = () => {
                 </InnerPane>
             </HouseContainer>
             
-            <AlarmIcon className="fa-solid fa-bell" />
+            <Bell />
         </>
     )
 }

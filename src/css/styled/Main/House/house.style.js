@@ -4,8 +4,7 @@ export const HouseContainer = styled.div`
     /* 나머지 부분을 꽉 채우는 형태 */
     width: 100%;
     height: 100%;
-    /* 상하좌우 */
-    margin: 7vh;
+    margin: 6.5vh 5vw 6.5vh 2vw;
 
     gap: 20px;
 
@@ -25,19 +24,4 @@ export const InnerPane = styled.div`
 
     display: flex;
     flex-direction: column;
-`
-
-export const AlarmIcon = styled.i.attrs(({className}) => ({
-    className: `${className}`,
-}))`
-    position: absolute;
-    top: 8vh;
-    right: 3vh;
-    font-size: 2rem;
-    color: white;
-
-    &:hover {
-        color: var(--bg-light-gray);
-        cursor: pointer;
-    }
 `

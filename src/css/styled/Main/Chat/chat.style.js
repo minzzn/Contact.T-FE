@@ -71,4 +71,5 @@ export const ChatInputForm = styled.form`
     justify-content: center;
     position: relative;
     background-color: var(--bg-original-white);
+    border-radius: 0 0 10px 10px;
 `;

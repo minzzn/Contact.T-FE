@@ -14,6 +14,7 @@ export const ChatContents = styled.div`
     padding: 0 5px;
     overflow-y: scroll;
 `;
+
 export const ChatEtcContainer = styled.div`
     width: 100%;
     // 이하 자식 컴포넌트의 position은 이 녀석을 기준으로 설정됨
@@ -68,4 +69,5 @@ export const ChatInputForm = styled.form`
     flex-direction: column;
     justify-content: center;
     position: relative;
+    background-color: var(--bg-original-white);
 `;

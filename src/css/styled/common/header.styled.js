@@ -18,4 +18,5 @@ export const IconsModalContainer = styled.div`
     align-items: center;
     border-radius: 10px;
     margin: 6vh 1vw;
+    background-color: var(--bg-original-white);
 `

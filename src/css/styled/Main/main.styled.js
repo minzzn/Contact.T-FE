@@ -6,7 +6,7 @@ export const Container = styled.div`
   // 가로 정렬
   display: flex;
   overflow: hidden;
-  background-color: var(--bg-light-gray);
+  background-color: var(--bg-black);
 `;
 
 export const ChatAndPeopleListContainer = styled.div`
@@ -15,8 +15,8 @@ export const ChatAndPeopleListContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 50vw;
-    max-height: 91vh;
-    margin: 6vh;
+    max-height: 92vh;
+    margin: 4vh;
 
     // 높이는 스크롤 가능하도록 무제한으로
     overflow-y: scroll;
@@ -38,11 +38,11 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
     font-size: ${(props) => props.size ? props.size : '16px'};
     margin-right: ${(props) => props.$marginright ? props.$marginright : 0};
     margin-bottom: ${(props) => props.$marginBottom ? props.$marginBottom : 0};
-    color: ${(props) => props.$selected === "true" ? 'var(--bg-black)' : 'var(--bg-dark-gray)'};
+    color: ${(props) => props.$selected === "true" ? 'var(--bg-original-black)' : 'var(--bg-dark-gray)'};
     transition: all 0.2s linear;
 
     &:hover {
-        color: var(--bg-beige);
+        color: var(--bg-light-gray);
         cursor: pointer;
     }
 `;

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
-import { isRequired, MinimumLength, CantStartWithNumber, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
+import { isRequired, MinimumLength, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
+import { sendReqAndSaveToken } from "../../function/login.register";
 
 export const Register = () => {
     const navigate = useNavigate();
+    const BACK_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -66,12 +68,20 @@ export const Register = () => {
             alert("모든 항목을 제대로 입력해주세요");
             return;
         }
+        // 서버로 보낼 데이터 객체형태로 묶기
+        const formattedUserData = {
+            name: name,
+            email: email,
+            password: password,
+        }
+        // 서버에 요청을 보내고 토큰을 저장하는 함수
+        sendReqAndSaveToken(BACK_API_URL, 'POST', formattedUserData);
 
-        // 해야할 일 : 서버에 유저 정보 데이터 전송
-
-        // 모두 유효하다면, 로그인 페이지로
+        // 모두 유효하다면, 로그인 페이지로 : 변경 필요
         navigate("/");
     }
+
+
 
     return (
         <>
@@ -135,5 +145,3 @@ export const Register = () => {
         </>
     )
 }
-
-// todo : option customize

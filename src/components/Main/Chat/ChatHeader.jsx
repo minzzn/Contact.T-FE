@@ -1,5 +1,5 @@
-import { Container,HeaderLeftContainer, HeaderMiddleContainer, HeaderRightContainer, ProfileContainer, ImgContainer, UserName } from "../../css/styled/Main/chatHeader.style";
-import { StyledIcon } from "../../css/styled/Main/main.styled"
+import { Container,HeaderLeftContainer, HeaderRightContainer, ProfileContainer, ImgContainer, UserName } from "../../../css/styled/Main/Chat/chatHeader.style";
+import { StyledIcon } from "../../../css/styled/Main/main.styled"
 import { useState } from "react"
 
 export const ChatHeader = ({userdata}) => {

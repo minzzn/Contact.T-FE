@@ -1,4 +1,4 @@
-import { ChatContainer } from "../../css/styled/Main/chattingPane.style"
+import { ChatContainer } from "../../../css/styled/Main/Chat/chattingPane.style"
 import { ChatHeader } from "./ChatHeader";
 import { Chat } from "./Chat";
 import { ToastContainer } from 'react-toastify';

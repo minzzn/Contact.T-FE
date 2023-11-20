@@ -1,4 +1,4 @@
-import { AlarmIcon, HouseContainer, InnerPane } from "../../../css/styled/Main/house.style"
+import { AlarmIcon, HouseContainer, InnerPane } from "../../../css/styled/Main/House/house.style"
 
 export const House = () => {
 

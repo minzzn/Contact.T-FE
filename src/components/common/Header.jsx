@@ -15,7 +15,7 @@ export const Header = ({ setIsChatContentActive, setIconsState, iconsState }) =>
                             setIconsState(()=> ({
                                 chatList: false,
                                 peopleList: true,
-                                gear: false,
+                                house: false,
                             }));
                         }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'} />
 
@@ -23,19 +23,19 @@ export const Header = ({ setIsChatContentActive, setIconsState, iconsState }) =>
                             setIconsState(()=> ({
                                 chatList: true,
                                 peopleList: false,
-                                gear: false,
+                                house: false,
                             }));
                         }} $selected={iconsState["chatList"] === true ? 'true' : 'false'} />
                     </div>
 
                     {/* 매안 공간 : 차트, 알림 등등 보여주기 */}
-                    <StyledIcon className="fa-solid fa-gear" size="30px" onClick={() => {
+                    <StyledIcon className="fa-solid fa-house" size="30px" onClick={() => {
                         setIconsState(()=> ({
                             chatList: false,
                             peopleList: false,
-                            gear: true,
+                            house: true,
                         }));
-                    }} $selected={iconsState["gear"] === true ? 'true' : 'false'}/>
+                    }} $selected={iconsState["house"] === true ? 'true' : 'false'}/>
                     
                 </IconsWrapper>
             </IconsModalContainer>

@@ -8,5 +8,5 @@ export const ToastifyWarn = () => toast.warn('AI가 채팅을 분석하기 시�
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "dark",
+    theme: "light",
 });

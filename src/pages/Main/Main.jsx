@@ -3,13 +3,14 @@ import { Container } from "../../css/styled/Main/main.styled";
 import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
+import { House } from "./Sub/House";
 
 export const Main = () => {
     // 
     const [iconsState, setIconsState] = useState({
         chatList: false,
         peopleList: true,
-        gear: false
+        house: false
     })
     // 채팅치는 공간 상태관리
     const [isChatContentActive, setIsChatContentActive] = useState(false);
@@ -25,9 +26,10 @@ export const Main = () => {
                 
                 {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                 {
-                    iconsState["gear"] === true ? 
+                    iconsState["house"] === true ? 
                     (
-                        null
+                        // todo : home화면 컴포넌트 필요
+                        <House />
                     ) : 
                     (
                         <>

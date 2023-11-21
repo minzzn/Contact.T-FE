@@ -1,7 +1,11 @@
 import { useState } from "react"
 import Modal from 'react-modal';
+<<<<<<< HEAD:src/components/Main/PeopleListBox.jsx
 import { ToastifyWarn } from "../../function/toast";
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../css/styled/Main/peopleListBox.styled"
+=======
+import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
+>>>>>>> a04fbbd2f4948427ddcfae1b86ca4dd6640d9b44:src/components/Main/People/PeopleListBox.jsx
 
 export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatContentActive}) => {
 

@@ -1,12 +1,12 @@
-import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../css/styled/Main/chatListBox.styled";
-import { ToastifyWarn } from "../../function/toast";
+import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../../css/styled/Main/Chat/chatListBox.styled";
+import { ToastifyInfo } from "../../../function/toast";
 
 export const ChatListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { 
 
     function clickEventFn() {
         setChoosedUser(user);
         setIsChatContentActive(true);
-        ToastifyWarn();
+        ToastifyInfo('AI가 채팅을 분석하기 시작합니다🤖');
     }
 
     return (

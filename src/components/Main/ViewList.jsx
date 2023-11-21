@@ -1,5 +1,5 @@
-import { PeopleListBox } from "./PeopleListBox";
-import { ChatListBox } from "./ChatListBox";
+import { PeopleListBox } from "./People/PeopleListBox";
+import { ChatListBox } from "./Chat/ChatListBox";
 import { ChatAndPeopleListContainer } from "../../css/styled/Main/main.styled";
 
 {/* index 값은 map함수의 파라미터, 사용할 데이터와 분리해서 적을것 */}

@@ -1,14 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 /* font-family: 'Noto Sans KR', sans-serif; */
 :root {
-  --bg-orange: #FF6000;
+  --bg-orange: #D65A31;
   --bg-orangered: rgb(255, 25, 0);
-  --bg-white: white;
-  --bg-black: black;
-  --bg-dark-gray: #5c5c5c;
-  --bg-light-gray: #FAF6F0;
-  --bg-beige: #FFE6C7;
-  --bg-chat-dark-gray: #454545;
+  --bg-original-white: white;
+  --bg-original-black: black;
+  --bg-black: #222831;
+  --bg-dark-gray: #393E46;
+  --bg-light-gray: #EEEEEE;
 }
 * {
   margin: 0;
@@ -21,6 +20,7 @@ body {
   width: 100%;
   /* 스크롤 움직임 차단 */
   overflow: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .wrapper {
   height: 100%;

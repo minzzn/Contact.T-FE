@@ -24,7 +24,7 @@ export const ProfileContainer = styled.div`
     display: flex;
     justify-content: start;
     align-items: end;
-    color: var(--bg-white);
+    color: var(--bg-original-white);
 `
 export const ImgContainer = styled.div`
     width: 45px;

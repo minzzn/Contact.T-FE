@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
 import { ToastifyInfo } from './../../../function/toast';
 
-export const PeopleListBox = ({user}) => {
+export const PeopleListBox = ({user, setChoosedUser, setIsChatContentActive }) => { // props로 user 객체를 전달
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -17,6 +17,8 @@ export const PeopleListBox = ({user}) => {
     };
 
     function clickEventFn() {
+        setChoosedUser(user);
+        setIsChatContentActive(true);
         setModalIsOpen(false);
         console.log('Modal Close'); 
         ToastifyInfo();

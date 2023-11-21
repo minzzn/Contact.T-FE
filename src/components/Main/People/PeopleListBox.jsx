@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Modal from 'react-modal';
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
+import { ToastifyInfo } from './../../../function/toast';
 
-export const PeopleListBox = ({username, userimg}) => {
+export const PeopleListBox = ({user}) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -15,15 +16,21 @@ export const PeopleListBox = ({username, userimg}) => {
         console.log('Modal Close'); 
     };
 
+    function clickEventFn() {
+        setModalIsOpen(false);
+        console.log('Modal Close'); 
+        ToastifyInfo();
+    }
+
     return (
         <>
             <Container onClick={openModal}> 
                 
                 <ImgContainer>
-                    <img src={userimg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
+                    <img src={user.profileImg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
-                    <h2>{username}</h2>
+                    <h2>{user.name}</h2>
                 </NameAndContentContainer>
             </Container>
             <Modal // 분리하거나 display 바꾸기
@@ -43,7 +50,7 @@ export const PeopleListBox = ({username, userimg}) => {
                         <ProfileImage></ProfileImage>
                     </ProfileImageBox>
                     <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
-                    <RealName><p>{username}</p></RealName>
+                    <RealName><p>{user.name}</p></RealName>
                     <StateBox>
                         <DutyState>
                             <StateMark></StateMark>
@@ -54,7 +61,7 @@ export const PeopleListBox = ({username, userimg}) => {
                             채팅 가능 시간
                         </ChatState>
                     </StateBox>
-                    <ChatButton>채팅하기</ChatButton>
+                    <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
                 </SetBox>
             </Modal>
         </>

@@ -14,7 +14,7 @@ export const ChatHeader = ({userdata}) => {
                         <ImgContainer>
                             <img src={userdata.profileImg} style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                         </ImgContainer>
-                        <UserName>{userdata}</UserName>
+                        <UserName>{userdata.name}</UserName>
                     </ProfileContainer>
                 </HeaderLeftContainer>
                 {/* 헤더 오른쪽 부분 */}

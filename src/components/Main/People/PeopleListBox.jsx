@@ -1,13 +1,9 @@
 import { useState } from "react"
 import Modal from 'react-modal';
-<<<<<<< HEAD:src/components/Main/PeopleListBox.jsx
-import { ToastifyWarn } from "../../function/toast";
-import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../css/styled/Main/peopleListBox.styled"
-=======
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
->>>>>>> a04fbbd2f4948427ddcfae1b86ca4dd6640d9b44:src/components/Main/People/PeopleListBox.jsx
+import { ToastifyInfo } from './../../../function/toast';
 
-export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatContentActive}) => {
+export const PeopleListBox = ({user,}) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -23,9 +19,7 @@ export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatConte
     function clickEventFn() {
         setModalIsOpen(false);
         console.log('Modal Close'); 
-        setChoosedUser(username);
-        setIsChatContentActive(true);
-        ToastifyWarn();
+        ToastifyInfo();
     }
 
     return (
@@ -33,10 +27,10 @@ export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatConte
             <Container onClick={openModal}> 
                 
                 <ImgContainer>
-                    <img src={userimg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
+                    <img src={user.profileImg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                 </ImgContainer>
                 <NameAndContentContainer>
-                    <h2>{username}</h2>
+                    <h2>{user.name}</h2>
                 </NameAndContentContainer>
             </Container>
             <Modal // 분리하거나 display 바꾸기
@@ -56,7 +50,7 @@ export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatConte
                         <ProfileImage></ProfileImage>
                     </ProfileImageBox>
                     <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
-                    <RealName><p>{username}</p></RealName>
+                    <RealName><p>{user.name}</p></RealName>
                     <StateBox>
                         <DutyState>
                             <StateMark></StateMark>

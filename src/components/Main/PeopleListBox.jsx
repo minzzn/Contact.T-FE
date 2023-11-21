@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Modal from 'react-modal';
+import { ToastifyWarn } from "../../function/toast";
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../css/styled/Main/peopleListBox.styled"
 
-export const PeopleListBox = ({username, userimg}) => {
+export const PeopleListBox = ({username, userimg, setChoosedUser, setIsChatContentActive}) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -14,6 +15,14 @@ export const PeopleListBox = ({username, userimg}) => {
         setModalIsOpen(false);
         console.log('Modal Close'); 
     };
+
+    function clickEventFn() {
+        setModalIsOpen(false);
+        console.log('Modal Close'); 
+        setChoosedUser(username);
+        setIsChatContentActive(true);
+        ToastifyWarn();
+    }
 
     return (
         <>
@@ -54,7 +63,7 @@ export const PeopleListBox = ({username, userimg}) => {
                             채팅 가능 시간
                         </ChatState>
                     </StateBox>
-                    <ChatButton>채팅하기</ChatButton>
+                    <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
                 </SetBox>
             </Modal>
         </>

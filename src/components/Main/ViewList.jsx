@@ -11,7 +11,7 @@ export const ViewList = ({ setIsChatContentActive, users, setChoosedUser, iconsS
                 iconsState["chatList"] ? (
                     users.map((user,idx) => <ChatListBox user={user} setChoosedUser={setChoosedUser} setIsChatContentActive={setIsChatContentActive} key={idx} />)
                 ) : (
-                    users.map((user,idx) => <PeopleListBox username={user.name} userimg={user.profileImg} key={idx}/>)
+                    users.map((user,idx) => <PeopleListBox username={user.name} setChoosedUser={setChoosedUser} setIsChatContentActive={setIsChatContentActive} userimg={user.profileImg} key={idx}/>)
                 )
             }
         </ChatAndPeopleListContainer>

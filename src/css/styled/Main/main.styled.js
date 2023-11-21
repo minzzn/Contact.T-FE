@@ -6,7 +6,6 @@ export const Container = styled.div`
   // 가로 정렬
   display: flex;
   overflow: hidden;
-  background-color: var(--bg-black);
 `;
 
 export const ChatAndPeopleListContainer = styled.div`

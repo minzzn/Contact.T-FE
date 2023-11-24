@@ -74,8 +74,6 @@ export const Register = () => {
             email: email,
             password: password,
         }
-        // 서버에 요청을 보내고 토큰을 저장하는 함수
-        sendReqAndSaveToken(BACK_API_URL, 'POST', formattedUserData);
 
         // 모두 유효하다면, 로그인 페이지로 : 변경 필요
         navigate("/");

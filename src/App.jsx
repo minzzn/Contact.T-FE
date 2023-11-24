@@ -5,6 +5,8 @@ import { Register } from "./pages/LoginAndRegister/Register";
 import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
+import { AddInfoModal } from "./components/Profile/AddInfoModal";
+
 export default function App() {
   return (
     <Routes>
@@ -12,6 +14,7 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/main" element={<Main/>}/>
       <Route path="/Setprofile" element={<SetProfile />} />
+      <Route path="/addInfo" element={<AddInfoModal />} />
     </Routes>
   );
 }

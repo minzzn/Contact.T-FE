@@ -67,7 +67,6 @@ export const customStyles = {
     justifyContent: "center",
     overflow: "auto",
     border: "7px solid #FF9634",
-    overflow: "auto",
   },
 };
 

@@ -6,12 +6,12 @@ export const ChatContentsBox = ({ chatsHistory }) => {
     return (
         <>
             <ChatContents>
-                <ChatContentsContainer>
+                <ChatContentsContainer $ismine={`${true}`}>
                     {
                         chatsHistory?.map((content,idx) => {
                             return (
                                 <ChatContentDivWrapper key={idx}>
-                                    <ChatContentDiv ismine={true}>
+                                    <ChatContentDiv $ismine={`${false}`}>
                                         {content}
                                     </ChatContentDiv>
                                 </ChatContentDivWrapper>

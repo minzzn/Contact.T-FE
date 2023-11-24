@@ -32,9 +32,6 @@ export const Login = () => {
 
     function onSubmit(e) {
         e.preventDefault();
-        
-        // 서버에 요청을 보내고 토큰을 저장하는 함수
-        sendReqAndSaveToken(BACK_API_URL, 'POST', formattedUserData);
 
         // 변경 필요 : 인증되어야 main화면으로 넘어가요
         navigate('/main');

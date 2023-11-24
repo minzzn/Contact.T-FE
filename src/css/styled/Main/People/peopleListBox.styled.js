@@ -8,6 +8,7 @@ export const Container = styled.div`
   height: 11vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */

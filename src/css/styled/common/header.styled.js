@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ChatIconsContainer = styled.div`
     width: min-content;
-    height: 100vh;
+    height: 100%;
     display: flex;
     // 세로로 쌓이도록
     flex-direction: column;
@@ -17,6 +17,5 @@ export const IconsModalContainer = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin: 6vh 1vw;
     background-color: var(--bg-original-white);
 `

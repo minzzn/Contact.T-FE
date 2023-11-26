@@ -52,11 +52,13 @@ export const SelectChatTime = () => {
                 timeCaption="Time"
                 dateFormat="aa h:mm 시작"
                 placeholderText="시작 시간"
-                className="mt-4"
+                //className="mt-4"
+                className={StyledDatePickerWrapper}
             /></div>
 
             {isSelected ? // 시작 시간을 선택해야 종료 시간 선택 가능
                 <div><DatePicker
+                customStyle={StyledDatePickerWrapped}
                 filterTime={filterPassedTime}
                 selected={endTime}
                 onChange={(time) => setEndTime(time)}
@@ -77,7 +79,8 @@ export const SelectChatTime = () => {
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
-                className="mt-3"
+                //className="mt-3"
+                className={StyledDatePickerWrapper}
             /></div>
                 
                 : null 
@@ -85,38 +88,37 @@ export const SelectChatTime = () => {
         </>
     );
 }
-// const StyledDataPickerWrapper = styled.section`
-//     control: (provided, state) => ({
-//         ...provided,
-//         background: '#ffffff',
-//         width: '45vh',
-//         height: '7vh',
-//         paddingRight: '1.5vh',
-//         border: state.isFocused? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
-//         '&:hover': { borderColor: '${lighten(0.1, #FF9634)}'},
-//         borderRadius: '2vh',
-//         marginBottom: '1vh',
-//         display: 'flex',
-//         textAlign: 'center',
-//         cursor: 'pointer',
+const StyledDatePickerWrapper = styled.section`
+    
+    background: #ffffff;
+    width: 45vh;
+    height: 7vh;
+    padding-right: 1.5vh;
 
-//         fontFamily: 'Noto Sans KR, sans-serif',
-//         fontWeight: state.isFocused? '800' : '400',
-//         fontSize: '2.4vh',
-//         color: '#000000',
+    border: 0.5vh solid #B4B4B4;
+    border-radius: 2vh;
+    margin-bottom: 1vh;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
 
-//     }),
-//     option: (provided, state) => ({
-//         ...provided,
-//         background-color: #ffffff;
-//         align-items: center;
-//         justify-content: center;
-//         display: flex;
-//         text-align: center;
+    font-weight: 800;
+    font-size: 2.4vh;
+    color: #000000;
+    
+    .react-datepicker__time-list-item {
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        text-align: center;
 
-//         font-family: 'Noto Sans KR, sans-serif';
-//         font-weight: state.isFocused? '800' : '400';
-//         font-size: '2.4vh';
-//         color: '#000000',
-//     })
-// `
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 800;
+        font-size: 2.4vh;
+        color: #000000;
+    }
+
+`
+

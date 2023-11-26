@@ -11,7 +11,7 @@ export const ChatContentsBox = ({ chatsHistory }) => {
                         chatsHistory?.map((content,idx) => {
                             return (
                                 <ChatContentDivWrapper key={idx}>
-                                    <ChatContentDiv $ismine={`${false}`}>
+                                    <ChatContentDiv $ismine={`${true}`}>
                                         {content}
                                     </ChatContentDiv>
                                 </ChatContentDivWrapper>

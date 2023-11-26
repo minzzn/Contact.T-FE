@@ -1,12 +1,27 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel } from '../../css/styled/Profile/addInfo.styled';
+import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolInputWrapper, SchoolInputBtn } from '../../css/styled/Profile/addInfo.styled';
+import { searchDB } from '../../function/addInfo';
 
 export const AddInfoModal = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [childInfo, setChildInfo] = useState("");
     const [schoolInfo, setSchoolInfo] = useState("");
+    const [schoolType, setSchoolType] = useState("");
 
+
+    // async function searchDB(schoolType, schoolInfo) {
+
+    //     const response = await fetch(`//www.career.go.kr/cnet/openapi/getOpenApi.json?apiKey=${process.env.REACT_APP_CAREERNET_KEY}&svcType=api&svcCode=SCHOOL&contentType=json&gubun=${schoolType}`, {
+    //         method: "GET",
+    //     });
+
+    //     const data = await response.json();
+
+    //     console.log(data);
+    // }
+
+    Modal.setAppElement('#root');
     return (
         <>
             <Modal
@@ -16,49 +31,33 @@ export const AddInfoModal = () => {
             >
                 <ExtraInfoForm>
                     <ExtraInfoLabel htmlFor='child'>자녀 이름</ExtraInfoLabel>
-                    <ExtraInfoInput required onChange={(e) => {
+                    <ExtraInfoInput type='text' required onChange={(e) => {
                         setChildInfo(e.target.value);
-                    }} id='child' value={childInfo} />
+                    }} id='child' value={childInfo} placeholder='자녀 이름 입력' />
 
                     <ExtraInfoLabel htmlFor='school'>학교 검색</ExtraInfoLabel>
-                    <ExtraInfoInput required onChange={(e) => {
+                    <RadioInputContainer>
+                        <RadioInputWrapper>
+                            <ExtraInfoInputRadio type='radio' value="elementary" id='elementary' name='schoolType' onChange={(e) => setSchoolType(e.target.value)} />
+                            <label htmlFor='elementary'>초등학교</label>
+                        </RadioInputWrapper>
+                        <RadioInputWrapper>
+                            <ExtraInfoInputRadio type='radio' value="middle" id='middle' name='schoolType' onChange={(e) => setSchoolType(e.target.value)} />
+                            <label htmlFor='elementary'>중학교</label>
+                        </RadioInputWrapper>
+                        <RadioInputWrapper>
+                            <ExtraInfoInputRadio type='radio' value="high" id='high' name='schoolType' onChange={(e) => setSchoolType(e.target.value)} />
+                            <label htmlFor='elementary'>고등학교</label>                          
+                        </RadioInputWrapper>
+                    </RadioInputContainer>
+                    <ExtraInfoInput required id='school' type='text' $customizedWidth="60%" value={schoolInfo} disabled={schoolType.length < 1} onChange={(e) => {
                         setSchoolInfo(e.target.value);
-                    }} id='school' value={schoolInfo} />
+                        searchDB(schoolType, schoolInfo);
+                    }} placeholder='학교 정보 입력'/>
+
+                    
                 </ExtraInfoForm>
             </Modal>
         </>
     )
-}
-
-// modal에 먹이는 스타일 객체
-const customedStyle = {
-    // 모달창 뒷 배경 스타일 설정
-    overlay: {
-        backgroundColor: 'var(--bg-original-black)',
-        width: "100vw",
-        height: "100vh",
-        zIndex: '10',
-        position: 'fixed',
-        top: '0',
-        left: '0',
-    },
-    // 모달창 
-    content: {
-        // 내부 내용을 기반으로 동적으로 화면 크기 생성
-        width: "40vw",
-        height: "40vw",
-        zIndex: '150',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: "translate(-50%, -50%)",
-        borderRadius: "15px",
-        backgroundColor: 'var(--bg-original-white)',
-        overflow: "hidden",
-        border: "5px solid var(--bg-orange)",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: "stretch",
-        alignItems: 'center',
-    }
 }

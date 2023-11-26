@@ -9,6 +9,7 @@ export const StyledForm = styled.form`
     height: 60%;
     margin: auto;
     margin-top: 12vh;
+    color: var(--bg-original-white);
 `
 export const LoginTitle = styled.h1`
     text-align: center;
@@ -46,9 +47,9 @@ export const ErrorMsgContainer = styled.div`
 export const StyledLink = styled(Link)`
     margin-left: 10px;
     text-decoration: none;
-    color: black;
     font-size: 20px;
     font-weight: 600;
+    color: var(--bg-original-white);
 
     &:hover, &:focus {
         color: orange;
@@ -69,10 +70,10 @@ export const LoginSubmitButton = styled.button`
 
 
     &:focus, &:hover {
-        background-color: orange;
+        background-color: var(--bg-orange);
     }
     /* 버튼이 클릭되었다가 떼질 때 */
     &:active {
-        background-color: orangered;
+        background-color: var(--bg-orangered);
     }
 `

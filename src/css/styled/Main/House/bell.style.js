@@ -5,7 +5,7 @@ export const BellContainer = styled.div`
     height: min-content;
 
     position: absolute;
-    top: 8vh;
+    bottom: 40px;
     right: 1vw;
     font-size: 2rem;
     color: white;
@@ -29,4 +29,6 @@ export const RedDot = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
+
+    display: ${(props) => props.$isHavingAlarm === "true" ? "block" : "none" };
 `

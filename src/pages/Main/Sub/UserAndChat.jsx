@@ -5,8 +5,6 @@ import { ChattingPane } from "../../../components/Main/Chat/ChattingPane";
 export const UserAndChat = ({ setIsChatContentActive, isChatContentActive, USERS, iconsState }) => {
     const [choosedUser, setChoosedUser] = useState(null);
 
-    console.log(choosedUser);
-
     return (
         <>
             <ViewList setIsChatContentActive={setIsChatContentActive} users={USERS} setChoosedUser={setChoosedUser} iconsState={iconsState} />

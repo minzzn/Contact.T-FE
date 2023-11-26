@@ -47,7 +47,7 @@ export const SetProfile = () => {
 const SetProfileBox = styled.div`
     width: 70vh;
     height: 85vh;
-    zIndex: 150;
+    z-index: 150;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -152,12 +152,12 @@ const StartButton = styled.button`
   height: 7vh;
   border-radius: 3vh;
   border: none;
-  background: #FF9634;
+  background: var(--bg-orange);
     &:hover {
-      background: ${lighten(0.1, '#FF9634')};
+      background: ${lighten(0.1, '#D65A31')};
     }
     &:active {
-      background:  ${darken(0.1, '#FF9634')};
+      background:  ${darken(0.1, '#D65A31')};
     }
   cursor: pointer;
   /* 서비스 시작하기 */

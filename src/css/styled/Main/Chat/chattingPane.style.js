@@ -2,13 +2,10 @@ import styled from "styled-components"
 
 export const ChatContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
 
     max-width: 40vw;
-    max-height: 90vh;
-
-    margin-top: 6vh;
-    margin-right: 1vw;
+    margin-left: 3vw;
 
     display: flex;
     flex-direction: column;

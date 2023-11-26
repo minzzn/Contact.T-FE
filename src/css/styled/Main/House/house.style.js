@@ -4,7 +4,7 @@ export const HouseContainer = styled.div`
     /* 나머지 부분을 꽉 채우는 형태 */
     width: 100%;
     height: 100%;
-    margin: 6.5vh 5vw 6.5vh 2vw;
+    margin-left: 3vw; 
 
     gap: 20px;
 

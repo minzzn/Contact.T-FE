@@ -8,6 +8,7 @@ export const Container = styled.div`
   height: 11vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */
@@ -66,7 +67,6 @@ export const customStyles = {
     justifyContent: "center",
     overflow: "auto",
     border: "7px solid #FF9634",
-    overflow: "auto",
   },
 };
 

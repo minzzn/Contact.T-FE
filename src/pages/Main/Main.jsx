@@ -11,7 +11,8 @@ export const Main = () => {
         chatList: false,
         peopleList: true,
         house: false
-    })
+    });
+    
     // 채팅치는 공간 상태관리
     const [isChatContentActive, setIsChatContentActive] = useState(false);
 

@@ -21,6 +21,7 @@ body {
   /* 스크롤 움직임 차단 */
   overflow: hidden;
   font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg-black);
 }
 .wrapper {
   height: 100%;

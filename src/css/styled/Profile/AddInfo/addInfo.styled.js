@@ -15,8 +15,8 @@ export const customedStyle = {
     // 모달창 
     content: {
         // 내부 내용을 기반으로 동적으로 화면 크기 생성
-        width: "40vw",
-        height: "40vw",
+        width: "55vw",
+        height: "",
         zIndex: '150',
         position: 'absolute',
         top: '50%',
@@ -30,7 +30,9 @@ export const customedStyle = {
         flexDirection: 'column',
         justifyContent: "stretch",
         alignItems: 'center',
-        padding: '0 20px'
+        padding: '0 20px',
+        minWidth: '671px',
+        minHeight: '671px',
     }
 }
 
@@ -38,6 +40,23 @@ export const ExtraInfoForm = styled.form`
     width: 100%;
     height: 100%;
     color: var(--bg-original-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+export const ChildInfoContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+`
+export const ChildInfoWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 `
 
 export const ExtraInfoLabel = styled.label`
@@ -45,7 +64,9 @@ export const ExtraInfoLabel = styled.label`
     font-weight: 600;
     font-size: 1.8rem;
     margin-bottom: 5px;
-    margin-top: 1.8rem;
+    margin-top: 1.2rem;
+    position: relative;
+    bottom: ${(props) => props.$customedBottom ? props.$customedBottom : '0'};
 `
 
 export const ExtraInfoInput = styled.input`
@@ -60,9 +81,10 @@ export const ExtraInfoInput = styled.input`
 
 export const RadioInputContainer = styled.div`
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
-    margin-bottom: 5px;
+    position: relative;
+    bottom: -30px;
 `
 
 export const RadioInputWrapper = styled.div`
@@ -81,6 +103,27 @@ export const SchoolInputWrapper = styled.div`
     justify-content: space-between;
 `
 
-export const SchoolDBWrapper = styled.div`
+export const SchoolsListWrapper = styled.div`
     width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    justify-content: flex-start;
+    position: relative;
+    top: -35px;
+`
+
+export const StyledButton = styled.button`
+    display: block;
+    padding: 2px 5px;
+    background-color: var(--bg-original-black);
+    color: var(--bg-original-white);
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    &:hover {
+        cursor: pointer;
+        background-color: orange;
+    }
 `

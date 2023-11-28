@@ -5,7 +5,7 @@ import { Register } from "./pages/LoginAndRegister/Register";
 import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
-import { AddInfoModal } from "./components/Profile/AddInfoModal";
+import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
 
 export default function App() {
   return (

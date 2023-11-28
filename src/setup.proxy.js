@@ -5,4 +5,4 @@ module.exports = (app) => {
         "/ws",
         createProxyMiddleWare({ target: "43.202.161.139:8080/", ws: true })
     );
-}
+};

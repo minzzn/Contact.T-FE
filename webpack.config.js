@@ -56,7 +56,9 @@ module.exports = {
     historyApiFallback: true,
     // 프록시 설정
     proxy: {
+      // api로 시작하는 경로일 경우 : ex) /api/sub/chat/ws
       '/api': {
+        // 요청 url앞에 타겟 붙여주기 : ex) 43.202.161.139:8080/api/sub/chat/ws
         target: '43.202.161.139:8080/',
         ws: true,
       },

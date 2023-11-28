@@ -7,7 +7,10 @@ export const setToken = (tokenValue) => localStorage.setItem("token", tokenValue
 // 토큰과 string으로 뒤에 추가적으로 붙는 url을 적어주세요
 export const getUserInfoThrough = async (token, url) => {
     const username = "";
-    const BACK_API = `${serverEndPoint}${url}`;
+    const BACK_API = `http://${serverEndPoint}${url}`;
+
+    // console.log(BACK_API);
+    console.log(token);
 
     try {
         const response = await fetch(BACK_API, {
@@ -17,6 +20,8 @@ export const getUserInfoThrough = async (token, url) => {
                 'Authorization': `Bearer ${token}`,
             },
         })
+
+        console.log(response);
 
         // 전송은 됐지만 응답이 제대로 안 넘어온 경우
         if(!response.ok) {

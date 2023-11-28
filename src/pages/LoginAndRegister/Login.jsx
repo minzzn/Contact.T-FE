@@ -3,6 +3,7 @@ import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, Log
 import { useNavigate } from "react-router-dom";
 import { EmailFormat } from "../../constant/user.constraints";
 import { getUserInfoThrough } from "../../function/common.js";
+import { postLoginDataWith } from "../../function/login.register.js";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -33,8 +34,13 @@ export const Login = () => {
 
     function onSubmit(e) {
         e.preventDefault();
-        // 변경 필요 : 인증되어야 main화면으로 넘어가요
-        navigate('/main');
+
+        // 서버로 데이터 보내는 로직 추가
+        const loginData = {
+            email: email,
+            password: password,
+        };
+        postLoginDataWith(loginData,'auth/login');
     }
 
     return (

@@ -6,7 +6,7 @@ import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
-import { getUserInfoThrough } from "./function/common.js";
+import { getUserInfoThrough, getToken } from "./function/common.js";
 import { isUserInfoAtom } from "./hooks/IsUserInfo.js";
 import { useRecoilState } from 'recoil';
 
@@ -15,7 +15,37 @@ export default function App() {
   // useRecoilState를 통해 값을 받아오고 변경하기 둘다 가능
   const [isUserInfo, setisUserInfo] = useRecoilState(isUserInfoAtom);
   
-  // setisUserInfo(() => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jsonData = await getUserInfoThrough(getToken(), 'entry');
+        if (jsonData !== null) {
+          setisUserInfo(jsonData);
+        }
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+        console.log(jsonData);
+      }
+    };
+    fetchData();
+  }, []);
+
+  
+  return (// 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
+      <>
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+        <Route path="/register" element={<Register />} />
+        <Route path="/main" element={isUserInfo ? <Main/> : <Login />}/>
+        <Route path="/Setprofile" element={<SetProfile />} />
+        <Route path="/addInfo" element={<AddInfoModal />} />
+      </Routes>
+    </>
+  );
+}
+
+
+// setisUserInfo(() => {
   //   {
   //     getUserInfoThrough === null ?
   //       null
@@ -28,31 +58,3 @@ export default function App() {
   //   return jsonData === null ? null : setisUserInfo(jsonData);
   //   // console.log(jsonData);
   // };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const jsonData = await getUserInfoThrough();
-        if (jsonData !== null) {
-          setisUserInfo(jsonData);
-        }
-      } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  
-  return (// 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
-      <>
-      <Routes>
-        <Route path="/" element={ isUserInfo ? <Main /> : <Login /> } />
-        <Route path="/register" element={<Register />} />
-        <Route path="/main" element={<Main/>}/>
-        <Route path="/Setprofile" element={<SetProfile />} />
-        <Route path="/addInfo" element={<AddInfoModal />} />
-      </Routes>
-    </>
-  );
-}

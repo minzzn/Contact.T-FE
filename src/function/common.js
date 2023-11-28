@@ -27,9 +27,7 @@ export const getUserInfoThrough = async (token, url) => {
         const jsonData = await response.json();
         // 유저 정보를 반환
         return jsonData;
-        
-        // 받아온 유저 정보를 확인
-        console.log(jsonData);
+    
 
     } catch(error) {
         // 전송에 실패한 경우의 추가 로직을 써도 됩니다. + 로딩중 추가하면 될듯 . . .

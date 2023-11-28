@@ -4,13 +4,8 @@ import styled from "styled-components";
 export const customedStyle = {
     // 모달창 뒷 배경 스타일 설정
     overlay: {
-        backgroundColor: 'var(--bg-original-black)',
-        width: "100vw",
-        height: "100vh",
-        zIndex: '10',
-        position: 'fixed',
-        top: '0',
-        left: '0',
+        backgroundColor: 'var(--bg-black)',
+        backdropFilter: 'blur(15px)', // backdrop-filter 설정
     },
     // 모달창 
     content: {

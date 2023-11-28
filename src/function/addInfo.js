@@ -1,4 +1,6 @@
-export const searchDB = async(schoolType, schoolInfo) => {
+import { serverEndPoint } from "../constant/common.constant";
+
+export const searchDB = async(schoolType) => {
     const INF = 5000;
     const url = `//www.career.go.kr/cnet/openapi/getOpenApi.json?apiKey=${process.env.REACT_APP_CAREERNET_KEY}&svcType=api&svcCode=SCHOOL&contentType=json&gubun=${schoolType}&perPage=${INF}`;
 
@@ -27,4 +29,10 @@ export const searchDB = async(schoolType, schoolInfo) => {
         console.log('Error: ', error.message);
         throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
     }
+}
+
+export const POST = async (formattedExtraUserInfoObject) => {
+    const BACK_API = `http://${serverEndPoint}auth/add-info`;
+
+
 }

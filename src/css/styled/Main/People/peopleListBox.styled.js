@@ -25,7 +25,7 @@ export const Container = styled.div`
 `;
 
 export const ImgContainer = styled.div`
-    overflow: hiddden;
+    overflow: hidden;
     width: 55px;
     height: 55px;
     border-radius: 10%;
@@ -52,6 +52,7 @@ export const customStyles = {
     position: "fixed",
     top: "0",
     left: "0",
+    backdropFilter: "blur(5px)",
   },
   content: {
     width: "49vh",
@@ -78,8 +79,6 @@ export const SetBox = styled.div`
   width: 100%;
   height: 100%;
   background: #FFFFFF;
-  /* border: 7px solid #FF9634;
-  border-radius: 30px; */
 
   overflow: hidden;
   flex: initial;

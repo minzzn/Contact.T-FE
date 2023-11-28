@@ -75,7 +75,7 @@ export const Register = () => {
             password: password,
         }
 
-        // 모두 유효하다면, 로그인 페이지로 : 변경 필요
+        // 모두 유효하다면, 로그인 페이지로 : 토큰 저장하는 코드 지웠음 !!
         navigate("/");
     }
 

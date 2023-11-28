@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
 import { EmailFormat } from "../../constant/user.constraints";
+import { getUserInfoThrough } from "../../function/common.js";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -32,7 +33,6 @@ export const Login = () => {
 
     function onSubmit(e) {
         e.preventDefault();
-
         // 변경 필요 : 인증되어야 main화면으로 넘어가요
         navigate('/main');
     }

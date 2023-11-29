@@ -16,15 +16,18 @@ export default function App() {
   const [isUserInfo, setisUserInfo] = useRecoilState(isUserInfoAtom);
   
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (jsonData) => {
       try {
+        const { userdata: { email, username }} = jsonData;
         const jsonData = await getUserInfoThrough(getToken(), 'entry');
         if (jsonData !== null) {
           setisUserInfo(jsonData);
+          console.log(isUserInfo);
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
         console.log(jsonData);
+        console.log(isUserInfo);
       }
     };
     fetchData();

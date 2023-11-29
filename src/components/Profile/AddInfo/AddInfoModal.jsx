@@ -14,6 +14,7 @@ export const AddInfoModal = () => {
     const [extraInfo, setExtraInfo] = useState({
         childName: '',
         childCnt: '',
+        teacherName: '',
         schoolInfo: '',
         schoolType: '',
         // TODO : 나중에 선생님과 학부모 구분 지어서 보내야함
@@ -39,6 +40,9 @@ export const AddInfoModal = () => {
             case 'schoolInfo':
                 (value?.length > 0) ? setError('') : setError("학교를 선택해주세요");
                 break;
+            case 'teacherName':
+                (value?.length < 2) ? setError('교사 성함을 올바르게 작성해주세요') : setError('');
+                break;
             // 나머지는 그냥 빠져나오기
             default: 
                 break;
@@ -63,15 +67,18 @@ export const AddInfoModal = () => {
                     <ChildInfoContainer>
                         <ChildInfoWrapper>
                             <ExtraInfoLabel htmlFor='childName'>자녀 이름</ExtraInfoLabel>
-                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childName' name="childName" value={extraInfo.childName} placeholder='자녀 이름 입력' $customizedWidth="35%" />
+                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childName' name="childName" value={extraInfo.childName} placeholder='자녀 이름' $customizedWidth="32%" />
                         </ChildInfoWrapper>
                         <ChildInfoWrapper>
                             <ExtraInfoLabel htmlFor='childCnt'>자녀 수</ExtraInfoLabel>
-                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childCnt' name="childCnt" value={extraInfo.childCnt} placeholder='자녀 수' $customizedWidth="20%" />
+                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childCnt' name="childCnt" value={extraInfo.childCnt} placeholder='자녀 수' $customizedWidth="26%" />
                         </ChildInfoWrapper>
                     </ChildInfoContainer>
 
-                    <ExtraInfoLabel $customedBottom="-60px" >학교 검색</ExtraInfoLabel>
+                    <ExtraInfoLabel htmlFor='teacherName'>교사 이름</ExtraInfoLabel>
+                    <ExtraInfoInput required type='text' id='teacherName' name='teacherName' onChange={(e) => onChange(e)} placeholder='교사 이름' $customizedWidth="15%"></ExtraInfoInput>
+
+                    <ExtraInfoLabel $customedBottom="-15px" >학교 검색</ExtraInfoLabel>
                     <RadioInputContainer>
                         <RadioInputWrapper>
                             <ExtraInfoInputRadio type='radio' value="elem_list" id='elementary' name='schoolType' onChange={(e) => onChange(e)} />
@@ -91,10 +98,8 @@ export const AddInfoModal = () => {
                     <SchoolsListWrapper>
                         <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setSelected={setSelectedSchool}/>
                     </SchoolsListWrapper>
-                    {
-                        // 에러 상태값의 길이가 이상으면 error message 표현
-                        error?.length > 0 && <ErrorMsgContainer>{error}</ErrorMsgContainer>
-                    }
+                    {/* 에러 상태값의 길이가 이상으면 error message 표현 */}
+                    <ErrorMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrorMsgContainer>
                     
                     <div style={{
                         width: '100%',

@@ -6,7 +6,7 @@ import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
-import { getUserInfoThrough } from "./function/common.js";
+import { getUserInfoThrough, getToken } from "./function/common.js";
 import { isUserInfoAtom } from "./hooks/IsUserInfo.js";
 import { useRecoilState } from 'recoil';
 
@@ -15,39 +15,32 @@ export default function App() {
   // useRecoilState를 통해 값을 받아오고 변경하기 둘다 가능
   const [isUserInfo, setisUserInfo] = useRecoilState(isUserInfoAtom);
   
-  // setisUserInfo(() => {
-  //   {
-  //     getUserInfoThrough === null ?
-  //       null
-  //       :isUserInfo = getUserInfoThrough;
-  //   }
-  // })
-  
-  // const userInfo = () => {
-  //   const jsonData = getUserInfoThrough();
-  //   return jsonData === null ? null : setisUserInfo(jsonData);
-  //   // console.log(jsonData);
-  // };
-
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const jsonData = await getUserInfoThrough();
-        if (jsonData !== null) {
-          setisUserInfo(jsonData);
+      // 토큰은 잘 넘어오는거 확인
+      const token = getToken();
+
+      console.log(token);
+
+      if(token !== undefined || token !== null) {
+        try {
+          const userJsonData = await getUserInfoThrough(token, 'entry');
+          console.log(userJsonData);
+
+          setisUserInfo(...userJsonData);
+        } catch (error) {
+          console.error('캐치 함수 내부:', error);
         }
-      } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
       }
     };
     fetchData();
   }, []);
 
-  
-  return (// 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
+  return (
+      // 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
       <>
       <Routes>
-        <Route path="/" element={ isUserInfo ? <Main /> : <Login /> } />
+        <Route path="/" element={ <Login /> } />
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<Main/>}/>
         <Route path="/Setprofile" element={<SetProfile />} />

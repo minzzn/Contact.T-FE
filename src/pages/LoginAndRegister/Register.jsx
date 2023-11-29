@@ -2,8 +2,8 @@ import { useState } from "react";
 import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
 import { useNavigate } from "react-router-dom";
 import { isRequired, MinimumLength, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
-import { sendReqAndSaveToken } from "../../function/login.register";
-
+//import { sendReqAndSaveToken } from "../../function/login.register";
+import { postRegisterDataWith } from "../../function/login.register";
 export const Register = () => {
     const navigate = useNavigate();
     const BACK_API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -75,8 +75,12 @@ export const Register = () => {
             password: password,
         }
 
-        // 모두 유효하다면, 로그인 페이지로 : 토큰 저장하는 코드 지웠음 !!
-        navigate("/");
+        const resultAfterPost = postRegisterDataWith(formattedUserData,'auth/sign-up');
+        
+        // 모두 유효하다면, 로그인 페이지로 : 토큰 저장하는 코드 지웠음, 유효성 검사 해야됨.
+        if(resultAfterPost) {
+            navigate("/");
+        }
     }
 
 
@@ -118,13 +122,11 @@ export const Register = () => {
                         onChange={onChange}
                     />
                 </FormInnerWrapper>
-                {
-                    error && error.length > 0 && (
-                        <FormInnerWrapper>
-                            <ErrorMsgContainer>{error}</ErrorMsgContainer>
-                        </FormInnerWrapper>
-                    )
-                }
+                
+                <FormInnerWrapper>
+                    <ErrorMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrorMsgContainer>
+                </FormInnerWrapper>
+
                 <FormInnerWrapper>
                     이미 계정이 있으신가요?
                     <StyledLink to="/register">

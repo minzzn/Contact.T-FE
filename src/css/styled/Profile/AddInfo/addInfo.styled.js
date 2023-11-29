@@ -79,7 +79,7 @@ export const RadioInputContainer = styled.div`
     align-items: start;
     justify-content: space-between;
     position: relative;
-    bottom: -30px;
+    bottom: -10px;
 `
 
 export const RadioInputWrapper = styled.div`
@@ -105,8 +105,8 @@ export const SchoolsListWrapper = styled.div`
     flex-direction: column;
     overflow: scroll;
     justify-content: flex-start;
-    position: relative;
-    top: -35px;
+    /* position: relative;
+    top: -35px; */
 `
 
 export const StyledButton = styled.button`

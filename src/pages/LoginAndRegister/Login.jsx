@@ -1,15 +1,14 @@
 import { useState } from "react"
 import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, LoginTitle, StyledForm, StyledLabel, StyledLink } from "../../css/styled/signin_up.styled";
-import { useNavigate } from "react-router-dom";
 import { EmailFormat } from "../../constant/user.constraints";
-import { getUserInfoThrough } from "../../function/common.js";
+import { postLoginDataWith } from "../../function/login.register.js";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
-    const navigate = useNavigate();
 
     function onChange(e) {
       // deconstructed obj
@@ -33,8 +32,18 @@ export const Login = () => {
 
     function onSubmit(e) {
         e.preventDefault();
-        // 변경 필요 : 인증되어야 main화면으로 넘어가요
-        navigate('/main');
+
+        // 서버로 데이터 보내는 로직 추가
+        const loginData = {
+            email: email,
+            password: password,
+        };
+        const resultAfterPost = postLoginDataWith(loginData,'auth/login');
+
+        if(resultAfterPost) {
+            // 인증되어야 main화면으로 넘어가요
+            navigate('/main');
+        }
     }
 
     return (
@@ -63,13 +72,11 @@ export const Login = () => {
                         onChange={onChange}
                     />
                 </FormInnerWrapper>
-                {
-                    error && error.length > 0 && (
-                        <FormInnerWrapper>
-                            <ErrorMsgContainer>{error}</ErrorMsgContainer>
-                        </FormInnerWrapper>
-                    )
-                }
+
+                <FormInnerWrapper>
+                    <ErrorMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrorMsgContainer>
+                </FormInnerWrapper>
+
                 <FormInnerWrapper>
                     계정이 없으신가요?
                     <StyledLink to="/register">

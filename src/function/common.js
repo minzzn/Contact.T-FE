@@ -1,7 +1,9 @@
 import { serverEndPoint } from "../constant/common.constant";
 import { useNavigate } from "react-router-dom";
 
+// 웹 스토리지에 저장된 토큰을 서버 쪽에 보내기
 export const getToken = () => localStorage.getItem("token");
+// 웹 스토리지에 토큰 저장
 export const setToken = (tokenValue) => localStorage.setItem("token", tokenValue);
 
 // 토큰과 string으로 뒤에 추가적으로 붙는 url을 적어주세요

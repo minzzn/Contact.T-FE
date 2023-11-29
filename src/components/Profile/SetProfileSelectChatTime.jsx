@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Select from "react-select"; //라이브러리 import
+import Select from "react-select"; 
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,38 +28,24 @@ export const SelectChatTime = () => {
 
     return(
         <>
-            {/* <Select
-            width="120"
-            height="40"
-            chooseType={(e: any) => setTimeData(e)}
-            isSearchable={false}
-            options={TimeData}
-            onFocus={onFocus}
-            isDisabled={disabled}
-            placeholder="00:00"
-            value={value ? { target: value, label: value } : null}
-            />  */}
-            <div><DatePicker
-                filterTime={filterPassedTime}
+            <div><StyledDatePicker
+                //filterTime={filterPassedTime}
                 selected={startTime}
                 onChange={onSelect}
                 locale={ ko }
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={30}
-                minTime={setHours(setMinutes(new Date(), 30), 9)}
-                maxTime={setHours(setMinutes(new Date(), 0), 17)}
+                minTime={setHours(setMinutes(new Date(), 30), 0)}
+                maxTime={setHours(setMinutes(new Date(), 0), 24)}
                 timeCaption="Time"
                 dateFormat="aa h:mm 시작"
                 placeholderText="시작 시간"
-                //className="mt-4"
-                className={StyledDatePickerWrapper}
             /></div>
 
             {isSelected ? // 시작 시간을 선택해야 종료 시간 선택 가능
-                <div><DatePicker
-                customStyle={StyledDatePickerWrapped}
-                filterTime={filterPassedTime}
+                <div><StyledDatePicker
+                //filterTime={filterPassedTime}
                 selected={endTime}
                 onChange={(time) => setEndTime(time)}
                 locale={ ko }
@@ -67,20 +53,19 @@ export const SelectChatTime = () => {
                 showTimeSelectOnly
                 timeIntervals={30}
                 minTime={startTime}
-                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+2)} // 시작 시간부터 2시간
+                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+23)} // 시작 시간부터 24시간
                 excludeTimes={[
                     // 시작 시간 제외
-                    startTime,
-                    // 5:00 선택 기준 최대 7:00까지 예외처리
-                    setHours(setMinutes(new Date(), 0), 18),
-                    setHours(setMinutes(new Date(), 30), 18),
-                    setHours(setMinutes(new Date(), 0), 19)
+                    // startTime,
+                    // 18-19시 30분 간격으로 제외
+                    // setHours(setMinutes(new Date(), 0), 18),
+                    // setHours(setMinutes(new Date(), 30), 18),
+                    // setHours(setMinutes(new Date(), 0), 19)
                 ]}
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
                 //className="mt-3"
-                className={StyledDatePickerWrapper}
             /></div>
                 
                 : null 
@@ -88,7 +73,7 @@ export const SelectChatTime = () => {
         </>
     );
 }
-const StyledDatePickerWrapper = styled.section`
+const StyledDatePicker = styled(DatePicker)`
     
     background: #ffffff;
     width: 45vh;

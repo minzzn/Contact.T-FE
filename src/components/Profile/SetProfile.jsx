@@ -4,23 +4,46 @@ import { useNavigate } from 'react-router-dom';
 import { darken, lighten } from 'polished';
 import { SelectDuty } from './SetProfileSelectDuty';
 import { SelectChatTime } from './SetProfileSelectChatTime';
+import { postSetProfileDataWith } from '../../function/setprofile.js';
 
-export const SetProfile = () => {
+export const SetProfile = (startTime, endTime, isSelected) => {
   const navigate = useNavigate();
 
   // 근무중, 채팅 가능 시간 상태관리
   const [duty, setDuty] = useState("");
   const [chattime, setChattime] = useState("");
-  const [profileimg, setProfileimg] = useState(""); // img 상태관리 
+  const [selectstate, setSelectstate] = useState(false);
 
+  const isSelectTime = () => {
+    console.log(startTime);
+    console.log(endTime);
+    console.log(isSelected);
+  }
+
+  // 근무중 시간 둘다 설정하면(상태 바뀌면) 컴포넌트 테두리 주황색으로 바꾸기(setselectstate로 설정) - 이건 모르겠네 ... 다른파일 참고해야 할듯
+  // 테두리 주황색으로 바뀌면(selectstate==true) 데이터 객체에 담고 콘솔에 입력한 데이터 찍어보기 - onSubmit 함수 ...??
+  // 서비스 시작하기 누르면 post 요청 및 서버로 데이터 보내고 확인 - onSubmit 함수
+
+  function onSubmit(e) {
+    e.preventDefault();
+
+    const setprofileData = {
+      duty: duty,
+      starttime: startTime,
+      endtime: endTime,
+    };
+
+    postSetProfileDataWith(setprofileData,url);
+    // url 추가 필요, setprofile에서 post 성공하면 넘기고 실패하면 오류메시지 띄우기
+    
+  }
   {/* main으로 이동 함수 */}
   const goToMain = (e) => {
     console.log('go to main'); // main으로 이동하기 전 콘솔에 메시지 출력
     navigate('/');
     console.log('enter to main'); // main으로 이동 후 콘솔에 메시지 출력
-    e.preventDefault(); // 이동 혹은 새로고침 방지, event handling 처리 시 명시적으로 호출
- }
-
+    e.preventDefault(); // 이동 혹은 새로고침 방지, event handling 처리 시 명시적 호출
+  }
   return (
     <SetProfileBox>{/* 메인 컨테이너 박스 */}
       <Section>
@@ -36,7 +59,7 @@ export const SetProfile = () => {
                   <SelectDuty></SelectDuty>
                   <SelectChatTime></SelectChatTime>
                 </InputBox>
-                <StartButton onClick={goToMain}>서비스 시작하기</StartButton>
+                <StartButton onClick={onSubmit}>서비스 시작하기</StartButton>
             </SetBox>
         </SetContainer>
       </Section>  
@@ -74,7 +97,6 @@ const ProfileSetText = styled.div`
   width: 33vh;
   /* border: 1px solid #000000; */
 
-  /* 프로필 설정하기 */
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 600;
   text-align: 'center';
@@ -87,7 +109,6 @@ const ExplainText = styled.div`
   justify-content: center;
   padding: 0.7vh;
 
-  /* 프로필 설정하기 */
   font-family: 'Noto Sans KR', sans-serif;
   text-align: 'center';
   font-weight: 400;

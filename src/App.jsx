@@ -32,7 +32,7 @@ export default function App() {
 
   
   return (// 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
-      <>
+    <>
       <Routes>
         <Route path="/" element={ <Login /> } />
         <Route path="/register" element={<Register />} />

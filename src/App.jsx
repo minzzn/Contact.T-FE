@@ -20,14 +20,15 @@ export default function App() {
       // 토큰은 잘 넘어오는거 확인
       const token = getToken();
 
-      console.log(token);
-
       if(token !== undefined || token !== null) {
         try {
           const userJsonData = await getUserInfoThrough(token, 'entry');
-          console.log(userJsonData);
 
-          setisUserInfo(...userJsonData);
+          setisUserInfo({
+            email: userJsonData.email,
+            username: userJsonData.username,
+          });
+          console.log(isUserInfo);
         } catch (error) {
           console.error('캐치 함수 내부:', error);
         }

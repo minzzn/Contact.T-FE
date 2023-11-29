@@ -40,8 +40,11 @@ export const LoginInput = styled.input`
 `
 
 export const ErrorMsgContainer = styled.div`
+    width: 100%;
+    height: 20px;
     color: red;
     font-weight: 600;
+    visibility: ${(props) => props.$visibleTrue ? 'visible' : 'hidden'};
 `
 
 export const StyledLink = styled(Link)`

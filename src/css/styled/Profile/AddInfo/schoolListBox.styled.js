@@ -15,6 +15,12 @@ export const SchoolDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     margin: 5px 0;
+    transition: all 0.2s linear;
+
+    &:hover {
+        cursor: pointer;
+        background-color: orange;
+    }
 `
 
 export const SchoolName = styled.h3`

@@ -16,48 +16,36 @@ export default function App() {
   const [isUserInfo, setisUserInfo] = useRecoilState(isUserInfoAtom);
   
   useEffect(() => {
-    const fetchData = async (jsonData) => {
-      try {
-        const { userdata: { email, username }} = jsonData;
-        const jsonData = await getUserInfoThrough(getToken(), 'entry');
-        if (jsonData !== null) {
-          setisUserInfo(jsonData);
-          console.log(isUserInfo);
+    const fetchData = async () => {
+      // 토큰은 잘 넘어오는거 확인
+      const token = getToken();
+
+      console.log(token);
+
+      if(token !== undefined || token !== null) {
+        try {
+          const userJsonData = await getUserInfoThrough(token, 'entry');
+          console.log(userJsonData);
+
+          setisUserInfo(...userJsonData);
+        } catch (error) {
+          console.error('캐치 함수 내부:', error);
         }
-      } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-        console.log(jsonData);
-        console.log(isUserInfo);
       }
     };
     fetchData();
   }, []);
 
-  
-  return (// 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
-    <>
+  return (
+      // 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
+      <>
       <Routes>
         <Route path="/" element={ <Login /> } />
         <Route path="/register" element={<Register />} />
-        <Route path="/main" element={isUserInfo ? <Main/> : <Login />}/>
+        <Route path="/main" element={<Main/>}/>
         <Route path="/Setprofile" element={<SetProfile />} />
         <Route path="/addInfo" element={<AddInfoModal />} />
       </Routes>
     </>
   );
 }
-
-
-// setisUserInfo(() => {
-  //   {
-  //     getUserInfoThrough === null ?
-  //       null
-  //       :isUserInfo = getUserInfoThrough;
-  //   }
-  // })
-  
-  // const userInfo = () => {
-  //   const jsonData = getUserInfoThrough();
-  //   return jsonData === null ? null : setisUserInfo(jsonData);
-  //   // console.log(jsonData);
-  // };

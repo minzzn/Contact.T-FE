@@ -75,10 +75,12 @@ export const Register = () => {
             password: password,
         }
 
-        postRegisterDataWith(formattedUserData,'auth/sign-up');
+        const resultAfterPost = postRegisterDataWith(formattedUserData,'auth/sign-up');
         
         // 모두 유효하다면, 로그인 페이지로 : 토큰 저장하는 코드 지웠음, 유효성 검사 해야됨.
-        navigate("/");
+        if(resultAfterPost) {
+            navigate("/");
+        }
     }
 
 
@@ -120,13 +122,11 @@ export const Register = () => {
                         onChange={onChange}
                     />
                 </FormInnerWrapper>
-                {
-                    error && error.length > 0 && (
-                        <FormInnerWrapper>
-                            <ErrorMsgContainer>{error}</ErrorMsgContainer>
-                        </FormInnerWrapper>
-                    )
-                }
+                
+                <FormInnerWrapper>
+                    <ErrorMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrorMsgContainer>
+                </FormInnerWrapper>
+
                 <FormInnerWrapper>
                     이미 계정이 있으신가요?
                     <StyledLink to="/register">

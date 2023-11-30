@@ -71,7 +71,7 @@ const StyledDatePicker = styled(DatePicker)`
     cursor: pointer;
     font-family: 'Noto Sans KR', sans-serif;
 
-    font-weight: 800;
+    font-weight: ${(props) => (props.startTime !== null && props.endTime !== null ? '800' : "400")};
     font-size: 2.4vh;
     color: #000000;
     {

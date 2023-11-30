@@ -4,13 +4,21 @@ import Select from "react-select";
 import { darken, lighten } from 'polished';
 
 export const SelectDuty = () => {
+    // select 태그의 옵션들을 배열로 만들어준다.
     const onduty = [
         { value: "onduty", label: "근무중" },
         { value: "offduty", label: "근무중 아님" }
-    ] //원래는 select 태그 안에 들어가는 애들을 배열로 만들어준다.
+    ]
 
-    const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
     //안에 들어가는 값을 받아야해서 state 사용
+    const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
+
+    //다음 datepicker 선택하거나 option의 값을 바꾸면 스타일 바꾸기
+    const [isClick, setIsClick] = useState(false);
+  
+    // const handleOnChangeSelectValue = (e) => {
+    //   setCurrentValue(e.target.getAttribute("value"));
+    // };
 
     return(
         <>
@@ -41,7 +49,7 @@ const customStyles = {
         cursor: 'pointer',
 
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isFocused? '800' : '400',
+        fontWeight: '400', //state.isFocused? '800' : 
         fontSize: '2.4vh',
         color: '#000000',
 

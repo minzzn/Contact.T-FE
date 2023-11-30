@@ -8,7 +8,7 @@ export const ChatContentsContainer = styled.div`
     flex-direction: column;
     min-height: 540px;
     /* 가로 방향 메시지들 박스 배치 */
-    align-items: ${(props) => props.$ismine === "true" ? "flex-end" : "flex-start"}
+    align-items: ${(props) => props.$ismine === "true" ? "flex-end" : "flex-start"};
 `
 // 실제 메시지 내용들이 담는 div tag의 wrapper
 export const ChatContentDivWrapper = styled.div`
@@ -29,5 +29,5 @@ export const ChatContentDiv = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
-    color: white;
+    color: ${(props) => props.$ismine === "true" ? 'black' : 'white'};
 `

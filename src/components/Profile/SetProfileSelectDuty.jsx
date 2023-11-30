@@ -22,8 +22,8 @@ export const SelectDuty = () => {
 
     return(
         <>
-            <Select options={onduty} //위에서 만든 배열을 select로 넣기
-                onChange={setSelectOnduty} //값이 바뀌면 setState되게
+            <Select options={onduty}
+                onChange={setSelectOnduty}
                 defaultValue={onduty[0]}
                 styles={customStyles}
                 isSearchable={false}

@@ -6,6 +6,7 @@ import { Client } from '@stomp/stompjs';
 
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
+    const senderID = 10;
     const client = useRef({});
     const [chat, setChat] = useState("");
     const [chatList, setChatList] = useState([]);
@@ -61,7 +62,7 @@ export const Chat = () => {
             // 형식에 맞게 수정해서 보내야 함.
             body: JSON.stringify({
                 chat: chat,
-                senderID: 10,
+                senderID: senderID,
             }),
         });
 
@@ -78,7 +79,7 @@ export const Chat = () => {
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} />
+                <ChatContentsBox chatsHistory={chatList} isMine={senderID === 1}/>
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

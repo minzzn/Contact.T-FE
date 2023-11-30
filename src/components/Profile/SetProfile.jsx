@@ -6,7 +6,7 @@ import { SelectDuty } from './SetProfileSelectDuty';
 import { SelectChatTime } from './SetProfileSelectChatTime';
 import { postSetProfileDataWith } from '../../function/setprofile.js';
 
-export const SetProfile = (startTime, endTime) => {
+export const SetProfile = ({startTime, endTime, time}) => {
   const navigate = useNavigate();
 
   // 근무중, 채팅 가능 시간 상태관리
@@ -15,7 +15,7 @@ export const SetProfile = (startTime, endTime) => {
   const [selectstate, setSelectstate] = useState(false);
 
   // 값 전부 선택시 상태 바꾸기
-  const onSelect = () => {
+  const onSelect = (time) => {
     { startTime && endTime ? setSelectstate(true)
         : null;
     }
@@ -62,7 +62,7 @@ export const SetProfile = (startTime, endTime) => {
                   <SelectDuty></SelectDuty>
                   <SelectChatTime></SelectChatTime>
                 </InputBox>
-                <StartButton onClick={onSubmit}>서비스 시작하기</StartButton>
+                <StartButton onClick={onSelect}>서비스 시작하기</StartButton>
             </SetBox>
         </SetContainer>
       </Section>  

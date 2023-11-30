@@ -18,18 +18,10 @@ export const SelectChatTime = () => {
         setEndTime(null);
     };
 
-    // 현재 시간 기준 지나간 시간 선택 불가
-    const filterPassedTime = (time) => {
-        const currentDate = new Date();
-        const selectedDate = new Date(time);
-    
-        return currentDate.getTime() < selectedDate.getTime();
-    };
-
     return(
         <>
             <div><StyledDatePicker
-                //filterTime={filterPassedTime}
+                startTime={startTime}
                 selected={startTime}
                 onChange={onSelect}
                 locale={ ko }
@@ -45,7 +37,7 @@ export const SelectChatTime = () => {
 
             {isSelected ? // 시작 시간을 선택해야 종료 시간 선택 가능
                 <div><StyledDatePicker
-                //filterTime={filterPassedTime}
+                endTime={endTime}
                 selected={endTime}
                 onChange={(time) => setEndTime(time)}
                 locale={ ko }
@@ -53,15 +45,8 @@ export const SelectChatTime = () => {
                 showTimeSelectOnly
                 timeIntervals={30}
                 minTime={startTime}
-                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+23)} // 시작 시간부터 24시간
-                excludeTimes={[
-                    // 시작 시간 제외
-                    // startTime,
-                    // 18-19시 30분 간격으로 제외
-                    // setHours(setMinutes(new Date(), 0), 18),
-                    // setHours(setMinutes(new Date(), 30), 18),
-                    // setHours(setMinutes(new Date(), 0), 19)
-                ]}
+                // 시작 시간부터 24시간
+                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+23)}
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
@@ -74,12 +59,11 @@ export const SelectChatTime = () => {
 }
 const StyledDatePicker = styled(DatePicker)`
     
-    background: #ffffff;
     width: 45vh;
     height: 7vh;
     padding-right: 1.5vh;
 
-    border: 0.5vh solid #B4B4B4;
+    border: ${(props) => (props.startTime !== null && props.endTime !== null ? '0.5vh solid #FF9634' : "0.5vh solid #B4B4B4")};
     border-radius: 2vh;
     margin-bottom: 1vh;
     display: flex;
@@ -90,6 +74,9 @@ const StyledDatePicker = styled(DatePicker)`
     font-weight: 800;
     font-size: 2.4vh;
     color: #000000;
+    {
+        
+    }
     
     .react-datepicker__time-list-item {
         background-color: #ffffff;

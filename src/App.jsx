@@ -19,15 +19,17 @@ export default function App() {
     const fetchData = async () => {
       // 토큰은 잘 넘어오는거 확인
       const token = getToken();
-
+      // 토큰이 없는경우와 정의되지 않은 경우의 차이가 궁금함
+      // 로그인만 안한경우와 회원가입도 안한경우인지 ^.^...?
       if(token !== undefined || token !== null) {
         try {
           const userJsonData = await getUserInfoThrough(token, 'entry');
-
+          // 구조분해 할당
           setisUserInfo({
             email: userJsonData.email,
             username: userJsonData.username,
           });
+          // 콘솔에 유저정보 잘 왔는지 출력
           console.log(isUserInfo);
         } catch (error) {
           console.error('캐치 함수 내부:', error);
@@ -39,9 +41,11 @@ export default function App() {
 
   return (
       // 받은 유저 정보가 존재할 경우 Main으로 이동, 아니면 Login으로 이동
+      // 존재하면 Main으로 이동하고 아니면 Login으로 이동하는지 어케알쥐 ... 로그인 화면에 넣어놓은 함수 저건가 . .
+      // 로그인 했을때 토큰이 존재하지 않아도 Main으로 이동함.
       <>
       <Routes>
-        <Route path="/" element={ <Login /> } />
+        <Route path="/" element={<Login /> } />
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<Main/>}/>
         <Route path="/Setprofile" element={<SetProfile />} />

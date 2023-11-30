@@ -40,10 +40,8 @@ export const Login = () => {
         };
         const resultAfterPost = postLoginDataWith(loginData,'auth/login');
 
-        if(resultAfterPost) {
-            // 인증되어야 main화면으로 넘어가요
-            navigate('/main');
-        }
+        // 인증되어야 main화면으로 넘어가요
+        { resultAfterPost === true ? navigate('/main') : navigate('/'); alert("로그인에 실패하였습니다."); }
     }
 
     return (

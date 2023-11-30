@@ -24,7 +24,7 @@ export const postRegisterDataWith = async (userObj,url) => {
         console.log("회원가입 성공");
         return true;
     } catch(error) {
-        console.log('Error: ', error.message);
+        console.log('Error : ', error.message);
         return false;
     }
 }
@@ -70,7 +70,7 @@ export const postLoginDataWith = async (userObj,url) => {
         }
 
     } catch(error) {
-        console.log('Error: ', error.message);
+        console.log('Error : ', error.message);
         return false;
     }
 }

@@ -16,7 +16,7 @@ export const Chat = () => {
     }
 
     function subscribe() {
-        client.current.subscribe('/sub/chat/', (body) => {
+        client.current.subscribe('/sub/chat/1', (body) => {
             const json_body = JSON.parse(body.body);
 
             console.log(json_body);

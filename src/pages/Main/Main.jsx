@@ -4,6 +4,7 @@ import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
 import { House } from "./Sub/House";
+import { AddInfoModal } from "../../components/Profile/AddInfo/AddInfoModal";
 
 export const Main = () => {
     // 
@@ -41,6 +42,7 @@ export const Main = () => {
                 }
 
             </Container>
+            <AddInfoModal />
         </>
     )
 }

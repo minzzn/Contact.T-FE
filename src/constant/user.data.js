@@ -4,13 +4,13 @@ import defaultImg from "../assets/profile.png"
 
 export const users = [
     {
-        name: '민주',
-        img: img2,
+        name: '민정',
+        img: img1,
         profileImg: defaultImg
     },
     {
-        name: '민정',
-        img: img1,
+        name: '민주',
+        img: img2,
         profileImg: defaultImg
     },
     {

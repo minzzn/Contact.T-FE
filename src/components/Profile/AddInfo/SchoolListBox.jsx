@@ -1,13 +1,7 @@
 import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../../css/styled/Profile/AddInfo/schoolListBox.styled"
 
 export const SchoolListBox = ({ schoolsListArray, schoolInfo, setSelected }) => {
-    // schoolsListArray.map((school) => {
-    //     console.log(school);
-    //     console.log(`${school.schoolName}`);
-    //     console.log(typeof `${school.schoolName}`);
-    //     console.log(`${school.schoolName}`.indexOf(schoolInfo));
-    // })
-
+    
     function selectSchool(e, name) {
         e.preventDefault();
         

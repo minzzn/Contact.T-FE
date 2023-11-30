@@ -4,8 +4,8 @@ import styled from "styled-components";
 export const customedStyle = {
     // 모달창 뒷 배경 스타일 설정
     overlay: {
-        backgroundColor: 'var(--bg-black)',
-        backdropFilter: 'blur(15px)', // backdrop-filter 설정
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        backdropFilter: 'blur(4px)', // backdrop-filter 설정
     },
     // 모달창 
     content: {
@@ -25,43 +25,85 @@ export const customedStyle = {
         flexDirection: 'column',
         justifyContent: "stretch",
         alignItems: 'center',
-        padding: '0 20px',
+        padding: '30px',
         minWidth: '671px',
         minHeight: '671px',
     }
 }
 
+export const AllLayoutContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`
+
+export const RoleSelectContainer = styled.div`
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+`
+
+export const RoleSelectInput = styled.select`
+    padding: 10px 15px;
+    border: 1px solid orange;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.5rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 export const ExtraInfoForm = styled.form`
     width: 100%;
     height: 100%;
     color: var(--bg-original-black);
+    /* 크게 <자녀이름, 자녀수, 교사이름> 과 <학교검색> 두 개로 레이아웃 쪼개주기 */
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    /* 가장 위로 붙도록 */
+    align-items: flex-start;
+    /* 큰 두개의 레이아웃 사이 약간의 갭 */
+    gap: 10px;
 `
 
-export const ChildInfoContainer = styled.div`
+export const ExtraInfoContainer = styled.div`
     width: 100%;
     display: flex;
-    align-items: center;
-    gap: 50px;
-    justify-content: space-between;
+    flex-direction: column;
+    /* 가로 방향 맨 앞으로 */
+    align-items: flex-start;
+    /* 이 컨테이너 내부 컴포넌트들은 서로 갭을 둠 */
+    gap: 20px;
 `
+export const SearchSchoolContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* 가로 방향 끝으로 */
+    align-items: flex-start;
+    gap: 30px;
+`
+
 export const ChildInfoWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    justify-content: center;
+    /* 가로 방향 맨 앞으로 */
+    align-items: flex-start;
+    gap: 7px;
 `
 
 export const ExtraInfoLabel = styled.label`
     display: block;
     font-weight: 600;
     font-size: 1.8rem;
-    margin-bottom: 5px;
-    margin-top: 1.2rem;
-    position: relative;
-    bottom: ${(props) => props.$customedBottom ? props.$customedBottom : '0'};
 `
 
 export const ExtraInfoInput = styled.input`
@@ -78,8 +120,6 @@ export const RadioInputContainer = styled.div`
     display: flex;
     align-items: start;
     justify-content: space-between;
-    position: relative;
-    bottom: -10px;
 `
 
 export const RadioInputWrapper = styled.div`
@@ -92,6 +132,11 @@ export const ExtraInfoInputRadio = styled.input`
     margin-right: 5px;
 `
 
+export const TypeOfSchoolLabel = styled.label`
+    margin-right: 15px;
+    font-weight: 500;
+`
+
 export const SchoolInputWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -100,22 +145,35 @@ export const SchoolInputWrapper = styled.div`
 
 export const SchoolsListWrapper = styled.div`
     width: 100%;
-    height: 150px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     overflow: scroll;
     justify-content: flex-start;
-    /* position: relative;
-    top: -35px; */
+`
+
+export const ErrMsgContainer = styled.div`
+    position: absolute;
+    bottom: 60px;
+    right: 23px;
+    color: red;
+    font-weight: 600;
+    font-size: 1.1rem;
+    visibility: ${(props) => props.$visibleTrue ? 'visible' : 'hidden'};
 `
 
 export const StyledButton = styled.button`
     display: block;
     padding: 2px 5px;
     background-color: var(--bg-original-black);
+    box-sizing: border-box;
     color: var(--bg-original-white);
     font-size: 1.2rem;
     font-weight: 500;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    box-sizing: border-box;
 
     &:hover {
         cursor: pointer;

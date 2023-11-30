@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoContainer, ChildInfoWrapper, StyledButton } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
+import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
 import { searchDB } from '../../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
-import { ErrorMsgContainer } from '../../../css/styled/signin_up.styled';
+import { ParentRole } from './DividedByRole/ParentRole';
 
 // 랜더링이 좀 자주 됨 : 리팩토링 개선 여지 필요
 export const AddInfoModal = () => {
@@ -17,14 +17,13 @@ export const AddInfoModal = () => {
         teacherName: '',
         schoolInfo: '',
         schoolType: '',
-        // TODO : 나중에 선생님과 학부모 구분 지어서 보내야함
-        role: 'GUEST',
+        role: '',
     });
 
     async function onChange(e) {
         const { name, value } = e.target;
-
         setExtraInfo((prevState) => ({ ...prevState, [name]: value }));
+        console.log(extraInfo);
         if(name === 'schoolInfo') {
             const schoolDB = await searchDB(extraInfo.schoolType);
             setSchoolList(schoolDB);
@@ -52,6 +51,7 @@ export const AddInfoModal = () => {
     function onSubmit(e) {
         e.preventDefault();
 
+        console.log(extraInfo);
         setIsOpen(false);
     }
 
@@ -63,58 +63,66 @@ export const AddInfoModal = () => {
                 isOpen={isOpen}
                 style={customedStyle}
             >
-                <ExtraInfoForm>
-                    <ChildInfoContainer>
-                        <ChildInfoWrapper>
-                            <ExtraInfoLabel htmlFor='childName'>자녀 이름</ExtraInfoLabel>
-                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childName' name="childName" value={extraInfo.childName} placeholder='자녀 이름' $customizedWidth="32%" />
-                        </ChildInfoWrapper>
-                        <ChildInfoWrapper>
-                            <ExtraInfoLabel htmlFor='childCnt'>자녀 수</ExtraInfoLabel>
-                            <ExtraInfoInput type='text' required onChange={(e) => onChange(e)} id='childCnt' name="childCnt" value={extraInfo.childCnt} placeholder='자녀 수' $customizedWidth="26%" />
-                        </ChildInfoWrapper>
-                    </ChildInfoContainer>
+                <AllLayoutContainer>
+                    <RoleSelectContainer>
+                        <RoleSelectInput name='role' id='role' onChange={(e) => onChange(e)}>
+                            <option value="TEACHER">교사</option>
+                            <option value="PARENT">학부모</option>
+                        </RoleSelectInput>
+                    </RoleSelectContainer>
 
-                    <ExtraInfoLabel htmlFor='teacherName'>교사 이름</ExtraInfoLabel>
-                    <ExtraInfoInput required type='text' id='teacherName' name='teacherName' onChange={(e) => onChange(e)} placeholder='교사 이름' $customizedWidth="15%"></ExtraInfoInput>
+                    <ExtraInfoForm>
+                        <ExtraInfoContainer>
+                            {
+                                extraInfo.role === "PARENT" ? (
+                                    <ParentRole onChangeFn={onChange} extraInfo={extraInfo}/>
+                                ) : (
+                                    null
+                                )
+                            }
+                            <ChildInfoWrapper>
+                                <ExtraInfoLabel htmlFor='grade'>학년</ExtraInfoLabel>
+                                <ExtraInfoInput required type='text' id='grade' name='grade' onChange={(e) => onChange(e)} placeholder='학년' $customizedWidth="17%"></ExtraInfoInput>
+                            </ChildInfoWrapper>
+                            <ChildInfoWrapper>
+                                <ExtraInfoLabel htmlFor='class'>반</ExtraInfoLabel>
+                                <ExtraInfoInput required type='text' id='class' name='class' onChange={(e) => onChange(e)} placeholder='반' $customizedWidth="12%"></ExtraInfoInput>
+                            </ChildInfoWrapper>
+                        </ExtraInfoContainer>
+                        
+                        <SearchSchoolContainer>
+                            <ExtraInfoLabel>학교 검색</ExtraInfoLabel>
+                            <RadioInputContainer>
+                                <RadioInputWrapper>
+                                    <ExtraInfoInputRadio type='radio' value="elem_list" id='elementary' name='schoolType' onChange={(e) => onChange(e)} />
+                                    <TypeOfSchoolLabel htmlFor='elementary'>초등학교</TypeOfSchoolLabel>
+                                </RadioInputWrapper>
+                                <RadioInputWrapper>
+                                    <ExtraInfoInputRadio type='radio' value="midd_list" id='middle' name='schoolType' onChange={(e) => onChange(e)} />
+                                    <TypeOfSchoolLabel htmlFor='middle'>중학교</TypeOfSchoolLabel>
+                                </RadioInputWrapper>
+                                <RadioInputWrapper>
+                                    <ExtraInfoInputRadio type='radio' value="high_list" id='high' name='schoolType' onChange={(e) => onChange(e)} />
+                                    <TypeOfSchoolLabel htmlFor='high'>고등학교</TypeOfSchoolLabel>                          
+                                </RadioInputWrapper>
+                            </RadioInputContainer>
+                            <ExtraInfoInput required id='schoolInfo' name="schoolInfo" type='text' value={selectedSchool || extraInfo.schoolInfo} disabled={extraInfo.schoolType.length < 1} onChange={onChange} placeholder='학교 정보 입력'/>
 
-                    <ExtraInfoLabel $customedBottom="-15px" >학교 검색</ExtraInfoLabel>
-                    <RadioInputContainer>
-                        <RadioInputWrapper>
-                            <ExtraInfoInputRadio type='radio' value="elem_list" id='elementary' name='schoolType' onChange={(e) => onChange(e)} />
-                            <label htmlFor='elementary'>초등학교</label>
-                        </RadioInputWrapper>
-                        <RadioInputWrapper>
-                            <ExtraInfoInputRadio type='radio' value="midd_list" id='middle' name='schoolType' onChange={(e) => onChange(e)} />
-                            <label htmlFor='middle'>중학교</label>
-                        </RadioInputWrapper>
-                        <RadioInputWrapper>
-                            <ExtraInfoInputRadio type='radio' value="high_list" id='high' name='schoolType' onChange={(e) => onChange(e)} />
-                            <label htmlFor='high'>고등학교</label>                          
-                        </RadioInputWrapper>
-                    </RadioInputContainer>
-                    <ExtraInfoInput required id='schoolInfo' name="schoolInfo" type='text' value={selectedSchool || extraInfo.schoolInfo} disabled={extraInfo.schoolType.length < 1} onChange={onChange} placeholder='학교 정보 입력'/>
+                            <SchoolsListWrapper>
+                                <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setSelected={setSelectedSchool}/>
+                            </SchoolsListWrapper>
+                        </SearchSchoolContainer>
 
-                    <SchoolsListWrapper>
-                        <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setSelected={setSelectedSchool}/>
-                    </SchoolsListWrapper>
-                    {/* 에러 상태값의 길이가 이상으면 error message 표현 */}
-                    <ErrorMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrorMsgContainer>
-                    
-                    <div style={{
-                        width: '100%',
-                        padding: '20px 0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                    }}>   
+                        {/* 에러 상태값의 길이가 이상으면 error message 표현 */}
+                        <ErrMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrMsgContainer>
+                        
                         <StyledButton
                             type='button'
                             onClick={onSubmit}
                             disabled={error?.length > 0}
                         >제출</StyledButton>
-                    </div>
-                </ExtraInfoForm>
+                    </ExtraInfoForm>
+                </AllLayoutContainer>
             </Modal>
         </>
     )

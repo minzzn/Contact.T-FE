@@ -29,5 +29,5 @@ export const ChatContentDiv = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
-    color: white;
+    color: ${(props) => props.$ismine === "true" ? 'black' : 'white'};
 `

@@ -65,7 +65,6 @@ export const SelectChatTime = () => {
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
-                //className="mt-3"
             /></div>
                 
                 : null 

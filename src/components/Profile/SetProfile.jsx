@@ -6,7 +6,7 @@ import { SelectDuty } from './SetProfileSelectDuty';
 import { SelectChatTime } from './SetProfileSelectChatTime';
 import { postSetProfileDataWith } from '../../function/setprofile.js';
 
-export const SetProfile = (startTime, endTime, isSelected) => {
+export const SetProfile = (startTime, endTime) => {
   const navigate = useNavigate();
 
   // 근무중, 채팅 가능 시간 상태관리
@@ -14,11 +14,14 @@ export const SetProfile = (startTime, endTime, isSelected) => {
   const [chattime, setChattime] = useState("");
   const [selectstate, setSelectstate] = useState(false);
 
-  const isSelectTime = () => {
+  // 값 전부 선택시 상태 바꾸기
+  const onSelect = () => {
+    { startTime && endTime ? setSelectstate(true)
+        : null;
+    }
     console.log(startTime);
     console.log(endTime);
-    console.log(isSelected);
-  }
+};
 
   // 근무중 시간 둘다 설정하면(상태 바뀌면) 컴포넌트 테두리 주황색으로 바꾸기(setselectstate로 설정) - 이건 모르겠네 ... 다른파일 참고해야 할듯
   // 테두리 주황색으로 바뀌면(selectstate==true) 데이터 객체에 담고 콘솔에 입력한 데이터 찍어보기 - onSubmit 함수 ...??

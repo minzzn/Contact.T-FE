@@ -45,7 +45,7 @@ export default function App() {
       // 로그인 했을때 토큰이 존재하지 않아도 Main으로 이동함.
       <>
       <Routes>
-        <Route path="/" element={<Login /> } />
+        <Route path="/" element={isUserInfo ? <Main /> : <Login /> } />
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<Main/>}/>
         <Route path="/Setprofile" element={<SetProfile />} />

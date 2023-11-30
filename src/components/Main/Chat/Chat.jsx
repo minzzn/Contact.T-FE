@@ -15,19 +15,22 @@ export const Chat = () => {
         publish(chat);
     }
 
+    // 
     function subscribe() {
-        client.current.subscribe('/sub/chat/1', (body) => {
+        // sub/chat/{roomID}
+        client.current.subscribe('/sub/chat/', (body) => {
             const json_body = JSON.parse(body.body);
 
             console.log(json_body);
 
             setChatList((chatList) => [
-                ...chatList, ...Object.values(json_body)
+                ...chatList, json_body.chat,
             ]);
         });
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
+    // ws프로토콜 연결
     function connect() {
         client.current = new Client({
             brokerURL: BROKER_URL,
@@ -52,11 +55,13 @@ export const Chat = () => {
         }
 
         client.current.publish({
-            destination: '/sub/chat',
+            // sub/chat/{roomID}
+            destination: '/sub/chat/',
             // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
             // 형식에 맞게 수정해서 보내야 함.
             body: JSON.stringify({
                 chat: chat,
+                senderID: 1,
             }),
         });
 
@@ -64,6 +69,7 @@ export const Chat = () => {
         setChat('');
     }
 
+    // 초기랜더링될 때, 연결
     useEffect(() => {
         connect();
     },[]);

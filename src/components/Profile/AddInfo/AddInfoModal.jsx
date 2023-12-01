@@ -42,6 +42,12 @@ export const AddInfoModal = () => {
             case 'teacherName':
                 (value?.length < 2) ? setError('교사 성함을 올바르게 작성해주세요') : setError('');
                 break;
+            case 'grade':
+                (value?.length < 1) ? setError('학년을 올바르게 적어주세요') : setError('');
+                break;
+            case 'class':
+                (value?.length < 1) ? setError('반을 올바르게 적어주세요') : setError('');
+                break;
             // 나머지는 그냥 빠져나오기
             default: 
                 break;

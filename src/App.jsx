@@ -6,7 +6,7 @@ import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
-import { getUserInfoThrough, getToken } from "./function/common.js";
+import { getToken, getUserInfoWithToken } from "./function/common.js";
 import { isUserInfoAtom } from "./hooks/IsUserInfo.js";
 import { useRecoilState } from 'recoil';
 
@@ -22,7 +22,7 @@ export default function App() {
 
       if(token !== undefined || token !== null) {
         try {
-          const userJsonData = await getUserInfoThrough(token, 'entry');
+          const userJsonData = await getUserInfoWithToken(token, 'entry');
 
           setisUserInfo({
             email: userJsonData.email,

@@ -4,7 +4,7 @@ export const getToken = () => localStorage.getItem("token");
 export const setToken = (tokenValue) => localStorage.setItem("token", tokenValue);
 
 // 토큰과 string으로 뒤에 추가적으로 붙는 url을 적어주세요
-export const getUserInfoThrough = async (token, url) => {
+export const getUserInfoWithToken = async (token, url) => {
     const BACK_API = `http://${serverEndPoint}/${url}`;
 
     try {

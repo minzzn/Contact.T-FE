@@ -27,18 +27,20 @@ export const Chat = () => {
     // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
         // sub/chat/{roomID}
-        client.current.subscribe('/sub/chat/', (body) => {
-            // 서버로부터 넘어온 JSON 데이터를 파싱
-            const json_body = JSON.parse(body.body);
-
-            console.log(json_body);
+        client.current.subscribe('/sub/chat/', (datafromServer) => {
+            // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
+            const response = datafromServer;
+            console.log(response);
+            const json_body = response.body;
+            // console.log(json_body);
+            // console.log(response.headers);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
             setChatList((previousChatList) => [
                 ...previousChatList, {...json_body},
             ]);
         });
-        console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
+        // console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
     // ws프로토콜 연결
@@ -51,7 +53,6 @@ export const Chat = () => {
                 subscribe(); // 연결 성공 시 구독하는 로직 실행
             }
         });
-        console.log('activated(연결되었다)');
         // 연결 활성화
         client.current.activate();
     }
@@ -70,7 +71,7 @@ export const Chat = () => {
 
         client.current.publish({
             // sub/chat/{roomID}
-            destination: '/sub/chat/',
+            destination: '/pub/chat/message',
             // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
             // 형식에 맞게 수정해서 보내야 함.
             body: JSON.stringify({
@@ -79,7 +80,7 @@ export const Chat = () => {
             }),
         });
 
-        console.log('published!(채팅을 보낸다)');
+        // console.log('published!(채팅을 보낸다)');
         setChat('');
     }
 

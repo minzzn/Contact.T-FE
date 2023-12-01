@@ -4,28 +4,38 @@ import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInpu
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 
+/**
+ * 상위 컴포넌트 - <ChattingPane>
+ * 하위 컴포넌트 - <ChatContentsBox>
+ * @author 이시영
+ * @returns 
+ */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
     const senderID = 1;
     const client = useRef({});
+    // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
+    // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
 
     function handleSubmit(event, chat) {
         event.preventDefault();
         publish(chat);
-    }
+    };
 
-    // 
+    // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
         // sub/chat/{roomID}
         client.current.subscribe('/sub/chat/', (body) => {
+            // 서버로부터 넘어온 JSON 데이터를 파싱
             const json_body = JSON.parse(body.body);
 
             console.log(json_body);
 
-            setChatList((chatList) => [
-                ...chatList, json_body.chat,
+            // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
+            setChatList((previousChatList) => [
+                ...previousChatList, {...json_body},
             ]);
         });
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
@@ -45,11 +55,14 @@ export const Chat = () => {
         // 연결 활성화
         client.current.activate();
     }
+
+    // 프로토콜 연결 종료
     function disconnect() {
         client.current.deactivate();
         consol.log('종료');
     }
 
+    // 사용자가 입력한 채팅 서버로 전송하는 역할
     function publish(chat) {
         if (!client.current.connected) {
             return;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
-import { searchDB } from '../../../function/addInfo';
+import { POST, searchDB } from '../../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
 
@@ -23,7 +23,7 @@ export const AddInfoModal = () => {
     async function onChange(e) {
         const { name, value } = e.target;
         setExtraInfo((prevState) => ({ ...prevState, [name]: value }));
-        console.log(extraInfo);
+
         if(name === 'schoolInfo') {
             const schoolDB = await searchDB(extraInfo.schoolType);
             setSchoolList(schoolDB);
@@ -52,6 +52,7 @@ export const AddInfoModal = () => {
         e.preventDefault();
 
         console.log(extraInfo);
+        // POST(extraInfo); // 데이터 전송
         setIsOpen(false);
     }
 

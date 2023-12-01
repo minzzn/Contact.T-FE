@@ -7,18 +7,17 @@ import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper } from "..
  * @param {boolean} 내가 보낸건지 구분짓는 변수
  * @returns 없음
  */
-export const ChatContentsBox = ({ chatsHistory, isMine }) => {
-    console.log(typeof isMine);
+export const ChatContentsBox = ({ chatsHistory, senderID }) => {
 
     return (
         <>
             <ChatContents>
-                <ChatContentsContainer $ismine={isMine}>
+                <ChatContentsContainer>
                     {
                         chatsHistory?.map((messageObj,idx) => {
                             return (
-                                <ChatContentDivWrapper key={idx} $ismine={isMine}>
-                                    <ChatContentDiv $ismine={isMine}>
+                                <ChatContentDivWrapper key={idx} $ismine={`${messageObj.senderID === senderID}`}>
+                                    <ChatContentDiv $ismine={`${messageObj.senderID === senderID}`}>
                                         {messageObj.chat}
                                     </ChatContentDiv>
                                 </ChatContentDivWrapper>

@@ -92,7 +92,7 @@ export const Chat = () => {
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} isMine={`${senderID === 1}`}/>
+                <ChatContentsBox chatsHistory={chatList} senderID={senderID} />
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

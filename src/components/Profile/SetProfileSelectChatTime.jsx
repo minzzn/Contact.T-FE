@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 import Select from "react-select"; 
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 
-export const SelectChatTime = () => {
+export const SelectChatTime = ({ onStartTimeChange, onEndTimeChange }) => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
     // 시작 시간이 선택되면 해당 시간 적용 및 isSelected를 true, endTime을 null로
+    // 객체를 key값으로 쪼개서 시간 쪼개서 string 형태로 넣기
     const onSelect = (time) => {
         setStartTime(time);
         setIsSelected(true);
         setEndTime(null);
+    };
+
+    useEffect(() => {
+        console.log(startTime);
+        console.log(endTime);
+    }, [startTime, endTime]); // startTime이 업데이트될 때마다 useEffect가 실행됨
+
+    const sendDataToParent = () => {
+        onStartTimeChange(startTime);
+        onEndTimeChange(endTime); // 콜백 함수 호출하여 데이터 전달
     };
 
     return(
@@ -50,6 +62,7 @@ export const SelectChatTime = () => {
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
+                isSelect={sendDataToParent}
             /></div>
                 
                 : null 
@@ -74,10 +87,7 @@ const StyledDatePicker = styled(DatePicker)`
     font-weight: ${(props) => (props.startTime !== null && props.endTime !== null ? '800' : "400")};
     font-size: 2.4vh;
     color: #000000;
-    {
-        
-    }
-    
+
     .react-datepicker__time-list-item {
         background-color: #ffffff;
         align-items: center;
@@ -86,9 +96,12 @@ const StyledDatePicker = styled(DatePicker)`
         text-align: center;
 
         font-family: 'Noto Sans KR', sans-serif;
-        font-weight: 800;
         font-size: 2.4vh;
         color: #000000;
+        &:hover {
+            font-weight: 800;
+            cursor: pointer;
+        }
     }
 
 `

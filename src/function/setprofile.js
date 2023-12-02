@@ -1,7 +1,7 @@
 import { serverEndPoint } from "../constant/common.constant";
 import { setToken } from "./common";
 
-// 회원가입 함수
+// 프로필 설정 함수
 export const postSetProfileDataWith = async (userObj,url) => {
     const BACK_API = `http://${serverEndPoint}${url}`;
 
@@ -21,7 +21,7 @@ export const postSetProfileDataWith = async (userObj,url) => {
             throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
         }
 
-        console.log("프로필 설정");
+        console.log("프로필 설정 성공");
 
     } catch(error) {
         console.log('Error: ', error.message);

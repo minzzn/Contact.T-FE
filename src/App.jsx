@@ -22,7 +22,7 @@ export default function App() {
 
       if(token !== undefined || token !== null) {
         try {
-          const userJsonData = await getUserInfoWithToken(token, 'entry');
+          const userJsonData = await getUserInfoWithToken(token);
 
           setisUserInfo({
             email: userJsonData.email,

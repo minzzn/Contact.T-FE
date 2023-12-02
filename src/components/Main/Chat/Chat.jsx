@@ -6,47 +6,36 @@ import { Client } from '@stomp/stompjs';
 
 /**
  * 상위 컴포넌트 - <ChattingPane>
- * 하위 컴포넌트 - <ChatContentsBox>
  * @author 이시영
- * @returns 
+ * @returns <ChatContentsBox>
  */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
     const senderID = 1;
     const client = useRef({});
-    // 사용자가 입력한 채팅
+    // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
-    // 채팅을 쌓아두는 역할
+    // // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
 
-    function handleSubmit(event, chat) {
-        event.preventDefault();
-        publish(chat);
-    };
-
-    // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
+    // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
         // sub/chat/{roomID}
-        client.current.subscribe('/sub/chat', (datafromServer) => {
+        client.current.subscribe('/sub/chat/1', (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
-            const response = datafromServer;
-            console.log(response);
-
-            const json_body = response.body;
-            console.log(json_body);
+            const message = JSON.parse(datafromServer.body);
+            console.log(message);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
             setChatList((previousChatList) => [
-                ...previousChatList, {...json_body},
+                ...previousChatList, {...message},
             ]);
 
         });
-
-        console.log(client.current);
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
-    // ws프로토콜 연결
+    // // ws프로토콜 연결
     function connect() {
         // useRef안에 Client객체 넣어서 랜더링과 분리해서 관리
         client.current = new Client({
@@ -61,7 +50,7 @@ export const Chat = () => {
         client.current.activate();
     }
 
-    // 프로토콜 연결 종료
+    // // 프로토콜 연결 종료
     function disconnect() {
         client.current.deactivate();
         consol.log('종료');
@@ -78,14 +67,23 @@ export const Chat = () => {
             destination: '/pub/chat/message',
             // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
             // 형식에 맞게 수정해서 보내야 함
-            body: JSON.stringify({
-                chat: chat,
-                senderID: senderID,
+            body: JSON.stringify({ 
+                type: "CHAT",
+                hidden: [0,1,2],
+                roomId: 1,
+                message: chat,
+                sender: senderID,
+                time: "1",
             }),
         });
         console.log('published!(채팅을 보낸다)');
         setChat('');
     }
+
+    function handleSubmit(event, chat) {
+        event.preventDefault();
+        publish(chat);
+    };
 
     // 초기랜더링될 때, 연결
     useEffect(() => {

@@ -14,11 +14,11 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
             <ChatContents>
                 <ChatContentsContainer>
                     {
-                        chatsHistory?.map((messageObj,idx) => {
+                        chatsHistory?.map((messageObject,idx) => {
                             return (
-                                <ChatContentDivWrapper key={idx} $ismine={`${messageObj.senderID === senderID}`}>
-                                    <ChatContentDiv $ismine={`${messageObj.senderID === senderID}`}>
-                                        {messageObj.chat}
+                                <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                    <ChatContentDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                        {messageObject.message}
                                     </ChatContentDiv>
                                 </ChatContentDivWrapper>
                             )

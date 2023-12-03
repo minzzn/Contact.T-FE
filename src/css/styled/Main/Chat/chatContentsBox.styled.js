@@ -32,4 +32,17 @@ export const ChatContentDiv = styled.div`
     align-items: center;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
     color: ${(props) => props.$ismine === "true" ? 'white' : 'black'};
+`;
+
+export const AggressvieContentDiv = styled.div`
+    height: min-content;
+    padding: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: black;
 `

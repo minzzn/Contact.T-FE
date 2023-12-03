@@ -18,6 +18,7 @@ export const Chat = () => {
     const [chat, setChat] = useState("");
     // // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
+    const [accumulatedWarning, setaccumulatedWarning] = useState(null);
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
@@ -31,7 +32,7 @@ export const Chat = () => {
             setChatList((previousChatList) => {
                 // hidden값 체크
                 if(message.hidden === 1) {
-                    ToastifyError("경고");
+                    setaccumulatedWarning((prevState) => prevState+1);
                 }
 
                 return [ ...previousChatList, {...message} ];
@@ -100,11 +101,19 @@ export const Chat = () => {
         connect();
     },[]);
 
+    // 초기 랜더링때는 경고문구를 안 띄우지만, 메시지의 hidden값이 1이라 accumulatedWarning의 값이 증가하면 경고문구를 띄워줍니다(누적횟수와 함께)
+    useEffect(()=> {
+        if(accumulatedWarning !== null) {
+            console.log(accumulatedWarning);
+            ToastifyError(`공격적 언행 발견. 현재 경고 ${accumulatedWarning}회 입니다`);
+        }
+    }, [accumulatedWarning])
+
     return (
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} senderID={senderID}/>
+                <ChatContentsBox chatsHistory={chatList} senderID={senderID} />
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

@@ -5,7 +5,7 @@ export const SchoolListBox = ({ schoolsListArray, schoolInfo, setSelected }) => 
     function selectSchool(e, name) {
         e.preventDefault();
         
-        console.log(name);
+        console.log(e.target);
         // 값 할당(props값에)
         setSelected(name);
     }

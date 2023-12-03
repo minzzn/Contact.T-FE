@@ -69,7 +69,7 @@ export const Chat = () => {
             // 형식에 맞게 수정해서 보내야 함
             body: JSON.stringify({ 
                 type: "CHAT",
-                hidden: [0,1,2],
+                hidden: 0,
                 roomId: 1,
                 message: chat,
                 sender: senderID,

@@ -44,8 +44,6 @@ export const postLoginDataWith = async (userObj,url) => {
             body: JSON.stringify(userObj)
         });
 
-        console.log(response);
-
         // 서버에 전송은 했는데 응답이 ok가 아니면 에러 문구 던지기
         if(!response.ok) {
             const errorData = await response.json();

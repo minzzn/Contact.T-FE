@@ -21,7 +21,7 @@ export const PeopleListBox = ({ user, setChoosedUser, setIsChatContentActive }) 
         setIsChatContentActive(true);
         setModalIsOpen(false);
         console.log('Modal Close'); 
-        ToastifyInfo();
+        ToastifyInfo('AI가 채팅을 분석하기 시작합니다🤖');
     }
 
     return (

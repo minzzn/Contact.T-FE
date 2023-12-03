@@ -81,7 +81,6 @@ export const Chat = () => {
             }),
         });
         console.log('published!(채팅을 보낸다)');
-        console.log(typeof(time));
         setChat('');
     }
 

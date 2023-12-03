@@ -58,25 +58,21 @@ export const SetProfile = () => {
     e.preventDefault();
   }
   return (
-    <SetProfileBox>{/* 메인 컨테이너 박스 */}
-      <Section>
-        {/* 프로필 설정하기 설명 박스 */}
-        <ProfileSetText>프로필 설정하기</ProfileSetText>
-        <ExplainText>나중에도 언제든 변경할 수 있어요!</ExplainText>
-        <SetContainer>
-            <SetBox>
-                <ProfileImageBox>
-                    <ProfileImage></ProfileImage>
-                </ProfileImageBox>
-                <InputBox>
-                  <SelectDuty></SelectDuty>
-                  <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
-                </InputBox>
-                <StartButton onClick={onSelect}>서비스 시작하기</StartButton>
-            </SetBox>
-        </SetContainer>
-      </Section>  
-    </SetProfileBox>
+    
+          <SetBox>
+              {/* 프로필 설정하기 설명 박스 */}
+              <ProfileSetText>프로필 설정하기</ProfileSetText>
+              <ExplainText>나중에도 언제든 변경할 수 있어요!</ExplainText>
+              <ProfileImageBox>
+                  <ProfileImage></ProfileImage>
+              </ProfileImageBox>
+              <InputBox>
+                <SelectDuty></SelectDuty>
+                <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
+              </InputBox>
+              <StartButton onClick={onSelect}>서비스 시작하기</StartButton>
+          </SetBox>
+ 
   );
 }
 

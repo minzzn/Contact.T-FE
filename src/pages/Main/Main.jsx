@@ -8,13 +8,14 @@ import { AddInfoModal } from "../../components/Profile/AddInfo/AddInfoModal";
 import { getToken, getUserInfoWithToken } from "../../function/common";
 import { useRecoilState } from "recoil";
 import { isUserInfoAtom } from "../../hooks/IsUserInfo";
+import { SetProfile } from "../../components/Profile/SetProfile";
 
 export const Main = () => {
     const [isFirst, setIsFirst] = useState(true);
     const [iconsState, setIconsState] = useState({
-        setProfile: false,
         chatList: false,
         peopleList: true,
+        setProfile: false,
         house: false
     });
     // 채팅치는 공간 상태관리
@@ -46,7 +47,6 @@ export const Main = () => {
             <Container>
                 {/* 헤더 */}
                 <Header setIsChatContentActive={setIsChatContentActive} setIconsState={setIconsState} iconsState={iconsState} />
-                
                 {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                 {
                     iconsState["house"] === true ? 

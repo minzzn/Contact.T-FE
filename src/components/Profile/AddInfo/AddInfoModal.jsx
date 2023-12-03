@@ -7,7 +7,6 @@ import { ParentRole } from './DividedByRole/ParentRole';
 
 // 랜더링이 좀 자주 됨 : 리팩토링 개선 여지 필요
 export const AddInfoModal = () => {
-    const [selectedSchool, setSelectedSchool] = useState("");
     const [isOpen, setIsOpen] = useState(true);
     const [error, setError] = useState('');
     const [schoolList, setSchoolList] = useState([]);
@@ -61,6 +60,7 @@ export const AddInfoModal = () => {
         // POST(extraInfo); // 데이터 전송
         setIsOpen(false);
     }
+    console.log(extraInfo.schoolInfo);
 
     Modal.setAppElement('#root');
     return (
@@ -113,10 +113,10 @@ export const AddInfoModal = () => {
                                     <TypeOfSchoolLabel htmlFor='high'>고등학교</TypeOfSchoolLabel>                          
                                 </RadioInputWrapper>
                             </RadioInputContainer>
-                            <ExtraInfoInput required id='schoolInfo' name="schoolInfo" type='text' value={selectedSchool || extraInfo.schoolInfo} disabled={extraInfo.schoolType.length < 1} onChange={onChange} placeholder='학교 정보 입력'/>
+                            <ExtraInfoInput required id='schoolInfo' name="schoolInfo" type='text' value={extraInfo.schoolInfo} disabled={extraInfo.schoolType.length < 1} onChange={onChange} placeholder='학교 정보 입력'/>
 
                             <SchoolsListWrapper>
-                                <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setSelected={setSelectedSchool}/>
+                                <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setExtraInfo={setExtraInfo}/>
                             </SchoolsListWrapper>
                         </SearchSchoolContainer>
 

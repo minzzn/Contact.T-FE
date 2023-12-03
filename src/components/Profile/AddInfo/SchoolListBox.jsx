@@ -1,13 +1,12 @@
 import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../../css/styled/Profile/AddInfo/schoolListBox.styled"
 
-export const SchoolListBox = ({ schoolsListArray, schoolInfo, setSelected }) => {
+export const SchoolListBox = ({ schoolsListArray, schoolInfo, setExtraInfo }) => {
     
-    function selectSchool(e, name) {
+    function selectSchool(e, schoolName) {
         e.preventDefault();
-        
-        console.log(e.target);
+    
         // 값 할당(props값에)
-        setSelected(name);
+        setExtraInfo((prevState) => ({ ...prevState, schoolInfo: schoolName }));
     }
 
     return (

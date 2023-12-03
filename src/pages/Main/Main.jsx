@@ -12,6 +12,7 @@ import { isUserInfoAtom } from "../../hooks/IsUserInfo";
 export const Main = () => {
     const [isFirst, setIsFirst] = useState(true);
     const [iconsState, setIconsState] = useState({
+        setProfile: false,
         chatList: false,
         peopleList: true,
         house: false

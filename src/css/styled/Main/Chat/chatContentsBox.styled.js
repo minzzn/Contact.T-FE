@@ -7,6 +7,8 @@ export const ChatContentsContainer = styled.div`
     // 내부 채팅 div들은 세로로 쌓이도록 만들기
     flex-direction: column;
     min-height: 540px;
+    max-height: 540px;
+    overflow-y: scroll;
 `
 // 실제 메시지 내용들이 담는 div tag의 wrapper
 export const ChatContentDivWrapper = styled.div`
@@ -17,7 +19,7 @@ export const ChatContentDivWrapper = styled.div`
     display: flex;
     align-items: center;
     /* 가로 방향 메시지들 박스 배치 */
-    justify-content: ${(props) => props.$ismine === "true" ? "flex-end" : "flex-start"};
+    flex-direction: ${(props) => props.$ismine === "true" ? "row-reverse" : "row"};
 `
 export const ChatContentDiv = styled.div`
     height: min-content;
@@ -28,6 +30,18 @@ export const ChatContentDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
     color: ${(props) => props.$ismine === "true" ? 'white' : 'black'};
+`
+export const ChatTimeDiv = styled.div`
+    height: 30px;
+    margin: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
 `

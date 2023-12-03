@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
-import { searchDB } from '../../../function/addInfo';
+import { POST, searchDB } from '../../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
 
@@ -23,7 +23,7 @@ export const AddInfoModal = () => {
     async function onChange(e) {
         const { name, value } = e.target;
         setExtraInfo((prevState) => ({ ...prevState, [name]: value }));
-        console.log(extraInfo);
+
         if(name === 'schoolInfo') {
             const schoolDB = await searchDB(extraInfo.schoolType);
             setSchoolList(schoolDB);
@@ -42,6 +42,12 @@ export const AddInfoModal = () => {
             case 'teacherName':
                 (value?.length < 2) ? setError('교사 성함을 올바르게 작성해주세요') : setError('');
                 break;
+            case 'grade':
+                (value?.length < 1) ? setError('학년을 올바르게 적어주세요') : setError('');
+                break;
+            case 'class':
+                (value?.length < 1) ? setError('반을 올바르게 적어주세요') : setError('');
+                break;
             // 나머지는 그냥 빠져나오기
             default: 
                 break;
@@ -52,6 +58,7 @@ export const AddInfoModal = () => {
         e.preventDefault();
 
         console.log(extraInfo);
+        // POST(extraInfo); // 데이터 전송
         setIsOpen(false);
     }
 

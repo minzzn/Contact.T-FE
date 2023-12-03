@@ -4,35 +4,40 @@ import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInpu
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 
+/**
+ * 상위 컴포넌트 - <ChattingPane>
+ * @author 이시영
+ * @returns <ChatContentsBox>
+ */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
-    const senderID = 10;
+    const senderID = 100;
     const client = useRef({});
+    // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
+    // // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
 
-    function handleSubmit(event, chat) {
-        event.preventDefault();
-        publish(chat);
-    }
-
-    // 
+    // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
         // sub/chat/{roomID}
-        client.current.subscribe('/sub/chat/', (body) => {
-            const json_body = JSON.parse(body.body);
+        client.current.subscribe('/sub/chat/1', (datafromServer) => {
+            // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
+            const message = JSON.parse(datafromServer.body);
+            console.log(message);
 
-            console.log(json_body);
-
-            setChatList((chatList) => [
-                ...chatList, json_body.chat,
+            // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
+            setChatList((previousChatList) => [
+                ...previousChatList, {...message},
             ]);
+
         });
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
-    // ws프로토콜 연결
+    // // ws프로토콜 연결
     function connect() {
+        // useRef안에 Client객체 넣어서 랜더링과 분리해서 관리
         client.current = new Client({
             brokerURL: BROKER_URL,
             reconnectDelay: 5000, // 5초마다 자동 재연결
@@ -41,15 +46,17 @@ export const Chat = () => {
                 subscribe(); // 연결 성공 시 구독하는 로직 실행
             }
         });
-        console.log('activated(연결되었다)');
         // 연결 활성화
         client.current.activate();
     }
+
+    // // 프로토콜 연결 종료
     function disconnect() {
         client.current.deactivate();
         consol.log('종료');
     }
 
+    // 사용자가 입력한 채팅, 채팅 전송 시점 서버로 전송하는 역할
     function publish(chat) {
         if (!client.current.connected) {
             return;
@@ -57,18 +64,31 @@ export const Chat = () => {
 
         client.current.publish({
             // sub/chat/{roomID}
-            destination: '/sub/chat/',
+            destination: '/pub/chat/message',
             // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
-            // 형식에 맞게 수정해서 보내야 함.
-            body: JSON.stringify({
-                chat: chat,
-                senderID: senderID,
+            // 형식에 맞게 수정해서 보내야 함
+            body: JSON.stringify({ 
+                type: "CHAT",
+                hidden: [0,1,2],
+                roomId: 1,
+                message: chat,
+                sender: senderID,
+                time: new Date().toLocaleTimeString("ko-KR", 
+                {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
             }),
         });
-
         console.log('published!(채팅을 보낸다)');
+        console.log(typeof(time));
         setChat('');
     }
+
+    function handleSubmit(event, chat) {
+        event.preventDefault();
+        publish(chat);
+    };
 
     // 초기랜더링될 때, 연결
     useEffect(() => {
@@ -79,7 +99,7 @@ export const Chat = () => {
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} isMine={`${senderID === 1}`}/>
+                <ChatContentsBox chatsHistory={chatList} senderID={senderID}/>
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

@@ -30,3 +30,8 @@ export const sendChatData = async (text) => {
         console.error('전송 실패:', error.message);
     }
 };
+
+
+export const returnAfterCheckingAggressive = () => {
+
+}

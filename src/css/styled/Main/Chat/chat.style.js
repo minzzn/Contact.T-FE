@@ -10,10 +10,7 @@ export const Container = styled.div`
 export const ChatContents = styled.div`
     width: 100%;
     height: 100%;
-    min-height: 100%;
     padding: 0 5px;
-    overflow-y: scroll;
-
 `;
 
 export const ChatEtcContainer = styled.div`

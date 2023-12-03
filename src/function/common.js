@@ -4,10 +4,23 @@ import { serverEndPoint } from "../constant/common.constant";
 export const getToken = () => localStorage.getItem("token");
 // 웹 스토리지에 토큰 저장
 export const setToken = (tokenValue) => localStorage.setItem("token", tokenValue);
+export const getUserInfoObject = () => localStorage.getItem("entry");
+/**
+ * 로컬스토리지에 존재하는 유저Info객체를 뽑아내는 함수를 인자에 넣어주면 이메일만 뽑을 수 있습니다.
+ * @param {function} getUserInfoObject 
+ * @returns email
+ */
+export const getUserEmail = (getUserInfoObject) => getUserInfoObject.email;
+/**
+ * 로컬스토리지에 존재하는 유저Info객체를 뽑아내는 함수를 인자에 넣어주면 유저의 이름만 뽑을 수 있습니다.
+ * @param {function} getUserInfoObject 
+ * @returns username
+ */
+export const getUserName = (getUserInfoObject) => getUserInfoObject.username; 
 
 // 토큰과 string으로 뒤에 추가적으로 붙는 url을 적어주세요
-export const getUserInfoThrough = async (token, url) => {
-    const BACK_API = `http://${serverEndPoint}/${url}`; 
+export const getUserInfoWithToken = async (token) => {
+    const BACK_API = `http://${serverEndPoint}/entry`;
 
     try {
         const response = await fetch(BACK_API, {
@@ -15,7 +28,6 @@ export const getUserInfoThrough = async (token, url) => {
             headers: {
                 // 인증을 위한 request임을 짐작해주세요
                 'Authorization': `${token}`,
-                'Content-Type': 'application/json',
             },
         })
 

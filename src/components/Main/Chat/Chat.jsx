@@ -105,7 +105,8 @@ export const Chat = () => {
     useEffect(()=> {
         if(accumulatedWarning !== null) {
             console.log(accumulatedWarning);
-            ToastifyError(`공격적 언행 발견. 현재 경고 ${accumulatedWarning}회 입니다`);
+            // todo : 경고누적횟수 양 사용자 모두에게 전달되는 오류 수정할것
+            ToastifyError(`공격적 언행 발견`);
         }
     }, [accumulatedWarning])
 

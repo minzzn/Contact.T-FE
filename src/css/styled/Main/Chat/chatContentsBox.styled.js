@@ -23,7 +23,7 @@ export const ChatContentDivWrapper = styled.div`
 `
 export const ChatContentDiv = styled.div`
     height: min-content;
-    padding: 10px;
+    padding: 12px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 600;
     border-radius: 15px;
@@ -32,7 +32,20 @@ export const ChatContentDiv = styled.div`
     align-items: center;
     margin-bottom: 10px;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
-    color: ${(props) => props.$ismine === "true" ? 'white' : 'black'};
+    color: var(--bg-original-black);
+`;
+
+export const AggressvieContentDiv = styled.div`
+    height: min-content;
+    padding: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: black;
 `
 export const ChatTimeDiv = styled.div`
     height: 30px;

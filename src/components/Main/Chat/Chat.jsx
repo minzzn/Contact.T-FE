@@ -3,6 +3,7 @@ import { IconsWrapper, StyledIcon } from "../../../css/styled/Main/main.styled"
 import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../../css/styled/Main/Chat/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
+import { ToastifyError } from "../../../function/toast.js"
 
 /**
  * 상위 컴포넌트 - <ChattingPane>
@@ -11,12 +12,13 @@ import { Client } from '@stomp/stompjs';
  */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
-    const senderID = 100;
+    const senderID = 1;
     const client = useRef({});
     // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
     // // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
+    const [accumulatedWarning, setaccumulatedWarning] = useState(null);
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
@@ -27,9 +29,14 @@ export const Chat = () => {
             console.log(message);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
-            setChatList((previousChatList) => [
-                ...previousChatList, {...message},
-            ]);
+            setChatList((previousChatList) => {
+                // hidden값 체크
+                if(message.hidden === 1) {
+                    setaccumulatedWarning((prevState) => prevState+1);
+                }
+
+                return [ ...previousChatList, {...message} ];
+            });
 
         });
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
@@ -94,11 +101,19 @@ export const Chat = () => {
         connect();
     },[]);
 
+    // 초기 랜더링때는 경고문구를 안 띄우지만, 메시지의 hidden값이 1이라 accumulatedWarning의 값이 증가하면 경고문구를 띄워줍니다(누적횟수와 함께)
+    useEffect(()=> {
+        if(accumulatedWarning !== null) {
+            console.log(accumulatedWarning);
+            ToastifyError(`공격적 언행 발견. 현재 경고 ${accumulatedWarning}회 입니다`);
+        }
+    }, [accumulatedWarning])
+
     return (
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} senderID={senderID}/>
+                <ChatContentsBox chatsHistory={chatList} senderID={senderID} />
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

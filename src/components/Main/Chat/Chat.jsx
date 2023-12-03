@@ -12,7 +12,7 @@ import { ToastifyError } from "../../../function/toast.js"
  */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
-    const senderID = 1;
+    const senderID = 100;
     const client = useRef({});
     // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");

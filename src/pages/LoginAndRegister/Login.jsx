@@ -29,8 +29,9 @@ export const Login = () => {
             break;
         }
       };
-
-    function onSubmit(e) {
+    
+    //  로그인 버튼 누를때의 함수
+    async function onSubmit(e) {
         e.preventDefault();
 
         // 서버로 데이터 보내는 로직 추가
@@ -38,10 +39,17 @@ export const Login = () => {
             email: email,
             password: password,
         };
+        // 유저 정보를 잘 넘기면 true반환
         const resultAfterPost = postLoginDataWith(loginData,'auth/login');
 
+<<<<<<< HEAD
         // 인증되어야 main화면으로 넘어가요
         { resultAfterPost  ? navigate('/main') : alert("로그인에 실패하였습니다."); }
+=======
+        if(resultAfterPost) {
+            navigate('/main');
+        }
+>>>>>>> 6dd1851c3a7551aaf8a4509dc65ad37f34118f91
     }
 
     return (

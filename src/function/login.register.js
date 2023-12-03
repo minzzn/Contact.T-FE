@@ -54,13 +54,13 @@ export const postLoginDataWith = async (userObj,url) => {
 
         // 유저 정보
         const userAuthorizationToken = response.headers.get("Authorization");
-        console.log(userAuthorizationToken);
 
         // 유저 정보 중 하나인 토큰은 따로 변수로 분리
         const token = userAuthorizationToken;
         if(token) {
             // 로컬스토리지에 토큰 저장
             setToken(token);
+            console.log("로그인 성공 : 토큰 저장됨");
             console.log('token saved : ', token);
 
             return true;

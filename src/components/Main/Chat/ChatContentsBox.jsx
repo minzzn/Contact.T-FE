@@ -15,6 +15,9 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                 <ChatContentsContainer>
                     {
                         chatsHistory?.map((messageObject,idx) => {
+                            const isAggressive = messageObject.hidden[0]
+                            
+
                             return (
                                 <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
                                     <ChatContentDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>

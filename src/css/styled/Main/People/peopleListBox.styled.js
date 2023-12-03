@@ -12,7 +12,7 @@ export const Container = styled.div`
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */
-  margin: 0.6vh 0;
+  margin: 0.6vh;
   color: var(--bg-dark-gray);
   border-radius: 10px;
   background-color: white;
@@ -41,9 +41,10 @@ export const NameAndContentContainer = styled.div`
     // 최대한 왼쪽에 붙도록
     align-items: start;
 `;
-
+export const displayStyle = styled.div`
+  display: ${(props) => props.display || 'none'};
+`
 export const customStyles = {
-  display: "${(props) => props.display || 'none'}",
   overlay: {
     backgroundColor: " rgba(0, 0, 0, 0.4)",
     width: "100%",

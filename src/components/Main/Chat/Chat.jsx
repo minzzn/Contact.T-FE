@@ -3,6 +3,7 @@ import { IconsWrapper, StyledIcon } from "../../../css/styled/Main/main.styled"
 import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../../css/styled/Main/Chat/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
+import { ToastifyError } from "../../../function/toast.js"
 
 /**
  * 상위 컴포넌트 - <ChattingPane>
@@ -27,9 +28,14 @@ export const Chat = () => {
             console.log(message);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
-            setChatList((previousChatList) => [
-                ...previousChatList, {...message},
-            ]);
+            setChatList((previousChatList) => {
+                // hidden값 체크
+                if(message.hidden === 1) {
+                    ToastifyError("경고");
+                }
+
+                return [ ...previousChatList, {...message} ];
+            });
 
         });
         console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
@@ -56,7 +62,7 @@ export const Chat = () => {
         consol.log('종료');
     }
 
-    // 사용자가 입력한 채팅 서버로 전송하는 역할
+    // 사용자가 입력한 채팅, 채팅 전송 시점 서버로 전송하는 역할
     function publish(chat) {
         if (!client.current.connected) {
             return;
@@ -73,7 +79,11 @@ export const Chat = () => {
                 roomId: 1,
                 message: chat,
                 sender: senderID,
-                time: "1",
+                time: new Date().toLocaleTimeString("ko-KR", 
+                {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
             }),
         });
         console.log('published!(채팅을 보낸다)');
@@ -94,7 +104,7 @@ export const Chat = () => {
         <>
             <Container>
                 {/* 채팅 내용들이 화면에 뜨는 컴포넌트 */}
-                <ChatContentsBox chatsHistory={chatList} senderID={senderID} />
+                <ChatContentsBox chatsHistory={chatList} senderID={senderID}/>
                 {/* 채팅을 입력하는 곳 */}
                 <ChatInputContainer>
                     {/* 입력받는 곳 */}

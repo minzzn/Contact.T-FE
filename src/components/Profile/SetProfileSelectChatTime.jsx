@@ -1,65 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Select from "react-select"; //라이브러리 import
+import { darken, lighten } from 'polished';
+import Select from "react-select"; 
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 
-export const SelectChatTime = () => {
+export const SelectChatTime = ({ onStartTimeChange, onEndTimeChange }) => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
     // 시작 시간이 선택되면 해당 시간 적용 및 isSelected를 true, endTime을 null로
+    // 객체를 key값으로 쪼개서 시간 쪼개서 string 형태로 넣기
     const onSelect = (time) => {
         setStartTime(time);
         setIsSelected(true);
         setEndTime(null);
     };
 
-    // 현재 시간 기준 지나간 시간 선택 불가
-    const filterPassedTime = (time) => {
-        const currentDate = new Date();
-        const selectedDate = new Date(time);
-    
-        return currentDate.getTime() < selectedDate.getTime();
+    useEffect(() => {
+        console.log(startTime);
+        console.log(endTime);
+    }, [startTime, endTime]); // startTime이 업데이트될 때마다 useEffect가 실행됨
+
+    const sendDataToParent = () => {
+        onStartTimeChange(startTime);
+        onEndTimeChange(endTime); // 콜백 함수 호출하여 데이터 전달
     };
 
     return(
         <>
-            {/* <Select
-            width="120"
-            height="40"
-            chooseType={(e: any) => setTimeData(e)}
-            isSearchable={false}
-            options={TimeData}
-            onFocus={onFocus}
-            isDisabled={disabled}
-            placeholder="00:00"
-            value={value ? { target: value, label: value } : null}
-            />  */}
-            <div><DatePicker
-                filterTime={filterPassedTime}
+            <div><StyledDatePicker
+                startTime={startTime}
                 selected={startTime}
                 onChange={onSelect}
                 locale={ ko }
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={30}
-                minTime={setHours(setMinutes(new Date(), 30), 9)}
-                maxTime={setHours(setMinutes(new Date(), 0), 17)}
+                minTime={setHours(setMinutes(new Date(), 30), 0)}
+                maxTime={setHours(setMinutes(new Date(), 0), 24)}
                 timeCaption="Time"
                 dateFormat="aa h:mm 시작"
                 placeholderText="시작 시간"
-                //className="mt-4"
-                className={StyledDatePickerWrapper}
             /></div>
 
             {isSelected ? // 시작 시간을 선택해야 종료 시간 선택 가능
-                <div><DatePicker
-                customStyle={StyledDatePickerWrapped}
-                filterTime={filterPassedTime}
+                <div><StyledDatePicker
+                endTime={endTime}
                 selected={endTime}
                 onChange={(time) => setEndTime(time)}
                 locale={ ko }
@@ -67,20 +57,12 @@ export const SelectChatTime = () => {
                 showTimeSelectOnly
                 timeIntervals={30}
                 minTime={startTime}
-                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+2)} // 시작 시간부터 2시간
-                excludeTimes={[
-                    // 시작 시간 제외
-                    startTime,
-                    // 5:00 선택 기준 최대 7:00까지 예외처리
-                    setHours(setMinutes(new Date(), 0), 18),
-                    setHours(setMinutes(new Date(), 30), 18),
-                    setHours(setMinutes(new Date(), 0), 19)
-                ]}
+                // 시작 시간부터 24시간
+                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+23)}
                 timeCaption="Time"
                 dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
-                //className="mt-3"
-                className={StyledDatePickerWrapper}
+                isSelect={sendDataToParent}
             /></div>
                 
                 : null 
@@ -88,14 +70,13 @@ export const SelectChatTime = () => {
         </>
     );
 }
-const StyledDatePickerWrapper = styled.section`
+const StyledDatePicker = styled(DatePicker)`
     
-    background: #ffffff;
     width: 45vh;
     height: 7vh;
     padding-right: 1.5vh;
 
-    border: 0.5vh solid #B4B4B4;
+    border: ${(props) => (props.startTime !== null && props.endTime !== null ? '0.5vh solid #FF9634' : "0.5vh solid #B4B4B4")};
     border-radius: 2vh;
     margin-bottom: 1vh;
     display: flex;
@@ -103,10 +84,10 @@ const StyledDatePickerWrapper = styled.section`
     cursor: pointer;
     font-family: 'Noto Sans KR', sans-serif;
 
-    font-weight: 800;
+    font-weight: ${(props) => (props.startTime !== null && props.endTime !== null ? '800' : "400")};
     font-size: 2.4vh;
     color: #000000;
-    
+
     .react-datepicker__time-list-item {
         background-color: #ffffff;
         align-items: center;
@@ -115,9 +96,12 @@ const StyledDatePickerWrapper = styled.section`
         text-align: center;
 
         font-family: 'Noto Sans KR', sans-serif;
-        font-weight: 800;
         font-size: 2.4vh;
         color: #000000;
+        &:hover {
+            font-weight: 800;
+            cursor: pointer;
+        }
     }
 
 `

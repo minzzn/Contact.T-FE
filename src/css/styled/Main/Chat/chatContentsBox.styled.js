@@ -19,19 +19,20 @@ export const ChatContentDivWrapper = styled.div`
     display: flex;
     align-items: center;
     /* 가로 방향 메시지들 박스 배치 */
-    justify-content: ${(props) => props.$ismine === "true" ? "flex-end" : "flex-start"}
+    flex-direction: ${(props) => props.$ismine === "true" ? "row-reverse" : "row"};
 `
 export const ChatContentDiv = styled.div`
     height: min-content;
-    padding: 10px;
+    padding: 12px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 600;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
     background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
-    color: ${(props) => props.$ismine === "true" ? 'white' : 'black'};
+    color: var(--bg-original-black);
 `;
 
 export const AggressvieContentDiv = styled.div`
@@ -45,4 +46,15 @@ export const AggressvieContentDiv = styled.div`
     align-items: center;
     background-color: red;
     color: black;
+`
+export const ChatTimeDiv = styled.div`
+    height: 30px;
+    margin: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
 `

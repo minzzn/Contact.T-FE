@@ -1,7 +1,5 @@
 import { ChatContents } from "../../../css/styled/Main/Chat/chat.style"
-import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, AggressvieContentDiv } from "../../../css/styled/Main//Chat/chatContentsBox.styled.js"
-import { ToastifyWarn } from "../../../function/toast.js"
-import { useState } from "react"
+import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, AggressvieContentDiv, ChatTimeDiv } from "../../../css/styled/Main/Chat/chatContentsBox.styled.js"
 
 /**
  * 배열과 불리언값 두 개를 props로 Chat component로부터 받아옵니다
@@ -18,7 +16,7 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-                            
+
                             return (
                                 <div key={idx}>
                                     {
@@ -26,13 +24,19 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                                             <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
                                                 <ChatContentDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
                                                     {messageObject.message}
-                                                </ChatContentDiv>       
+                                                </ChatContentDiv>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                    {messageObject.time}
+                                                </ChatTimeDiv>       
                                             </ChatContentDivWrapper>
                                         ) : (
                                             <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
                                                 <AggressvieContentDiv>
                                                     공격적인 발언입니다
                                                 </AggressvieContentDiv>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                    {messageObject.time}
+                                                </ChatTimeDiv>
                                             </ChatContentDivWrapper>
                                         )
                                     }

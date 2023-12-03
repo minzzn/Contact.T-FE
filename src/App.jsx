@@ -13,7 +13,7 @@ export default function App() {
     // 우선 로그인으로 진입, 로그인 하고나면 나머지 라우팅 가능하도록 설정
     <>
       <Routes>
-        <Route path="/" element={ <Login /> } />
+        <Route path="/" element={<Login /> } />
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<Main/>}/>
         <Route path="/Setprofile" element={<SetProfile />} />

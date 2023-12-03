@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Modal from 'react-modal';
-import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
+import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, displayStyle, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
 import { ToastifyInfo } from './../../../function/toast';
 
 export const PeopleListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { // props로 user 객체를 전달
@@ -36,7 +36,8 @@ export const PeopleListBox = ({ user, setChoosedUser, setIsChatContentActive }) 
             </Container>
                 {modalIsOpen === true ?
                     <Modal // 분리하거나 display 바꾸기
-                    display={modalIsOpen ? 'flex' : 'none'}
+                    $modalIsOpen={modalIsOpen}
+                    display={displayStyle}
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     style={customStyles}

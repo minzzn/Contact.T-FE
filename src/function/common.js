@@ -1,6 +1,8 @@
 import { serverEndPoint } from "../constant/common.constant";
 
+// 웹 스토리지에 저장된 토큰을 서버 쪽에 보내기
 export const getToken = () => localStorage.getItem("token");
+// 웹 스토리지에 토큰 저장
 export const setToken = (tokenValue) => localStorage.setItem("token", tokenValue);
 export const getUserInfoObject = () => localStorage.getItem("entry");
 /**

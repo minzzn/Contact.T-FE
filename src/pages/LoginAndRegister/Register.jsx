@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { isRequired, MinimumLength, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
 //import { sendReqAndSaveToken } from "../../function/login.register";
 import { postRegisterDataWith } from "../../function/login.register";
+import { ToastifyWarn } from "../../function/toast";
+import { ToastContainer } from 'react-toastify';
+
 export const Register = () => {
     const navigate = useNavigate();
     const BACK_API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -65,7 +68,7 @@ export const Register = () => {
         event.preventDefault();
         // 유효하지 않은 정보가 하나라도 있으면 안됨
         if(Object.values(valid).filter((value) => value === false).length > 0) {
-            alert("모든 항목을 제대로 입력해주세요");
+            ToastifyWarn("모든 항목을 제대로 입력해주세요");
             return;
         }
         // 서버로 보낼 데이터 객체형태로 묶기
@@ -142,6 +145,7 @@ export const Register = () => {
                     >회원가입</LoginSubmitButton>
                 </FormInnerWrapper>
             </StyledForm>  
+            <ToastContainer />
         </>
     )
 }

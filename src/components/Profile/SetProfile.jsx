@@ -5,6 +5,7 @@ import { darken, lighten } from 'polished';
 import { SelectDuty } from './SetProfileSelectDuty';
 import { SelectChatTime } from './SetProfileSelectChatTime';
 import { postSetProfileDataWith } from '../../function/setprofile.js';
+import Modal from 'react-modal';
 
 export const SetProfile = () => {
   const navigate = useNavigate();
@@ -15,6 +16,17 @@ export const SetProfile = () => {
   const [isstartTime, setisStartTime] = useState("");
   const [isendTime, setisEndTime] = useState("");
 
+  // 모달 열고 닫기 상태관리
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+        console.log('Modal Open');
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+        console.log('Modal Close'); 
+    };
 
   // 값 전부 선택시 상태 바꾸기
   const onSelect = () => {
@@ -58,25 +70,19 @@ export const SetProfile = () => {
     e.preventDefault();
   }
   return (
-    <SetProfileBox>{/* 메인 컨테이너 박스 */}
-      <Section>
-        {/* 프로필 설정하기 설명 박스 */}
-        <ProfileSetText>프로필 설정하기</ProfileSetText>
-        <ExplainText>나중에도 언제든 변경할 수 있어요!</ExplainText>
-        <SetContainer>
-            <SetBox>
-                <ProfileImageBox>
-                    <ProfileImage></ProfileImage>
-                </ProfileImageBox>
-                <InputBox>
-                  <SelectDuty></SelectDuty>
-                  <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
-                </InputBox>
-                <StartButton onClick={onSelect}>서비스 시작하기</StartButton>
-            </SetBox>
-        </SetContainer>
-      </Section>  
-    </SetProfileBox>
+          <SetBox>
+              {/* 프로필 설정하기 설명 박스 */}
+              <ProfileSetText>프로필 설정하기</ProfileSetText>
+              <ExplainText>나중에도 언제든 변경할 수 있어요!</ExplainText>
+              <ProfileImageBox>
+                  <ProfileImage></ProfileImage>
+              </ProfileImageBox>
+              <InputBox>
+                <SelectDuty></SelectDuty>
+                <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
+              </InputBox>
+              <StartButton onClick={onSelect}>서비스 시작하기</StartButton>
+          </SetBox>
   );
 }
 
@@ -148,7 +154,7 @@ const SetBox = styled.div`
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;
 const ProfileImageBox = styled.div`
-  box-sizing: border-box;s
+  box-sizing: border-box;
   align-items:center;
   justify-content: center;
   width: 25vh;

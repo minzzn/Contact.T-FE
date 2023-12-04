@@ -6,6 +6,8 @@ import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
+import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute';
+import { getUserInfoObject } from "./function/common.js";
 
 export default function App() {
 
@@ -13,11 +15,15 @@ export default function App() {
     // 우선 로그인으로 진입, 로그인 하고나면 나머지 라우팅 가능하도록 설정
     <>
       <Routes>
+        {/* Public으로 접근 가능한 경로 */}
         <Route path="/" element={<Login /> } />
         <Route path="/register" element={<Register />} />
-        <Route path="/main" element={<Main/>}/>
-        <Route path="/Setprofile" element={<SetProfile />} />
-        <Route path="/addInfo" element={<AddInfoModal />} />
+
+        {/* Private으로 접근 가능한 경로 */}
+        <Route path="/main" element={<PrivateRoute authenticated={getUserInfoObject} component={<Main />}/>}/>
+        <Route path="/Setprofile" element={<PrivateRoute authenticated={getUserInfoObject} component={<SetProfile />}/>}/>
+        <Route path="/addInfo" element={<PrivateRoute authenticated={getUserInfoObject} component={<AddInfoModal />}/>}/>
+        
         {/* default 경로 설정 */}
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>

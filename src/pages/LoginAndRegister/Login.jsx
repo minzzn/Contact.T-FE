@@ -3,6 +3,8 @@ import { ErrorMsgContainer, FormInnerWrapper, LoginInput, LoginSubmitButton, Log
 import { EmailFormat } from "../../constant/user.constraints";
 import { postLoginDataWith } from "../../function/login.register.js";
 import { useNavigate } from "react-router-dom";
+import { ToastifyWarn } from "../../function/toast.js";
+import { ToastContainer } from 'react-toastify';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -39,10 +41,17 @@ export const Login = () => {
             email: email,
             password: password,
         };
+
+        // 제대로 입력하지 않으면 라우팅되는거 막기
+        if(loginData.email === "" || loginData.password === "") {
+            ToastifyWarn("제대로 작성해주세요");
+            return;
+        }
+        
         // 유저 정보를 잘 넘기면 true반환
         const resultAfterPost = postLoginDataWith(loginData,'auth/login');
 
-        if(resultAfterPost) {
+        if(resultAfterPost !== null || resultAfterPost !== undefined) {
             navigate('/main');
         }
     }
@@ -93,6 +102,7 @@ export const Login = () => {
                     >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
             </StyledForm>
+            <ToastContainer />
         </>
     )
 }

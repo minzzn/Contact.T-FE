@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { ChatContents } from "../../../css/styled/Main/Chat/chat.style"
 import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, AggressvieContentDiv, ChatTimeDiv } from "../../../css/styled/Main/Chat/chatContentsBox.styled.js"
 
@@ -8,11 +9,18 @@ import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, Aggressvi
  * @returns 없음
  */
 export const ChatContentsBox = ({ chatsHistory, senderID }) => {
+    const listHeight = 410;
+    const containerRef = useRef();
+
+    // 채팅 배열이 새로 들어올때마다 스크롤을 가장 밑으로 내림
+    useEffect(() => {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }, [chatsHistory])
 
     return (
         <>
             <ChatContents>
-                <ChatContentsContainer>
+                <ChatContentsContainer ref={containerRef}>
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;

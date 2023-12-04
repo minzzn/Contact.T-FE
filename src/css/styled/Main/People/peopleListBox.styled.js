@@ -12,7 +12,7 @@ export const Container = styled.div`
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */
-  margin: 0.6vh;
+  margin: 0.6vh 0;
   color: var(--bg-dark-gray);
   border-radius: 10px;
   background-color: white;

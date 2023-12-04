@@ -20,7 +20,7 @@ export const Header = ({ setIsChatContentActive, setIconsState, iconsState }) =>
                             }));
                         }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'} />
 
-                        <StyledIcon className="fas fa-comment" size="30px" $marginBottom="73vh" onClick={()=> {
+                        <StyledIcon className="fas fa-comment" size="30px" $marginBottom="65vh" onClick={()=> {
                             setIconsState(()=> ({
                                 chatList: true,
                                 peopleList: false,

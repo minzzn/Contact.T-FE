@@ -116,8 +116,29 @@ export const ExplainText = styled.div`
   font-weight: 400;
   font-size: 2.8vh;
 `;
-export const ProfileImageBox = styled.div`
-  box-sizing: border-box;s
+const SetContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68vh; //697px
+  height: 80vh; //816px
+`;
+const SetBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 60vh;
+  height: 72vh;
+  background: #FFFFFF;
+  border: ${(props) => (props.selectstate === true ? '0.5vh solid #FF9634' : "0.5vh solid #B4B4B4")};
+  border-radius: 3vh;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+`;
+const ProfileImageBox = styled.div`
+  box-sizing: border-box;
   align-items:center;
   justify-content: center;
   width: 25vh;

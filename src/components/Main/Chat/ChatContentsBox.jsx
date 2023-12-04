@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { ChatContents } from "../../../css/styled/Main/Chat/chat.style"
 import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, AggressvieContentDiv, ChatTimeDiv } from "../../../css/styled/Main/Chat/chatContentsBox.styled.js"
 
@@ -8,6 +9,8 @@ import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, Aggressvi
  * @returns 없음
  */
 export const ChatContentsBox = ({ chatsHistory, senderID }) => {
+    const listHeight = 410;
+    const container = useRef();
 
     return (
         <>

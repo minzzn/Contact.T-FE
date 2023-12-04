@@ -46,10 +46,12 @@ export const postLoginDataWith = async (userObj,url) => {
 
         // 서버에 전송은 했는데 응답이 ok가 아니면 에러 문구 던지기
         if(!response.ok) {
+            console.log("ok응답이 아닌 경우");
             const errorData = await response.json();
             throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
         }
 
+        console.log(response.headers.get("Authorization-refresh"));
         // 유저 정보
         const userAuthorizationToken = response.headers.get("Authorization");
 

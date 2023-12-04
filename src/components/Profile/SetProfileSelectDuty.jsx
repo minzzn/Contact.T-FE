@@ -27,6 +27,7 @@ export const SelectDuty = () => {
         <>
             <Select options={onduty}
                 onChange={setSelectOnduty}
+                components={{IndicatorSeparator: () => null,}}
                 defaultValue={onduty[0]}
                 styles={customStyles}
                 isSearchable={false}
@@ -43,7 +44,7 @@ const customStyles = {
         width: '45vh',
         height: '7vh',
         paddingRight: '1.5vh',
-        border: state.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
+        border: state.isFocused? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
         '&:hover': { border: '${lighten(0.1, #FF9634)}'},
         borderRadius: '2vh',
         marginBottom: '1vh',
@@ -52,7 +53,7 @@ const customStyles = {
         cursor: 'pointer',
 
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isSelected? '800' : '400',
+        fontWeight: state.isFocused? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
 

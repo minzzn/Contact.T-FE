@@ -47,24 +47,21 @@ export const Main = () => {
                 <Header setIsChatContentActive={setIsChatContentActive} setIconsState={setIconsState} iconsState={iconsState} />
                 {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                 {
-                    iconsState === true ? (
-                        users.map((iconState,idx) => <ChatListBox user={user} setChoosedUser={setChoosedUser} setIsChatContentActive={setIsChatContentActive} key={idx} />)
-                    ) : (
-                        users.map((user,idx) => <PeopleListBox user={user} setChoosedUser={setChoosedUser} setIsChatContentActive={setIsChatContentActive} key={idx}/>)
-                    )
-                }
-                {
                     iconsState["house"] === true ? 
                     (
                         // todo : home화면 컴포넌트 필요
                         <House />
-                    ) : 
-                    (
-                        <>
-                            {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}
-                            <UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />                     
-                        </>
                     )
+                    : ( iconsState["setProfile"] === true
+                        ? <SetProfile /> 
+                        : (
+                            <>
+                                {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}
+                                <UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />                     
+                            </>
+                        )
+                        
+                      )
                 }
 
             </Container>

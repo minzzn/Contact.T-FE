@@ -14,7 +14,11 @@ export const SelectDuty = () => {
     const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
 
     //다음 datepicker 선택하거나 option의 값을 바꾸면 스타일 바꾸기
-    const [isClick, setIsClick] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    const handleOptionChange = (control) => {
+        setSelectedOption(control);
+    };
   
     // const handleOnChangeSelectValue = (e) => {
     //   setCurrentValue(e.target.getAttribute("value"));
@@ -39,7 +43,7 @@ const customStyles = {
         width: '45vh',
         height: '7vh',
         paddingRight: '1.5vh',
-        border: state.isFocused? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
+        border: state.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
         '&:hover': { border: '${lighten(0.1, #FF9634)}'},
         borderRadius: '2vh',
         marginBottom: '1vh',
@@ -48,7 +52,7 @@ const customStyles = {
         cursor: 'pointer',
 
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: '400', //state.isFocused? '800' : 
+        fontWeight: state.isSelected? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
 

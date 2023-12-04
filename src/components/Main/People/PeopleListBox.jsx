@@ -47,7 +47,7 @@ export const PeopleListBox = ({ user, setChoosedUser, setIsChatContentActive }) 
 
                     <SetBox>
                         <DeleteIconWrap>
-                            <DeleteIcon className="fa-solid fa-xmark" size="30px" marginright="20px" onClick={closeModal}/>
+                            <DeleteIcon className="fa-solid fa-xmark" size="30px" onClick={closeModal}/>
                         </DeleteIconWrap>
                         <ProfileImageBox>
                             <ProfileImage></ProfileImage>

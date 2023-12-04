@@ -42,7 +42,7 @@ export const NameAndContentContainer = styled.div`
     align-items: start;
 `;
 export const displayStyle = styled.div`
-  display: ${(props) => props.display || 'none'};
+  display: ${(props) => props.display || none};
 `
 export const customStyles = {
   overlay: {

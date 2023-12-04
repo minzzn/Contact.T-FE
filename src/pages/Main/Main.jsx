@@ -40,6 +40,15 @@ export const Main = () => {
         entryFn();
     }, []);
 
+    const closeModal = () => {
+        setIconsState(()=> ({
+            chatList: true,
+            peopleList: false,
+            setProfile: false,
+            house: false,
+        }));
+    };
+
     return (
         <>
             <Container>
@@ -53,7 +62,7 @@ export const Main = () => {
                         <House />
                     )
                     : ( iconsState["setProfile"] === true
-                        ? <SetProfile /> 
+                        ? <SetProfile closeModal={closeModal}/> 
                         : (
                             <>
                                 {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}

@@ -44,15 +44,19 @@ export const Login = () => {
 
         // 제대로 입력하지 않으면 라우팅되는거 막기
         if(loginData.email === "" || loginData.password === "") {
-            ToastifyWarn("제대로 작성해주세요");
+            ToastifyWarn("회원가입을 해주시거나, 다시 시도해주세요");
             return;
         }
         
         // 유저 정보를 잘 넘기면 true반환
-        const resultAfterPost = postLoginDataWith(loginData,'auth/login');
+        const resultAfterPost = await postLoginDataWith(loginData,'auth/login')
+        console.log(resultAfterPost);
 
-        if(resultAfterPost !== null || resultAfterPost !== undefined) {
+        if(resultAfterPost) {
             navigate('/main');
+        } else {
+            ToastifyWarn("제대로 작성해주세요");
+            return;
         }
     }
 

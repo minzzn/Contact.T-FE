@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 /* font-family: 'Noto Sans KR', sans-serif; */
 :root {
-  --bg-orange: #D65A31;
+  --bg-orange: orange;
   --bg-orangered: rgb(255, 25, 0);
   --bg-original-white: white;
   --bg-original-black: black;
@@ -126,4 +126,9 @@ body {
 }
 .received .message {
   background: #fff;
+}
+/* input tag에 값이 들어갔을때, blue color 자동적용을 막는 속성 */
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+	box-shadow: 0 0 0 1000px white inset;
 }

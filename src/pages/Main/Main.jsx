@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container } from "../../css/styled/Main/main.styled";
 import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
 import { House } from "./Sub/House";
 import { AddInfoModal } from "../../components/Profile/AddInfo/AddInfoModal";
-import { getToken, getUserInfoWithToken } from "../../function/common";
-import { useRecoilState } from "recoil";
-import { isUserInfoAtom } from "../../hooks/IsUserInfo";
 import { SetProfile } from "../../components/Profile/SetProfile";
 
 export const Main = () => {
-    const [isFirst, setIsFirst] = useState(null);
+    const [isFirst, setIsFirst] = useState(true);
     const [iconsState, setIconsState] = useState({
         chatList: false,
         peopleList: true,
@@ -22,23 +19,6 @@ export const Main = () => {
     const [isChatContentActive, setIsChatContentActive] = useState(false);
     // 서버로부터 받아온 데이터라고 가정
     const USERS = users;
-    // recoil
-    const [userInfo, setUserInfo] = useRecoilState(isUserInfoAtom);
-
-    // 첫 진입 시에 entry api 사용
-    useEffect(() => {
-
-        const entryFn = async() => {
-            const entryResponse = await getUserInfoWithToken(getToken());
-
-            entryResponse?.role === "ROLE_GUEST" ? setIsFirst(true) : setIsFirst(false);
-            console.log(entryResponse);
-            // recoil 전역상태관리에 유저 정보(entry 응답값) 올림
-            setUserInfo(entryResponse);
-        }
-
-        entryFn();
-    }, []);
 
     const closeModal = () => {
         setIconsState(()=> ({
@@ -74,8 +54,9 @@ export const Main = () => {
                 }
 
             </Container>
+            {/* 유저가 처음으로 회원가입한 경우일때는, 추가정보 입력 모달 화면을 띄워줍니다 */}
             {
-                isFirst && <AddInfoModal />
+                isFirst && <AddInfoModal setIsFirst={setIsFirst}/>
             }
         </>
     )

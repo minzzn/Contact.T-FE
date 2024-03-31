@@ -48,3 +48,15 @@ export const getUserInfoWithToken = async (token) => {
         console.error('전송 실패:', error.message);
     }
 };
+
+export const IsBlankStringInObject = (object) => {
+    let result = false;
+
+    for(const value of Object.values(object)) {
+        if(value === "") {
+            result = true;
+        }
+    }
+    
+    return result;
+}

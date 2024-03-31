@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Select from "react-select";
 import { darken, lighten } from 'polished';
@@ -15,22 +15,22 @@ export const SelectDuty = () => {
 
     //다음 datepicker 선택하거나 option의 값을 바꾸면 스타일 바꾸기
     const [selectedOption, setSelectedOption] = useState(null);
+    const selectRef = useRef();
 
-    const handleOptionChange = (control) => {
-        setSelectedOption(control);
+    const handleOptionChange = (selected) => {
+        setSelectedOption(selected);
+        console.log(selectRef);
     };
-  
-    // const handleOnChangeSelectValue = (e) => {
-    //   setCurrentValue(e.target.getAttribute("value"));
-    // };
+
     return(
         <>
             <Select options={onduty}
-                onChange={setSelectOnduty}
+                onChange={handleOptionChange}
                 defaultValue={onduty[0]}
                 styles={customStyles}
                 isSearchable={false}
                 isMulti={false}
+                ref={selectRef}
                 placeholder='근무 상태를 선택하세요' /> 
         </>        
     );
@@ -43,16 +43,16 @@ const customStyles = {
         width: '45vh',
         height: '7vh',
         paddingRight: '1.5vh',
-        border: state.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
+        border: state.selectProps.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
         '&:hover': { border: '${lighten(0.1, #FF9634)}'},
         borderRadius: '2vh',
         marginBottom: '1vh',
         display: 'flex',
         textAlign: 'center',
         cursor: 'pointer',
-
+        boxSizing: 'border-box',
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isSelected? '800' : '400',
+        fontWeight: state.selectProps.isSelected? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
 

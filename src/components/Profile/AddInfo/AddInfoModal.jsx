@@ -4,9 +4,10 @@ import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, Extra
 import { POST, searchDB } from '../../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
+import { IsBlankStringInObject } from '../../../function/common';
 
 // 랜더링이 좀 자주 됨 : 리팩토링 개선 여지 필요
-export const AddInfoModal = () => {
+export const AddInfoModal = ({ setIsFirst }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [error, setError] = useState('');
     const [schoolList, setSchoolList] = useState([]);
@@ -54,13 +55,17 @@ export const AddInfoModal = () => {
     }
 
     function onSubmit(e) {
-        e.preventDefault();
-
+        e.preventDefault(); 
         console.log(extraInfo);
+
         // POST(extraInfo); // 데이터 전송
-        setIsOpen(false);
+        if(IsBlankStringInObject(extraInfo) === false) {
+            setIsFirst(false);
+            setIsOpen(false);
+        } else {
+            setError("정보를 모두 입력해주세요");
+        }
     }
-    console.log(extraInfo.schoolInfo);
 
     Modal.setAppElement('#root');
     return (
@@ -89,11 +94,11 @@ export const AddInfoModal = () => {
                             }
                             <ChildInfoWrapper>
                                 <ExtraInfoLabel htmlFor='grade'>학년</ExtraInfoLabel>
-                                <ExtraInfoInput required type='text' id='grade' name='grade' onChange={(e) => onChange(e)} placeholder='학년' $customizedWidth="17%"></ExtraInfoInput>
+                                <ExtraInfoInput required type='text' id='grade' name='grade' onChange={(e) => onChange(e)} placeholder='학년'></ExtraInfoInput>
                             </ChildInfoWrapper>
                             <ChildInfoWrapper>
                                 <ExtraInfoLabel htmlFor='class'>반</ExtraInfoLabel>
-                                <ExtraInfoInput required type='text' id='class' name='class' onChange={(e) => onChange(e)} placeholder='반' $customizedWidth="12%"></ExtraInfoInput>
+                                <ExtraInfoInput required type='text' id='class' name='class' onChange={(e) => onChange(e)} placeholder='반'></ExtraInfoInput>
                             </ChildInfoWrapper>
                         </ExtraInfoContainer>
                         

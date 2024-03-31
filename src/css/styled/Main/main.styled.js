@@ -20,6 +20,7 @@ export const ChatAndPeopleListContainer = styled.div`
     max-width: 50vw;
     max-height: 90vh;
     margin-left: 3vw;
+    padding-right: 10px;
 
     // 높이는 스크롤 가능하도록 무제한으로
     overflow-y: scroll;

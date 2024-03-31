@@ -46,7 +46,6 @@ export const postLoginDataWith = async (userObj,url) => {
 
         // 서버에 전송은 했는데 응답이 ok가 아니면 에러 문구 던지기
         if(!response.ok) {
-            console.log("ok응답이 아닌 경우");
             const errorData = await response.json();
             throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
         }
@@ -56,12 +55,9 @@ export const postLoginDataWith = async (userObj,url) => {
         if(token) {
             // 로컬스토리지에 토큰 저장
             setToken(token);
-            console.log("로그인 성공 : 토큰 저장됨");
-            console.log('token saved : ', token);
 
             return true;
         } else {
-            console.error('토큰이 응답으로부터 발견되지 않음');
             return false;
         }
 

@@ -50,7 +50,6 @@ export const Login = () => {
         
         // 유저 정보를 잘 넘기면 true반환
         const resultAfterPost = await postLoginDataWith(loginData,'auth/login')
-        console.log(resultAfterPost);
 
         if(resultAfterPost) {
             navigate('/main');

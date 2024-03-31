@@ -12,16 +12,14 @@ export const AddInfoModal = ({ setIsFirst }) => {
     const [error, setError] = useState('');
     const [schoolList, setSchoolList] = useState([]);
     const [extraInfo, setExtraInfo] = useState({
-        childName: '',
-        childCnt: '',
-        teacherName: '',
         schoolInfo: '',
         schoolType: '',
-        role: '',
+        role: 'TEACHER',
     });
 
     async function onChange(e) {
         const { name, value } = e.target;
+        // 이미 있는 정보는 hold, 객체에 없는 정보는 동적으로 키를 생성해서 값 할당
         setExtraInfo((prevState) => ({ ...prevState, [name]: value }));
 
         if(name === 'schoolInfo') {

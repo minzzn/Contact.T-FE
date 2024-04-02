@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./css/public.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Register } from "./pages/LoginAndRegister/Register";
@@ -7,7 +7,7 @@ import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
 import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
 import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute';
-import { getUserInfoObject } from "./function/common.js";
+import { getToken } from "./function/common";
 
 export default function App() {
 
@@ -20,9 +20,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Private으로 접근 가능한 경로 */}
-        <Route path="/main" element={<PrivateRoute authenticated={getUserInfoObject} component={<Main />}/>}/>
-        <Route path="/Setprofile" element={<PrivateRoute authenticated={getUserInfoObject} component={<SetProfile />}/>}/>
-        <Route path="/addInfo" element={<PrivateRoute authenticated={getUserInfoObject} component={<AddInfoModal />}/>}/>
+        <Route path="/main" element={<PrivateRoute authenticated={getToken()} component={<Main />}/>}/>
+        <Route path="/Setprofile" element={<PrivateRoute authenticated={getToken()} component={<SetProfile />}/>}/>
+        <Route path="/addInfo" element={<PrivateRoute authenticated={getToken()} component={<AddInfoModal />}/>}/>
         
         {/* default 경로 설정 */}
         <Route path="*" element={<Navigate replace to="/" />} />

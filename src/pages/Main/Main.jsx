@@ -17,7 +17,7 @@ export const Main = () => {
     });
     // 채팅치는 공간 상태관리
     const [isChatContentActive, setIsChatContentActive] = useState(false);
-    // 서버로부터 받아온 데이터라고 가정
+    // 서버로부터 받아온 데이터라고 가정 : dummy data
     const USERS = users;
 
     const closeModal = () => {

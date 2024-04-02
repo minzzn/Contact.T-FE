@@ -21,7 +21,6 @@ export const postRegisterDataWith = async (userObj,url) => {
             throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
         }
 
-        console.log("회원가입 성공");
         return true;
     } catch(error) {
         console.log('Error : ', error.message);
@@ -49,20 +48,19 @@ export const postLoginDataWith = async (userObj,url) => {
             const errorData = await response.json();
             throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
         }
+
         // 유저 정보 중 하나인 토큰은 따로 변수로 분리
         const token = response.headers.get("Authorization");
 
         if(token) {
             // 로컬스토리지에 토큰 저장
             setToken(token);
-
             return true;
         } else {
             return false;
         }
 
     } catch(error) {
-        console.log('Error : ', error.message);
         return false;
     }
 }

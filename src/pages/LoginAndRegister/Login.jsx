@@ -54,7 +54,7 @@ export const Login = () => {
         if(resultAfterPost) {
             navigate('/main');
         } else {
-            ToastifyWarn("제대로 작성해주세요");
+            ToastifyWarn("다시 작성해주세요");
             return;
         }
     }

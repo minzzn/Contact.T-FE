@@ -15,7 +15,7 @@ export const HouseContainer = styled.div`
 `
 
 export const InnerPane = styled.div`
-    background-color: black;
+    background-color: orange;
     padding: 30px;
     border-radius: 15px;
     

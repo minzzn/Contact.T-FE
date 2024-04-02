@@ -9,7 +9,7 @@ export const StyledForm = styled.form`
     height: 60%;
     margin: auto;
     margin-top: 12vh;
-    color: var(--bg-original-white);
+    color: black;
 `
 export const LoginTitle = styled.h1`
     text-align: center;
@@ -52,7 +52,7 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
     font-weight: 600;
-    color: var(--bg-original-white);
+    color: black;
 
     &:hover, &:focus {
         color: orange;

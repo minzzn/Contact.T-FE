@@ -31,7 +31,7 @@ export const ChatContentDiv = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    background-color: ${(props) => props.$ismine === "true" ? 'orange' : 'yellow'};
+    background-color: ${(props) => props.$ismine === "true" ? 'white' : 'yellow'};
     color: var(--bg-original-black);
 `;
 

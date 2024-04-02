@@ -20,7 +20,7 @@ export const customedStyle = {
         borderRadius: "15px",
         backgroundColor: 'var(--bg-original-white)',
         overflow: "hidden",
-        border: "5px solid var(--bg-orange)",
+        border: "5px solid var(--bg-black)",
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "stretch",

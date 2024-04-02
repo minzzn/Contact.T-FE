@@ -14,6 +14,7 @@ export const BellContainer = styled.div`
 export const BellIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
+    color: var(--bg-black);
     &:hover {
         color: var(--bg-light-gray);
         cursor: pointer;

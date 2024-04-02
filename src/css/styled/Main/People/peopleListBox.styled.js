@@ -18,7 +18,7 @@ export const Container = styled.div`
   background-color: white;
 
   &:hover {
-      color: var(--bg-black);
+      background-color: gray;
       text-shadow: 2px 2px 5px var(--bg-beige);
       cursor: pointer;
   }

@@ -17,6 +17,7 @@ export const Container = styled.div`
   background-color: white;
 
   &:hover {
+      background-color: gray;
       color: var(--bg-black);
       text-shadow: 2px 2px 5px var(--bg-beige);
       cursor: pointer;
@@ -24,7 +25,7 @@ export const Container = styled.div`
 `;
 
 export const ImgContainer = styled.div`
-    overflow: hiddden;
+    overflow: hidden;
     width: 55px;
     height: 55px;
     border-radius: 10%;

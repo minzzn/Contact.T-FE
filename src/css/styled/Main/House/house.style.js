@@ -6,8 +6,16 @@ export const HouseContainer = styled.div`
     height: 100%;
     margin-left: 3vw; 
 
-    background-color: var(--bg-original-white);
-    border-radius: 10px;
+    gap: 20px;
+
+    /* 가로로 */
+    display: flex;
+    /* 최대한 길쭉하게 빼기 */
+    justify-content: stretch;
+`
+
+export const InnerPane = styled.div`
+    background-color: orange;
     padding: 30px;
 
     display: flex;

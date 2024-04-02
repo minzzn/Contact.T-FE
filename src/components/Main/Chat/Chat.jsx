@@ -68,7 +68,7 @@ export const Chat = () => {
         if (!client.current.connected) {
             return;
         }
-
+        console.log("before pub");
         client.current.publish({
             // sub/chat/{roomID}
             destination: '/pub/chat/message',
@@ -87,6 +87,7 @@ export const Chat = () => {
                 }),
             }),
         });
+        console.log("after pub");
         console.log('published!(채팅을 보낸다)');
         setChat('');
     }

@@ -28,7 +28,7 @@ export const Main = () => {
     };
 
     useEffect(() => {
-        // 첫 렌더링때, modal을 안띄우기 위한 role값 체크부분
+        // todo : 첫 렌더링때, modal을 안띄우기 위한 role값 체크부분(서버 로그인 응답값 변경된 후에 작업진행 예정)
     }, [])
 
     return (    

@@ -26,7 +26,6 @@ export const Chat = () => {
         client.current.subscribe('/sub/chat/1', (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
             const message = JSON.parse(datafromServer.body);
-            console.log(message);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
             setChatList((previousChatList) => {
@@ -39,7 +38,6 @@ export const Chat = () => {
             });
 
         });
-        console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
 
     // // ws프로토콜 연결
@@ -68,7 +66,6 @@ export const Chat = () => {
         if (!client.current.connected) {
             return;
         }
-        console.log("before pub");
         client.current.publish({
             // sub/chat/{roomID}
             destination: '/pub/chat/message',
@@ -87,8 +84,6 @@ export const Chat = () => {
                 }),
             }),
         });
-        console.log("after pub");
-        console.log('published!(채팅을 보낸다)');
         setChat('');
     }
 

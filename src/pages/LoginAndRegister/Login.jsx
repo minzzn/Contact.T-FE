@@ -104,6 +104,11 @@ export const Login = () => {
                         onClick={onSubmit}
                     >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
+                <div style={{
+                    textAlign: "center",
+                    color: "var(--bg-light-gray)",
+                    marginTop: "5vh"
+                }}>소셜 로그인 :</div>
             </StyledForm>
             <ToastContainer />
         </>

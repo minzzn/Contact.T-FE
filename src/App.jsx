@@ -10,23 +10,24 @@ import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute';
 import { getToken } from "./function/common";
 
 export default function App() {
+  const token = getToken();
 
   return (
     // 우선 로그인으로 진입, 로그인 하고나면 나머지 라우팅 가능하도록 설정
     <>
-      <Routes>
-        {/* Public으로 접근 가능한 경로 */}
-        <Route path="/" element={<Login /> } />
-        <Route path="/register" element={<Register />} />
+        <Routes>
+          {/* Public으로 접근 가능한 경로 */}
+          <Route path="/" element={<Login /> } />
+          <Route path="/register" element={<Register />} />
 
-        {/* Private으로 접근 가능한 경로 */}
-        <Route path="/main" element={<PrivateRoute authenticated={getToken()} component={<Main />}/>}/>
-        <Route path="/Setprofile" element={<PrivateRoute authenticated={getToken()} component={<SetProfile />}/>}/>
-        <Route path="/addInfo" element={<PrivateRoute authenticated={getToken()} component={<AddInfoModal />}/>}/>
-        
-        {/* default 경로 설정 */}
-        <Route path="*" element={<Navigate replace to="/" />} />
-      </Routes>
+          {/* Private으로 접근 가능한 경로 */}
+          <Route path="/main" element={<PrivateRoute authenticated={token} component={<Main />}/>}/>
+          <Route path="/Setprofile" element={<PrivateRoute authenticated={token} component={<SetProfile />}/>}/>
+          <Route path="/addInfo" element={<PrivateRoute authenticated={token} component={<AddInfoModal />}/>}/>
+          
+          {/* default 경로 설정 */}
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Routes>
     </>
   );
 }

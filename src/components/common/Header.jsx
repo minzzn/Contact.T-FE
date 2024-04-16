@@ -1,7 +1,10 @@
+import { useRecoilState } from "recoil";
 import { StyledIcon, IconsWrapper } from "../../css/styled/Main/main.styled";
 import { ChatIconsContainer, IconsModalContainer} from "../../css/styled/common/header.styled";
+import { IconState } from "../../hooks/iconState";
 
-export const Header = ({ setIsChatContentActive, setIconsState, iconsState }) => {
+export const Header = ({ setIsChatContentActive }) => {
+    const [iconsState, setIconsState] = useRecoilState(IconState);
 
     return (
         <ChatIconsContainer className="left-pane">

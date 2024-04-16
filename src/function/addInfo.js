@@ -1,4 +1,5 @@
 import { serverEndPoint } from "../constant/common.constant";
+import { getToken } from "./common";
 
 export const searchDB = async(schoolType) => {
     const INF = 5000;
@@ -32,7 +33,7 @@ export const searchDB = async(schoolType) => {
 }
 
 export const POST = async (formattedExtraUserInfoObject) => {
-    const BACK_API = `http://${serverEndPoint}auth/add-info`;
+    const BACK_API = `http://${serverEndPoint}/auth/add-info`;
 
     try {
         const response = await fetch(BACK_API, {
@@ -51,6 +52,22 @@ export const POST = async (formattedExtraUserInfoObject) => {
         }
 
         console.log("추가 정보 전송 성공");
+    } catch(error) {
+        console.log('Error: ', error.message);
+    }
+}
+
+export const getRole = async () => {
+    const BACK_API = `http://${serverEndPoint}/auth/add-info`;
+
+    try {
+        const response = await fetch(BACK_API, {
+            method: "GET",
+            headers: {
+                "Authorization": getToken()
+            }
+        });
+        console.log(response);
     } catch(error) {
         console.log('Error: ', error.message);
     }

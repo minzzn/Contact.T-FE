@@ -49,9 +49,10 @@ export const Login = () => {
         }
         
         // 유저 정보를 잘 넘기면 true반환
-        const resultAfterPost = await postLoginDataWith(loginData,'auth/login')
-
+        const resultAfterPost = await postLoginDataWith(loginData,'auth/login');
+        
         if(resultAfterPost) {
+            // todo : 유저정보에 role값도 넘어오게 변경되면, role값도 localstorage상에 저장
             navigate('/main');
         } else {
             ToastifyWarn("다시 작성해주세요");

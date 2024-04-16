@@ -1,3 +1,5 @@
+import React from "react";
+
 // 웹 스토리지에 저장된 토큰을 서버 쪽에 보내기
 export const getToken = () => localStorage.getItem("token");
 // 웹 스토리지에 토큰 저장
@@ -19,3 +21,9 @@ export const IsBlankStringInObject = (object) => {
     
     return result;
 }
+
+export const WrappingReactFragment = (ReactNode, index) => (
+    <React.Fragment key={index}>
+        {ReactNode}
+    </React.Fragment>
+);

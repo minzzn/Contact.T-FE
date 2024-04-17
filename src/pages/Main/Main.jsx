@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { Container } from "../../css/styled/Main/main.styled";
-import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
 import { House } from "./Sub/House";
 import { AddInfoModal } from "../../components/Profile/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
-import { IconState } from "../../hooks/iconState";
+import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState } from "recoil";
 import { WrappingReactFragment } from "../../function/common";
 
 export const Main = () => {
-    const [iconsState, setIconsState] = useRecoilState(IconState);
+    const [iconsState, setIconsState] = useRecoilState(IconsState);
     const [isFirst, setIsFirst] = useState(false);
-    // 채팅치는 공간 상태관리
-    const [isChatContentActive, setIsChatContentActive] = useState(false);
-    // 서버로부터 받아온 데이터라고 가정 : dummy data
-    const USERS = users;
 
     const closeModal = () => {
         setIconsState(()=> ({
@@ -34,8 +29,7 @@ export const Main = () => {
     return (    
         <>
             <Container>
-                {/* 헤더 */}
-                <Header setIsChatContentActive={setIsChatContentActive} />
+                <Header />
                 {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                 {
                     Object.keys(iconsState).map((iconName,idx) => {
@@ -43,11 +37,15 @@ export const Main = () => {
                         if(iconsState[iconName]) {
                             switch(iconName) {
                                 case "house":
-                                    return WrappingReactFragment(<House />,idx)
+                                    return WrappingReactFragment(<House />,idx);
                                 case "setProfile":
-                                    return WrappingReactFragment(<SetProfile closeModal={closeModal} />,idx)
+                                    return WrappingReactFragment(<SetProfile closeModal={closeModal} />,idx);
+                                case "chatList":
+                                    return WrappingReactFragment(<UserAndChat />,idx);
+                                case "peopleList":
+                                    return WrappingReactFragment(<UserAndChat />,idx);
                                 default:
-                                    return WrappingReactFragment(<UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />,idx)
+                                    return null;
                             }
                         }
                     })

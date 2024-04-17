@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const IconState = atom({
+export const IconsState = atom({
     key: 'icon',
     default: {
         chatList: true,

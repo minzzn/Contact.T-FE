@@ -1,11 +1,12 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { StyledIcon, IconsWrapper } from "../../css/styled/Main/main.styled";
 import { ChatIconsContainer, IconsModalContainer} from "../../css/styled/common/header.styled";
-import { IconState } from "../../hooks/iconState";
+import { IconsState } from "../../hooks/iconsState";
+import { ChatActiveState } from "../../hooks/chatActiveState";
 
-export const Header = ({ setIsChatContentActive }) => {
-    const [iconsState, setIconsState] = useRecoilState(IconState);
-
+export const Header = () => {
+    const [iconsState, setIconsState] = useRecoilState(IconsState);
+    const setIsChatActive = useSetRecoilState(ChatActiveState);
     return (
         <ChatIconsContainer className="left-pane">
             <IconsModalContainer>
@@ -14,7 +15,7 @@ export const Header = ({ setIsChatContentActive }) => {
 
                     <div className="temporary_wrapper">
                         <StyledIcon className="fas fa-user" size='30px' $marginBottom="2vh" onClick={()=> {
-                            setIsChatContentActive(false);
+                            setIsChatActive(false);
                             setIconsState(()=> ({
                                 chatList: false,
                                 peopleList: true,

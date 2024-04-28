@@ -11,7 +11,7 @@ export const ChatContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: orange;
+    background-color: var(--bg-original-white);
     border-radius: 15px;
-
+    box-shadow: 10px 10px 10px #ceced1;
 `;

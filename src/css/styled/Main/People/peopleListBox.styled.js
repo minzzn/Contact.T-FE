@@ -8,18 +8,17 @@ export const Container = styled.div`
   height: 11vh;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   /* vertical - horizontal */
   padding: 2vh 2vw;
   /* vertical - horizontal */
   margin: 0.6vh 0;
-  color: var(--bg-dark-gray);
+  color: var(--bg-original-black);
   border-radius: 10px;
   background-color: white;
 
   &:hover {
-      background-color: gray;
-      text-shadow: 2px 2px 5px var(--bg-beige);
+      background-color: var(--bg-light-gray);
       cursor: pointer;
   }
 `;
@@ -43,7 +42,8 @@ export const NameAndContentContainer = styled.div`
 `;
 export const displayStyle = styled.div`
   display: ${(props) => props.display || none};
-`
+` 
+/* customStyles의 색깔 변경 시 렌더링 안됨 - 왜그런지 이유를 모르겠음 */
 export const customStyles = {
   overlay: {
     backgroundColor: " rgba(0, 0, 0, 0.4)",
@@ -68,7 +68,7 @@ export const customStyles = {
     backgroundColor: "white",
     justifyContent: "center",
     overflow: "auto",
-    border: "7px solid #FF9634",
+    border: "7px solid var(--bg-main-green)",
   },
 };
 
@@ -79,7 +79,7 @@ export const SetBox = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: #FFFFFF;
+  background: var(--bg-original-white);
 
   overflow: hidden;
   flex: initial;
@@ -109,8 +109,8 @@ export const ProfileImage = styled.img`
   box-sizing: border-box;
   width: 16vh;
   height: 16vh;
-  background: #FFFFFF;
-  border: 5px solid #FF9634;
+  background: var(--bg-original-white);
+  border: 5px solid var(--bg-main-green);
   border-radius: 50%;
 
 `;
@@ -128,7 +128,7 @@ export const IdentifyName = styled.div`
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 2vh;
-    color: #000000;
+    color: var(--bg-original-black);
     text-align: center;
 
     overflow: hidden;
@@ -150,7 +150,7 @@ export const RealName = styled.div`
     font-weight: 400;
     font-size: 1.5vh;
     line-height: 29px;
-    color: #000000;
+    color: var(--bg-original-black);
     text-align: center;
 
     overflow: hidden;
@@ -177,14 +177,14 @@ export const StateMark = styled.div`
     width: 23px;
     height: 23px;
     margin-right: 10px;
-    background: #FF9634;
+    background: var(--bg-main-green);
     border-radius: 50%;
 
 `;
 export const DutyState = styled.div`
 
     box-sizing: border-box;
-    display:flex;
+    display: flex;
     align-items:center;
     justify-content: center;
     width: 20vh;//340px
@@ -194,7 +194,7 @@ export const DutyState = styled.div`
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 2vh;
-    color: #000000;
+    color: var(--bg-original-black);
 
 `;
 export const ChatState = styled.div`
@@ -211,7 +211,7 @@ export const ChatState = styled.div`
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
     font-size: 2vh;
-    color: #000000;
+    color: var(--bg-original-black);
 
 `;
 export const ChatButton = styled.button`
@@ -226,19 +226,19 @@ export const ChatButton = styled.button`
     margin-bottom: 3vh;
     border-radius: 30px;
     border: none;
-    background: #FF9634;
+    background: var(--bg-main-green);
       &:hover {
-          background: ${lighten(0.1, '#FF9634')};
+          background: ${lighten(0.1, '#5CC095')};
       }
       &:active {
-          background:  ${darken(0.1, '#FF9634')};
+          background:  ${darken(0.1, '#5CC095')};
       }
     cursor: pointer;
     /* 채팅 하기 */
     font-family: 'Noto Sans KR', sans-serif;
     font-family: 'Inter';
     font-size: 2vh;
-    color: #000000;
+    color: var(--bg-original-black);
 
     overflow: hidden;
     flex: 1;

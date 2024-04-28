@@ -9,7 +9,7 @@ export const StyledForm = styled.form`
     height: 60%;
     margin: auto;
     margin-top: 12vh;
-    color: black;
+    color: var(--bg-original-black);
 `
 export const LoginTitle = styled.h1`
     text-align: center;
@@ -34,7 +34,7 @@ export const LoginInput = styled.input`
     padding: 20px 15px;
     font-size: 18px;
     border-radius: 0.3rem;
-    border: 1px solid orange;
+    border: 1px solid var(--bg-button-gray);
     box-sizing: border-box;
     width: 100%;
 `
@@ -52,10 +52,10 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
     font-weight: 600;
-    color: black;
+    color: var(--bg-original-black);
 
     &:hover, &:focus {
-        color: orange;
+        color: var(--bg-main-green);
     }
 `
 
@@ -67,16 +67,16 @@ export const LoginSubmitButton = styled.button`
     cursor: pointer;
     margin: 0 auto;
     font-size: 18px;
-    color: white;
-    background-color: black;
+    color: var(--bg-original-white);
+    background-color: var(--bg-original-black);
     border: none;
 
 
     &:focus, &:hover {
-        background-color: var(--bg-orange);
+        background-color: var(--bg-main-green);
     }
     /* 버튼이 클릭되었다가 떼질 때 */
     &:active {
-        background-color: var(--bg-orangered);
+        background-color: var(--bg-main-green);
     }
 `

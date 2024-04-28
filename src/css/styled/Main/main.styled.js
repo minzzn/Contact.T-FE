@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  min-width: 250px;
   width: 100%;
   height: 100%;
   // 가로 정렬
@@ -11,6 +12,15 @@ export const Container = styled.div`
   padding: 2rem;
 `;
 
+export const HeaderListContainer = styled.div`
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    // 내부 채팅 div들은 세로로 쌓이도록 만들기
+    flex-direction: column;
+    min-height: 520px;
+`
+
 export const ChatAndPeopleListContainer = styled.div`
     width: 100%;
     min-width: 300px;
@@ -18,8 +28,8 @@ export const ChatAndPeopleListContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 50vw;
-    max-height: 90vh;
-    margin-left: 3vw;
+    max-height: 80vh;
+    margin-left: 1vw;
 
     // 높이는 스크롤 가능하도록 무제한으로
     overflow-y: scroll;
@@ -32,20 +42,20 @@ export const IconsWrapper = styled.div`
     display: flex;
     flex-direction: ${(props) => props.$flexDirection ? props.$flexDirection : 'row'};
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 `;
 
 export const StyledIcon = styled.i.attrs(({className}) => ({
     className: `${className}`,
 }))`
     font-size: ${(props) => props.size ? props.size : '16px'};
-    margin-right: ${(props) => props.$marginright ? props.$marginright : 0};
+    margin-right: ${(props) => props.$marginright ? props.$marginright : '3vh'};
     margin-bottom: ${(props) => props.$marginBottom ? props.$marginBottom : 0};
-    color: ${(props) => props.$selected === "true" ? 'black' : 'var(--bg-light-gray)'};
+    color: ${(props) => props.$selected === "true" ? 'var(--bg-main-green)' : 'var(--bg-dark-gray)'};
     transition: all 0.2s linear;
 
     &:hover {
-        color: var(--bg-light-gray);
+        color: var(--bg-button-gray);
         cursor: pointer;
     }
 `;

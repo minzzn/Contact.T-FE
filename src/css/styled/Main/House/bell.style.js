@@ -8,7 +8,7 @@ export const BellContainer = styled.div`
     bottom: 40px;
     right: 1vw;
     font-size: 2rem;
-    color: white;
+    color: var(--bg-original-white);
 `
 
 export const BellIcon = styled.i.attrs(({className}) => ({
@@ -23,7 +23,7 @@ export const BellIcon = styled.i.attrs(({className}) => ({
 export const RedDot = styled.div`
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: var(--bg-orangered);
     border-radius: 50%;
 
     position: absolute;

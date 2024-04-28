@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container } from "../../css/styled/Main/main.styled";
+import { Container, HeaderListContainer } from "../../css/styled/Main/main.styled";
 import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
@@ -52,27 +52,28 @@ export const Main = () => {
     return (
         <>
             <Container>
-                {/* 헤더 */}
-                <Header setIsChatContentActive={setIsChatContentActive} setIconsState={setIconsState} iconsState={iconsState} />
-                {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
-                {
-                    iconsState["house"] === true ? 
-                    (
-                        // todo : home화면 컴포넌트 필요
-                        <House />
-                    )
-                    : ( iconsState["setProfile"] === true
-                        ? <SetProfile closeModal={closeModal}/> 
-                        : (
-                            <>
-                                {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}
-                                <UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />                     
-                            </>
+                    {/* 헤더 */}
+                    <HeaderListContainer>
+                    <Header setIsChatContentActive={setIsChatContentActive} setIconsState={setIconsState} iconsState={iconsState} />
+                    {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
+                    {
+                        iconsState["house"] === true ? 
+                        (
+                            // todo : home화면 컴포넌트 필요
+                            <House />
                         )
-                        
-                      )
-                }
-
+                        : ( iconsState["setProfile"] === true
+                            ? <SetProfile closeModal={closeModal}/> 
+                            : (
+                                <>
+                                    {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}
+                                    <UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />                     
+                                </>
+                            )
+                            
+                        )
+                    }
+                </HeaderListContainer>
             </Container>
             {
                 isFirst && <AddInfoModal />

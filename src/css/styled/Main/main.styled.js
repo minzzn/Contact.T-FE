@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AddInfoModal } from './../../../components/Profile/AddInfo/AddInfoModal';
 
 export const Container = styled.div`
   min-width: 250px;
@@ -12,7 +13,7 @@ export const Container = styled.div`
   padding: 2rem;
 `;
 
-export const HeaderListContainer = styled.div`
+export const HeaderAndListContainer = styled.div`
     min-width: 250px;
     width: 100%;
     display: flex;
@@ -34,6 +35,11 @@ export const ChatAndPeopleListContainer = styled.div`
     // 높이는 스크롤 가능하도록 무제한으로
     overflow-y: scroll;
 `;
+
+export const UserAndChatContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+`
 
 export const IconsWrapper = styled.div`
     background-color: var(--bg-white);

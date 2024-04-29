@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, HeaderListContainer } from "../../css/styled/Main/main.styled";
+import { Container, HeaderAndListContainer, UserAndChatContainer } from "../../css/styled/Main/main.styled";
 import { users } from "../../constant/user.data";
 import { Header } from "../../components/common/Header";
 import { UserAndChat } from "./Sub/UserAndChat";
@@ -53,7 +53,7 @@ export const Main = () => {
         <>
             <Container>
                     {/* 헤더 */}
-                    <HeaderListContainer>
+                <HeaderAndListContainer>
                     <Header setIsChatContentActive={setIsChatContentActive} setIconsState={setIconsState} iconsState={iconsState} />
                     {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                     {
@@ -65,15 +65,15 @@ export const Main = () => {
                         : ( iconsState["setProfile"] === true
                             ? <SetProfile closeModal={closeModal}/> 
                             : (
-                                <>
+                                <UserAndChatContainer>
                                     {/* 채팅목록과 채팅영역을 보여주는 컴포넌트 */}
                                     <UserAndChat isChatContentActive={isChatContentActive} setIsChatContentActive={setIsChatContentActive} USERS={USERS} iconsState={iconsState} />                     
-                                </>
+                                </UserAndChatContainer>
                             )
                             
                         )
                     }
-                </HeaderListContainer>
+                </HeaderAndListContainer>
             </Container>
             {
                 isFirst && <AddInfoModal />

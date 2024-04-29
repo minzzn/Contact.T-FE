@@ -7,7 +7,7 @@ import { AddInfoModal } from "../../components/Profile/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
 import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState } from "recoil";
-import { WrappingReactFragment } from "../../function/common";
+import { getRole, WrappingReactFragment } from "../../function/common";
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -23,8 +23,12 @@ export const Main = () => {
     };
 
     useEffect(() => {
-        // todo : 첫 렌더링때, modal을 안띄우기 위한 role값 체크부분(서버 로그인 응답값 변경된 후에 작업진행 예정)
-    }, [])
+        if(getRole() === "GUEST") {
+            setIsFirst(true);
+        } else {
+            setIsFirst(false);
+        }
+    }, []);
 
     return (    
         <>

@@ -17,6 +17,7 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
         containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }, [chatsHistory])
 
+
     return (
         <>
             <ChatContents>

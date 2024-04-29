@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   // 가로 정렬
   display: flex;
   overflow: hidden;
@@ -30,10 +30,7 @@ export const IconsWrapper = styled.div`
     background-color: var(--bg-white);
     padding: 20px;   
     border-radius: 20px;
-    display: flex;
-    flex-direction: ${(props) => props.$flexDirection ? props.$flexDirection : 'row'};
-    align-items: center;
-    justify-content: space-between;
+    height: 100%;
 `;
 
 export const StyledIcon = styled.i.attrs(({className}) => ({

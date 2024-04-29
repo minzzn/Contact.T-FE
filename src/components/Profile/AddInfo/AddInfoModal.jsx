@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
-import { POST, searchDB } from '../../../function/addInfo';
+import { searchDB } from '../../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
 import { IsBlankStringInObject } from '../../../function/common';

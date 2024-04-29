@@ -33,6 +33,11 @@ export const ChatAndPeopleListContainer = styled.div`
     overflow-y: scroll;
 `;
 
+export const UserAndChatContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
 export const IconsWrapper = styled.div`
     background-color: var(--bg-white);
     padding: 20px;   

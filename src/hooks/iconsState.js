@@ -6,6 +6,7 @@ export const IconsState = atom({
         chatList: true,
         peopleList: false,
         setProfile: false,
-        house: false
+        house: false,
+        bell: false,
     }
 });

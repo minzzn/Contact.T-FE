@@ -1,10 +1,13 @@
 import styled from "styled-components";
+import { AddInfoModal } from '../../../../components/AddInfo/AddInfoModal';
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     width: 100%;
+    height: 100%;
+    // max-height: 70vh;
 `
 
 export const ChatContents = styled.div`
@@ -24,6 +27,7 @@ export const ChatEtcContainer = styled.div`
     align-items: center;
     // 양쪽 끝 배치
     justify-content: space-between;
+    
 `;
 
 export const ChatInput = styled.input`
@@ -32,8 +36,7 @@ export const ChatInput = styled.input`
     border: none;
     outline: none;
     padding: 15px;
-    border-radius: 20px;
-    background-color: var(--bg-white);
+    background-color: var(--bg-light-gray);
     margin-bottom: 10px;
     /* 스크롤 안 생기도록 막기 */
     &::-webkit-scrollbar {
@@ -42,7 +45,8 @@ export const ChatInput = styled.input`
 `;
 
 export const ChatInputBtn = styled.button`
-    border: 3px solid var(--dark-gray);
+    border: 3px solid var(--bg-dark-gray);
+    background-color: var(--bg-dark-gray);
     border-radius: 5px;
     // vertical - horizontal
     padding: 10px 15px;
@@ -53,7 +57,7 @@ export const ChatInputBtn = styled.button`
 
 export const ChatInputContainer = styled.div`
     width: 100%;
-    background-color: var(--bg-white);
+    background-color: var(--bg-light-gray);
     display: flex;
     flex-direction: column;
     /* 왼쪽위 부터 시계방향 */
@@ -68,6 +72,6 @@ export const ChatInputForm = styled.form`
     flex-direction: column;
     justify-content: center;
     position: relative;
-    background-color: var(--bg-original-white);
+    background-color: var(--bg-light-gray);
     border-radius: 0 0 10px 10px;
 `;

@@ -1,13 +1,19 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.div`
-    width: min-content;
-    height: 100%;
-    padding: 20px;
-    transition: all 0.4s linear;
-
+    max-width: 50vw;
+    // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
+    height: 11vh;
     display: flex;
-    flex-direction: column;
+    // 가로 중앙 정렬 */
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    transition: all 0.4s linear;
+    /* vertical - horizontal */
+    padding: 2vh 2vw;
+    /* vertical - horizontal */
+    margin: 0.6vh 0;
+    color: var(--bg-original-black);
+    border-radius: 10px;
+    background-color: var(--bg-original-white);
 `;

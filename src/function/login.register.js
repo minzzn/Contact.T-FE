@@ -61,7 +61,6 @@ export const postLoginDataWith = async (userObj,url) => {
 
             return true;
         } else {
-            console.log('여기');
             return false;
         }
 

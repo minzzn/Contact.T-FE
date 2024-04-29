@@ -11,10 +11,14 @@ export const ChatHeader = ({userdata}) => {
                 {/* 헤더 왼쪽 부분 */}
                 <HeaderLeftContainer>
                     <ProfileContainer>
+                        {/* userdata가 존재하면 불러오도록 - 리렌더링 시 userdata 값이 바뀌는것 같음 확인 필요, 
+                            오류는 안뜨지만 컴포넌트를 한번 더 클릭해야 채팅헤더에 정보가 뜸 */}
                         <ImgContainer>
-                            <img src={userdata.profileImg} style={{objectFit: "cover", width: "100%", height: "100%"}}/>
+                            {
+                                userdata && <img src={userdata.profileImg} style={{objectFit: "cover", width: "100%", height: "100%"}}/>
+                            }
                         </ImgContainer>
-                        <UserName>{userdata.name}</UserName>
+                        {userdata && <UserName>{userdata.name}</UserName>}
                     </ProfileContainer>
                 </HeaderLeftContainer>
                 {/* 헤더 오른쪽 부분 */}

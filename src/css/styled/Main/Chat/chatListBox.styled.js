@@ -12,14 +12,13 @@ export const Container = styled.div`
   padding: 2vh 2vw;
   /* vertical - horizontal */
   margin: 0.6vh 0;
-  color: var(--bg-dark-gray);
+  color: var(--bg-original-black);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--bg-original-white);
 
   &:hover {
-      background-color: gray;
-      color: var(--bg-black);
-      text-shadow: 2px 2px 5px var(--bg-beige);
+      background-color: var(--bg-light-gray);
+      color: var(--bg-original-black);
       cursor: pointer;
   }
 `;
@@ -30,7 +29,6 @@ export const ImgContainer = styled.div`
     height: 55px;
     border-radius: 10%;
     margin-right: 7px;
-    overflow: hidden;
 `;
 
 export const NameAndContentContainer = styled.div`

@@ -12,7 +12,7 @@ export const ViewList = ({ setChoosedUser }) => {
     const USERS = useRecoilValue(UsersState);
 
     return (
-        <ChatAndPeopleListContainer className="main-middle-pane">
+        <ChatAndPeopleListContainer>
             {
                 iconsState["chatList"] ? (
                     USERS.map((user,idx) => <ChatListContainer user={user} setChoosedUser={setChoosedUser} key={idx} />)

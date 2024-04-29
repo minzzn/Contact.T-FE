@@ -1,6 +1,6 @@
-import { ChildInfoWrapper, ExtraInfoInput, ExtraInfoLabel } from "../../../../css/styled/Profile/AddInfo/addInfo.styled"
+import { ChildInfoWrapper, ExtraInfoInput, ExtraInfoLabel } from "../../../css/styled/Profile/AddInfo/addInfo.styled"
 
-export const ParentRole = ({onChangeFn, extraInfo}) => {
+export const ParentRole = ({onChangeFn = f => f, extraInfo}) => {
 
     return (
         <>

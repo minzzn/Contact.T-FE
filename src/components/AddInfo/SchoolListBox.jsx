@@ -1,4 +1,4 @@
-import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../../css/styled/Profile/AddInfo/schoolListBox.styled"
+import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../css/styled/Profile/AddInfo/schoolListBox.styled"
 
 export const SchoolListBox = ({ schoolsListArray, schoolInfo, setExtraInfo }) => {
     

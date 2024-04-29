@@ -5,7 +5,6 @@ import { Register } from "./pages/LoginAndRegister/Register";
 import { Login } from "./pages/LoginAndRegister/Login";
 import { Main } from "./pages/Main/Main";
 import { SetProfile } from "./components/Profile/SetProfile";
-import { AddInfoModal } from "./components/Profile/AddInfo/AddInfoModal";
 import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute';
 import { getToken } from "./function/common";
 
@@ -23,7 +22,6 @@ export default function App() {
           {/* Private으로 접근 가능한 경로 */}
           <Route path="/main" element={<PrivateRoute authenticated={token} component={<Main />}/>}/>
           <Route path="/Setprofile" element={<PrivateRoute authenticated={token} component={<SetProfile />}/>}/>
-          <Route path="/addInfo" element={<PrivateRoute authenticated={token} component={<AddInfoModal />}/>}/>
           
           {/* default 경로 설정 */}
           <Route path="*" element={<Navigate replace to="/" />} />

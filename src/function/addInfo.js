@@ -1,4 +1,5 @@
 import { serverEndPoint } from "../constant/common.constant";
+import { getToken } from "./common";
 
 export const searchDB = async(schoolType) => {
     const INF = 5000;
@@ -28,30 +29,5 @@ export const searchDB = async(schoolType) => {
     } catch(error) {
         console.log('Error: ', error.message);
         throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
-    }
-}
-
-export const POST = async (formattedExtraUserInfoObject) => {
-    const BACK_API = `http://${serverEndPoint}auth/add-info`;
-
-    try {
-        const response = await fetch(BACK_API, {
-            method: "POST",
-            headers: {
-                // 유저 정보를 JSON형태로 보내기 위한 request임을 짐작해주세요
-                "Content-Type": "application/json",
-            },
-            // 객체형태로 저희가 묶어낸 추가유저정보를 JSON 데이터 포맷으로 만들어서 바디에 실어줍니다.
-            body: JSON.stringify(formattedExtraUserInfoObject),
-        })
-
-        if(!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || '어딘가 잘못된 정보가 갔습니다');
-        }
-
-        console.log("추가 정보 전송 성공");
-    } catch(error) {
-        console.log('Error: ', error.message);
     }
 }

@@ -8,7 +8,7 @@ export const SchoolContainer = styled.div`
 
 export const SchoolDiv = styled.div`
     width: 100%;
-    border: 1px solid orange;
+    border: 2px solid orange;
     border-radius: 5px;
     padding: 10px 5px;
     display: flex;

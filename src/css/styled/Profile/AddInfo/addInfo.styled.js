@@ -20,7 +20,7 @@ export const customedStyle = {
         borderRadius: "15px",
         backgroundColor: 'var(--bg-original-white)',
         overflow: "hidden",
-        border: "5px solid var(--bg-orange)",
+        border: "5px solid var(--bg-main-green)",
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "stretch",
@@ -49,7 +49,7 @@ export const RoleSelectContainer = styled.div`
 
 export const RoleSelectInput = styled.select`
     padding: 10px 15px;
-    border: 1px solid orange;
+    border: 2px solid var(--bg-main-green);
     border-radius: 5px;
     font-weight: 600;
     font-size: 1.5rem;
@@ -91,7 +91,7 @@ export const SearchSchoolContainer = styled.div`
 `
 
 export const ChildInfoWrapper = styled.div`
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,13 +107,17 @@ export const ExtraInfoLabel = styled.label`
 `
 
 export const ExtraInfoInput = styled.input`
-    width: ${(props) => props.$customizedWidth ? props.$customizedWidth : "100%"};
     height: 30px;
     padding: 20px 8px;
     font-size: 1.1rem;
-    border-radius: 0.3rem;
-    border: 1px solid orange;
     box-sizing: border-box;
+    border: 2px solid var(--bg-main-green);
+    border-radius: 5px;
+
+    &:focus {
+        /* input태그 focus시 outline 제거 */
+        outline: none; 
+    }
 `
 
 export const RadioInputContainer = styled.div`
@@ -130,6 +134,12 @@ export const RadioInputWrapper = styled.div`
 
 export const ExtraInfoInputRadio = styled.input`
     margin-right: 5px;
+    accent-color: var(--bg-main-green);
+    cursor: pointer;
+    &:checked {
+        border: none;
+        outline: none;
+    }
 `
 
 export const TypeOfSchoolLabel = styled.label`
@@ -165,18 +175,17 @@ export const ErrMsgContainer = styled.div`
 export const StyledButton = styled.button`
     display: block;
     padding: 2px 5px;
-    background-color: var(--bg-original-black);
-    box-sizing: border-box;
-    color: var(--bg-original-white);
+    background-color: var(--bg-original-white);
+    border: none;
+    color: var(--bg-black);
     font-size: 1.2rem;
     font-weight: 500;
     position: absolute;
     bottom: 20px;
     right: 20px;
-    box-sizing: border-box;
 
     &:hover {
         cursor: pointer;
-        background-color: orange;
+        color: orange;
     }
 `

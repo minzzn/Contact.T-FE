@@ -44,15 +44,19 @@ export const Login = () => {
 
         // 제대로 입력하지 않으면 라우팅되는거 막기
         if(loginData.email === "" || loginData.password === "") {
-            ToastifyWarn("제대로 작성해주세요");
+            ToastifyWarn("회원가입을 해주시거나, 다시 시도해주세요");
             return;
         }
         
         // 유저 정보를 잘 넘기면 true반환
-        const resultAfterPost = postLoginDataWith(loginData,'auth/login');
-
-        if(resultAfterPost !== null || resultAfterPost !== undefined) {
+        const resultAfterPost = await postLoginDataWith(loginData,'auth/sign-in');
+        
+        if(resultAfterPost) {
+            // todo : 유저정보에 role값도 넘어오게 변경되면, role값도 localstorage상에 저장
             navigate('/main');
+        } else {
+            ToastifyWarn("다시 작성해주세요");
+            return;
         }
     }
 
@@ -101,6 +105,11 @@ export const Login = () => {
                         onClick={onSubmit}
                     >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
+                <div style={{
+                    textAlign: "center",
+                    color: "var(--bg-light-gray)",
+                    marginTop: "5vh"
+                }}>소셜 로그인 :</div>
             </StyledForm>
             <ToastContainer />
         </>

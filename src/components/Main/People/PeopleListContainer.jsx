@@ -1,26 +1,25 @@
 import { useState } from "react"
 import Modal from 'react-modal';
 import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, displayStyle, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
-import { ToastifyInfo } from './../../../function/toast';
+import { ToastifyInfo } from '../../../function/toast';
+import { useSetRecoilState } from "recoil";
+import { ChatActiveState } from "../../../hooks/chatActiveState";
 
-export const PeopleListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { // props로 user 객체를 전달
-
+export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 user 객체를 전달
+    const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
         setModalIsOpen(true);
-        console.log('Modal Open');
     };
     const closeModal = () => {
         setModalIsOpen(false);
-        console.log('Modal Close'); 
     };
  
     function clickEventFn() {
         setChoosedUser(user);
-        setIsChatContentActive(true);
+        setIsChatActive(true);
         setModalIsOpen(false);
-        console.log('Modal Close'); 
         ToastifyInfo('AI가 채팅을 분석하기 시작합니다🤖');
     }
 

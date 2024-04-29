@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { isRequired, MinimumLength, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
 //import { sendReqAndSaveToken } from "../../function/login.register";
 import { postRegisterDataWith } from "../../function/login.register";
-import { ToastifyWarn } from "../../function/toast";
+import { ToastifySuccess, ToastifyWarn } from "../../function/toast";
 import { ToastContainer } from 'react-toastify';
 
 export const Register = () => {
@@ -78,11 +78,12 @@ export const Register = () => {
             password: password,
         }
 
-        const resultAfterPost = postRegisterDataWith(formattedUserData,'auth/sign-up');
-        
-        // 모두 유효하다면, 로그인 페이지로 : 토큰 저장하는 코드 지웠음, 유효성 검사 해야됨.
+        const resultAfterPost = await postRegisterDataWith(formattedUserData,'auth/sign-up');
+
+        // true값을 반환해오면, login페이지로 이동
         if(resultAfterPost) {
             navigate("/");
+            ToastifySuccess("회원가입 성공");
         }
     }
 

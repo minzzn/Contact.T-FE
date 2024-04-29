@@ -1,11 +1,14 @@
+import { useSetRecoilState } from "recoil";
 import { Container, ImgContainer, NameAndContentContainer, DateContainer } from "../../../css/styled/Main/Chat/chatListBox.styled";
 import { ToastifyInfo } from "../../../function/toast";
+import { ChatActiveState } from "../../../hooks/chatActiveState";
 
-export const ChatListBox = ({ user, setChoosedUser, setIsChatContentActive }) => { 
+export const ChatListContainer = ({ user, setChoosedUser }) => { 
+    const setIsChatActive = useSetRecoilState(ChatActiveState);
 
     function clickEventFn() {
         setChoosedUser(user);
-        setIsChatContentActive(true);
+        setIsChatActive(true);
         ToastifyInfo('AI가 채팅을 분석하기 시작합니다🤖');
     }
 

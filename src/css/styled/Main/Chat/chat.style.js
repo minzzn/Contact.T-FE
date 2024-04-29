@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AddInfoModal } from './../../../../components/Profile/AddInfo/AddInfoModal';
+import { AddInfoModal } from '../../../../components/AddInfo/AddInfoModal';
 
 export const Container = styled.div`
     display: flex;

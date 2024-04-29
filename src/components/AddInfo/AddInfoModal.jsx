@@ -1,26 +1,25 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../../css/styled/Profile/AddInfo/addInfo.styled';
-import { POST, searchDB } from '../../../function/addInfo';
+import { ExtraInfoInput, ExtraInfoForm, ExtraInfoLabel, RadioInputWrapper, ExtraInfoInputRadio, customedStyle, RadioInputContainer, SchoolsListWrapper, ChildInfoWrapper, StyledButton, SearchSchoolContainer, ErrMsgContainer, TypeOfSchoolLabel, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput } from '../../css/styled/Profile/AddInfo/addInfo.styled';
+import { searchDB } from '../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
+import { IsBlankStringInObject } from '../../function/common';
 
 // 랜더링이 좀 자주 됨 : 리팩토링 개선 여지 필요
-export const AddInfoModal = () => {
+export const AddInfoModal = ({ setIsFirst }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [error, setError] = useState('');
     const [schoolList, setSchoolList] = useState([]);
     const [extraInfo, setExtraInfo] = useState({
-        childName: '',
-        childCnt: '',
-        teacherName: '',
         schoolInfo: '',
         schoolType: '',
-        role: '',
+        role: 'TEACHER',
     });
 
     async function onChange(e) {
         const { name, value } = e.target;
+        // 이미 있는 정보는 hold, 객체에 없는 정보는 동적으로 키를 생성해서 값 할당
         setExtraInfo((prevState) => ({ ...prevState, [name]: value }));
 
         if(name === 'schoolInfo') {
@@ -54,13 +53,17 @@ export const AddInfoModal = () => {
     }
 
     function onSubmit(e) {
-        e.preventDefault();
-
+        e.preventDefault(); 
         console.log(extraInfo);
+
         // POST(extraInfo); // 데이터 전송
-        setIsOpen(false);
+        if(IsBlankStringInObject(extraInfo) === false) {
+            setIsFirst(false);
+            setIsOpen(false);
+        } else {
+            setError("정보를 모두 입력해주세요");
+        }
     }
-    console.log(extraInfo.schoolInfo);
 
     Modal.setAppElement('#root');
     return (
@@ -89,36 +92,14 @@ export const AddInfoModal = () => {
                             }
                             <ChildInfoWrapper>
                                 <ExtraInfoLabel htmlFor='grade'>학년</ExtraInfoLabel>
-                                <ExtraInfoInput required type='text' id='grade' name='grade' onChange={(e) => onChange(e)} placeholder='학년' $customizedWidth="17%"></ExtraInfoInput>
+                                <ExtraInfoInput required type='text' id='grade' name='grade' onChange={(e) => onChange(e)} placeholder='학년'></ExtraInfoInput>
                             </ChildInfoWrapper>
                             <ChildInfoWrapper>
                                 <ExtraInfoLabel htmlFor='class'>반</ExtraInfoLabel>
-                                <ExtraInfoInput required type='text' id='class' name='class' onChange={(e) => onChange(e)} placeholder='반' $customizedWidth="12%"></ExtraInfoInput>
+                                <ExtraInfoInput required type='text' id='class' name='class' onChange={(e) => onChange(e)} placeholder='반'></ExtraInfoInput>
                             </ChildInfoWrapper>
                         </ExtraInfoContainer>
-                        
-                        <SearchSchoolContainer>
-                            <ExtraInfoLabel>학교 검색</ExtraInfoLabel>
-                            <RadioInputContainer>
-                                <RadioInputWrapper>
-                                    <ExtraInfoInputRadio type='radio' value="elem_list" id='elementary' name='schoolType' onChange={(e) => onChange(e)} />
-                                    <TypeOfSchoolLabel htmlFor='elementary'>초등학교</TypeOfSchoolLabel>
-                                </RadioInputWrapper>
-                                <RadioInputWrapper>
-                                    <ExtraInfoInputRadio type='radio' value="midd_list" id='middle' name='schoolType' onChange={(e) => onChange(e)} />
-                                    <TypeOfSchoolLabel htmlFor='middle'>중학교</TypeOfSchoolLabel>
-                                </RadioInputWrapper>
-                                <RadioInputWrapper>
-                                    <ExtraInfoInputRadio type='radio' value="high_list" id='high' name='schoolType' onChange={(e) => onChange(e)} />
-                                    <TypeOfSchoolLabel htmlFor='high'>고등학교</TypeOfSchoolLabel>                          
-                                </RadioInputWrapper>
-                            </RadioInputContainer>
-                            <ExtraInfoInput required id='schoolInfo' name="schoolInfo" type='text' value={extraInfo.schoolInfo} disabled={extraInfo.schoolType.length < 1} onChange={onChange} placeholder='학교 정보 입력'/>
-
-                            <SchoolsListWrapper>
-                                <SchoolListBox schoolsListArray={schoolList} schoolInfo={extraInfo.schoolInfo} setExtraInfo={setExtraInfo}/>
-                            </SchoolsListWrapper>
-                        </SearchSchoolContainer>
+                    
 
                         {/* 에러 상태값의 길이가 이상으면 error message 표현 */}
                         <ErrMsgContainer $visibleTrue={`${error?.length > 0}`}>{error}</ErrMsgContainer>

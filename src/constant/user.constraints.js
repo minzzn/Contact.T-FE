@@ -27,6 +27,6 @@ export const EmailFormat = {
 }
 
 export const SpecialText = {
-    rule: /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g,
+    rule: /[!?@#$%^&*():;+-=~{}<>\\[\]\|\\\"\'\,\.\/\`\₩]/g,
     message: '특수문자를 포함해주셔야 합니다',
 }

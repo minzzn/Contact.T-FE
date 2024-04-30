@@ -31,3 +31,66 @@ export const WrappingReactFragment = (ReactNode, index) => (
         {ReactNode}
     </React.Fragment>
 );
+
+
+    {/* 방 열기- openChatRoom
+    사용 방법 : const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
+    연결 시 openChatRoom(1); 와 같이 사용. */}
+function openChatRoom(teacherUserId) {
+    try {
+        // SSE 연결을 위한 EventSource 생성
+        const eventSource = new EventSource(`http://${BACKEND_URL}/notify/subscribe/${teacherUserId}`);
+
+        // SSE 연결이 성공적으로 설정된 후에 호출되는 함수
+        eventSource.onopen = function(event) {
+            // 콘솔에 채팅방이 열렸음을 알리는 메시지 출력
+            console.log('Chat room opened!');
+        };
+
+        // SSE 이벤트 수신 시 처리할 함수
+        eventSource.addEventListener('sse', event  => {
+            // 받은 이벤트 데이터는 파싱하지 않고 바로 출력합니다.
+            console.log('sse connected message:', event.data);
+        });
+
+        // SSE 연결이 끊어졌을 때 처리할 함수
+        eventSource.onerror = function(error) {
+            // 오류 처리
+            console.error('SSE 연결 오류:', error);
+            // SSE 연결 오류 처리
+        };
+    } catch (error) {
+        // 오류 처리
+        console.error('Error opening chat room:', error);
+    }
+}
+
+// SSE - 데이터 변동 알림, 학부모가 친구추가 요청을 보낼 떄 사용, 테스트 X
+// 의문점 - 선생님 Id를 어떻게 알아내서 보내는진 모르겠음
+async function sendFriendRequest(teacherUserId, requestData) {
+    try {
+        // 요청할 URL
+        const url = `http://${BACKEND_URL}/notify/send-data/${teacherUserId}`;
+
+        // post 요청 옵션
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                parentUserId: parentUserId,
+            }) // 요청 데이터를 JSON 문자열로 변환
+        };
+
+        // POST 요청
+        const response = await fetch(url, options);
+
+        // 응답 확인
+        if (response.ok) {
+            console.log('친구 요청 성공');
+        } else {
+            console.error('친구 요청 실패:', response.statusText);
+        }
+    } catch (error) {
+        console.error('친구 요청에 오류가 있음:', error);
+    }
+}
+

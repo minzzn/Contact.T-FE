@@ -7,7 +7,7 @@ import { AddInfoModal } from "../../components/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
 import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState } from "recoil";
-import { getRole, WrappingReactFragment } from "../../function/common";
+import { getRole, getUserId, openChatRoom, WrappingReactFragment } from "../../function/common";
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -29,6 +29,11 @@ export const Main = () => {
             setIsFirst(false);
         }
     }, []);
+
+    useEffect(() => {
+        openChatRoom(getUserId());
+        console.log('여기');
+    }, [isFirst]);
 
     return (    
         <>

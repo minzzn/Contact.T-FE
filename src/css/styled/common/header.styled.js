@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.div`
-    max-width: 50vw;
     // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
     height: 11vh;
     display: flex;

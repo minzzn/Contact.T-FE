@@ -14,29 +14,16 @@ export const getRole = () => localStorage.getItem("role");
 export const getUserId = () => localStorage.getItem("userId");
 export const setUserId = (userId) => localStorage.setItem("userId", userId);
 
-export const IsBlankStringInObject = (object) => {
-    let result = false;
-
-    for(const value of Object.values(object)) {
-        if(value === "") {
-            result = true;
-        }
-    }
-    
-    return result;
-}
-
 export const WrappingReactFragment = (ReactNode, index) => (
     <React.Fragment key={index}>
         {ReactNode}
     </React.Fragment>
 );
 
+// add-info 작성 후, sse구독을 위해선 notify/subscribe/{userId} api가 필요
+export const openChatRoom = (teacherUserId) => {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-    {/* 방 열기- openChatRoom
-    사용 방법 : const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-    연결 시 openChatRoom(1); 와 같이 사용. */}
-function openChatRoom(teacherUserId) {
     try {
         // SSE 연결을 위한 EventSource 생성
         const eventSource = new EventSource(`http://${BACKEND_URL}/notify/subscribe/${teacherUserId}`);
@@ -67,7 +54,9 @@ function openChatRoom(teacherUserId) {
 
 // SSE - 데이터 변동 알림, 학부모가 친구추가 요청을 보낼 떄 사용, 테스트 X
 // 의문점 - 선생님 Id를 어떻게 알아내서 보내는진 모르겠음
-async function sendFriendRequest(teacherUserId, requestData) {
+export async function sendFriendRequest(teacherUserId) {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
+
     try {
         // 요청할 URL
         const url = `http://${BACKEND_URL}/notify/send-data/${teacherUserId}`;

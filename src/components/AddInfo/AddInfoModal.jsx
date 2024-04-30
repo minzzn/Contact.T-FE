@@ -103,7 +103,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
         const result = postAddInfo({
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${getToken()}`,
+                "Authorization": `${getToken()}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(finalDataStructureBeforeSending)

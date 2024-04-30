@@ -4,6 +4,7 @@ import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInpu
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
 import { ToastifyError } from "../../../function/toast.js";
+import { getUserId } from "../../../function/common.js";
 
 /**
  * 상위 컴포넌트 - <ChattingPane>
@@ -12,14 +13,13 @@ import { ToastifyError } from "../../../function/toast.js";
  */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
-    const senderID = parseInt(process.env.REACT_APP_SENDER_ID);
+    const senderID = getUserId();
     const client = useRef({});
     // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
     // // 채팅을 쌓아두는 역할
     const [chatList, setChatList] = useState([]);
     const [accumulatedWarning, setaccumulatedWarning] = useState(null);
-
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {

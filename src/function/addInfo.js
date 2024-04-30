@@ -28,7 +28,7 @@ export const searchDB = async(schoolType) => {
 };
 
 export const postAddInfo = async(options) => {
-    const url = `http://13.124.97.155:8080/add-info`;
+    const url = `http://13.124.97.155:8080/auth/add-info`;
 
     try {
         const response = await fetch(url, options);

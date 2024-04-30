@@ -4,9 +4,6 @@ export const HouseContainer = styled.div`
     /* 나머지 부분을 꽉 채우는 형태 */
     width: 100%;
     height: 100%;
-    height: 100%;
-
-    gap: 20px;
 
     /* 가로로 */
     display: flex;

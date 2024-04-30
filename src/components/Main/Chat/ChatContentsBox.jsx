@@ -17,7 +17,6 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
         containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }, [chatsHistory])
 
-
     return (
         <>
             <ChatContents>
@@ -25,25 +24,26 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-
+                            
+                            console.log(parseInt(messageObject.sender) == senderID);
                             return (
                                 <div key={idx}>
                                     {
                                         isAggressive === 0 ? (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
-                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.message}
                                                 </ChatContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>       
                                             </ChatContentDivWrapper>
                                         ) : (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                 <AggressvieContentDiv>
                                                     공격적인 발언입니다
                                                 </AggressvieContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>
                                             </ChatContentDivWrapper>

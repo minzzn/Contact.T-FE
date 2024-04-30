@@ -1,14 +1,13 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.div`
-    max-width: 50vw;
     // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
     height: 11vh;
     display: flex;
     // 가로 중앙 정렬 */
     align-items: center;
     justify-content: space-evenly;
-    transition: all 0.4s linear;
+    transition: background-color 0.4s linear;
     /* vertical - horizontal */
     padding: 2vh 2vw;
     /* vertical - horizontal */

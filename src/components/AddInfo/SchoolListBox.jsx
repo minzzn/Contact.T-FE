@@ -1,12 +1,19 @@
 import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../css/styled/Profile/AddInfo/schoolListBox.styled"
 
-export const SchoolListBox = ({ schoolsListArray, schoolInfo, setExtraInfo }) => {
-    
+export const SchoolListBox = ({ role, schoolsListArray, schoolInfo, setter }) => {
+
     function selectSchool(e, schoolName) {
         e.preventDefault();
     
         // 값 할당(props값에)
-        setExtraInfo((prevState) => ({ ...prevState, schoolInfo: schoolName }));
+        setter((prevState) => {
+            const schoolKeyByRole = role === "TEACHER" ? "teacherSchool" : "childSchool";
+
+            return { 
+                ...prevState, 
+                [schoolKeyByRole]: schoolName 
+            }
+        });
     }
 
     return (
@@ -19,7 +26,7 @@ export const SchoolListBox = ({ schoolsListArray, schoolInfo, setExtraInfo }) =>
                                 <SchoolDiv name="school" onClick={(e) => selectSchool(e, school.schoolName)}>
                                     <SchoolName>{school.schoolName}</SchoolName>
                                     <EtcContentWrapper>
-                                        <SchoolAddressP>{school.adres.length > 12 ? `${school.adres.substring(0,11)}...` : school.adres}</SchoolAddressP>
+                                        <SchoolAddressP>{school.adres}</SchoolAddressP>
                                     </EtcContentWrapper>
                                 </SchoolDiv>
                             ) : null

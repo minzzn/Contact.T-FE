@@ -23,7 +23,7 @@ export const HeaderRightContainer = styled.div`
 export const ProfileContainer = styled.div`
     display: flex;
     justify-content: start;
-    align-items: end;
+    align-items: flex-start;
     color: var(--bg-original-black);
 `
 export const ImgContainer = styled.div`

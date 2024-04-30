@@ -59,7 +59,7 @@ module.exports = {
       // api로 시작하는 경로일 경우 : ex) /api/sub/chat/ws
       '/api': {
         // 요청 url앞에 타겟 붙여주기 : ex) 43.202.161.139:8080/api/sub/chat/ws
-        target: '43.202.161.139:8080/',
+        target: '13.124.97.155:8080/',
         ws: true,
       },
     },

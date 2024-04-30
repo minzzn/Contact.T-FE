@@ -1,6 +1,6 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { IconsWrapper, StyledIcon } from "../../css/styled/Main/main.styled";
-import { HeaderContainer, IconsModalContainer } from "../../css/styled/common/header.styled";
+import { StyledIcon } from "../../css/styled/Main/main.styled";
+import { HeaderContainer } from "../../css/styled/common/header.styled";
 import { IconsState } from "../../hooks/iconsState";
 import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "./Bell";

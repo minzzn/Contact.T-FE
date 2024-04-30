@@ -8,7 +8,7 @@ export const SchoolContainer = styled.div`
 
 export const SchoolDiv = styled.div`
     width: 100%;
-    border: 2px solid orange;
+    border: 2px solid var(--bg-main-green);
     border-radius: 5px;
     padding: 10px 5px;
     display: flex;
@@ -19,7 +19,7 @@ export const SchoolDiv = styled.div`
 
     &:hover {
         cursor: pointer;
-        background-color: orange;
+        background-color: var(--bg-main-green);
     }
 `
 

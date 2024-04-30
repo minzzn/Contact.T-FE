@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
     // 가로 중앙 정렬 */
     align-items: center;
     justify-content: space-evenly;
-    transition: all 0.4s linear;
+    transition: background-color 0.4s linear;
     /* vertical - horizontal */
     padding: 2vh 2vw;
     /* vertical - horizontal */

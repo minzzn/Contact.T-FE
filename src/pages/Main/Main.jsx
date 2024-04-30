@@ -22,13 +22,13 @@ export const Main = () => {
         }));
     };
 
-    // useEffect(() => {
-    //     if(getRole() === "GUEST") {
-    //         setIsFirst(true);
-    //     } else {
-    //         setIsFirst(false);
-    //     }
-    // }, []);
+    useEffect(() => {
+        if(getRole() === "GUEST") {
+            setIsFirst(true);
+        } else {
+            setIsFirst(false);
+        }
+    }, []);
 
     return (    
         <>

@@ -26,7 +26,7 @@ export const ChatAndPeopleListContainer = styled.div`
     // 채팅목록 박스들이 세로로 쌓이도록
     display: flex;
     flex-direction: column;
-    max-width: 50vw;
+    max-width: 45vw;
     max-height: 80vh;
 
     // 높이는 스크롤 가능하도록 무제한으로

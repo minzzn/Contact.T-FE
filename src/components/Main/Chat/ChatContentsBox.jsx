@@ -17,7 +17,6 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
         containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }, [chatsHistory])
 
-
     return (
         <>
             <ChatContents>
@@ -25,8 +24,8 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-                            console.log(messageObject);
-                            console.log(`$ismine: ${parseInt(messageObject.sender) == senderID}`); // 여기서 콘솔에 찍음
+                            
+                            console.log(parseInt(messageObject.sender) == senderID);
                             return (
                                 <div key={idx}>
                                     {   

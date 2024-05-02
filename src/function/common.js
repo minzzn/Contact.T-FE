@@ -65,8 +65,8 @@ function openChatRoom(teacherUserId) {
     }
 }
 
-// SSE - 데이터 변동 알림, 학부모가 친구추가 요청을 보낼 떄 사용, 테스트 X
-// 의문점 - 선생님 Id를 어떻게 알아내서 보내는진 모르겠음
+// SSE - 데이터 변동 알림, 학부모가 친구추가 요청을 보냈을 때 온 parentuserId를 사용하여 요청, 테스트 X
+// 
 async function sendFriendRequest(teacherUserId, requestData) {
     try {
         // 요청할 URL

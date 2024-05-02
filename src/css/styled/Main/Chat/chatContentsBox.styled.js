@@ -55,5 +55,5 @@ export const ChatTimeDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    color: var(--bg-original-white);
+    color: var(--bg-original-black);
 `

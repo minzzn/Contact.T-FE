@@ -7,7 +7,8 @@ import { AddInfoModal } from "../../components/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
 import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState } from "recoil";
-import { getRole, getUserId, openChatRoom, WrappingReactFragment } from "../../function/common";
+import { getRole, getUserId, openSseArea, sendFriendRequest, WrappingReactFragment } from "../../function/common";
+import { getToken } from './../../function/common';
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -31,8 +32,11 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        openChatRoom(getUserId());
+        openSseArea(getUserId());
+        sendFriendRequest(1,7);
         console.log('여기');
+        console.log(getToken());
+        console.log(getUserId());
     }, [isFirst]);
 
     return (    

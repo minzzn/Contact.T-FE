@@ -20,8 +20,9 @@ export const WrappingReactFragment = (ReactNode, index) => (
     </React.Fragment>
 );
 
+// *방 여는 게 아니라 선생님 id당 알림받을 구역을 열어놓는 func
 // add-info 작성 후, sse구독을 위해선 notify/subscribe/{userId} api가 필요
-export const openChatRoom = (teacherUserId) => {
+export const openSseArea = (teacherUserId) => {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
 
     try {
@@ -31,7 +32,7 @@ export const openChatRoom = (teacherUserId) => {
         // SSE 연결이 성공적으로 설정된 후에 호출되는 함수
         eventSource.onopen = function(event) {
             // 콘솔에 채팅방이 열렸음을 알리는 메시지 출력
-            console.log('Chat room opened!');
+            console.log('SSE event area opened!');
         };
 
         // SSE 이벤트 수신 시 처리할 함수
@@ -48,14 +49,15 @@ export const openChatRoom = (teacherUserId) => {
         };
     } catch (error) {
         // 오류 처리
-        console.error('Error opening chat room:', error);
+        console.error('Error opening SSE area:', error);
     }
 }
 
 // SSE - 데이터 변동 알림, 학부모가 친구추가 요청을 보낼 떄 사용, 테스트 X
-// 의문점 - 선생님 Id를 어떻게 알아내서 보내는진 모르겠음
-export async function sendFriendRequest(teacherUserId) {
+// 부모가 post 요청으로 선생님에게 친구요청 전송.
+export async function sendFriendRequest(teacherUserId,parentUserId) {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
+    // const parentUserId = getUserId();
 
     try {
         // 요청할 URL
@@ -65,7 +67,7 @@ export async function sendFriendRequest(teacherUserId) {
         const options = {
             method: 'POST',
             body: JSON.stringify({
-                parentUserId: parentUserId,
+                parentUserId: parentUserId
             }) // 요청 데이터를 JSON 문자열로 변환
         };
 

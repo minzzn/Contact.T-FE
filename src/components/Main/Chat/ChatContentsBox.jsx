@@ -25,7 +25,8 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
                             
-                            console.log(parseInt(messageObject.sender) == senderID);
+                            console.log(messageObject);
+                            console.log(`$ismine: ${parseInt(messageObject.sender) == senderID}`); // 여기서 콘솔에 찍음
                             return (
                                 <div key={idx}>
                                     {   

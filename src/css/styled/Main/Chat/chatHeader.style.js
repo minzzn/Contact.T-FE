@@ -23,8 +23,8 @@ export const HeaderRightContainer = styled.div`
 export const ProfileContainer = styled.div`
     display: flex;
     justify-content: start;
-    align-items: end;
-    color: var(--bg-original-white);
+    align-items: flex-start;
+    color: var(--bg-original-black);
 `
 export const ImgContainer = styled.div`
     width: 45px;

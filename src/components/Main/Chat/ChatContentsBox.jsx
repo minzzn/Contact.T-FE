@@ -24,25 +24,27 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-
+                            
+                            console.log(messageObject);
+                            console.log(`$ismine: ${parseInt(messageObject.sender) == senderID}`); // 여기서 콘솔에 찍음
                             return (
                                 <div key={idx}>
-                                    {
+                                    {   
                                         isAggressive === 0 ? (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
-                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.message}
                                                 </ChatContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>       
                                             </ChatContentDivWrapper>
                                         ) : (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                 <AggressvieContentDiv>
                                                     공격적인 발언입니다
                                                 </AggressvieContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) === senderID}`}>
+                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>
                                             </ChatContentDivWrapper>

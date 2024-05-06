@@ -5,10 +5,11 @@
   --bg-orangered: rgb(255, 25, 0);
   --bg-original-white: white;
   --bg-original-black: black;
-  --bg-black: #374150;
-  --bg-dark-gray: #393E46;
-  --bg-gray: gray;
-  --bg-light-gray: #EEEEEE;
+  --bg-black: #222831;
+  --bg-dark-gray: #E4E6E7;
+  --bg-light-gray: #F1F1F1;
+  --bg-button-gray: #AFB4B7;
+  --bg-main-green: #5CC095;
 }
 * {
   margin: 0;
@@ -22,7 +23,7 @@ body {
   /* 스크롤 움직임 차단 */
   overflow: hidden;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: white;
+  background-color: var(--bg-dark-gray);
 }
 .wrapper {
   height: 100%;

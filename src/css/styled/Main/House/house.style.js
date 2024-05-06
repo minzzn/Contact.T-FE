@@ -2,11 +2,8 @@ import styled from "styled-components"
 
 export const HouseContainer = styled.div`
     /* 나머지 부분을 꽉 채우는 형태 */
-    width: 100vw;
+    width: 100%;
     height: 100%;
-    margin-left: 3vw; 
-
-    gap: 20px;
 
     /* 가로로 */
     display: flex;
@@ -15,7 +12,7 @@ export const HouseContainer = styled.div`
 `
 
 export const InnerPane = styled.div`
-    background-color: orange;
+    background-color: var(--bg-main-green);
     padding: 30px;
 
     display: flex;

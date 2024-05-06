@@ -1,5 +1,4 @@
 import { serverEndPoint } from "../constant/common.constant";
-import { setToken } from "./common";
 
 // 프로필 설정 함수
 export const postSetProfileDataWith = async (userObj,url) => {

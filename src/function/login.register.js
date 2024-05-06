@@ -1,5 +1,5 @@
 import { serverEndPoint } from "../constant/common.constant";
-import { setToken } from "./common";
+import { setRole, setToken, setUserId } from "./common";
 
 // 회원가입 함수
 export const postRegisterDataWith = async (userObj,url) => {
@@ -51,10 +51,14 @@ export const postLoginDataWith = async (userObj,url) => {
 
         // 유저 정보 중 하나인 토큰은 따로 변수로 분리
         const token = response.headers.get("Authorization");
+        const { role, userId } = await response.json();
 
-        if(token) {
-            // 로컬스토리지에 토큰 저장
+        if(token && role && userId) {
+            // 로컬스토리지에 토큰, role, userId(key) 저장
             setToken(token);
+            setRole(role);
+            setUserId(userId);
+
             return true;
         } else {
             return false;

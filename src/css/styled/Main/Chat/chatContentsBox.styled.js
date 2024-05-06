@@ -6,8 +6,7 @@ export const ChatContentsContainer = styled.div`
     display: flex;
     // 내부 채팅 div들은 세로로 쌓이도록 만들기
     flex-direction: column;
-    min-height: 520px;
-    max-height: 520px;
+    min-height: 460px;
     overflow-y: scroll;
 `
 // 실제 메시지 내용들이 담는 div tag의 wrapper
@@ -31,8 +30,8 @@ export const ChatContentDiv = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    background-color: ${(props) => props.$ismine === "true" ? 'white' : 'yellow'};
-    color: var(--bg-original-black);
+    background-color: ${(props) => props.$ismine === "true" ? 'var(--bg-main-green)' : 'var(--bg-light-gray)' };
+    color: ${(props) => props.$ismine === "true" ? 'var(--bg-original-white)' : 'var(--bg-original-black)' };
 `;
 
 export const AggressvieContentDiv = styled.div`
@@ -44,8 +43,8 @@ export const AggressvieContentDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
-    color: black;
+    background-color: var(--bg-orangered);
+    color: var(--bg-original-black);
 `
 export const ChatTimeDiv = styled.div`
     height: 30px;
@@ -56,5 +55,5 @@ export const ChatTimeDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    color: white;
+    color: var(--bg-original-black);
 `

@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 export default function Messages({ isClicked }) {
     const [sseEvents, setSseEvents] = useRecoilState(sseEventState);
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-
+    console.log(sseEvents);
     return (
         <>
         {/* position: absolute를 통해 Bell component를 기준으로 상대적 위치를 결정해줘야함 */}

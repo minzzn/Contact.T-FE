@@ -18,14 +18,15 @@ export const RequestsContainer = styled.div`
 `;
 
 export const RequestContainer = styled.div` 
-    width: max-content;
+    width: 300px;
     transition: background-color linear 0.3s;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
 
-
+    color: white;
     &:hover {
         background-color: var(--bg-deep-green);
     }

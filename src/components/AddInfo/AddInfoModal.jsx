@@ -89,7 +89,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
         }
     }
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault(); 
         setChildren(prevState => [...prevState, {...childInfo}]);
 
@@ -119,11 +119,10 @@ export const AddInfoModal = ({ setIsFirst }) => {
             setRole(extraInfo.role)
 
             if(getRole() === "PARENT") {
-                const teachersIds = findTeachers();
-
-                if(teachersIds.length > 0) {
-                    // 해당 teacherid
-                    teachersIds.map(teacherId => sendFriendRequest(teacherId));
+                const teacherIds = await findTeachers();
+                
+                for(let i=0; i<teacherIds.length; i++) {
+                    await sendFriendRequest(teacherIds[i]);
                 }
             }
         } else {

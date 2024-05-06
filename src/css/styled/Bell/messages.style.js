@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const RequestsContainer = styled.div`
     position: absolute;
-    top: 50px;
+    top: 55px;
 
     z-index: 999;
-    padding: 10px;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
@@ -27,6 +27,6 @@ export const RequestContainer = styled.div`
 
 
     &:hover {
-        background-color: #1A4D2E;
+        background-color: var(--bg-deep-green);
     }
 `;

@@ -34,13 +34,12 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        if(getRole() === "TEACHER" && !isFirst) {
+        if(getRole() === "TEACHER") {
             const eventSource = openSseArea(getUserId());
 
             // SSE 이벤트 수신 시 처리할 함수
             eventSource.addEventListener('sse', event  => {
-                // 받은 이벤트 데이터는 파싱하지 않고 바로 사용하면 됩니다.
-                setSseEventData(prevState => [...prevState, event.data]);
+                setSseEventData(prevState => [...prevState, JSON.parse(event.data)]);
             });
 
             // SSE 연결이 끊어졌을 때 처리할 함수

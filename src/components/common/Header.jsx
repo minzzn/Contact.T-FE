@@ -3,11 +3,12 @@ import { StyledIcon } from "../../css/styled/Main/main.styled";
 import { HeaderContainer } from "../../css/styled/common/header.styled";
 import { IconsState } from "../../hooks/iconsState";
 import { ChatActiveState } from "../../hooks/chatActiveState";
-import { Bell } from "./Bell";
+import { Bell } from "../Bell/Bell";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
+
     return (
         <HeaderContainer>
             <div>

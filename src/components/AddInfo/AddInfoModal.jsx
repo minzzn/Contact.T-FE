@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ExtraInfoForm, customedStyle, StyledButton, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput, SearchSchoolContainer, ExtraInfoLabel, RadioInputContainer, RadioInputWrapper, ExtraInfoInputRadio, TypeOfSchoolLabel, ExtraInfoInput, SchoolsListWrapper } from '../../css/styled/Profile/AddInfo/addInfo.styled';
-import { postAddInfo, searchDB } from '../../function/addInfo';
+import { findTeachers, postAddInfo, searchDB } from '../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
-import { getToken, setRole } from '../../function/common';
+import { getRole, getToken, setRole } from '../../function/common';
+import { sendFriendRequest } from '../../function/addInfo';
 import { TeacherRole } from './DividedByRole/TeacherRole';
 import { ToastifyError, ToastifySuccess } from '../../function/toast';
 
@@ -116,6 +117,15 @@ export const AddInfoModal = ({ setIsFirst }) => {
             setIsOpen(false);
             // 로컬스토리지 상의 role값 변경
             setRole(extraInfo.role)
+
+            if(getRole() === "PARENT") {
+                const teachersIds = findTeachers();
+
+                if(teachersIds.length > 0) {
+                    // 해당 teacherid
+                    teachersIds.map(teacherId => sendFriendRequest(teacherId));
+                }
+            }
         } else {
             ToastifyError("에러 발생. 다시 시도해주세요");
         }

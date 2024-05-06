@@ -10,8 +10,8 @@ export const customedStyle = {
     // 모달창 
     content: {
         // 내부 내용을 기반으로 동적으로 화면 크기 생성
-        width: "55vw",
-        height: "",
+        width: "70vw",
+        height: "95vh",
         zIndex: '150',
         position: 'absolute',
         top: '50%',
@@ -20,7 +20,7 @@ export const customedStyle = {
         borderRadius: "15px",
         backgroundColor: 'var(--bg-original-white)',
         overflow: "hidden",
-        border: "5px solid var(--bg-black)",
+        border: "5px solid var(--bg-main-green)",
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "stretch",
@@ -49,7 +49,7 @@ export const RoleSelectContainer = styled.div`
 
 export const RoleSelectInput = styled.select`
     padding: 10px 15px;
-    border: 2px solid orange;
+    border: 2px solid var(--bg-main-green);
     border-radius: 5px;
     font-weight: 600;
     font-size: 1.5rem;
@@ -63,8 +63,8 @@ export const ExtraInfoForm = styled.form`
     width: 100%;
     height: 100%;
     color: var(--bg-original-black);
-    /* 크게 <자녀이름, 자녀수, 교사이름> 과 <학교검색> 두 개로 레이아웃 쪼개주기 */
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     /* 가장 위로 붙도록 */
     align-items: flex-start;
@@ -75,9 +75,8 @@ export const ExtraInfoForm = styled.form`
 export const ExtraInfoContainer = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: column;
     /* 가로 방향 맨 앞으로 */
-    align-items: flex-start;
+    justify-content: flex-start;
     /* 이 컨테이너 내부 컴포넌트들은 서로 갭을 둠 */
     gap: 20px;
 `
@@ -87,17 +86,16 @@ export const SearchSchoolContainer = styled.div`
     flex-direction: column;
     /* 가로 방향 끝으로 */
     align-items: flex-start;
-    gap: 30px;
+    gap: 10px;
 `
 
-export const ChildInfoWrapper = styled.div`
-    width: 80%;
+export const ExtraInfoWrapper = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     /* 가로 방향 맨 앞으로 */
     align-items: flex-start;
-    gap: 7px;
+    gap: 5px;
 `
 
 export const ExtraInfoLabel = styled.label`
@@ -108,10 +106,11 @@ export const ExtraInfoLabel = styled.label`
 
 export const ExtraInfoInput = styled.input`
     height: 30px;
+    width: 100%;
     padding: 20px 8px;
     font-size: 1.1rem;
     box-sizing: border-box;
-    border: 2px solid var(--bg-orange);
+    border: 2px solid var(--bg-main-green);
     border-radius: 5px;
 
     &:focus {
@@ -134,7 +133,7 @@ export const RadioInputWrapper = styled.div`
 
 export const ExtraInfoInputRadio = styled.input`
     margin-right: 5px;
-    accent-color: var(--bg-orange);
+    accent-color: var(--bg-main-green);
     cursor: pointer;
     &:checked {
         border: none;
@@ -155,37 +154,28 @@ export const SchoolInputWrapper = styled.div`
 
 export const SchoolsListWrapper = styled.div`
     width: 100%;
-    height: 200px;
+    max-height: 45vh;
     display: flex;
     flex-direction: column;
     overflow: scroll;
     justify-content: flex-start;
 `
 
-export const ErrMsgContainer = styled.div`
-    position: absolute;
-    bottom: 60px;
-    right: 23px;
-    color: red;
-    font-weight: 600;
-    font-size: 1.1rem;
-    visibility: ${(props) => props.$visibleTrue ? 'visible' : 'hidden'};
-`
-
 export const StyledButton = styled.button`
     display: block;
-    padding: 2px 5px;
-    background-color: var(--bg-original-white);
-    border: none;
+    width: 100%;
+    padding: 15px;
+
+    background-color: var(--bg-main-green);
     color: var(--bg-black);
     font-size: 1.2rem;
     font-weight: 500;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+
+    outline: none; border: none;
+    border-radius: 5px;
 
     &:hover {
         cursor: pointer;
-        color: orange;
+        color: var(--bg-original-white);
     }
 `

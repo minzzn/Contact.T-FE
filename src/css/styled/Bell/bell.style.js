@@ -3,33 +3,19 @@ import styled from "styled-components"
 export const BellContainer = styled.div`
     width: min-content;
     height: min-content;
-
-    position: absolute;
-    bottom: 40px;
-    right: 1vw;
+    position: relative;
     font-size: 2rem;
-    color: white;
-`
-
-export const BellIcon = styled.i.attrs(({className}) => ({
-    className: `${className}`,
-}))`
-    color: var(--bg-black);
-    &:hover {
-        color: var(--bg-light-gray);
-        cursor: pointer;
-    }
+    color: var(--bg-original-white);
 `
 
 export const RedDot = styled.div`
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: var(--bg-orangered);
     border-radius: 50%;
 
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: ${(props) => props.$marginBottom};
 
     display: ${(props) => props.$isHavingAlarm === "true" ? "block" : "none" };
 `

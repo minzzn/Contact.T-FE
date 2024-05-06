@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 export const ToastifyInfo = (text) => toast.info(text, {
     position: "top-right",
-    autoClose: 1500,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -13,7 +13,7 @@ export const ToastifyInfo = (text) => toast.info(text, {
 
 export const ToastifyWarn = (text) => toast.warn(text, {
     position: "top-right",
-    autoClose: 1500,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -24,7 +24,7 @@ export const ToastifyWarn = (text) => toast.warn(text, {
 
 export const ToastifySuccess = (text) => toast.success(text, {
     position: "top-right",
-    autoClose: 1500,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -35,7 +35,7 @@ export const ToastifySuccess = (text) => toast.success(text, {
 
 export const ToastifyError = (text) => toast.error(text, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

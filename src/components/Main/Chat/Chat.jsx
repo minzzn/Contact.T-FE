@@ -3,7 +3,8 @@ import { IconsWrapper, StyledIcon } from "../../../css/styled/Main/main.styled"
 import { ChatEtcContainer, ChatInput, ChatInputBtn, ChatInputContainer, ChatInputForm, Container } from "../../../css/styled/Main/Chat/chat.style";
 import { useEffect, useRef, useState } from "react";
 import { Client } from '@stomp/stompjs';
-import { ToastifyError } from "../../../function/toast.js"
+import { ToastifyError } from "../../../function/toast.js";
+import { getUserId } from "../../../function/common.js";
 
 /**
  * 상위 컴포넌트 - <ChattingPane>
@@ -12,7 +13,7 @@ import { ToastifyError } from "../../../function/toast.js"
  */
 export const Chat = () => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
-    const senderID = parseInt(process.env.REACT_APP_SENDER_ID);
+    const senderID = getUserId();
     const client = useRef({});
     // // 사용자가 입력한 채팅
     const [chat, setChat] = useState("");
@@ -23,10 +24,9 @@ export const Chat = () => {
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
         // sub/chat/{roomID}
-        client.current.subscribe('/sub/chat/1', (datafromServer) => {
+        client.current.subscribe('/queue/chat/room/d18c0129-737c-4d9a-b214-bed762ef88cb', (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
             const message = JSON.parse(datafromServer.body);
-            console.log(message);
 
             // 서버로부터 넘어온 채팅을 다시 풀어서 새로운 객체로 만들어서 넣어줌으로써 연결성 약화
             setChatList((previousChatList) => {
@@ -39,9 +39,8 @@ export const Chat = () => {
             });
 
         });
-        console.log('subscribed(구독중 : 채팅을 받을 수 있는 상태)');
     }
-
+    
     // // ws프로토콜 연결
     function connect() {
         // useRef안에 Client객체 넣어서 랜더링과 분리해서 관리
@@ -55,12 +54,13 @@ export const Chat = () => {
         });
         // 연결 활성화
         client.current.activate();
+        console.log("연결 완료");
     }
 
     // // 프로토콜 연결 종료
     function disconnect() {
         client.current.deactivate();
-        consol.log('종료');
+        console.log('종료');
     }
 
     // 사용자가 입력한 채팅, 채팅 전송 시점 서버로 전송하는 역할
@@ -68,16 +68,15 @@ export const Chat = () => {
         if (!client.current.connected) {
             return;
         }
-        console.log("before pub");
         client.current.publish({
             // sub/chat/{roomID}
-            destination: '/pub/chat/message',
+            destination: '/pub/chat/sendMessage',
             // 구독한 쪽에서 이 부분에 대한 내용을 받습니다.
             // 형식에 맞게 수정해서 보내야 함
             body: JSON.stringify({ 
                 type: "CHAT",
                 hidden: 0,
-                roomId: 1,
+                roomId: "d18c0129-737c-4d9a-b214-bed762ef88cb",
                 message: chat,
                 sender: senderID,
                 time: new Date().toLocaleTimeString("ko-KR", 
@@ -87,8 +86,6 @@ export const Chat = () => {
                 }),
             }),
         });
-        console.log("after pub");
-        console.log('published!(채팅을 보낸다)');
         setChat('');
     }
 

@@ -55,7 +55,7 @@ export const openSseArea = (teacherUserId) => {
     try {
         // SSE 연결을 위한 EventSource 생성
         const eventSource = new EventSource(`http://${BACKEND_URL}/notify/subscribe/${teacherUserId}`);
-        
+        console.log(eventSource);
         return eventSource;
     } catch (error) {
         // 오류 처리
@@ -120,7 +120,5 @@ export async function findTeachers() {
     } catch(error) {
         console.log("Error : ", error);
     }
-
-
     return teacherIds;
 }

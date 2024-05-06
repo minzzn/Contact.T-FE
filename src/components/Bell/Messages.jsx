@@ -7,15 +7,15 @@ import { useRecoilState } from "recoil";
 export default function Messages({ isClicked }) {
     const [sseEvents, setSseEvents] = useRecoilState(sseEventState);
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-
+    console.log(sseEvents);
     return (
         <>
         {/* position: absolute를 통해 Bell component를 기준으로 상대적 위치를 결정해줘야함 */}
             <RequestsContainer $isVisible={isClicked}>
                 {
                     sseEvents.length > 0 ? (
-                        sseEvents?.map(sseEvent => (
-                            <RequestContainer>
+                        sseEvents?.map((sseEvent, idx)=> (
+                            <RequestContainer key={idx}>
                                 <h6>{sseEvent["parentName"]}</h6>
                                 <StyledIcon className="fas fa-check" size="20px" onClick={async () => {
                                     const response = await fetch(`http://${BACKEND_URL}/friends/accept`, {

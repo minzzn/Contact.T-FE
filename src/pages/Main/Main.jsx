@@ -34,13 +34,24 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        if(getRole() === "TEACHER" && !isFirst) {
+        if(getRole() === "TEACHER") {
             const eventSource = openSseArea(getUserId());
 
+            // SSE 연결이 성공적으로 설정된 후에 호출되는 함수
+            eventSource.onopen = function(event) {
+                // 콘솔에 채팅방이 열렸음을 알리는 메시지 출력
+                console.log('SSE event area opened!');
+            };
             // SSE 이벤트 수신 시 처리할 함수
             eventSource.addEventListener('sse', event  => {
                 // 받은 이벤트 데이터는 파싱하지 않고 바로 사용하면 됩니다.
-                setSseEventData(prevState => [...prevState, event.data]);
+                if (event.data.trim().startsWith('{')) {
+                    // JSON 형식이라면 파싱하여 상태에 추가
+                    setSseEventData(prevState => [...prevState, JSON.parse(event.data)]);
+                } else {
+                    // 첫 번째 더미데이터는 그냥 무시
+                    console.log(event.data);
+                }
             });
 
             // SSE 연결이 끊어졌을 때 처리할 함수
@@ -50,7 +61,7 @@ export const Main = () => {
                 // SSE 연결 오류 처리
             };
         }
-    }, []);
+    }, [isFirst]);
 
     return (    
         <>

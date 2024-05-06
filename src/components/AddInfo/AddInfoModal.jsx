@@ -116,7 +116,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
             setIsFirst(false);
             setIsOpen(false);
             // 로컬스토리지 상의 role값 변경
-            setRole(extraInfo.role)
+            setRole(extraInfo.role);
 
             if(getRole() === "PARENT") {
                 const teachersIds = findTeachers();

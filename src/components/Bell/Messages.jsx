@@ -1,13 +1,15 @@
 import { RequestContainer, RequestsContainer } from "../../css/styled/Bell/messages.style";
 import { StyledIcon } from "../../css/styled/Main/main.styled";
-import { getToken, getUserId } from "../../function/common";
+import { createRoom, getToken, getUserId } from "../../function/common";
+import { RoomsState } from "../../hooks/roomsState";
 import { sseEventState } from "../../hooks/sseEventState";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default function Messages({ isClicked }) {
-    const [sseEvents, setSseEvents] = useRecoilState(sseEventState);
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-    console.log(sseEvents);
+    const [sseEvents, setSseEvents] = useRecoilState(sseEventState);
+    const setRoomsState = useSetRecoilState(RoomsState);
+    
     return (
         <>
         {/* position: absolute를 통해 Bell component를 기준으로 상대적 위치를 결정해줘야함 */}
@@ -33,6 +35,12 @@ export default function Messages({ isClicked }) {
 
                                     if(response) {
                                         setSseEvents(prevStates => prevStates.filter(state => state["parentId"] !== sseEvent["parentId"]));
+                                        setRoomsState(async (prevState) => {
+                                            const newData = await createRoom(sseEvent["parentId"]);
+                                            console.log(newData);
+
+                                            return [...prevState, newData];
+                                        });
                                     }
                                 }} />
                             </RequestContainer>

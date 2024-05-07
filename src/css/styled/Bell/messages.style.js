@@ -27,7 +27,4 @@ export const RequestContainer = styled.div`
     border-radius: 5px;
 
     color: white;
-    &:hover {
-        background-color: var(--bg-deep-green);
-    }
 `;

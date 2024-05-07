@@ -1,4 +1,4 @@
-import { getToken } from "./common";
+import { getToken, getUserId } from "./common";
 
 export const searchDB = async(schoolType) => {
     const INF = 7000;
@@ -104,7 +104,7 @@ export async function findTeachers() {
     const teacherIds = [];
 
     try {
-        const response = await fetch(`${BACKEND_URL}/findTeachers`, {
+        const response = await fetch(`http://${BACKEND_URL}/findTeachers`, {
             method: "GET",
             headers: {
                 "Authorization": `${getToken()}`,

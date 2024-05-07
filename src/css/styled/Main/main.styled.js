@@ -58,7 +58,7 @@ export const StyledIcon = styled.i.attrs(({className}) => ({
     transition: all 0.2s linear;
 
     &:hover {
-        color: var(--bg-button-gray);
+        color: ${props => props.$hoverColor ? props.$hoverColor : 'var(--bg-button-gray)'};
         cursor: pointer;
     }
 `;

@@ -14,10 +14,10 @@ export default function Messages({ isClicked }) {
             <RequestsContainer $isVisible={isClicked}>
                 {
                     sseEvents.length > 0 ? (
-                        sseEvents?.map((sseEvent, idx)=> (
+                        sseEvents?.map((sseEvent, idx) => (
                             <RequestContainer key={idx}>
-                                <h6>{sseEvent["parentName"]}</h6>
-                                <StyledIcon className="fas fa-check" size="20px" onClick={async () => {
+                                <h5>{sseEvent["parentName"]}</h5>
+                                <StyledIcon className="fas fa-check" size="30px" $hoverColor="black" onClick={async () => {
                                     const response = await fetch(`http://${BACKEND_URL}/friends/accept`, {
                                         method: "POST",
                                         headers: {
@@ -41,7 +41,7 @@ export default function Messages({ isClicked }) {
                         <div style={{
                             width: "max-content",
                         }}>
-                            <h6>아직 요청이 없습니다</h6>
+                            <h6>더 이상 요청이 없습니다</h6>
                         </div>
                     )
                 }

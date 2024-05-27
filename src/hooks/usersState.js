@@ -11,5 +11,20 @@ export const UsersState = atom({
             img: img1,
             profileImg: defaultImg
         },
+        {
+            name: '김현기',
+            img: img1,
+            profileImg: defaultImg
+        },
+        {
+            name: '김태양',
+            img: img1,
+            profileImg: defaultImg
+        },
+        {
+            name: '지준호',
+            img: img1,
+            profileImg: defaultImg
+        }
     ]
 })

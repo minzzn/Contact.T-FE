@@ -4,14 +4,28 @@ import { HeaderContainer } from "../../css/styled/common/header.styled";
 import { IconsState } from "../../hooks/iconsState";
 import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "../Bell/Bell";
+import HoverIcon from "./HoverIcon";
+import { useState } from "react";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
+    const [isHovered, setIsHovered] = useState(false);
+
+    function handleMouseEnterOrLeave() {
+        setIsHovered(!isHovered);
+    }
+
+    function example() {
+        roomInfos.map(roomInfo => {
+            setRoomsState(prevState => [...prevState, roomInfo]);
+        })
+
+    }
 
     return (
         <HeaderContainer>
-            <div>
+            <div className="temporary_wrapper">
                 <StyledIcon className="fas fa-user" size='30px' onClick={()=> {
                     setIsChatActive(false);
                     setIconsState(()=> ({
@@ -33,8 +47,14 @@ export const Header = () => {
                 }} $selected={iconsState["chatList"] === true ? 'true' : 'false'} />
             </div>
         
-            <div className="temporary_wrapper">
-                <StyledIcon className="fa-solid fa-rotate" size="30px" />
+            <div className="temporary_wrapper"  style={{
+                position: "relative"
+            }}>
+                <HoverIcon isVisible={isHovered}/>
+                <StyledIcon className="fa-solid fa-rotate" size="30px" 
+                    onMouseEnter={handleMouseEnterOrLeave}
+                    onMouseLeave={handleMouseEnterOrLeave}
+                />
             </div>
 
             <div className="temporary_wrapper" style={{

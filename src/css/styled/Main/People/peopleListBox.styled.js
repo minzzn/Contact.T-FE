@@ -36,9 +36,10 @@ export const NameAndContentContainer = styled.div`
     flex: 3;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     // 최대한 왼쪽에 붙도록
     align-items: start;
+    margin-top: 4px;
 `;
 export const displayStyle = styled.div`
   display: ${(props) => props.display || none};

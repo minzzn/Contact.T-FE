@@ -84,7 +84,7 @@ export const customStyles = {
     width: "60vh",
     height: "72vh",
     background: "#FFFFFF",
-    border: "${(props) => (props.selectstate === true ? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4')}",
+    border: "${(props) => (props.selectstate === true ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4')}",
     borderRadius: "3vh",
     boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
     overflow: "hidden",
@@ -133,7 +133,7 @@ const SetBox = styled.div`
   width: 60vh;
   height: 72vh;
   background: #FFFFFF;
-  border: ${(props) => (props.selectstate === true ? '0.5vh solid #FF9634' : "0.5vh solid #B4B4B4")};
+  border: ${(props) => (props.selectstate === true ? '0.5vh solid #5CC095' : "0.5vh solid #B4B4B4")};
   border-radius: 3vh;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;
@@ -172,12 +172,12 @@ export const StartButton = styled.button`
   height: 7vh;
   border-radius: 3vh;
   border: none;
-  background: var(--bg-orange);
+  background: var(--bg-main-green);
     &:hover {
-      background: ${lighten(0.1, '#D65A31')};
+      background: ${lighten(0.1, '#1A4D2E')};
     }
     &:active {
-      background:  ${darken(0.1, '#D65A31')};
+      background:  ${darken(0.1, '#1A4D2E')};
     }
   cursor: pointer;
   /* 서비스 시작하기 */

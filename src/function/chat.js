@@ -1,4 +1,4 @@
-import { getNameThrough, getToken } from "./common";
+import { getNameThrough, getToken, getUserId } from "./common";
 
 export const sendChatData = async (text) => {
 

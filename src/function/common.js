@@ -20,32 +20,29 @@ export const WrappingReactFragment = (ReactNode, index) => (
     </React.Fragment>
 );
 
-// findroomid - 방 id 알아내기
-export async function getRoomId() {
+// findroomid - 방 id, 정보 알아내기
+export async function getRoomInfo() {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-    const token = getToken();
-
+    let roomInfos = [];
     try {
       const response = await fetch(`http://${BACKEND_URL}/findRoomId`, {
-        method: 'GET',
-        headers: {
-          // 토큰을 헤더에 추가함
-          'Authorization': `${token}`
-        }
+          method: 'GET',
+          headers: {
+              // 토큰을 헤더에 추가함
+              'Authorization': `${getToken()}`,
+
+          }
       });
       // 서버로부터 응답을 받았을 경우
-      if (response.ok) {
-        const data = await response.json();
-        return data; // 채팅방 ID 및 이름 반환
-      } 
-      // 서버로부터 응답이 성공적이지 않은 경우
-      else {
-        throw new Error('find roomid 실패');
+      roomInfos = await response.json(); // 채팅방 ID 및 이름 반환
+      // 서버에서 반환된 채팅방 정보가 없는 경우
+      if (!roomInfos || roomInfos.length === 0) {
+          console.warn('서버로부터 채팅방 정보를 찾을 수 없습니다.');
       }
+    } catch (error) {
+      console.error("Error : ", error);
     }
-    catch (error) {
-      console.error('요청에 오류가 있음');
-    }
+    return roomInfos;
 }
 
 export async function createRoom(parentUserId) {
@@ -71,7 +68,7 @@ export async function createRoom(parentUserId) {
         } 
         // 서버로부터 응답이 성공적이지 않은 경우
         else {
-          throw new Error('find roomid 실패');
+          throw new Error('createRoom 실패');
         }
       }
       catch (error) {

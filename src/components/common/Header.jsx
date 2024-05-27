@@ -3,54 +3,57 @@ import { StyledIcon } from "../../css/styled/Main/main.styled";
 import { HeaderContainer } from "../../css/styled/common/header.styled";
 import { IconsState } from "../../hooks/iconsState";
 import { ChatActiveState } from "../../hooks/chatActiveState";
-import { RoomsState } from "../../hooks/roomsState";
 import { Bell } from "../Bell/Bell";
-import { getRoomInfo, getRole } from "../../function/common.js";
-import { useState, useEffect } from "react";
+import HoverIcon from "./HoverIcon";
+import { useState } from "react";
+import { getRole, getRoomInfo } from "../../function/common";
+import { RoomsState } from "../../hooks/roomsState";
+import img1 from "../../assets/userimg_01.png";
+import defaultImg from "../../assets/profile.png"
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
-    const [roomsState, setRoomsState] = useRecoilState(RoomsState);
-    const [clicked, setClicked] = useState(false); // 클릭 여부를 저장하는 상태
+    const [isHovered, setIsHovered] = useState(false);
+    const setRoomsState = useSetRecoilState(RoomsState);
+
     const handleGetRoomInfo = async () => {
         try {
             const roomInfos = await getRoomInfo();
-            const role = await getRole(); // 로컬 스토리지에서 role 값을 가져옴
+            const role = getRole();
             // 역할에 따라서 roomsState 업데이트
             if (role === "TEACHER") {
-                roomInfos.map(roomInfo => {
-                    setRoomsState(prevState =>[...prevState, 
-                        {
-                            parentUserId: roomInfo.parentUserId,
-                            parentName: roomInfo.parentName,
-                            roomId: roomInfo.roomId
-                        }
-                    ]);
-                });
+                const newRoomsState = roomInfos.map(roomInfo => ({
+                            userId: roomInfo.parentUserId,
+                            name: roomInfo.parentName,
+                            roomId: roomInfo.roomId,
+                            img: img1,
+                            profileImg: defaultImg
+                }));
+                setRoomsState(newRoomsState);
             } else if (role === "PARENT") {
-                roomInfos.map(roomInfo => {
-                    setRoomsState(prevState => [...prevState,
-                        {                        
-                            teacherUserId: roomInfo.teacherUserId,
-                            teacherName: roomInfo.teacherName,
-                            roomId: roomInfo.roomId
-                        }
-                    ]);
-                });
+                const newRoomsState = roomInfos.map(roomInfo => ({                     
+                            userId: roomInfo.teacherUserId,
+                            name: roomInfo.teacherName,
+                            roomId: roomInfo.roomId,
+                            img: img1,
+                            profileImg: defaultImg
+                }));
+
+                setRoomsState(newRoomsState);
             }
         } catch (error) {
             console.error("Error fetching room info:", error);
         }
     };
-    // useEffect 훅을 사용하여 업데이트 이후의 상태를 출력
-    useEffect(() => {
-        console.log(roomsState);
-    }, [roomsState]);
+
+    function handleMouseEnterOrLeave() {
+        setIsHovered(!isHovered);
+    }
 
     return (
         <HeaderContainer>
-            <div>
+            <div className="temporary_wrapper">
                 <StyledIcon className="fas fa-user" size='30px' onClick={()=> {
                     setIsChatActive(false);
                     setIconsState(()=> ({
@@ -72,8 +75,13 @@ export const Header = () => {
                 }} $selected={iconsState["chatList"] === true ? 'true' : 'false'} />
             </div>
         
-            <div className="temporary_wrapper">
-                <StyledIcon className="fa-solid fa-rotate" size="30px" onClick={() => handleGetRoomInfo()}
+            <div className="temporary_wrapper"  style={{
+                position: "relative"
+            }}>
+                <HoverIcon isVisible={isHovered}/>
+                <StyledIcon className="fa-solid fa-rotate" size="30px" onClick={() => handleGetRoomInfo()} 
+                    onMouseEnter={handleMouseEnterOrLeave}
+                    onMouseLeave={handleMouseEnterOrLeave}
                 />
             </div>
 

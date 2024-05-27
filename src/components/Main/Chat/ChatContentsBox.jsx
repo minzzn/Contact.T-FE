@@ -9,7 +9,6 @@ import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, Aggressvi
  * @returns 없음
  */
 export const ChatContentsBox = ({ chatsHistory, senderID }) => {
-    const listHeight = 410;
     const containerRef = useRef();
 
     // 채팅 배열이 새로 들어올때마다 스크롤을 가장 밑으로 내림
@@ -19,14 +18,12 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
 
     return (
         <>
-            <ChatContents>
-                <ChatContentsContainer ref={containerRef}>
+            <ChatContents ref={containerRef}>
+                <ChatContentsContainer>
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-                            
-                            console.log(messageObject);
-                            console.log(`$ismine: ${parseInt(messageObject.sender) == senderID}`); // 여기서 콘솔에 찍음
+                        
                             return (
                                 <div key={idx}>
                                     {   

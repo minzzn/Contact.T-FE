@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AddInfoModal } from '../../../../components/AddInfo/AddInfoModal';
 
 export const Container = styled.div`
     display: flex;
@@ -12,7 +11,8 @@ export const Container = styled.div`
 
 export const ChatContents = styled.div`
     width: 100%;
-    height: 100%;
+    height: 56vh;
+    overflow-y: scroll;
     padding: 0 5px;
 `;
 

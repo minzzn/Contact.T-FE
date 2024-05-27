@@ -7,7 +7,6 @@ export const ChatContentsContainer = styled.div`
     // 내부 채팅 div들은 세로로 쌓이도록 만들기
     flex-direction: column;
     min-height: 460px;
-    overflow-y: scroll;
 `
 // 실제 메시지 내용들이 담는 div tag의 wrapper
 export const ChatContentDivWrapper = styled.div`

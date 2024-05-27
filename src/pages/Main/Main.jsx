@@ -7,14 +7,18 @@ import { AddInfoModal } from "../../components/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
 import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { getRole, getUserId, WrappingReactFragment } from "../../function/common";
+import { getRole, getRoomInfo, getUserId, WrappingReactFragment } from "../../function/common";
 import { openSseArea } from "../../function/addInfo";
 import { sseEventState } from "../../hooks/sseEventState";
+import { RoomsState } from "../../hooks/roomsState";
+import img1 from "../../assets/userimg_01.png";
+import defaultImg from "../../assets/profile.png";
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const [isFirst, setIsFirst] = useState(false);
     const setSseEventData = useSetRecoilState(sseEventState);
+    const setRoomsState = useSetRecoilState(RoomsState);
 
     const closeModal = () => {
         setIconsState(()=> ({
@@ -62,6 +66,40 @@ export const Main = () => {
             };
         }
     }, [isFirst]);
+
+    useEffect(() => {
+        const handleGetRoomInfo = async () => {
+            try {
+                const roomInfos = await getRoomInfo();
+                const role = getRole();
+                // 역할에 따라서 roomsState 업데이트
+                if (role === "TEACHER") {
+                    const newRoomsState = roomInfos.map(roomInfo => ({
+                                userId: roomInfo.parentUserId,
+                                name: roomInfo.parentName,
+                                roomId: roomInfo.roomId,
+                                img: img1,
+                                profileImg: defaultImg
+                    }));
+                    setRoomsState(newRoomsState);
+                } else if (role === "PARENT") {
+                    const newRoomsState = roomInfos.map(roomInfo => ({                     
+                                userId: roomInfo.teacherUserId,
+                                name: roomInfo.teacherName,
+                                roomId: roomInfo.roomId,
+                                img: img1,
+                                profileImg: defaultImg
+                    }));
+
+                    setRoomsState(newRoomsState);
+                }
+            } catch (error) {
+                console.error("Error fetching room info:", error);
+            }
+        };
+
+        handleGetRoomInfo();
+    }, []);
 
     return (    
         <>

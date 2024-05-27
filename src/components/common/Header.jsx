@@ -3,11 +3,50 @@ import { StyledIcon } from "../../css/styled/Main/main.styled";
 import { HeaderContainer } from "../../css/styled/common/header.styled";
 import { IconsState } from "../../hooks/iconsState";
 import { ChatActiveState } from "../../hooks/chatActiveState";
+import { RoomsState } from "../../hooks/roomsState";
 import { Bell } from "../Bell/Bell";
+import { getRoomInfo, getRole } from "../../function/common.js";
+import { useState, useEffect } from "react";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
+    const [roomsState, setRoomsState] = useRecoilState(RoomsState);
+    const [clicked, setClicked] = useState(false); // 클릭 여부를 저장하는 상태
+    const handleGetRoomInfo = async () => {
+        try {
+            const roomInfos = await getRoomInfo();
+            const role = await getRole(); // 로컬 스토리지에서 role 값을 가져옴
+            // 역할에 따라서 roomsState 업데이트
+            if (role === "TEACHER") {
+                roomInfos.map(roomInfo => {
+                    setRoomsState(prevState =>[...prevState, 
+                        {
+                            parentUserId: roomInfo.parentUserId,
+                            parentName: roomInfo.parentName,
+                            roomId: roomInfo.roomId
+                        }
+                    ]);
+                });
+            } else if (role === "PARENT") {
+                roomInfos.map(roomInfo => {
+                    setRoomsState(prevState => [...prevState,
+                        {                        
+                            teacherUserId: roomInfo.teacherUserId,
+                            teacherName: roomInfo.teacherName,
+                            roomId: roomInfo.roomId
+                        }
+                    ]);
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching room info:", error);
+        }
+    };
+    // useEffect 훅을 사용하여 업데이트 이후의 상태를 출력
+    useEffect(() => {
+        console.log(roomsState);
+    }, [roomsState]);
 
     return (
         <HeaderContainer>
@@ -34,7 +73,8 @@ export const Header = () => {
             </div>
         
             <div className="temporary_wrapper">
-                <StyledIcon className="fa-solid fa-rotate" size="30px" />
+                <StyledIcon className="fa-solid fa-rotate" size="30px" onClick={() => handleGetRoomInfo()}
+                />
             </div>
 
             <div className="temporary_wrapper" style={{

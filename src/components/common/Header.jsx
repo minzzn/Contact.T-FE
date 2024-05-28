@@ -6,13 +6,13 @@ import { ChatActiveState } from "../../hooks/chatActiveState";
 import { RoomsState } from "../../hooks/roomsState";
 import { Bell } from "../Bell/Bell";
 import { getRoomInfo, getRole } from "../../function/common.js";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [roomsState, setRoomsState] = useRecoilState(RoomsState);
-    const [clicked, setClicked] = useState(false); // 클릭 여부를 저장하는 상태
+
     const handleGetRoomInfo = async () => {
         try {
             const roomInfos = await getRoomInfo();
@@ -20,6 +20,7 @@ export const Header = () => {
             // 역할에 따라서 roomsState 업데이트
             if (role === "TEACHER") {
                 roomInfos.map(roomInfo => {
+                    // 이전값을 prevState에 임시로 저장, 리렌더링 없이 setRoomState를 업데이트
                     setRoomsState(prevState =>[...prevState, 
                         {
                             parentUserId: roomInfo.parentUserId,

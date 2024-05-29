@@ -15,9 +15,9 @@ export const ViewList = ({ setChoosedUser }) => {
         <ChatAndPeopleListContainer>
             {
                 iconsState["chatList"] ? (
-                    USERS.map((user,idx) => <ChatListContainer user={user} setChoosedUser={setChoosedUser} key={idx} />)
+                    USERS.length > 0 && USERS.map((user,idx) => <ChatListContainer user={user} setChoosedUser={setChoosedUser} key={idx} />)
                 ) : (
-                    USERS.map((user,idx) => <PeopleListContainer user={user} setChoosedUser={setChoosedUser} key={idx}/>)
+                    USERS.length > 0 && USERS.map((user,idx) => <PeopleListContainer user={user} setChoosedUser={setChoosedUser} key={idx}/>)
                 )
             }
         </ChatAndPeopleListContainer>

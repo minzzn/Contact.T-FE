@@ -7,7 +7,8 @@ import { AddInfoModal } from "../../components/AddInfo/AddInfoModal";
 import { SetProfile } from "../../components/Profile/SetProfile";
 import { IconsState } from "../../hooks/iconsState";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { getRole, getRoomInfo, getUserId, WrappingReactFragment } from "../../function/common";
+import { getRole, getUserId, WrappingReactFragment } from "../../function/common";
+import { getRoomInfo } from "../../function/room.info";
 import { openSseArea } from "../../function/addInfo";
 import { sseEventState } from "../../hooks/sseEventState";
 import { RoomsState } from "../../hooks/roomsState";
@@ -73,7 +74,7 @@ export const Main = () => {
                 const roomInfos = await getRoomInfo();
                 const role = getRole();
                 // 역할에 따라서 roomsState 업데이트
-                if (role === "TEACHER") {
+                if (role === "TEACHER" && roomInfos.length > 0) {
                     const newRoomsState = roomInfos.map(roomInfo => ({
                                 userId: roomInfo.parentUserId,
                                 name: roomInfo.parentName,
@@ -82,7 +83,7 @@ export const Main = () => {
                                 profileImg: defaultImg
                     }));
                     setRoomsState(newRoomsState);
-                } else if (role === "PARENT") {
+                } else if (role === "PARENT" && roomInfos.length > 0) {
                     const newRoomsState = roomInfos.map(roomInfo => ({                     
                                 userId: roomInfo.teacherUserId,
                                 name: roomInfo.teacherName,
@@ -105,7 +106,13 @@ export const Main = () => {
         <>
             <Container>
                 <HeaderAndListContainer>
-                    <Header />
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }} className="temporary-header-wrapper">
+                        <Header />
+                    </div>
                     {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                     {
                         Object.keys(iconsState).map((iconName,idx) => {

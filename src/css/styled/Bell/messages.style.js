@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const RequestsContainer = styled.div`
     position: absolute;
     top: 55px;
-
-    z-index: 999;
     padding: 20px;
 
     display: flex;

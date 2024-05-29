@@ -23,25 +23,28 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
+                            const isMine = parseInt(messageObject.sender) == senderID;
                         
                             return (
                                 <div key={idx}>
                                     {   
                                         isAggressive === 0 ? (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
-                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={isMine}>
+                                                <ChatContentDiv $ismine={isMine}>
                                                     {messageObject.message}
                                                 </ChatContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatTimeDiv $ismine={isMine}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>       
                                             </ChatContentDivWrapper>
                                         ) : (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={isMine}>
                                                 <AggressvieContentDiv>
-                                                    공격적인 발언입니다
+                                                    {
+                                                        isMine ? messageObject.message : "공격적 발언 감지"
+                                                    }
                                                 </AggressvieContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatTimeDiv $ismine={isMine}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>
                                             </ChatContentDivWrapper>

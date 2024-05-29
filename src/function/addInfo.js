@@ -82,7 +82,11 @@ export async function sendFriendRequest(teacherUserId) {
             },
             body: JSON.stringify({
                 parentUserId: parentUserId
-            }) 
+            }),
+            // 캐시 방지
+            cache: 'no-store',
+            // 쿠키 방지
+            credentials: 'omit'
         };
 
         // POST 요청

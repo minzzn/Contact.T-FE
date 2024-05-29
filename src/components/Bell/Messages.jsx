@@ -1,6 +1,7 @@
 import { RequestContainer, RequestsContainer } from "../../css/styled/Bell/messages.style";
 import { StyledIcon } from "../../css/styled/Main/main.styled";
-import { createRoom, getToken, getUserId } from "../../function/common";
+import { getToken, getUserId } from "../../function/common";
+import { createRoom } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
 import { sseEventState } from "../../hooks/sseEventState";
 import { useRecoilState, useSetRecoilState } from "recoil";

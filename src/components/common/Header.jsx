@@ -6,10 +6,12 @@ import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "../Bell/Bell";
 import HoverIcon from "./HoverIcon";
 import { useState } from "react";
-import { getRole, getRoomInfo } from "../../function/common";
+import { getRole} from "../../function/common";
+import { getRoomInfo } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
 import img1 from "../../assets/userimg_01.png";
 import defaultImg from "../../assets/profile.png"
+import Role from "./Role";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -53,7 +55,13 @@ export const Header = () => {
 
     return (
         <HeaderContainer>
-            <div className="temporary_wrapper">
+            <div 
+                className="temporary_wrapper" 
+                style={{
+                    whiteSpace: "nowrap"
+                }}
+            >
+                <Role />
                 <StyledIcon className="fas fa-user" size='30px' onClick={()=> {
                     setIsChatActive(false);
                     setIconsState(()=> ({

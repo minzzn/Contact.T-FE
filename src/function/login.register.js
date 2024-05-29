@@ -12,7 +12,11 @@ export const postRegisterDataWith = async (userObj,url) => {
                 // 유저 정보를 JSON형태로 보내기 위한 request임을 짐작해주세요
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(userObj)
+            body: JSON.stringify(userObj),
+            // 캐시 방지
+            cache: 'no-store',
+            // 쿠키 방지
+            credentials: 'omit'
         });
 
         // 서버에 전송은 했는데 응답이 ok가 아니면 에러 문구 던지기
@@ -43,7 +47,10 @@ export const postLoginDataWith = async (userObj,url) => {
                 "Pragma": "no-cache", // 캐시 비활성화
             },
             body: JSON.stringify(userObj),
-            cache: "no-store" // 캐시 비활성화
+            // 캐시 방지
+            cache: 'no-store',
+            // 쿠키 방지
+            credentials: 'omit'
         });
 
         // 서버에 전송은 했는데 응답이 ok가 아니면 에러 문구 던지기

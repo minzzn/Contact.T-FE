@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { isRequired, MinimumLength, CantContainSpace, EmailFormat, SpecialText } from "../../constant/user.constraints";
 //import { sendReqAndSaveToken } from "../../function/login.register";
 import { postRegisterDataWith } from "../../function/login.register";
-import { ToastifySuccess, ToastifyWarn } from "../../function/toast";
+import { ToastifyError, ToastifySuccess, ToastifyWarn } from "../../function/toast";
 import { ToastContainer } from 'react-toastify';
 
 export const Register = () => {
@@ -84,6 +84,8 @@ export const Register = () => {
         if(resultAfterPost) {
             navigate("/");
             ToastifySuccess("회원가입 성공");
+        } else {
+            ToastifyError("회원가입 실패");
         }
     }
 

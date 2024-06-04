@@ -44,7 +44,6 @@ export const postLoginDataWith = async (userObj,url) => {
                 // 유저 정보를 JSON형태로 보내기 위한 request임을 짐작해주세요
                 "Content-Type": "application/json",
                 "Cache-Control": "no-store", // 캐시 비활성화
-                "Pragma": "no-cache", // 캐시 비활성화
             },
             body: JSON.stringify(userObj),
             // 캐시 방지

@@ -55,7 +55,6 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 u
                         </ProfileImageBox>
                         <IdentifyName>ㅇㅇ고 0-0 {role}</IdentifyName>
                         <RealName><p>{user.name}</p></RealName>
-                        {role === "선생님" ? (
                             <StateBox>
                                 <DutyState>
                                     <DutyStateMark></DutyStateMark>
@@ -66,7 +65,6 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 u
                                     채팅 가능 시간
                                 </ChatState>
                             </StateBox>
-                        ) : null}
                         <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
                     </SetBox>
                 </Modal>: null}

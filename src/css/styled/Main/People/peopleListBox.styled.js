@@ -61,8 +61,9 @@ export const Divider = styled.div`
     margin: 1.5vh;
     min-width: 250px;
     width: 100%;
-    height: 0.5px;
+    height: 3px;
     background: var(--bg-button-gray);
+    border-radius: 5px;
 `
 export const displayStyle = styled.div`
   display: ${(props) => props.display || none};
@@ -200,7 +201,7 @@ export const DutyStateMark = styled.div`
 
     width: 23px;
     height: 23px;
-    background-color: ${(props) => (props.duty ? '#5CC095' : '#AFB4B7')};
+    background-color: ${(props) => (props.$duty === "true" ? '#5CC095' : '#AFB4B7')};
     margin-right: 10px;
     border-radius: 50%;
 `;
@@ -209,7 +210,7 @@ export const ChatStateMark = styled.div`
 
     width: 23px;
     height: 23px;
-    background-color: ${(props) => (props.ischatable ? '#5CC095' : '#AFB4B7')};
+    background-color: ${(props) => (props.$ischatable === "true" ? '#5CC095' : '#AFB4B7')};
     margin-right: 10px;
     border-radius: 50%;
 `;

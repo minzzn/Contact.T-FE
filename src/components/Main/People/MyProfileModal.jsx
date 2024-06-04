@@ -66,16 +66,16 @@ const ProfileModal = ({ isOpen, onRequestClose, role, MyInfo, profileImg }) => {
                 <ProfileImageBox>
                     <ProfileImage src={profileImg} alt="프로필 이미지" />
                 </ProfileImageBox>
-                <IdentifyName>{role || "정보 없음"}</IdentifyName>
+                <IdentifyName>ㅇㅇ고 0-0 {role}</IdentifyName>
                 <RealName><p>{myInfoName}</p></RealName>
                 {role === "선생님" ? (
                     <StateBox>
                         <DutyState>
-                            <DutyStateMark duty={dutyStateInfo?.duty ? "true" : "false"}></DutyStateMark>
+                            <DutyStateMark $duty={dutyStateInfo?.duty === true ? "true" : "false"}></DutyStateMark>
                             {dutyStateInfo?.duty ? "근무중" : "근무중 아님"}
                         </DutyState>
                         <ChatState>
-                            <ChatStateMark ischatable={isChatable === true ? "true" : "false"}></ChatStateMark>
+                            <ChatStateMark $ischatable={isChatable === true ? "true" : "false"}></ChatStateMark>
                             {isChatable === true ? "연락 가능" : "연락 자제"}
                         </ChatState>
                     </StateBox>

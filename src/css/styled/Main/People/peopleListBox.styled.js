@@ -13,7 +13,6 @@ export const MyProfileBox = styled.div`
   padding: 2vh 2vw;
   /* vertical - horizontal */
   margin: 0.6vh 0;
-  border-radius: 10px;
   overflow: hidden;
 
 `
@@ -37,6 +36,7 @@ export const Container = styled.div`
       background-color: var(--bg-light-gray);
       cursor: pointer;
   }
+  
 `;
 
 export const ImgContainer = styled.div`
@@ -58,7 +58,7 @@ export const NameAndContentContainer = styled.div`
 `;
 
 export const Divider = styled.div`
-    margin: 1vh;
+    margin: 1.5vh;
     min-width: 250px;
     width: 100%;
     height: 0.5px;

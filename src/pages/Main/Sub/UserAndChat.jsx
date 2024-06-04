@@ -10,7 +10,7 @@ export const UserAndChat = () => {
         <>
             <UserAndChatContainer>
                 <ViewList setChoosedUser={setChoosedUser} />
-                <ChattingPane userdata={choosedUser} />
+                <ChattingPane choosedUserRoomInfo={choosedUser} />
             </UserAndChatContainer>
         </>
     )

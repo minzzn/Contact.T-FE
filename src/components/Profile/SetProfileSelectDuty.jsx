@@ -1,62 +1,49 @@
-import React, { useRef, useState } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import Select from "react-select";
-import { darken, lighten } from 'polished';
+import React, { useState } from 'react';
+import Select from 'react-select';
 
-export const SelectDuty = () => {
-    // select 태그의 옵션들을 배열로 만들어준다.
-    const onduty = [
-        { value: "onduty", label: "근무중" },
-        { value: "offduty", label: "근무중 아님" }
-    ]
-
-    //안에 들어가는 값을 받아야해서 state 사용, 기본 값 '온라인'=={online[0]}
-    const [selectOnduty, setSelectOnduty] = useState(onduty[0]);
-
-    //다음 datepicker 선택하거나 option의 값을 바꾸면 스타일 바꾸기
+export const SelectDuty = ({ onDutyChange }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const selectRef = useRef();
+
+    const ondutyOptions = [
+        { value: 'onduty', label: '근무중' },
+        { value: 'offduty', label: '근무중 아님' }
+    ];
 
     const handleOptionChange = (selected) => {
         setSelectedOption(selected);
-        console.log(selectRef);
+        onDutyChange(selected.value); // 상위 컴포넌트로 선택된 값을 전달
     };
 
-    return(
-        <>
-            <Select options={onduty}
-                onChange={setSelectOnduty}
-                components={{IndicatorSeparator: () => null,}}
-                defaultValue={onduty[0]}
-                styles={customStyles}
-                isSearchable={false}
-                isMulti={false}
-                ref={selectRef}
-                placeholder='근무 상태를 선택하세요' /> 
-        </>        
+    return (
+        <Select 
+            options={ondutyOptions}
+            onChange={handleOptionChange}
+            value={selectedOption}
+            styles={customStyles(selectedOption)}
+            isSearchable={false}
+            isMulti={false}
+            placeholder='근무 상태를 선택하세요'
+        />
     );
 }
 
-const customStyles = {
-    control: (provided, state) => ({
+const customStyles = (selectedOption) => ({
+    control: (provided) => ({
         ...provided,
         background: '#ffffff',
         width: '45vh',
         height: '7vh',
-        paddingRight: '1.5vh',
-        border: state.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
-        '&:hover': { border: '${lighten(0.1, #FF9634)}'},
         borderRadius: '2vh',
         marginBottom: '1vh',
         display: 'flex',
         textAlign: 'center',
         cursor: 'pointer',
-        boxSizing: 'border-box',
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isSelected? '800' : '400',
+        fontWeight: selectedOption ? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
-
+        // 선택된 옵션이 있을 경우 테두리 색상을 초록색으로, 없을 경우 회색으로 설정
+        border: selectedOption ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4',
     }),
     option: (provided, state) => ({
         ...provided,
@@ -65,10 +52,9 @@ const customStyles = {
         justifyContent: 'center',
         display: 'flex',
         textAlign: 'center',
-
         fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isFocused? '800' : '400',
+        fontWeight: state.isFocused ? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
     })
-};
+});

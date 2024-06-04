@@ -9,7 +9,6 @@ import { ChatContentDiv, ChatContentsContainer, ChatContentDivWrapper, Aggressvi
  * @returns 없음
  */
 export const ChatContentsBox = ({ chatsHistory, senderID }) => {
-    const listHeight = 410;
     const containerRef = useRef();
 
     // 채팅 배열이 새로 들어올때마다 스크롤을 가장 밑으로 내림
@@ -19,32 +18,33 @@ export const ChatContentsBox = ({ chatsHistory, senderID }) => {
 
     return (
         <>
-            <ChatContents>
-                <ChatContentsContainer ref={containerRef}>
+            <ChatContents ref={containerRef}>
+                <ChatContentsContainer>
                     {
                         chatsHistory?.map((messageObject,idx) => {
                             const isAggressive = messageObject.hidden;
-                            
-                            console.log(messageObject);
-                            console.log(`$ismine: ${parseInt(messageObject.sender) == senderID}`); // 여기서 콘솔에 찍음
+                            const isMine = parseInt(messageObject.sender) == senderID;
+                        
                             return (
                                 <div key={idx}>
                                     {   
                                         isAggressive === 0 ? (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
-                                                <ChatContentDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={isMine}>
+                                                <ChatContentDiv $ismine={isMine}>
                                                     {messageObject.message}
                                                 </ChatContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatTimeDiv $ismine={isMine}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>       
                                             </ChatContentDivWrapper>
                                         ) : (
-                                            <ChatContentDivWrapper key={idx} $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                            <ChatContentDivWrapper key={idx} $ismine={isMine}>
                                                 <AggressvieContentDiv>
-                                                    공격적인 발언입니다
+                                                    {
+                                                        isMine ? messageObject.message : "공격적 발언 감지"
+                                                    }
                                                 </AggressvieContentDiv>
-                                                <ChatTimeDiv $ismine={`${parseInt(messageObject.sender) == senderID}`}>
+                                                <ChatTimeDiv $ismine={isMine}>
                                                     {messageObject.time}
                                                 </ChatTimeDiv>
                                             </ChatContentDivWrapper>

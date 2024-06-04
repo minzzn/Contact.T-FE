@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ExtraInfoForm, customedStyle, StyledButton, ExtraInfoContainer, AllLayoutContainer, RoleSelectContainer, RoleSelectInput, SearchSchoolContainer, ExtraInfoLabel, RadioInputContainer, RadioInputWrapper, ExtraInfoInputRadio, TypeOfSchoolLabel, ExtraInfoInput, SchoolsListWrapper } from '../../css/styled/Profile/AddInfo/addInfo.styled';
-import { postAddInfo, searchDB } from '../../function/addInfo';
+import { findTeachers, postAddInfo, searchDB } from '../../function/addInfo';
 import { SchoolListBox } from './SchoolListBox';
 import { ParentRole } from './DividedByRole/ParentRole';
-import { getToken, setRole } from '../../function/common';
+import { getRole, getToken, setRole } from '../../function/common';
+import { sendFriendRequest } from '../../function/addInfo';
 import { TeacherRole } from './DividedByRole/TeacherRole';
 import { ToastifyError, ToastifySuccess } from '../../function/toast';
+import { Loading } from '../common/Loading';
 
 export const AddInfoModal = ({ setIsFirst }) => {
     const [isOpen, setIsOpen] = useState(true);
@@ -30,6 +32,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
     });
     const [childNum, setChildNum] = useState(0);
     const [children, setChildren] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function onChange(e) {
         let { name, value } = e.target;
@@ -88,9 +91,10 @@ export const AddInfoModal = ({ setIsFirst }) => {
         }
     }
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault(); 
         setChildren(prevState => [...prevState, {...childInfo}]);
+        setLoading(!loading);
 
         let finalDataStructureBeforeSending = {};
         if(extraInfo.role === "TEACHER") {
@@ -110,12 +114,25 @@ export const AddInfoModal = ({ setIsFirst }) => {
         })
 
         if(result) {
-            ToastifySuccess("추가 정보 입력 완료");
-            // 모달창 닫기
-            setIsFirst(false);
-            setIsOpen(false);
-            // 로컬스토리지 상의 role값 변경
-            setRole(extraInfo.role)
+            // 2.5초의 지연시간 유도 : 서버에 post이후 SSE 연동하는데 시간이 좀 필요하기에
+            setTimeout(async () => {
+                setLoading(!loading);
+
+                ToastifySuccess("추가 정보 입력 완료");
+                // 모달창 닫기
+                setIsFirst(false);
+                setIsOpen(false);
+                // 로컬스토리지 상의 role값 변경
+                setRole(extraInfo.role);
+
+                if(getRole() === "PARENT") {
+                    const teacherIds = await findTeachers();
+                    
+                    for(let i=0; i<teacherIds.length; i++) {
+                        await sendFriendRequest(teacherIds[i]);
+                    }
+                }
+            }, 2500);
         } else {
             ToastifyError("에러 발생. 다시 시도해주세요");
         }
@@ -138,6 +155,24 @@ export const AddInfoModal = ({ setIsFirst }) => {
         });
         setCurrentPage(prevState => prevState+1);
     };
+
+    function renderButton(role) {
+        let result = null;
+
+        switch(role) {
+            case "TEACHER":
+                result = <StyledButton type='button' onClick={onSubmit}>{loading ? <Loading /> : "제출"}</StyledButton>;
+                break;
+            case "PARENT":
+                const content = currentPage == childNum ? "제출" : "다음";
+                result = <StyledButton type='button' onClick={currentPage == childNum ? onSubmit : onNext}>{loading ? <Loading /> : content}</StyledButton>;
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
 
     Modal.setAppElement('#root');
     return (
@@ -195,9 +230,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
                         </ExtraInfoContainer>
                         {/* button */}
                         {
-                            extraInfo.role === "PARENT"
-                            ? <StyledButton type='button' onClick={currentPage == childNum ? onSubmit : onNext}>{currentPage == childNum ? "제출" : "다음"}</StyledButton>
-                            : <StyledButton type='button' onClick={onSubmit}>제출</StyledButton> 
+                            renderButton(extraInfo.role)
                         }
                     </ExtraInfoForm>
                 </AllLayoutContainer>

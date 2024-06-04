@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 export const Container = styled.div`
   min-width: 250px;
@@ -48,17 +48,26 @@ export const IconsWrapper = styled.div`
     justify-content: center;
 `;
 
-export const StyledIcon = styled.i.attrs(({className}) => ({
-    className: `${className}`,
-}))`
+// 키프레임 정의 변수 분리
+const isUpdatingNow = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const StyledIcon = styled.i`
     font-size: ${(props) => props.size ? props.size : '16px'};
     margin-right: ${(props) => props.$marginright ? props.$marginright : '2vh'};
     margin-bottom: ${(props) => props.$marginBottom ? props.$marginBottom : 0};
     color: ${(props) => props.$selected === "true" ? 'var(--bg-main-green)' : 'var(--bg-dark-gray)'};
-    transition: all 0.2s linear;
+    transition: color 0.2s linear;
+    animation: ${(props) => props.$isUpdating ? css`${isUpdatingNow} 1.5s linear Infinite` : "none"}; 
 
     &:hover {
-        color: var(--bg-button-gray);
+        color: ${props => props.$hoverColor ? props.$hoverColor : 'var(--bg-button-gray)'};
         cursor: pointer;
     }
 `;

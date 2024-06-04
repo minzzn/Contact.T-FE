@@ -1,188 +1,107 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { darken, lighten } from 'polished';
 import { SelectDuty } from './SetProfileSelectDuty';
 import { SelectChatTime } from './SetProfileSelectChatTime';
-import { postSetProfileDataWith } from '../../function/setprofile.js';
+import { postDutyState } from '../../function/setprofile.js';
+import { ProfileSetText, ProfileImageBox, ProfileImage, InputBox, StartButton, customStyles } from '../../css/styled/Profile/setProfile.styled';
 import { iconState } from "../../pages/Main/Main";
 import Modal from 'react-modal';
+import profileImg from '../../assets/profile.png';
+import { ToastifyError, ToastifySuccess } from '../../function/toast';
 
-export const SetProfile = ({closeModal}) => {
+export const SetProfile = ({ closeModal }) => {
   const navigate = useNavigate();
 
-  // 근무중, 채팅 가능 시간 상태관리
-  const [duty, setDuty] = useState("");
-  const [selectstate, setSelectstate] = useState(false);
-  const [isstartTime, setisStartTime] = useState("");
-  const [isendTime, setisEndTime] = useState("");
+  // 상태 통합 관리 (duty를 boolean 값으로 초기화)
+  const [profileState, setProfileState] = useState({
+    duty: false, // duty 초기 상태를 false로 설정
+    workStart: "",
+    workEnd: "",
+    disturbStart: "",
+    disturbEnd: ""
+  });
 
+  // 직무 변경 처리
+  const handleDutyChange = (selected) => {
+    if (selected == "onduty") { // selected 값이 "onDuty"일 때
+      setProfileState(prevState => ({ ...prevState, duty: true })); // duty 값을 true로 설정
+    } else {
+      setProfileState(prevState => ({ ...prevState, duty: false }));
+    }
+  };
+
+  // 근무 시작 시간 변경 처리
   const handleStartTimeChange = (startTime) => {
-    setisStartTime(startTime.toLocaleTimeString());
-    console.log(isStartTime);
+    const formattedStartTime = startTime.toLocaleTimeString();
+    setProfileState(prevState => ({ ...prevState, workStart: formattedStartTime, disturbStart: formattedStartTime }));
   };
 
+  // 근무 종료 시간 변경 처리
   const handleEndTimeChange = (endTime) => {
-    setisEndTime(endTime.toLocaleTimeString());
-    console.log(isEndTime);
-    setSelectstate(true);
+    const formattedEndTime = endTime.toLocaleTimeString();
+    setProfileState(prevState => ({ ...prevState, workEnd: formattedEndTime, disturbEnd: formattedEndTime }));
   };
 
-  // 모달 열고 닫기 상태관리
+  // 근무 상태 설정하고, 현재 프로필 상태를 콘솔에 출력하는 함수
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!profileState) {
+      ToastifyError("모든 값을 선택해 주세요!");
+      return; // 프로필 상태가 없으면 함수를 조기에 종료
+    }
+    
+    // post 요청 옵션
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json" // 유저 정보를 JSON형태로 보내기 위한 request
+      },
+      body: JSON.stringify(profileState),
+    };
+
+    // postDutyState 함수는 프라미스를 반환
+    postDutyState(options) // options를 전달
+      .then(response => {
+        if (response === true) {
+          ToastifySuccess("근무 상태 설정 완료");
+        } else {
+          // response가 true가 아닌 경우, 실패
+          ToastifyError("근무 상태 설정 실패");
+        }
+      })
+      .catch(error => {
+        // 오류 처리
+        ToastifyError("근무 상태 설정 에러");
+      })
+      .finally(() => {
+        closeModal(); // 모든 조건부 처리 후에는, 모달 닫기
+      });
+  };
+  // 모달 상태 관리
   const [modalIsOpen, setModalIsOpen] = useState(true);
-
+  
   return (
-      <>
-
-            <Modal
-            $modalIsOpen={modalIsOpen}
-            display={displayStyle}
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            ariaHideApp={false}
-            contentLabel="Pop up Profile"
-            shouldCloseOnOverlayClick={false}>
-                {/* 프로필 설정하기 설명 박스 */}
-                <ProfileSetText>프로필 설정하기</ProfileSetText>
-                <ProfileImageBox>
-                    <ProfileImage></ProfileImage>
-                </ProfileImageBox>
-                <InputBox>
-                  <SelectDuty></SelectDuty>
-                  <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
-                </InputBox>
-                <StartButton onClick={closeModal}>서비스 시작하기</StartButton>
-        </Modal>
-      </>  
+    <>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        ariaHideApp={false}
+        contentLabel="Pop up Profile"
+        shouldCloseOnOverlayClick={true}>
+        {/* 프로필 설정하기 설명 박스 */}
+        <ProfileSetText>프로필 설정하기</ProfileSetText>
+        <ProfileImageBox>
+          <ProfileImage>
+            <img src={profileImg} alt="user-img" style={{ objectFit: "cover", width: "100%", height: "115%" }} />
+          </ProfileImage>
+        </ProfileImageBox>
+        <InputBox>
+          <SelectDuty onDutyChange={handleDutyChange}></SelectDuty>
+          <SelectChatTime handleStartTimeChange={handleStartTimeChange} handleEndTimeChange={handleEndTimeChange}></SelectChatTime>
+        </InputBox>
+        <StartButton onClick={handleSubmit}>근무 상태 설정하기</StartButton>
+      </Modal>
+    </>
   );
 }
-export const displayStyle = styled.div`
-  display: ${(props) => props.display || none};
-`
-export const customStyles = {
-  overlay: {
-    backgroundColor: " rgba(0, 0, 0, 0.4)",
-    width: "100%",
-    height: "100vh",
-    zIndex: "10",
-    position: "fixed",
-    top: "0",
-    left: "0",
-    backdropFilter: "blur(5px)",
-  },
-  content: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: "translate(-50%, -50%)",
-    boxSizing: "border-box",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    width: "60vh",
-    height: "72vh",
-    background: "#FFFFFF",
-    border: "${(props) => (props.selectstate === true ? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4')}",
-    borderRadius: "3vh",
-    boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
-    overflow: "hidden",
-    flex: "initial",
-  }
-}
-export const ProfileSetText = styled.div`
-  box-sizing: border-box;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-  width: 33vh;
-  margin-bottom: 5vh;
-  
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 600;
-  text-align: 'center';
-  font-size: 4vh;
-`;
-export const ExplainText = styled.div`
-  box-sizing: border-box;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-  padding: 0.7vh;
-
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: 'center';
-  font-weight: 400;
-  font-size: 2.8vh;
-`;
-const SetContainer = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 68vh; //697px
-  height: 80vh; //816px
-`;
-const SetBox = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 60vh;
-  height: 72vh;
-  background: #FFFFFF;
-  border: ${(props) => (props.selectstate === true ? '0.5vh solid #FF9634' : "0.5vh solid #B4B4B4")};
-  border-radius: 3vh;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-`;
-const ProfileImageBox = styled.div`
-  box-sizing: border-box;
-  align-items:center;
-  justify-content: center;
-  width: 25vh;
-  height: 25vh;
-`;
-export const ProfileImage = styled.img`
-  box-sizing: border-box;
-  width: 23vh;
-  height: 23vh;
-  background: #FFFFFF;
-  border: 0.5vh solid #B4B4B4;
-  border-radius: 50%;
-`;
-export const InputBox = styled.div`
-  box-sizing: border-box;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-  flex-direction: column;
-  width: 56vh;
-  height: 25vh;
-  /* border: 1px solid #000000; */
-`;
-export const StartButton = styled.button`
-  box-sizing: border-box;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-  margin-top: 1vh; 
-  width: 45vh;
-  height: 7vh;
-  border-radius: 3vh;
-  border: none;
-  background: var(--bg-orange);
-    &:hover {
-      background: ${lighten(0.1, '#D65A31')};
-    }
-    &:active {
-      background:  ${darken(0.1, '#D65A31')};
-    }
-  cursor: pointer;
-  /* 서비스 시작하기 */
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  font-weight: bold;
-  font-size: 2.4vh;
-`;

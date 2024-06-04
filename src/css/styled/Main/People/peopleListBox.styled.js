@@ -1,6 +1,21 @@
 import styled from "styled-components"
 import { darken, lighten } from 'polished';
 
+export const MyProfileBox = styled.div`
+  min-width: 250px;
+  width: 100%;
+  // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* vertical - horizontal */
+  padding: 2vh 2vw;
+  /* vertical - horizontal */
+  margin: 0.6vh 0;
+  overflow: hidden;
+
+`
 export const Container = styled.div`
   min-width: 250px;
   width: 100%;
@@ -21,6 +36,7 @@ export const Container = styled.div`
       background-color: var(--bg-light-gray);
       cursor: pointer;
   }
+  
 `;
 
 export const ImgContainer = styled.div`
@@ -29,17 +45,26 @@ export const ImgContainer = styled.div`
     height: 55px;
     border-radius: 10%;
     margin-right: 7px;
-    overflow: hidden;
 `;
 
 export const NameAndContentContainer = styled.div`
     flex: 3;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     // 최대한 왼쪽에 붙도록
     align-items: start;
+    margin-top: 4px;
 `;
+
+export const Divider = styled.div`
+    margin: 1.5vh;
+    min-width: 250px;
+    width: 100%;
+    height: 3px;
+    background: var(--bg-button-gray);
+    border-radius: 5px;
+`
 export const displayStyle = styled.div`
   display: ${(props) => props.display || none};
 ` 
@@ -172,15 +197,24 @@ export const StateBox = styled.div`
     flex: 1;
 
 `;
-export const StateMark = styled.div`
+export const DutyStateMark = styled.div`
 
     width: 23px;
     height: 23px;
+    background-color: ${(props) => (props.$duty === "true" ? '#5CC095' : '#AFB4B7')};
     margin-right: 10px;
-    background: var(--bg-main-green);
     border-radius: 50%;
-
 `;
+
+export const ChatStateMark = styled.div`
+
+    width: 23px;
+    height: 23px;
+    background-color: ${(props) => (props.$ischatable === "true" ? '#5CC095' : '#AFB4B7')};
+    margin-right: 10px;
+    border-radius: 50%;
+`;
+
 export const DutyState = styled.div`
 
     box-sizing: border-box;

@@ -5,8 +5,9 @@ import { postLoginDataWith } from "../../function/login.register.js";
 import { useNavigate } from "react-router-dom";
 import { ToastifyWarn } from "../../function/toast.js";
 import { ToastContainer } from 'react-toastify';
+import { getToken } from "../../function/common.js";
 
-export const Login = () => {
+export const Login = ({ setToken }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -48,11 +49,11 @@ export const Login = () => {
             return;
         }
         
-        // 유저 정보를 잘 넘기면 true반환
-        const resultAfterPost = await postLoginDataWith(loginData,'auth/sign-in');
+        // 유저 정보를 잘 넘기면 해당 로그인에 대한 토큰값 반환
+        const token = await postLoginDataWith(loginData,'auth/sign-in');
         
-        if(resultAfterPost) {
-            // todo : 유저정보에 role값도 넘어오게 변경되면, role값도 localstorage상에 저장
+        if(token) {
+            setToken(getToken());
             navigate('/main');
         } else {
             ToastifyWarn("다시 작성해주세요");
@@ -92,7 +93,12 @@ export const Login = () => {
                 </FormInnerWrapper>
 
                 <FormInnerWrapper>
-                    계정이 없으신가요?
+                    <span style={{
+                        fontWeight: "lighter",
+                        color: "#878787"
+                    }}>
+                        계정이 없으신가요?
+                    </span>
                     <StyledLink to="/register">
                         회원가입하기
                     </StyledLink>
@@ -105,11 +111,6 @@ export const Login = () => {
                         onClick={onSubmit}
                     >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
-                <div style={{
-                    textAlign: "center",
-                    color: "var(--bg-light-gray)",
-                    marginTop: "5vh"
-                }}>소셜 로그인 :</div>
             </StyledForm>
             <ToastContainer />
         </>

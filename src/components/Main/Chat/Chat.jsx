@@ -11,7 +11,7 @@ import { getUserId } from "../../../function/common.js";
  * @author 이시영
  * @returns <ChatContentsBox>
  */
-export const Chat = () => {
+export const Chat = ({ choosedUserRoomInfo }) => {
     const BROKER_URL = process.env.REACT_APP_BROKER_URL;
     const senderID = getUserId();
     const client = useRef({});
@@ -23,8 +23,10 @@ export const Chat = () => {
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
+        console.log(choosedUserRoomInfo.roomId);
+
         // sub/chat/{roomID}
-        client.current.subscribe('/queue/chat/room/d18c0129-737c-4d9a-b214-bed762ef88cb', (datafromServer) => {
+        client.current.subscribe(`/queue/chat/room/${choosedUserRoomInfo.roomId}`, (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
             const message = JSON.parse(datafromServer.body);
 
@@ -76,7 +78,7 @@ export const Chat = () => {
             body: JSON.stringify({ 
                 type: "CHAT",
                 hidden: 0,
-                roomId: "d18c0129-737c-4d9a-b214-bed762ef88cb",
+                roomId: `${choosedUserRoomInfo.roomId}`,
                 message: chat,
                 sender: senderID,
                 time: new Date().toLocaleTimeString("ko-KR", 

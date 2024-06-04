@@ -4,8 +4,10 @@ import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWra
 import { ToastifyInfo } from '../../../function/toast';
 import { useSetRecoilState } from "recoil";
 import { ChatActiveState } from "../../../hooks/chatActiveState";
+import { getRole } from '../../../function/common.js';
 
 export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 user 객체를 전달
+    const role = getRole() === "TEACHER" ? "선생님" : "학부모";
     const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -51,18 +53,18 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 u
                         <ProfileImageBox>
                             <ProfileImage></ProfileImage>
                         </ProfileImageBox>
-                        <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
+                        <IdentifyName>ㅇㅇ고 0-0 {role}</IdentifyName>
                         <RealName><p>{user.name}</p></RealName>
-                        <StateBox>
-                            <DutyState>
-                                <StateMark></StateMark>
-                                근무중
-                            </DutyState>
-                            <ChatState>
-                                <StateMark></StateMark>
-                                채팅 가능 시간
-                            </ChatState>
-                        </StateBox>
+                            <StateBox>
+                                <DutyState>
+                                    <DutyStateMark></DutyStateMark>
+                                    근무중
+                                </DutyState>
+                                <ChatState>
+                                    <ChatStateMark></ChatStateMark>
+                                    채팅 가능 시간
+                                </ChatState>
+                            </StateBox>
                         <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
                     </SetBox>
                 </Modal>: null}

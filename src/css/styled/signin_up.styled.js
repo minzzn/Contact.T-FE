@@ -7,9 +7,12 @@ export const StyledForm = styled.form`
     /* width, height는 내부 컴포넌트들의 사이즈로 결정 */
     width: 40%;
     height: 60%;
-    margin: auto;
-    margin-top: 12vh;
+    margin: auto; margin-top: 12vh;
+    padding: 50px;
     color: var(--bg-original-black);
+    background-color: var(--bg-original-white);
+    border-radius: 7%;
+    filter: drop-shadow(5px 5px 3px var(--bg-main-green));
 `
 export const LoginTitle = styled.h1`
     text-align: center;
@@ -34,7 +37,7 @@ export const LoginInput = styled.input`
     padding: 20px 15px;
     font-size: 18px;
     border-radius: 0.3rem;
-    border: 1px solid var(--bg-button-gray);
+    border: 3px solid var(--bg-button-gray);
     box-sizing: border-box;
     width: 100%;
 `
@@ -53,6 +56,7 @@ export const StyledLink = styled(Link)`
     font-size: 20px;
     font-weight: 600;
     color: var(--bg-original-black);
+    transition: color 0.3s ease;
 
     &:hover, &:focus {
         color: var(--bg-main-green);
@@ -70,7 +74,7 @@ export const LoginSubmitButton = styled.button`
     color: var(--bg-original-white);
     background-color: var(--bg-original-black);
     border: none;
-
+    transition: background-color 0.3s ease;
 
     &:focus, &:hover {
         background-color: var(--bg-main-green);

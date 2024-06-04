@@ -134,7 +134,12 @@ export const Register = () => {
                 </FormInnerWrapper>
 
                 <FormInnerWrapper>
-                    이미 계정이 있으신가요?
+                    <span style={{
+                            fontWeight: "lighter",
+                            color: "#aeaeae"
+                    }}>
+                        계정이 없으신가요?
+                    </span>
                     <StyledLink to="/">
                         로그인하기
                     </StyledLink>

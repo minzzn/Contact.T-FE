@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-export const SelectDuty = () => {
+export const SelectDuty = ({ onDutyChange }) => {
+    const [selectedOption, setSelectedOption] = useState(null);
+
     const ondutyOptions = [
         { value: 'onduty', label: '근무중' },
         { value: 'offduty', label: '근무중 아님' }
     ];
 
-    const [selectOnduty, setSelectOnduty] = useState(null);
-
     const handleOptionChange = (selected) => {
-        setSelectOnduty(selected);
+        setSelectedOption(selected);
+        onDutyChange(selected); // 상위 컴포넌트로 선택된 값을 전달
     };
 
     return (
         <Select 
             options={ondutyOptions}
             onChange={handleOptionChange}
-            defaultValue={selectOnduty}
-            styles={customStyles(selectOnduty)}
+            value={selectedOption}
+            styles={customStyles(selectedOption)}
             isSearchable={false}
             isMulti={false}
             placeholder='근무 상태를 선택하세요'

@@ -7,7 +7,7 @@ import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 
-export const SelectChatTime = ({ onStartTimeChange, onEndTimeChange }) => {
+export const SelectChatTime = ({ handleStartTimeChange, handleEndTimeChange }) => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
@@ -18,73 +18,76 @@ export const SelectChatTime = ({ onStartTimeChange, onEndTimeChange }) => {
         setStartTime(time);
         setIsSelected(true);
         setEndTime(null);
+        handleStartTimeChange(time); // handleStartTimeChange 호출
     };
 
-    useEffect(() => {
-        console.log(startTime);
-        console.log(endTime);
-    }, [startTime, endTime]); // startTime이 업데이트될 때마다 useEffect가 실행됨
-
-    const sendDataToParent = () => {
-        onStartTimeChange(startTime);
-        onEndTimeChange(endTime); // 콜백 함수 호출하여 데이터 전달
+    const onSelectEnd = (time) => {
+        setEndTime(time);
+        handleEndTimeChange(time); // handleEndTimeChange 호출
     };
 
-    return(
+    // useEffect(() => {
+    //     console.log(startTime);
+    //     console.log(endTime);
+    // }, [startTime, endTime]); // startTime이 업데이트될 때마다 useEffect가 실행됨
+
+    return (
         <>
-            <div><StyledDatePicker
-                startTime={startTime}
-                selected={startTime}
-                onChange={onSelect}
-                locale={ ko }
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                minTime={setHours(setMinutes(new Date(), 30), 0)}
-                maxTime={setHours(setMinutes(new Date(), 0), 24)}
-                timeCaption="Time"
-                dateFormat="aa h:mm 시작"
-                placeholderText="시작 시간"
-            /></div>
+            <div>
+                <StyledDatePicker
+                    startTime={startTime}
+                    endTime={endTime}
+                    selected={startTime}
+                    onChange={onSelect}
+                    locale={ko}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={30}
+                    minTime={setHours(setMinutes(new Date(), 30), 0)}
+                    maxTime={setHours(setMinutes(new Date(), 0), 24)}
+                    timeCaption="Time"
+                    dateFormat="aa h:mm 시작"
+                    placeholderText="시작 시간"
+                />
+            </div>
 
             {isSelected ? // 시작 시간을 선택해야 종료 시간 선택 가능
-                <div><StyledDatePicker
-                endTime={endTime}
-                selected={endTime}
-                onChange={(time) => setEndTime(time)}
-                locale={ ko }
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                minTime={startTime}
-                // 시작 시간부터 24시간
-                maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime)+23)}
-                timeCaption="Time"
-                dateFormat="aa h:mm 종료"
-                placeholderText="종료 시간"
-                isSelect={sendDataToParent}
-            /></div>
-                
-                : null 
+                <div>
+                    <StyledDatePicker
+                        startTime={startTime}
+                        endTime={endTime}
+                        selected={endTime}
+                        onChange={onSelectEnd}
+                        locale={ko}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={30}
+                        minTime={startTime}
+                        // 시작 시간부터 24시간
+                        maxTime={setHours(setMinutes(new Date(), getMinutes(startTime)), getHours(startTime) + 23)}
+                        timeCaption="Time"
+                        dateFormat="aa h:mm 종료"
+                        placeholderText="종료 시간"
+                    />
+                </div>
+                : null
             }
         </>
     );
 }
+
 const StyledDatePicker = styled(DatePicker)`
-    
     width: 45vh;
     height: 7vh;
     padding-right: 1.5vh;
-
-    border: ${(props) => (props.startTime !== null && props.endTime !== null ? '0.5vh solid #5CC095' : "0.5vh solid #B4B4B4")};
+    border: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4') : "0.5vh solid #B4B4B4")};
     border-radius: 2vh;
     margin-bottom: 1vh;
     display: flex;
     text-align: center;
     cursor: pointer;
     font-family: 'Noto Sans KR', sans-serif;
-
-    font-weight: ${(props) => (props.startTime !== null && props.endTime !== null ? '800' : "400")};
+    font-weight: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '800' : '600') : "400")};
     font-size: 2.4vh;
     color: #000000;
 
@@ -94,7 +97,6 @@ const StyledDatePicker = styled(DatePicker)`
         justify-content: center;
         display: flex;
         text-align: center;
-
         font-family: 'Noto Sans KR', sans-serif;
         font-size: 2.4vh;
         color: #000000;
@@ -103,6 +105,4 @@ const StyledDatePicker = styled(DatePicker)`
             cursor: pointer;
         }
     }
-
-`
-
+`;

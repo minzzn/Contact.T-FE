@@ -1,3 +1,6 @@
+import styled from 'styled-components';
+import { darken, lighten } from 'polished';
+
 export const displayStyle = styled.div`
   display: ${(props) => props.display || none};
 `
@@ -42,7 +45,7 @@ export const ProfileSetText = styled.div`
   
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 600;
-  text-align: 'center';
+  text-align: center;
   font-size: 4vh;
 `;
 export const ExplainText = styled.div`
@@ -57,7 +60,7 @@ export const ExplainText = styled.div`
   font-weight: 400;
   font-size: 2.8vh;
 `;
-const SetContainer = styled.div`
+export const SetContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -65,7 +68,7 @@ const SetContainer = styled.div`
   width: 68vh; //697px
   height: 80vh; //816px
 `;
-const SetBox = styled.div`
+export const SetBox = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -78,20 +81,21 @@ const SetBox = styled.div`
   border-radius: 3vh;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 `;
-const ProfileImageBox = styled.div`
+export const ProfileImageBox = styled.div`
   box-sizing: border-box;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   width: 25vh;
   height: 25vh;
+  overflow: hidden;
 `;
-export const ProfileImage = styled.img`
+export const ProfileImage = styled.div`
   box-sizing: border-box;
   width: 23vh;
   height: 23vh;
-  background: #FFFFFF;
-  border: 0.5vh solid #B4B4B4;
+  border: 0.6vh solid #5CC095;
   border-radius: 50%;
+  overflow: hidden;
 `;
 export const InputBox = styled.div`
   box-sizing: border-box;
@@ -100,7 +104,7 @@ export const InputBox = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 56vh;
-  height: 25vh;
+  max-height: 25vh;
   /* border: 1px solid #000000; */
 `;
 export const StartButton = styled.button`
@@ -108,7 +112,7 @@ export const StartButton = styled.button`
   display:flex;
   align-items:center;
   justify-content: center;
-  margin-top: 1vh; 
+  margin-top: 0.7vh; 
   width: 45vh;
   height: 7vh;
   border-radius: 3vh;

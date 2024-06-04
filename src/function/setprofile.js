@@ -1,8 +1,8 @@
 import { serverEndPoint } from "../constant/common.constant";
 
 // 프로필 설정 함수
-export const postSetProfileDataWith = async (userObj,url) => {
-    const BACK_API = `http://${serverEndPoint}${url}`;
+export const postSetProfileDataWith = async (userObj) => {
+    const BACK_API = process.env.REACT_APP_BACKEND_API_URL;
 
     try {
         const response = await fetch(BACK_API, {
@@ -26,3 +26,22 @@ export const postSetProfileDataWith = async (userObj,url) => {
         console.log('Error: ', error.message);
     }
 }
+import { getToken } from "./common";
+
+export async function postDuty() {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
+    const url = `http://${BACKEND_URL}/status/${teacherUserId}`;
+
+    try {
+        const response = await fetch(url, options);
+
+        if(!response.ok) {
+            throw new Error('Not 202 status');
+        }
+
+        return true;
+    } catch(error) {
+        console.log("Error : ", error.message);
+        return false;
+    }
+};

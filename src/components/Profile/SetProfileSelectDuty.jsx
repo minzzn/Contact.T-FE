@@ -44,8 +44,6 @@ const customStyles = {
         width: '45vh',
         height: '7vh',
         paddingRight: '1.5vh',
-        border: state.isSelected? '0.5vh solid #FF9634' : '0.5vh solid #B4B4B4',
-        '&:hover': { border: '${lighten(0.1, #FF9634)}'},
         borderRadius: '2vh',
         marginBottom: '1vh',
         display: 'flex',
@@ -56,6 +54,10 @@ const customStyles = {
         fontWeight: state.isSelected? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
+        border: state.isSelected ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4',
+        '&:hover': {
+            border: state.isSelected ? '0.5vh solid #5CC095' : '0.5vh solid #5CC095',
+        },
 
     }),
     option: (provided, state) => ({
@@ -65,10 +67,10 @@ const customStyles = {
         justifyContent: 'center',
         display: 'flex',
         textAlign: 'center',
-
         fontFamily: 'Noto Sans KR, sans-serif',
         fontWeight: state.isFocused? '800' : '400',
         fontSize: '2.4vh',
         color: '#000000',
+        
     })
 };

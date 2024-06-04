@@ -7,6 +7,7 @@ import { SelectChatTime } from './SetProfileSelectChatTime';
 import { postSetProfileDataWith } from '../../function/setprofile.js';
 import { iconState } from "../../pages/Main/Main";
 import Modal from 'react-modal';
+import profileImg from '../../assets/profile.png';
 
 export const SetProfile = ({closeModal}) => {
   const navigate = useNavigate();
@@ -46,13 +47,15 @@ export const SetProfile = ({closeModal}) => {
                 {/* 프로필 설정하기 설명 박스 */}
                 <ProfileSetText>프로필 설정하기</ProfileSetText>
                 <ProfileImageBox>
-                    <ProfileImage></ProfileImage>
+                    <ProfileImage>
+                        <img src={profileImg} alt="user-img" style={{objectFit: "cover", width: "100%", height: "115%"}}/>
+                    </ProfileImage>
                 </ProfileImageBox>
                 <InputBox>
                   <SelectDuty></SelectDuty>
                   <SelectChatTime onStartTimeChange={handleStartTimeChange} onEndTimeChange={handleEndTimeChange}></SelectChatTime>
                 </InputBox>
-                <StartButton onClick={closeModal}>서비스 시작하기</StartButton>
+                <StartButton onClick={closeModal}>근무 상태 설정하기</StartButton>
         </Modal>
       </>  
   );
@@ -101,7 +104,7 @@ export const ProfileSetText = styled.div`
   
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 600;
-  text-align: 'center';
+  text-align: center;
   font-size: 4vh;
 `;
 export const ExplainText = styled.div`
@@ -139,18 +142,19 @@ const SetBox = styled.div`
 `;
 const ProfileImageBox = styled.div`
   box-sizing: border-box;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   width: 25vh;
   height: 25vh;
+  overflow: hidden;
 `;
-export const ProfileImage = styled.img`
+export const ProfileImage = styled.div`
   box-sizing: border-box;
   width: 23vh;
   height: 23vh;
-  background: #FFFFFF;
-  border: 0.5vh solid #B4B4B4;
+  border: 0.6vh solid #5CC095;
   border-radius: 50%;
+  overflow: hidden;
 `;
 export const InputBox = styled.div`
   box-sizing: border-box;
@@ -159,7 +163,7 @@ export const InputBox = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 56vh;
-  height: 25vh;
+  max-height: 25vh;
   /* border: 1px solid #000000; */
 `;
 export const StartButton = styled.button`
@@ -167,7 +171,7 @@ export const StartButton = styled.button`
   display:flex;
   align-items:center;
   justify-content: center;
-  margin-top: 1vh; 
+  margin-top: 0.7vh; 
   width: 45vh;
   height: 7vh;
   border-radius: 3vh;

@@ -99,16 +99,17 @@ export const Header = () => {
                 justifyContent: "center"
             }}>
                 <Bell />
-                <StyledIcon className="fa-solid fa-clock" size="30px" onClick={() => {
-                    setIconsState(()=> ({
-                        chatList: false,
-                        peopleList: false,
-                        setProfile: true,
-                        house: false,
-                        bell: false
-                    }));
-                }} $selected={iconsState["setProfile"] === true ? 'true' : 'false'}/>
-    
+                {getRole() === "TEACHER" && (
+                    <StyledIcon className="fa-solid fa-clock" size="30px" onClick={() => {
+                        setIconsState(()=> ({
+                            chatList: false,
+                            peopleList: false,
+                            setProfile: true,
+                            house: false,
+                            bell: false
+                        }));
+                    }} $selected={iconsState["setProfile"] === true ? 'true' : 'false'}/>
+                )}
                 {/* 매안 공간 : 차트, 알림 등등 보여주기 */}
                 <StyledIcon className="fa-solid fa-house" size="30px" onClick={() => {
                     setIconsState(()=> ({

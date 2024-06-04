@@ -1,4 +1,4 @@
-import { EtcContentWrapper, SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../css/styled/Profile/AddInfo/schoolListBox.styled"
+import { SchoolDiv, SchoolName, SchoolAddressP, SchoolContainer } from "../../css/styled/Profile/AddInfo/schoolListBox.styled"
 
 export const SchoolListBox = ({ role, schoolsListArray, schoolInfo, setter }) => {
 
@@ -25,9 +25,7 @@ export const SchoolListBox = ({ role, schoolsListArray, schoolInfo, setter }) =>
                             `${school.schoolName}`.indexOf(schoolInfo) === 0 ? (
                                 <SchoolDiv name="school" onClick={(e) => selectSchool(e, school.schoolName)}>
                                     <SchoolName>{school.schoolName}</SchoolName>
-                                    <EtcContentWrapper>
-                                        <SchoolAddressP>{school.adres}</SchoolAddressP>
-                                    </EtcContentWrapper>
+                                    <SchoolAddressP>{school.adres}</SchoolAddressP>
                                 </SchoolDiv>
                             ) : null
                         }

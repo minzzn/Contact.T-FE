@@ -103,6 +103,13 @@ export const AddInfoModal = ({ setIsFirst }) => {
             finalDataStructureBeforeSending = { ...finalDataStructureBeforeSending, role: extraInfo["role"], childNum, children: [...children, {...childInfo}] }
         }
 
+        // 만약 값이 비는 게 있으면 요청 전송을 막습니다.
+        if(Object.values(finalDataStructureBeforeSending).filter(value => String(value).length < 1).length > 0) {
+            ToastifyError("제대로 작성해주세요");
+            setLoading(prevState => !prevState);
+            return;
+        }
+
         // 성공한 경우
         const result = postAddInfo({
             method: "POST",
@@ -197,7 +204,8 @@ export const AddInfoModal = ({ setIsFirst }) => {
                                 width: "100%",
                                 display: "flex",
                                 flexDirection: "column",
-                                gap: "20px"
+                                gap: "20px",
+                                marginTop: "38px"
                             }}>
                                 {
                                     extraInfo.role === "PARENT" 

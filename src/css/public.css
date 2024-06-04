@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 /* font-family: 'Noto Sans KR', sans-serif; */
 :root {
-  --bg-orange: orange;
   --bg-orangered: rgb(255, 25, 0);
   --bg-original-white: white;
   --bg-original-black: black;
   --bg-black: #222831;
-  --bg-dark-gray: #E4E6E7;
+  --bg-main-gray: #E4E6E7;
   --bg-light-gray: #F1F1F1;
   --bg-button-gray: #AFB4B7;
   --bg-main-green: #5CC095;
@@ -24,7 +23,7 @@ body {
   /* 스크롤 움직임 차단 */
   overflow: hidden;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: var(--bg-dark-gray);
+  background-color: var(--bg-main-gray);
 }
 .wrapper {
   height: 100%;

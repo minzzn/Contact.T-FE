@@ -15,4 +15,5 @@ export const HeaderContainer = styled.div`
     color: var(--bg-original-black);
     border-radius: 10px;
     background-color: var(--bg-original-white);
+    filter: drop-shadow(0 3px 2px var(--bg-main-green));
 `;

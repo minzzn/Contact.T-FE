@@ -93,7 +93,12 @@ export const Login = ({ setToken }) => {
                 </FormInnerWrapper>
 
                 <FormInnerWrapper>
-                    계정이 없으신가요?
+                    <span style={{
+                        fontWeight: "lighter",
+                        color: "#878787"
+                    }}>
+                        계정이 없으신가요?
+                    </span>
                     <StyledLink to="/register">
                         회원가입하기
                     </StyledLink>
@@ -106,11 +111,6 @@ export const Login = ({ setToken }) => {
                         onClick={onSubmit}
                     >로그인</LoginSubmitButton>
                 </FormInnerWrapper>
-                <div style={{
-                    textAlign: "center",
-                    color: "var(--bg-light-gray)",
-                    marginTop: "5vh"
-                }}>소셜 로그인 :</div>
             </StyledForm>
             <ToastContainer />
         </>

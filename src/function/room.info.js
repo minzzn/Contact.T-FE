@@ -5,13 +5,12 @@ export async function getRoomInfo() {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
     let roomInfos = [];
     try {
-      // 서버로부터 날아오는 4xx 또는 5xx 응답으로 인한 콘솔창의 에러는, 프론트에서 해결할 수 없는 내용
-      const response = await fetch(`http://${BACKEND_URL}/findRoomId`, {
+        // 서버로부터 날아오는 4xx 또는 5xx 응답으로 인한 콘솔창의 에러는, 프론트에서 해결할 수 없는 내용
+        const response = await fetch(`http://${BACKEND_URL}/findRoomId`, {
           method: 'GET',
           headers: {
               // 토큰을 헤더에 추가함
               'Authorization': `${getToken()}`,
-
           }
       });
 

@@ -23,7 +23,7 @@ export const postDutyState = async(options) => {
 
 export async function getDutyState() {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-    const teacherUserId = getRole();
+    const teacherUserId = getUserId();
     let dutyData = {};
   
     try {

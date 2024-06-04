@@ -23,7 +23,7 @@ export const SetProfile = ({ closeModal }) => {
 
   // 직무 변경 처리
   const handleDutyChange = (selected) => {
-    if (selected === "onDuty") { // selected 값이 "onDuty"일 때
+    if (selected == "onduty") { // selected 값이 "onDuty"일 때
       setProfileState(prevState => ({ ...prevState, duty: true })); // duty 값을 true로 설정
     } else {
       setProfileState(prevState => ({ ...prevState, duty: false }));
@@ -59,22 +59,22 @@ export const SetProfile = ({ closeModal }) => {
       body: JSON.stringify(profileState),
     };
 
-    // postDutyState 함수가 프라미스를 반환한다고 가정
-    postDutyState(options) // options를 인자로 전달해야 할 필요가 있을 수 있음
+    // postDutyState 함수는 프라미스를 반환
+    postDutyState(options) // options를 전달
       .then(response => {
         if (response === true) {
           ToastifySuccess("근무 상태 설정 완료");
         } else {
-          // response가 true가 아닌 경우에는 실패로 간주
+          // response가 true가 아닌 경우, 실패
           ToastifyError("근무 상태 설정 실패");
         }
       })
       .catch(error => {
         // 오류 처리
-        ToastifyError("근무 상태 설정 실패: " + error.message);
+        ToastifyError("근무 상태 설정 에러");
       })
       .finally(() => {
-        closeModal(); // 모달 닫기는 모든 경우에 실행
+        closeModal(); // 모든 조건부 처리 후에는, 모달 닫기
       });
   };
   // 모달 상태 관리

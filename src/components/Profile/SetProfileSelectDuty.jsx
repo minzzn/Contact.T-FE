@@ -11,7 +11,7 @@ export const SelectDuty = ({ onDutyChange }) => {
 
     const handleOptionChange = (selected) => {
         setSelectedOption(selected);
-        onDutyChange(selected); // 상위 컴포넌트로 선택된 값을 전달
+        onDutyChange(selected.value); // 상위 컴포넌트로 선택된 값을 전달
     };
 
     return (

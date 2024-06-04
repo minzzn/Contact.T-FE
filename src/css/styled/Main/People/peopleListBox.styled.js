@@ -196,15 +196,24 @@ export const StateBox = styled.div`
     flex: 1;
 
 `;
-export const StateMark = styled.div`
+export const DutyStateMark = styled.div`
 
     width: 23px;
     height: 23px;
+    background-color: ${(props) => (props.duty ? '#5CC095' : '#AFB4B7')};
     margin-right: 10px;
-    background: var(--bg-main-green);
     border-radius: 50%;
-
 `;
+
+export const ChatStateMark = styled.div`
+
+    width: 23px;
+    height: 23px;
+    background-color: ${(props) => (props.ischatable ? '#5CC095' : '#AFB4B7')};
+    margin-right: 10px;
+    border-radius: 50%;
+`;
+
 export const DutyState = styled.div`
 
     box-sizing: border-box;

@@ -12,8 +12,7 @@ import { getRoomInfo } from "../../function/room.info";
 import { openSseArea } from "../../function/addInfo";
 import { sseEventState } from "../../hooks/sseEventState";
 import { RoomsState } from "../../hooks/roomsState";
-import img1 from "../../assets/userimg_01.png";
-import defaultImg from "../../assets/profile.png";
+import defaultImg from "../../../public/assets/profile.png";
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);

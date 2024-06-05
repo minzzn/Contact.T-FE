@@ -7,7 +7,7 @@ import { ParentRole } from './DividedByRole/ParentRole';
 import { getRole, getToken, setRole } from '../../function/common';
 import { sendFriendRequest } from '../../function/addInfo';
 import { TeacherRole } from './DividedByRole/TeacherRole';
-import { ToastifyError, ToastifySuccess } from '../../function/toast';
+import { ToastifyError, ToastifySuccess, ToastifyWarn } from '../../function/toast';
 import { Loading } from '../common/Loading';
 
 export const AddInfoModal = ({ setIsFirst }) => {
@@ -169,19 +169,26 @@ export const AddInfoModal = ({ setIsFirst }) => {
     function onNext(e) {
         e.preventDefault();
 
-        setChildren(prevState => [...prevState, {...childInfo}]);
-        // 초기화
-        setChildInfo({
-            childName: "",
-            childSchool: "",
-            childClass: "",
-            teacherName: ""
-        });
-        setTeacherInfo({
-            teacherClass: "",
-            teacherSchool: ""
-        });
-        setCurrentPage(prevState => prevState+1);
+        // 검증 과정 필요
+        // childInfo의 모든 값들이 안 비어있는지 체크 : 모두 빈 문자열이 아니면 false, 하나라도 빈 문자열이면 true
+        const allValuesEmpty = Object.values(childInfo).every(value => value == "");
+        if(allValuesEmpty) {
+            ToastifyWarn("모든 정보를 제대로 입력해주세요");
+        } else {
+            setChildren(prevState => [...prevState, {...childInfo}]);
+            // 초기화
+            setChildInfo({
+                childName: "",
+                childSchool: "",
+                childClass: "",
+                teacherName: ""
+            });
+            setTeacherInfo({
+                teacherClass: "",
+                teacherSchool: ""
+            });
+            setCurrentPage(prevState => prevState+1);
+        }
     };
 
     function renderButton(role) {

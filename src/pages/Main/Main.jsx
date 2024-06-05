@@ -78,7 +78,7 @@ export const Main = () => {
                                 userId: roomInfo.parentUserId,
                                 name: roomInfo.parentName,
                                 roomId: roomInfo.roomId,
-                                img: img1,
+                                img: defaultImg,
                                 profileImg: defaultImg
                     }));
                     setRoomsState(newRoomsState);
@@ -87,7 +87,7 @@ export const Main = () => {
                                 userId: roomInfo.teacherUserId,
                                 name: roomInfo.teacherName,
                                 roomId: roomInfo.roomId,
-                                img: img1,
+                                img: defaultImg,
                                 profileImg: defaultImg
                     }));
 

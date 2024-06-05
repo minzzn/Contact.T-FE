@@ -25,17 +25,23 @@ export const ViewList = ({ setChoosedUser }) => {
 
     return (
         <>
-            {/* 토큰이 있으면 실행 */}
-            { MyInfo && <MyProfileContainer MyInfo={MyInfo}/> }
-            <ChatAndPeopleListContainer>
-                {
-                    iconsState["chatList"] ? (
-                        USERS.length > 0 && USERS.map((user,idx) => <ChatListContainer user={user} setChoosedUser={setChoosedUser} key={idx} />)
-                    ) : (
-                        USERS.length > 0 && USERS.map((user,idx) => <PeopleListContainer user={user} setChoosedUser={setChoosedUser} key={idx}/>)
-                    )
-                }
-            </ChatAndPeopleListContainer>
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                minWidth: "40vw"
+            }}>   
+                {/* 토큰이 있으면 실행 */}
+                { MyInfo && <MyProfileContainer MyInfo={MyInfo}/> }
+                <ChatAndPeopleListContainer>
+                    {
+                        iconsState["chatList"] ? (
+                            USERS.length > 0 && USERS.map((user,idx) => <ChatListContainer user={user} setChoosedUser={setChoosedUser} key={idx} />)
+                        ) : (
+                            USERS.length > 0 && USERS.map((user,idx) => <PeopleListContainer user={user} setChoosedUser={setChoosedUser} key={idx}/>)
+                        )
+                    }
+                </ChatAndPeopleListContainer>
+            </div>
         </>
     )
 }

@@ -7,7 +7,7 @@ export const StyledForm = styled.form`
     /* width, height는 내부 컴포넌트들의 사이즈로 결정 */
     width: 40%;
     height: 60%;
-    margin: auto; margin-top: 10vh;
+    margin: auto; margin-top: 5vh;
     padding: 50px;
     color: var(--bg-original-black);
     background-color: var(--bg-original-white);

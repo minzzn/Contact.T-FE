@@ -104,7 +104,7 @@ export const AddInfoModal = ({ setIsFirst }) => {
             finalDataStructureBeforeSending = { ...finalDataStructureBeforeSending, role: extraInfo["role"], childNum, children: [...children, {...childInfo}] }
         }
 
-        Object.values(finalDataStructureBeforeSending).filter(value => {
+        isValid = Object.values(finalDataStructureBeforeSending).filter(value => {
             // Array인 경우
             if(typeof value === "object") {
                 // 배열 내 각 객체에 접근(filter)해서 반환 : 결과값은 filter된 객체들의 길이가 1보다 큰지 확인
@@ -118,12 +118,10 @@ export const AddInfoModal = ({ setIsFirst }) => {
                 // 배열 내 유효한 객체의 개수가 1보다 크고, childNum과 같은 경우만 올바르다 : 아이 정보가 하나 이상이며, 내가 입력한 아이 정보 수와 동일하다
                 return (filtered.length >= 1 && filtered.length == childNum) ? true : false;
             } else {
-                // 이건 정상작동
-                return String(value).length > 1 ? true : false;
+                // object type이 아닌 경우 : 원시값의 경우
+                return String(value).length >= 1 ? true : false
             }
-        })
-        .length > 0 ? isValid = true : null;
-
+        }).length > 0;
 
         if(!isValid) {
             // 만약 입력된 값들이 전부 유효하지 않다면 통신을 막습니다.

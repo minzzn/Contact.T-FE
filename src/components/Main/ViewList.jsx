@@ -23,11 +23,6 @@ export const ViewList = ({ setChoosedUser }) => {
         fetchMyInfo();
     }, []);
 
-    // useEffect(() => {
-    //     if (MyInfo) {
-    //         console.log(MyInfo);
-    //     }
-    // }, [MyInfo]);
     return (
         <>
             {/* 토큰이 있으면 실행 */}

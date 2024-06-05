@@ -9,8 +9,8 @@ export const Background = styled.div`
 `;
 
 export const StyledLoader = styled.span`
-    width: 48px;
-    height: 48px;
+    // addinfo.styled.js : StyledButton의 font-size와 연동되어야함
+    width: 1.2rem; height: 1.2rem;
     border: 5px solid #FFF;
     border-bottom-color: var(--bg-main-green);
     border-radius: 50%;

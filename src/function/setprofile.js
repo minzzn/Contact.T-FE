@@ -21,16 +21,15 @@ export const postDutyState = async(options) => {
     }
 };
 
-export async function getDutyState() {
+export async function getDutyState(teacherUserId) {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
-    const teacherUserId = getUserId();
-    let dutyData = {};
+    let dutyData = [];
   
     try {
         const response = await fetch(`http://${BACKEND_URL}/status/${teacherUserId}`, {
             method: "GET",
             headers: {
-                "Authorization": `${getToken()}`,
+                'Content-Type': 'application/json',
             }
         });
   

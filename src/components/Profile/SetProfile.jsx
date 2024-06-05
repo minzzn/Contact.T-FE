@@ -6,8 +6,7 @@ import { postDutyState } from '../../function/setprofile.js';
 import { ProfileSetText, ProfileImageBox, ProfileImage, InputBox, StartButton, customStyles } from '../../css/styled/Profile/setProfile.styled';
 import { iconState } from "../../pages/Main/Main";
 import Modal from 'react-modal';
-import profileImg from '../../assets/profile.png';
-import { ToastifyError, ToastifySuccess } from '../../function/toast';
+import profileImg from '../../../public/assets/profile.png';
 
 export const SetProfile = ({ closeModal }) => {
   const navigate = useNavigate();

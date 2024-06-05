@@ -10,7 +10,7 @@ export const customedStyle = {
     // 모달창 
     content: {
         // 내부 내용을 기반으로 동적으로 화면 크기 생성
-        width: "70vw",
+        width: "50vw",
         height: "95vh",
         zIndex: '150',
         position: 'absolute',
@@ -167,15 +167,16 @@ export const StyledButton = styled.button`
     padding: 15px;
 
     background-color: var(--bg-main-green);
-    color: var(--bg-black);
-    font-size: 1.2rem;
+    color: var(--bg-original-white);
+    font-size: 2.0rem;
     font-weight: 500;
 
     outline: none; border: none;
     border-radius: 5px;
+    transition: all 0.3s ease;
 
     &:hover {
         cursor: pointer;
-        color: var(--bg-original-white);
+        filter: drop-shadow(2px 2px 5px black);
     }
 `

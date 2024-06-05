@@ -45,8 +45,8 @@ export const ChatInput = styled.input`
 `;
 
 export const ChatInputBtn = styled.button`
-    border: 3px solid var(--bg-dark-gray);
-    background-color: var(--bg-dark-gray);
+    border: 3px solid var(--bg-main-gray);
+    background-color: var(--bg-main-gray);
     border-radius: 5px;
     // vertical - horizontal
     padding: 10px 15px;

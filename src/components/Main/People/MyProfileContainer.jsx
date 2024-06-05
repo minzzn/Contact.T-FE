@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getDutyState } from "../../../function/setprofile.js";
 import MyProfileModal from './MyProfileModal';
-import profileImg from '../../../assets/profile.png';
+import profileImg from '../../../../public/assets/profile.png';
 import { MyProfileBox, Container, ImgContainer, NameAndContentContainer, Divider } from "../../../css/styled/Main/People/peopleListBox.styled";
 import { getRole } from '../../../function/common.js';
 

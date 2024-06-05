@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
     /* vertical - horizontal */
     padding: 2vh 2vw;
     /* vertical - horizontal */
-    margin: 0.6vh 0;
+    margin-bottom: 3vh;
     
     color: var(--bg-original-black);
     border-radius: 10px;

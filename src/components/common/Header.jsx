@@ -27,34 +27,35 @@ export const Header = () => {
             setIsUpdatingNow(!isUpdatingNow);
             const roomInfos = await getRoomInfo();
 
-            // 역할에 따라서 roomsState 업데이트
-            if (role === "TEACHER" && roomInfos.length) {
-                const newRoomsState = roomInfos.map(roomInfo => ({
-                            userId: roomInfo.parentUserId,
-                            name: roomInfo.parentName,
-                            roomId: roomInfo.roomId,
-                            img: img1,
-                            profileImg: defaultImg
-                }));
-                setRoomsState(newRoomsState);
-            } else if (role === "PARENT" && roomInfos.length) {
-                const newRoomsState = roomInfos.map(roomInfo => ({                     
-                            userId: roomInfo.teacherUserId,
-                            name: roomInfo.teacherName,
-                            roomId: roomInfo.roomId,
-                            img: img1,
-                            profileImg: defaultImg
-                }));
-                setRoomsState(newRoomsState);
-            }
-
             // UI 표현을 위해 억지로 timeout 걸기
             setTimeout(() => {
                 setIsUpdatingNow(prevState => !prevState);
+                
                 if(!roomInfos.length) {
                     ToastifyError("연결된 사용자 목록이 없습니다");
                 } else {
-                    ToastifySuccess("사용자 목록 업데이트 성공");
+                    ToastifySuccess("사용자 목록 업데이트 성공!");
+                }
+
+                // 역할에 따라서 roomsState 업데이트
+                if (role === "TEACHER" && roomInfos.length) {
+                    const newRoomsState = roomInfos.map(roomInfo => ({
+                                userId: roomInfo.parentUserId,
+                                name: roomInfo.parentName,
+                                roomId: roomInfo.roomId,
+                                img: img1,
+                                profileImg: defaultImg
+                    }));
+                    setRoomsState(newRoomsState);
+                } else if (role === "PARENT" && roomInfos.length) {
+                    const newRoomsState = roomInfos.map(roomInfo => ({                     
+                                userId: roomInfo.teacherUserId,
+                                name: roomInfo.teacherName,
+                                roomId: roomInfo.roomId,
+                                img: img1,
+                                profileImg: defaultImg
+                    }));
+                    setRoomsState(newRoomsState);
                 }
             }, 1500);
         } catch (error) {
@@ -72,7 +73,7 @@ export const Header = () => {
             <div 
                 className="temporary_wrapper" 
                 style={{
-                    whiteSpace: "nowrap"
+                    whiteSpace: "nowrap",
                 }}
             >
                 <Role />
@@ -87,6 +88,7 @@ export const Header = () => {
                     }));
                 }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'} />
                 <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
+                    setIsChatActive(false);
                     setIconsState(()=> ({
                         chatList: true,
                         peopleList: false,

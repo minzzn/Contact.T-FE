@@ -3,15 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
     width: 100%;
     height: 100%;
-    // max-height: 70vh;
 `
 
 export const ChatContents = styled.div`
     width: 100%;
-    height: 56vh;
+    min-height: 50vh;
     overflow-y: scroll;
     padding: 0 5px;
 `;

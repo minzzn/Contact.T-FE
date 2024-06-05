@@ -18,7 +18,7 @@ export const RequestsContainer = styled.div`
 
 export const RequestContainer = styled.div` 
     width: 300px;
-    transition: background-color linear 0.3s, color linear 0.3s;
+    transition: color ease 0.3s;
 
     display: flex;
     justify-content: space-between;
@@ -28,7 +28,6 @@ export const RequestContainer = styled.div`
     color: white;
 
     &:hover {
-        background-color: var(--bg-deep-green);
-        color: black;
+        color: var(--bg-deep-green);
     }
 `;

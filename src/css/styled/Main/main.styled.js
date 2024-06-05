@@ -36,6 +36,7 @@ export const ChatAndPeopleListContainer = styled.div`
 export const UserAndChatContainer = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 `
 
 export const IconsWrapper = styled.div`

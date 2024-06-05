@@ -10,10 +10,3 @@ export const HouseContainer = styled.div`
     /* 최대한 길쭉하게 빼기 */
     justify-content: stretch;
 `
-
-export const InnerPane = styled.div`
-    background-color: var(--bg-main-green);
-    padding: 30px;
-
-    display: flex;
-`

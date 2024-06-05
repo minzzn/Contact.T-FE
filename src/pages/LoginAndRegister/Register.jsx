@@ -152,7 +152,7 @@ export const Register = () => {
                         onClick={onSubmit}
                     >회원가입</LoginSubmitButton>
                 </FormInnerWrapper>
-            </StyledForm>  
+            </StyledForm>
             <ToastContainer />
         </>
     )

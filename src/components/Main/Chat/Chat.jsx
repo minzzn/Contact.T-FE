@@ -23,8 +23,6 @@ export const Chat = ({ choosedUserRoomInfo }) => {
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
-        console.log(choosedUserRoomInfo.roomId);
-
         // sub/chat/{roomID}
         client.current.subscribe(`/queue/chat/room/${choosedUserRoomInfo.roomId}`, (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
@@ -56,7 +54,6 @@ export const Chat = ({ choosedUserRoomInfo }) => {
         });
         // 연결 활성화
         client.current.activate();
-        console.log("연결 완료");
     }
 
     // // 프로토콜 연결 종료

@@ -4,15 +4,11 @@ import { darken, lighten } from 'polished';
 export const MyProfileBox = styled.div`
   min-width: 250px;
   width: 100%;
-  // 콘텐츠 크기에 맞게끔 높이는 최대한 작게
-  height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* vertical - horizontal */
-  padding: 2vh 2vw;
-  /* vertical - horizontal */
-  margin: 0.6vh 0;
+  /* up - right - bottom - left */
+  margin: 0 0 0.6vh 0;
   overflow: hidden;
 
 `
@@ -26,8 +22,7 @@ export const Container = styled.div`
   align-items: start;
   /* vertical - horizontal */
   padding: 2vh 2vw;
-  /* vertical - horizontal */
-  margin: 0.6vh 0;
+  margin: 0 0 0.6vh 0;
   color: var(--bg-original-black);
   border-radius: 10px;
   background-color: white;

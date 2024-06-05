@@ -10,8 +10,7 @@ export const Container = styled.div`
   align-items: center;
   /* vertical - horizontal */
   padding: 2vh 2vw;
-  /* vertical - horizontal */
-  margin: 0.6vh 0;
+  margin: 0vh 0 0.6vh 0;
   color: var(--bg-original-black);
   border-radius: 10px;
   background-color: var(--bg-original-white);

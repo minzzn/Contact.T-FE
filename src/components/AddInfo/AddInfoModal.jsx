@@ -104,8 +104,6 @@ export const AddInfoModal = ({ setIsFirst }) => {
             finalDataStructureBeforeSending = { ...finalDataStructureBeforeSending, role: extraInfo["role"], childNum, children: [...children, {...childInfo}] }
         }
 
-        console.log(Object.values(finalDataStructureBeforeSending).filter(value => String(value).length >= 1 ? true : false).length > 0);
-
         isValid = Object.values(finalDataStructureBeforeSending).filter(value => {
             // Array인 경우
             if(typeof value === "object") {

@@ -7,7 +7,7 @@ import { SelectChatTime } from './SetProfileSelectChatTime';
 import { postSetProfileDataWith } from '../../function/setprofile.js';
 import { iconState } from "../../pages/Main/Main";
 import Modal from 'react-modal';
-import profileImg from '../../assets/profile.png';
+import profileImg from '../../../public/assets/profile.png';
 
 export const SetProfile = ({closeModal}) => {
   const navigate = useNavigate();

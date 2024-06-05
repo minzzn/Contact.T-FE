@@ -9,10 +9,10 @@ import { useState } from "react";
 import { getRole} from "../../function/common";
 import { getRoomInfo } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
-import img1 from "../../assets/userimg_01.png";
-import defaultImg from "../../assets/profile.png"
+import img1 from "../../../public/assets/profile.png";
+import defaultImg from "../../../public/assets/profile.png";
 import Role from "./Role";
-import { ToastifyError } from "../../function/toast";
+import { ToastifyError, ToastifySuccess } from "../../function/toast";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -53,6 +53,8 @@ export const Header = () => {
                 setIsUpdatingNow(prevState => !prevState);
                 if(!roomInfos.length) {
                     ToastifyError("연결된 사용자 목록이 없습니다");
+                } else {
+                    ToastifySuccess("사용자 목록 업데이트 성공");
                 }
             }, 1500);
         } catch (error) {

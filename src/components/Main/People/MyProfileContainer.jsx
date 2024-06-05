@@ -1,5 +1,5 @@
 import { MyProfileBox, Container, MyProfileBoxContainer, ImgContainer, NameAndContentContainer, Divider } from "../../../css/styled/Main/People/peopleListBox.styled";
-import profileImg from '../../../assets/profile.png';
+import profileImg from '../../../../public/assets/profile.png';
 export const MyProfileContainer = ({MyInfo}) => {
     const myInfoName = MyInfo && MyInfo.name ? MyInfo.name : "아직 이름을 불러오지 못했어요";
     return (

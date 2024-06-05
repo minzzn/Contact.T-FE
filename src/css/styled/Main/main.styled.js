@@ -62,7 +62,7 @@ export const StyledIcon = styled.i`
     font-size: ${(props) => props.size ? props.size : '16px'};
     margin-right: ${(props) => props.$marginright ? props.$marginright : '2vh'};
     margin-bottom: ${(props) => props.$marginBottom ? props.$marginBottom : 0};
-    color: ${(props) => props.$selected === "true" ? 'var(--bg-main-green)' : 'var(--bg-dark-gray)'};
+    color: ${(props) => props.$selected === "true" ? 'var(--bg-main-green)' : 'var(--bg-main-gray)'};
     transition: color 0.2s linear;
     animation: ${(props) => props.$isUpdating ? css`${isUpdatingNow} 1.5s linear Infinite` : "none"}; 
 

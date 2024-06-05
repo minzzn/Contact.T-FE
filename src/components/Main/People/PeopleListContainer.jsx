@@ -7,9 +7,9 @@ import { ChatActiveState } from "../../../hooks/chatActiveState";
 import { getRole } from '../../../function/common.js';
 
 export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 user 객체를 전달
-    const role = getRole() === "TEACHER" ? "선생님" : "학부모";
     const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    // 
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -53,7 +53,7 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 u
                         <ProfileImageBox>
                             <ProfileImage></ProfileImage>
                         </ProfileImageBox>
-                        <IdentifyName>ㅇㅇ고 0-0 {role}</IdentifyName>
+                        <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
                         <RealName><p>{user.name}</p></RealName>
                             <StateBox>
                                 <DutyState>

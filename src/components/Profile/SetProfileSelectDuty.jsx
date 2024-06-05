@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import { dutyCustomStyles }from '../../css/styled/Profile/setProfile.styled';
 
 export const SelectDuty = ({ onDutyChange }) => {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -19,7 +20,7 @@ export const SelectDuty = ({ onDutyChange }) => {
             options={ondutyOptions}
             onChange={handleOptionChange}
             value={selectedOption}
-            styles={customStyles(selectedOption)}
+            styles={dutyCustomStyles(selectedOption)}
             isSearchable={false}
             isMulti={false}
             placeholder='근무 상태를 선택하세요'
@@ -27,34 +28,3 @@ export const SelectDuty = ({ onDutyChange }) => {
     );
 }
 
-const customStyles = (selectedOption) => ({
-    control: (provided) => ({
-        ...provided,
-        background: '#ffffff',
-        width: '45vh',
-        height: '7vh',
-        borderRadius: '2vh',
-        marginBottom: '1vh',
-        display: 'flex',
-        textAlign: 'center',
-        cursor: 'pointer',
-        fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: selectedOption ? '800' : '400',
-        fontSize: '2.4vh',
-        color: '#000000',
-        // 선택된 옵션이 있을 경우 테두리 색상을 초록색으로, 없을 경우 회색으로 설정
-        border: selectedOption ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4',
-    }),
-    option: (provided, state) => ({
-        ...provided,
-        background: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-        textAlign: 'center',
-        fontFamily: 'Noto Sans KR, sans-serif',
-        fontWeight: state.isFocused ? '800' : '400',
-        fontSize: '2.4vh',
-        color: '#000000',
-    })
-});

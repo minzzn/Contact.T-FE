@@ -125,9 +125,75 @@ export const StartButton = styled.button`
       background:  ${darken(0.1, '#1A4D2E')};
     }
   cursor: pointer;
-  /* 서비스 시작하기 */
+  /* 근무 상태 설정하기 */
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-weight: bold;
   font-size: 2.4vh;
 `;
+
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+
+export const StyledDatePicker = styled(DatePicker)`
+    width: 45vh;
+    height: 7vh;
+    padding-right: 1.5vh;
+    border: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4') : "0.5vh solid #B4B4B4")};
+    border-radius: 2vh;
+    margin-bottom: 1vh;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '800' : '600') : "400")};
+    font-size: 2.4vh;
+    color: #000000;
+
+    .react-datepicker__time-list-item {
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        text-align: center;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 2.4vh;
+        color: #000000;
+        &:hover {
+            font-weight: 800;
+            cursor: pointer;
+        }
+    }
+`;
+
+export const dutyCustomStyles = (selectedOption) => ({
+  control: (provided) => ({
+      ...provided,
+      background: '#ffffff',
+      width: '45vh',
+      height: '7vh',
+      borderRadius: '2vh',
+      marginBottom: '1vh',
+      display: 'flex',
+      textAlign: 'center',
+      cursor: 'pointer',
+      fontFamily: 'Noto Sans KR, sans-serif',
+      fontWeight: selectedOption ? '800' : '400',
+      fontSize: '2.4vh',
+      color: '#000000',
+      // 선택된 옵션이 있을 경우 테두리 색상을 초록색으로, 없을 경우 회색으로 설정
+      border: selectedOption ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4',
+  }),
+  option: (provided, state) => ({
+      ...provided,
+      background: '#ffffff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+      textAlign: 'center',
+      fontFamily: 'Noto Sans KR, sans-serif',
+      fontWeight: state.isFocused ? '800' : '400',
+      fontSize: '2.4vh',
+      color: '#000000',
+  })
+});

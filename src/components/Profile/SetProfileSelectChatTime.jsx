@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { darken, lighten } from 'polished';
 import Select from "react-select"; 
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
-import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
+import { SytledDatePicker } from '../../css/styled/Profile/setProfile.styled';
 
 export const SelectChatTime = ({ handleStartTimeChange, handleEndTimeChange }) => {
     const [startTime, setStartTime] = useState(null);
@@ -75,34 +72,3 @@ export const SelectChatTime = ({ handleStartTimeChange, handleEndTimeChange }) =
         </>
     );
 }
-
-const StyledDatePicker = styled(DatePicker)`
-    width: 45vh;
-    height: 7vh;
-    padding-right: 1.5vh;
-    border: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4') : "0.5vh solid #B4B4B4")};
-    border-radius: 2vh;
-    margin-bottom: 1vh;
-    display: flex;
-    text-align: center;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '800' : '600') : "400")};
-    font-size: 2.4vh;
-    color: #000000;
-
-    .react-datepicker__time-list-item {
-        background-color: #ffffff;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        text-align: center;
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 2.4vh;
-        color: #000000;
-        &:hover {
-            font-weight: 800;
-            cursor: pointer;
-        }
-    }
-`;

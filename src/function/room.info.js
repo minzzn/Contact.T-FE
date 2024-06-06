@@ -1,4 +1,4 @@
-import { getToken } from "./common";
+import { getToken, getUserId } from "./common";
 
 // findroomid - 방 id, 정보 알아내기
 export async function getRoomInfo() {
@@ -26,32 +26,29 @@ export async function getRoomInfo() {
 }
 
 export async function createRoom(parentUserId) {
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-    try {
-        const response = await fetch(`http://${BACKEND_URL}/createRoom`, {
-          method: 'POST',
-          headers: {
-            // 토큰을 헤더에 추가함
-            'Authorization': `${getToken()}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            teacherUserId: `${getUserId()}`,
-            parentUserId: parentUserId
-          })
-        });
-        // 서버로부터 응답을 받았을 경우
-        if (response.ok) {
-          const data = await response.text();
-          return data; // 채팅방 ID
-        } 
-        // 서버로부터 응답이 성공적이지 않은 경우
-        else {
-          throw new Error('createRoom 실패');
-        }
+  try {
+      const response = await fetch(`http://${BACKEND_URL}/createRoom`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `${getToken()}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          teacherUserId: `${getUserId()}`,
+          parentUserId: parentUserId
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.text();
+        return data; // 채팅방 ID
+      } else {
+        throw new Error('createRoom 실패');
       }
-      catch (error) {
-        console.error('요청에 오류가 있음');
-      }
+    } catch (error) {
+      console.error('요청에 오류가 있음', error);
+    }
 }
+

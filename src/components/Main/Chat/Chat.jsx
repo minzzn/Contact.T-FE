@@ -96,7 +96,11 @@ export const Chat = ({ choosedUserRoomInfo }) => {
     // 초기랜더링될 때, 연결
     useEffect(() => {
         connect();
-    },[]);
+
+        return () => {
+            disconnect();
+        }
+    },[choosedUserRoomInfo]);
 
     // 초기 랜더링때는 경고문구를 안 띄우지만, 메시지의 hidden값이 1이라 accumulatedWarning의 값이 증가하면 경고문구를 띄워줍니다(누적횟수와 함께)
     useEffect(()=> {

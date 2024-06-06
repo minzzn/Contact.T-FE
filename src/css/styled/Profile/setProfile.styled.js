@@ -132,40 +132,6 @@ export const StartButton = styled.button`
   font-size: 2.4vh;
 `;
 
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
-
-export const StyledDatePicker = styled(DatePicker)`
-    width: 45vh;
-    height: 7vh;
-    padding-right: 1.5vh;
-    border: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '0.5vh solid #5CC095' : '0.5vh solid #B4B4B4') : "0.5vh solid #B4B4B4")};
-    border-radius: 2vh;
-    margin-bottom: 1vh;
-    display: flex;
-    text-align: center;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: ${(props) => (props.startTime !== null ? (props.endTime !== null ? '800' : '600') : "400")};
-    font-size: 2.4vh;
-    color: #000000;
-
-    .react-datepicker__time-list-item {
-        background-color: #ffffff;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        text-align: center;
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 2.4vh;
-        color: #000000;
-        &:hover {
-            font-weight: 800;
-            cursor: pointer;
-        }
-    }
-`;
-
 export const dutyCustomStyles = (selectedOption) => ({
   control: (provided) => ({
       ...provided,

@@ -12,13 +12,19 @@ import { getRoomInfo } from "../../function/room.info";
 import { openSseArea } from "../../function/addInfo";
 import { sseEventState } from "../../hooks/sseEventState";
 import { RoomsState } from "../../hooks/roomsState";
+import img1 from "../../../public/assets/profile.png";
 import defaultImg from "../../../public/assets/profile.png";
+import { getDutyState } from '../../function/setprofile.js';
+
 
 export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const [isFirst, setIsFirst] = useState(false);
     const setSseEventData = useSetRecoilState(sseEventState);
     const setRoomsState = useSetRecoilState(RoomsState);
+    const [isUpdatingNow, setIsUpdatingNow] = useState(false);
+    const [teachersDutyStates, setTeachersDutyStates] = useState([]); // 선생님들의 근무 상태 정보를 저장할 state
+    const role = getRole() === "TEACHER" ? "선생님" : "학부모";
 
     const closeModal = () => {
         setIconsState(()=> ({
@@ -70,31 +76,60 @@ export const Main = () => {
     useEffect(() => {
         const handleGetRoomInfo = async () => {
             try {
+                setIsUpdatingNow(!isUpdatingNow);
                 const roomInfos = await getRoomInfo();
-                const role = getRole();
-                // 역할에 따라서 roomsState 업데이트
-                if (role === "TEACHER" && roomInfos.length > 0) {
-                    const newRoomsState = roomInfos.map(roomInfo => ({
-                                userId: roomInfo.parentUserId,
-                                name: roomInfo.parentName,
-                                roomId: roomInfo.roomId,
-                                img: defaultImg,
-                                profileImg: defaultImg
-                    }));
-                    setRoomsState(newRoomsState);
-                } else if (role === "PARENT" && roomInfos.length > 0) {
-                    const newRoomsState = roomInfos.map(roomInfo => ({                     
+    
+                // UI 표현을 위해 억지로 timeout 걸기
+                setTimeout(async () => { // 이 부분을 async 함수로 변경
+                    setIsUpdatingNow(prevState => !prevState);
+    
+                    // 역할에 따라서 roomsState 업데이트
+                    if (role === "선생님" && roomInfos.length) {
+                        const newRoomsState = roomInfos.map(roomInfo => ({
+                            userId: roomInfo.parentUserId,
+                            name: roomInfo.parentName,
+                            roomId: roomInfo.roomId,
+                            img: img1,
+                            profileImg: defaultImg
+                        }));
+                        setRoomsState(newRoomsState);
+                    } else if (role === "학부모" && roomInfos.length) {
+                        const newRoomsState = await Promise.all(roomInfos.map(async (roomInfo) => {
+                            let duty = false; // 기본값 설정
+                            let workStart = "";
+                            let workEnd = "";
+                            try {
+                                const { duty: fetchedDuty, workStart: fetchedWorkStart, workEnd: fetchedWorkEnd } = await getDutyState(roomInfo.teacherUserId);
+                                // 근무 상태 정보가 존재하는 경우에만 업데이트
+                                if (fetchedDuty !== undefined) {
+                                    duty = fetchedDuty;
+                                    workStart = fetchedWorkStart || "";
+                                    workEnd = fetchedWorkEnd || "";
+                                }
+                            } catch (err) {
+                                console.error("근무 상태 가져오기 오류:", err);
+                                // 오류 발생 시 기본값 유지
+                            }
+                            
+                            return {
                                 userId: roomInfo.teacherUserId,
                                 name: roomInfo.teacherName,
                                 roomId: roomInfo.roomId,
-                                img: defaultImg,
-                                profileImg: defaultImg
-                    }));
-
-                    setRoomsState(newRoomsState);
-                }
+                                img: img1,
+                                profileImg: defaultImg,
+                                // 근무 상태 정보를 속성으로 추가
+                                duty: duty,
+                                workStart: workStart,
+                                workEnd: workEnd,
+                            };
+                        }));
+                        setRoomsState(newRoomsState);
+                        console.log(newRoomsState); // 디버깅용 로그
+                    }
+                }, 1500);
             } catch (error) {
                 console.error("Error fetching room info:", error);
+                setIsUpdatingNow(prevState => !prevState);
             }
         };
 

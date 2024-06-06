@@ -43,13 +43,12 @@ export const ImgContainer = styled.div`
 `;
 
 export const NameAndContentContainer = styled.div`
-    flex: 3;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
     // 최대한 왼쪽에 붙도록
     align-items: start;
-    margin-top: 4px;
 `;
 
 export const Divider = styled.div`
@@ -142,14 +141,17 @@ export const IdentifyName = styled.div`
     box-sizing: border-box;
     width: 21vh;
     height: 41vh;
-    margin-top: 18px;
-    /* border: 1px solid #000000; */
-    /* ㅇㅇ고 ㅇ-ㅇ 선생님 */
+    margin-top: 15px;
+    
+    /* 김ㅇㅇ */
     font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
+    font-weight: 400;
     font-size: 2vh;
+    line-height: 29px;
     color: var(--bg-original-black);
     text-align: center;
+    /* border: 1px solid #000000; */
 
     overflow: hidden;
     flex: 1;
@@ -162,14 +164,13 @@ export const RealName = styled.div`
     justify-content: center;
     width: 20vh;
     height: 30vh;
+    margin-top: 15px;
     /* border: 1px solid #000000; */
 
-    /* 김ㅇㅇ */
+    /* ㅇㅇ고 ㅇ-ㅇ 선생님 */
     font-family: 'Noto Sans KR', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.5vh;
-    line-height: 29px;
+    font-weight: bold;
+    font-size: 3vh;
     color: var(--bg-original-black);
     text-align: center;
 

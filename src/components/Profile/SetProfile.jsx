@@ -7,6 +7,7 @@ import { ProfileSetText, ProfileImageBox, ProfileImage, InputBox, StartButton, c
 import { iconState } from "../../pages/Main/Main";
 import Modal from 'react-modal';
 import profileImg from '../../../public/assets/profile.png';
+import { ToastifySuccess, ToastifyError } from './../../function/toast';
 
 export const SetProfile = ({ closeModal }) => {
   const navigate = useNavigate();

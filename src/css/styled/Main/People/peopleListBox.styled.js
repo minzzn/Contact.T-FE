@@ -22,7 +22,7 @@ export const Container = styled.div`
   align-items: start;
   /* vertical - horizontal */
   padding: 2vh 2vw;
-  margin: 0 0 0.6vh 0;
+  margin: 0 0 1vh 0;
   color: var(--bg-original-black);
   border-radius: 10px;
   background-color: white;
@@ -43,12 +43,13 @@ export const ImgContainer = styled.div`
 `;
 
 export const NameAndContentContainer = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    // 최대한 왼쪽에 붙도록
-    align-items: start;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // 최대한 왼쪽에 붙도록
+  align-items: start;
 `;
 
 export const Divider = styled.div`

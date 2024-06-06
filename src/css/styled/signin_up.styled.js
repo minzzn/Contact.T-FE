@@ -6,7 +6,7 @@ export const StyledForm = styled.form`
     flex-direction: column;
     /* width, height는 내부 컴포넌트들의 사이즈로 결정 */
     min-width: 60vh;
-    min-height: 80vh;
+    min-height: 70vh;
     width: 40%;
     height: 60%;
     margin: auto;

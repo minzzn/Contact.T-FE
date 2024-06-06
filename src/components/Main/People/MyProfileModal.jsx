@@ -3,33 +3,14 @@ import Modal from 'react-modal';
 import { SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, DutyStateMark, ChatStateMark, ChatButton, displayStyle, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled";
 import { getDutyState } from "../../../function/setprofile.js";
 import { getUserId } from '../../../function/common.js';
+import { checkChatable } from '../../../function/time.js';
 
 const ProfileModal = ({ isOpen, onRequestClose, role, MyInfo, profileImg }) => {
 
     const myInfoName = MyInfo && MyInfo.name ? MyInfo.name : "아직 이름을 불러오지 못했어요";
     const [dutyStateInfo, setDutyStateInfo] = useState();
-    const [isChatable, setIsChatable] = useState(false);
+    const [isChatable, setIsChatable] = useState(null);
 
-    const parseTimeKST = (timeStr) => {
-        const [period, time] = timeStr.split(' ');
-        const [hours, minutes, seconds] = time.split(':').map(Number);
-        let date = new Date();
-        let hours24 = period === '오전' ? (hours % 12) : (hours % 12) + 12;
-        date.setHours(hours24, minutes, seconds || 0, 0);
-        return date;
-    };
-    
-    const checkChatable = (workStart, workEnd) => {
-        const now = new Date();
-        const start = parseTimeKST(workStart);
-        const end = parseTimeKST(workEnd);
-        if (start <= now && now <= end) {
-            setIsChatable(true);
-        } else {
-            setIsChatable(false);
-        }
-    };
-    
     useEffect(() => {
         // 동기 함수인 경우(localStorage에서 직접 값을 가져오는 경우), await 키워드 없이 직접 값을 할당할 수 있음
         const teacherUserId = getUserId(); 
@@ -40,7 +21,7 @@ const ProfileModal = ({ isOpen, onRequestClose, role, MyInfo, profileImg }) => {
                 setDutyStateInfo(data);
                 // 근무 상태 정보를 바탕으로 isChatable 상태 업데이트
                 if (data && data.workStart && data.workEnd) {
-                    checkChatable(data.workStart, data.workEnd);
+                    checkChatable(data.workStart, data.workEnd) ? setIsChatable(true) : setIsChatable(false);
                 }
             } catch (error) {
                 console.error("근무 상태 정보 가져오기 실패:", error);
@@ -51,12 +32,6 @@ const ProfileModal = ({ isOpen, onRequestClose, role, MyInfo, profileImg }) => {
             fetchDutyState();
         }
     }, [isOpen, role]);
-    
-
-    // isChatable 상태가 변경될 때마다 실행됩니다.
-    //useEffect(() => {
-    //    console.log(isChatable);
-    //}, [isChatable]);
 
     return (
         <Modal

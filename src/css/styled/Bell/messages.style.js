@@ -17,7 +17,6 @@ export const RequestsContainer = styled.div`
 
     z-index: 3;
 `;
-
 export const RequestContainer = styled.div` 
     width: 300px;
     transition: color ease 0.3s;

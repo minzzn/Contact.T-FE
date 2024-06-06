@@ -4,7 +4,6 @@ import { SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, Re
 
 const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn }) => {
     const [isChatable, setIsChatable] = useState(false);
-    const [dutyState, setDutyState] = useState('미설정'); // 근무 상태
     const [chatState, setChatState] = useState('미설정'); // 채팅 가능 상태
   
     const parseTimeKST = (timeStr) => {
@@ -27,10 +26,10 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
       const end = parseTimeKST(workEnd);
       if (start <= now && now <= end) {
         setIsChatable(true);
-        setChatState('채팅 가능 시간');
+        setChatState('연락 가능');
       } else {
         setIsChatable(false);
-        setChatState('채팅 불가능');
+        setChatState('연락 자제');
       }
     };
   
@@ -38,12 +37,8 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
       if (isOpen) {
         const { workStart, workEnd } = user;
         checkChatable(workStart, workEnd);
-        // 근무 상태 설정, 미설정 상태일 시에, (workStart와 workEnd값 없을 시) 초기값 유지
-        if (workStart && workEnd) {
-          setDutyState('근무중');
-        } 
       }
-    //   console.log(user.workStart,user.workEnd,isChatable,dutyState,chatState); // 디버깅용 로그
+      // console.log(user.workStart,user.workEnd,isChatable,chatState); // 디버깅용 로그
     }, [isOpen, user]);
 
     return (
@@ -64,13 +59,9 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
                 </ProfileImageBox>
                 <RealName><p>{user.name}</p></RealName>
                 <IdentifyName>{peopleRole}</IdentifyName>
-                {/* role이 선생님일 때만 보이도록  */}
+                {/* peopleRole이 선생님일 때만 보이도록  */}
                 {peopleRole === "선생님" && (
                     <StateBox>
-                        <DutyState>
-                            <DutyStateMark $duty={user.duty === true ? "true" : "false"}></DutyStateMark>
-                            {dutyState}
-                        </DutyState>
                         <ChatState>
                             <ChatStateMark $ischatable={isChatable === true ? "true" : "false"}></ChatStateMark>
                             {chatState}

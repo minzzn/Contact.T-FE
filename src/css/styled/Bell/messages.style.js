@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RequestsContainer = styled.div`
     position: absolute;
     top: 55px;
-    padding: 20px;
+    padding: 10px;
 
     display: flex;
     flex-direction: column;
@@ -15,16 +15,25 @@ export const RequestsContainer = styled.div`
     background-color: var(--bg-main-green);
     border-radius: 10px;
 
-    z-index: 3;
+    z-index: 5;
 `;
 
 export const RequestContainer = styled.div` 
-    width: 300px;
-    transition: color ease 0.3s;
-
+    width: 260px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    padding: 10px;
     border-radius: 5px;
-    color: white;
+    color: var(--bg-original-white);
 `;
+
+export const StyleIconInMessage = styled.i`
+    font-size: 0.67em;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--bg-deep-green);
+    }
+`

@@ -24,7 +24,9 @@ export const sendChatData = async (text) => {
 
         // 성공적으로 전송된 경우의 추가 로직을 써도 됩니다.
         const result = await response.json();
-        console.log('전송 성공: ', result);
+        if(result) {
+            return;
+        }
     } catch (error) {
         // 전송에 실패한 경우의 추가 로직을 써도 됩니다.
         console.error('전송 실패:', error.message);

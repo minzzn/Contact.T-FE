@@ -51,4 +51,3 @@ export async function createRoom(parentUserId) {
       console.error('요청에 오류가 있음', error);
     }
 }
-

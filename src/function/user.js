@@ -9,6 +9,7 @@ export async function getUserInfo() {
             method: "GET",
             headers: {
                 "Authorization": `${getToken()}`,
+                "Content-Type": "application/json"
             }
         });
   

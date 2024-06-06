@@ -21,9 +21,8 @@ export const Main = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const [isFirst, setIsFirst] = useState(false);
     const setSseEventData = useSetRecoilState(sseEventState);
-    const setRoomsState = useSetRecoilState(RoomsState);
+    const [roomsState, setRoomsState] = useRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
-    const [teachersDutyStates, setTeachersDutyStates] = useState([]); // 선생님들의 근무 상태 정보를 저장할 state
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
 
     const closeModal = () => {
@@ -50,7 +49,7 @@ export const Main = () => {
             // SSE 연결이 성공적으로 설정된 후에 호출되는 함수
             eventSource.onopen = function(event) {
                 // 콘솔에 채팅방이 열렸음을 알리는 메시지 출력
-                console.log('SSE event area opened!');
+                // console.log('SSE event area opened!');
             };
             // SSE 이벤트 수신 시 처리할 함수
             eventSource.addEventListener('sse', event  => {
@@ -60,7 +59,7 @@ export const Main = () => {
                     setSseEventData(prevState => [...prevState, JSON.parse(event.data)]);
                 } else {
                     // 첫 번째 더미데이터는 그냥 무시
-                    console.log(event.data);
+                    // console.log(event.data);
                 }
             });
 
@@ -124,7 +123,7 @@ export const Main = () => {
                             };
                         }));
                         setRoomsState(newRoomsState);
-                        console.log(newRoomsState); // 디버깅용 로그
+                        // console.log(newRoomsState); // 디버깅용 로그
                     }
                 }, 1500);
             } catch (error) {
@@ -134,7 +133,7 @@ export const Main = () => {
         };
 
         handleGetRoomInfo();
-    }, []);
+    }, [roomsState]);
 
     return (    
         <>

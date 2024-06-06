@@ -21,14 +21,12 @@ export const Header = () => {
     const [isHovered, setIsHovered] = useState(false);
     const setRoomsState = useSetRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
-    const [teachersDutyStates, setTeachersDutyStates] = useState([]); // 선생님들의 근무 상태 정보를 저장할 state
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
 
     const handleGetRoomInfo = async () => {
         try {
             setIsUpdatingNow(!isUpdatingNow);
             const roomInfos = await getRoomInfo();
-            console.log(roomInfos);
             // UI 표현을 위해 억지로 timeout 걸기
             setTimeout(async () => { // 이 부분을 async 함수로 변경
                 setIsUpdatingNow(prevState => !prevState);
@@ -80,7 +78,6 @@ export const Header = () => {
                         };
                     }));
                     setRoomsState(newRoomsState);
-                    console.log(newRoomsState); // 디버깅용 로그
                 }
             }, 1500);
         } catch (error) {

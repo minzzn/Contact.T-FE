@@ -20,8 +20,6 @@ export const searchDB = async(schoolType) => {
             const schoolsDataArray = await jsonData.dataSearch.content;
 
             return schoolsDataArray;  
-        } else {
-            console.log('200 상태가 아님');
         }
     } catch(error) {
         console.log('Error: ', error.message);
@@ -94,9 +92,10 @@ export async function sendFriendRequest(teacherUserId) {
 
         // 응답 확인
         if (response.ok) {
-            console.log('친구 요청 성공');
+            return;
         } else {
-            console.error('친구 요청 실패:', response.statusText);
+            // 재전송
+            sendFriendRequest(teacherUserId);
         }
     } catch (error) {
         console.error('친구 요청에 오류가 있음:', error);

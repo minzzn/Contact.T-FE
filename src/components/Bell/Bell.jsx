@@ -4,12 +4,10 @@ import { StyledIcon } from "../../css/styled/Main/main.styled"
 import { IconsState } from "../../hooks/iconsState";
 import { sseEventState } from "../../hooks/sseEventState";
 import Messages from "./Messages";
-import { useState } from "react";
 
 export const Bell = ({ marginBottom = 0}) => { 
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const sseEvents = useRecoilValue(sseEventState);
-    const [isBellClicked, setIsBellClicked] = useState(false);
 
     return (
         <>
@@ -18,12 +16,11 @@ export const Bell = ({ marginBottom = 0}) => {
                 <StyledIcon className="fa-solid fa-bell" size="30px" $marginBottom={marginBottom} onClick={() => {
                     setIconsState((prevStates) => ({
                         ...prevStates,
-                        bell: !isBellClicked,
+                        bell: !(prevStates["bell"]),
                     }));
-                    setIsBellClicked(!isBellClicked);
                 }} $selected={iconsState["bell"] === true ? 'true' : 'false'} />
                 <RedDot $isHavingAlarm={`${sseEvents?.length > 0}`} $marginBottom={marginBottom} />
-                <Messages isClicked={isBellClicked} />
+                <Messages />
             </BellContainer>
         </>
     )

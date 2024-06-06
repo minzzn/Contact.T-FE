@@ -55,8 +55,8 @@ export const Divider = styled.div`
     margin: 1.5vh;
     min-width: 250px;
     width: 100%;
-    height: 3px;
-    background: var(--bg-button-gray);
+    height: 5px;
+    background: var(--bg-light-gray);
     border-radius: 5px;
 `
 export const displayStyle = styled.div`

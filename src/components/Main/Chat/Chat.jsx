@@ -108,7 +108,6 @@ export const Chat = ({ choosedUserRoomInfo }) => {
     // 초기 랜더링때는 경고문구를 안 띄우지만, 메시지의 hidden값이 1이라 accumulatedWarning의 값이 증가하면 경고문구를 띄워줍니다(누적횟수와 함께)
     useEffect(()=> {
         if(accumulatedWarning !== null) {
-            console.log(accumulatedWarning);
             // todo : 경고누적횟수 양 사용자 모두에게 전달되는 오류 수정할것
             ToastifyError(`공격적 언행 발견`);
         }

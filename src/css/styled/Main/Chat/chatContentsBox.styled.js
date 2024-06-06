@@ -3,10 +3,10 @@ import styled from "styled-components";
 // 채팅 내역들 전체를 담는 div tag
 export const ChatContentsContainer = styled.div`
     width: 100%;
+    height: 52vh; // chathistory 영역의 사이즈를 52vh로(특정값으로) 정해줘야 chat이 많아져도 높이가 길어지지 않음
     display: flex;
     // 내부 채팅 div들은 세로로 쌓이도록 만들기
     flex-direction: column;
-    min-height: 50vh;
 `
 // 실제 메시지 내용들이 담는 div tag의 wrapper
 export const ChatContentDivWrapper = styled.div`

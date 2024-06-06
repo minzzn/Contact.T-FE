@@ -28,7 +28,7 @@ export const Header = () => {
         try {
             setIsUpdatingNow(!isUpdatingNow);
             const roomInfos = await getRoomInfo();
-
+            console.log(roomInfos);
             // UI 표현을 위해 억지로 timeout 걸기
             setTimeout(async () => { // 이 부분을 async 함수로 변경
                 setIsUpdatingNow(prevState => !prevState);

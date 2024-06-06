@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 export const UserAndChat = () => {
     const [choosedUser, setChoosedUser] = useState(null);
-    
+
     return (
         <>
             <UserAndChatContainer>

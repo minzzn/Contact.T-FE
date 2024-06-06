@@ -96,9 +96,11 @@ export const Chat = ({ choosedUserRoomInfo }) => {
         publish(chat);
     };
 
-    // 초기랜더링될 때, 연결
+    // 초기랜더링될 때, 선택된 유저가 다를때 실행됨
     useEffect(() => {
         connect();
+        // chatHistory 초기화
+        setChatList([]);
 
         return () => {
             disconnect();

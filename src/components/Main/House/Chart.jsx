@@ -8,7 +8,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  scales,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { faker } from "@faker-js/faker";
@@ -66,13 +65,13 @@ export const data = {
     datasets: [
       {
         label: '개발자 접속 수',
-        data: labels.map(() => faker.number.int({ min: 0, max: 500 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 50 })),
         borderColor: '#5CC095',
         backgroundColor: 'white',
       },
       {
         label: '실 사용자 접속 수',
-        data: labels.map(() => faker.number.int({ min: 0, max: 500 })),
+        data: labels.map(() => faker.number.int({ min: 0, max: 50 })),
         borderColor: '#1A4D2E',
         backgroundColor: 'black',
       },

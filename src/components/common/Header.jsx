@@ -22,7 +22,6 @@ export const Header = () => {
     const setRoomsState = useSetRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
-    // console.log(role); // 디버깅용 로그
 
     const handleGetRoomInfo = async () => {
         try {
@@ -62,6 +61,9 @@ export const Header = () => {
                             console.error("근무 상태 가져오기 오류:", err);
                             // 오류 발생 시 기본값 유지
                         }
+
+                        // 채팅 가능시간 계산 -> roomsState 각 객체에 얹어서 주는게 목표
+                        const isChatable = checkChatable(workStart, workEnd);
                         
                         return {
                             userId: roomInfo.teacherUserId,
@@ -72,6 +74,7 @@ export const Header = () => {
                             // 근무 상태 정보를 속성으로 추가
                             workStart: workStart,
                             workEnd: workEnd,
+                            isChatable: isChatable
                         };
                     }));
                     setRoomsState(newRoomsState);

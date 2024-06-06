@@ -1,42 +1,39 @@
 import { React, useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, DutyStateMark, ChatStateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled";
+import { checkChatable } from '../../../function/time';
+import { ToastifyError, ToastifyWarn } from '../../../function/toast';
+import { getRole } from '../../../function/common';
 
 const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn }) => {
     const [isChatable, setIsChatable] = useState(false);
     const [chatState, setChatState] = useState('미설정'); // 채팅 가능 상태
-  
-    const parseTimeKST = (timeStr) => {
-      const [period, time] = timeStr.split(' ');
-      const [hours, minutes, seconds] = time.split(':').map(Number);
-      let date = new Date();
-      let hours24 = period === '오전' ? (hours % 12) : (hours % 12) + 12;
-      date.setHours(hours24, minutes, seconds || 0, 0);
-      return date;
-    };
-    
-    {/* 채팅 가능 시간 체크 함수*/}
-    const checkChatable = (workStart, workEnd) => {
-      // 미설정 상태시, 초기값 상태 그대로 유지 (dutyState, setDutyState에 미설정 setIsChatable에 false)
-      if (!workStart || !workEnd) {
-        return;
-      }
-      const now = new Date();
-      const start = parseTimeKST(workStart);
-      const end = parseTimeKST(workEnd);
-      if (start <= now && now <= end) {
-        setIsChatable(true);
-        setChatState('연락 가능');
+    const role = getRole();
+
+    // ChatButton 클릭 핸들러
+    const handleChatButtonClick = () => {
+      if (isChatable) {
+        clickEventFn();
       } else {
-        setIsChatable(false);
-        setChatState('연락 자제');
+        if(role === "TEACHER") {
+          ToastifyWarn("채팅 가능 시각 설정을 먼저해주세요");
+        } else {
+          ToastifyError('현재 채팅이 불가능합니다');
+        }
+
+        closeModal();
       }
     };
-  
+
     useEffect(() => {
       if (isOpen) {
-        const { workStart, workEnd } = user;
-        checkChatable(workStart, workEnd);
+        if(user["isChatable"]) {
+          setIsChatable(true);
+          setChatState('연락 가능');
+        } else {
+          setIsChatable(false);
+          setChatState('연락 자제');
+        }
       }
       // console.log(user.workStart,user.workEnd,isChatable,chatState); // 디버깅용 로그
     }, [isOpen, user]);
@@ -48,7 +45,7 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
         style={customStyles}
         ariaHideApp={false}
         contentLabel="Pop up Profile"
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         >
             <SetBox>
                 <DeleteIconWrap>
@@ -68,7 +65,7 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
                         </ChatState>
                     </StateBox>
                 )}
-                <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
+                <ChatButton onClick={handleChatButtonClick}>채팅하기</ChatButton>
             </SetBox>
         </Modal>
     );

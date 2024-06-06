@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Modal from 'react-modal';
 import { Container, ImgContainer, NameAndContentContainer } from "../../../css/styled/Main/People/peopleListBox.styled";
 import { ToastifyInfo } from '../../../function/toast';
 import { useSetRecoilState } from "recoil";
@@ -12,11 +11,9 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
     const peopleRole = role === "선생님" ? "학부모" : "선생님"; // 사용자의 role값에 따라 상대방의 role을 설정
-
+    
     const openModal = () => {
         setModalIsOpen(true);
-        // console.log(role); // 디버깅용 로그
-        // console.log(peopleRole);
     };
     const closeModal = () => {
         setModalIsOpen(false);
@@ -27,7 +24,7 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => {
         setIsChatActive(true);
         setModalIsOpen(false);
         ToastifyInfo('AI가 채팅을 분석하기 시작합니다🤖');
-    }
+    };
 
     return (
         <>

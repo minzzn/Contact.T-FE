@@ -94,17 +94,13 @@ export const Main = () => {
                         setRoomsState(newRoomsState);
                     } else if (role === "학부모" && roomInfos.length) {
                         const newRoomsState = await Promise.all(roomInfos.map(async (roomInfo) => {
-                            let duty = false; // 기본값 설정
-                            let workStart = "";
+                            let workStart = ""; // 기본값 설정
                             let workEnd = "";
                             try {
-                                const { duty: fetchedDuty, workStart: fetchedWorkStart, workEnd: fetchedWorkEnd } = await getDutyState(roomInfo.teacherUserId);
+                                const { workStart: fetchedWorkStart, workEnd: fetchedWorkEnd } = await getDutyState(roomInfo.teacherUserId);
                                 // 근무 상태 정보가 존재하는 경우에만 업데이트
-                                if (fetchedDuty !== undefined) {
-                                    duty = fetchedDuty;
-                                    workStart = fetchedWorkStart || "";
-                                    workEnd = fetchedWorkEnd || "";
-                                }
+                                workStart = fetchedWorkStart || "";
+                                workEnd = fetchedWorkEnd || "";
                             } catch (err) {
                                 console.error("근무 상태 가져오기 오류:", err);
                                 // 오류 발생 시 기본값 유지
@@ -117,7 +113,6 @@ export const Main = () => {
                                 img: img1,
                                 profileImg: defaultImg,
                                 // 근무 상태 정보를 속성으로 추가
-                                duty: duty,
                                 workStart: workStart,
                                 workEnd: workEnd,
                             };

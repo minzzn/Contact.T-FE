@@ -79,10 +79,6 @@ const ProfileModal = ({ isOpen, onRequestClose, role, MyInfo, profileImg }) => {
                 {/* role이 선생님일때만 보이도록 */}
                 {role === "선생님" && (
                     <StateBox>
-                        <DutyState>
-                            <DutyStateMark $duty={dutyStateInfo?.duty === true ? "true" : "false"}></DutyStateMark>
-                            {dutyStateInfo?.duty ? "근무중" : "근무중 아님"}
-                        </DutyState>
                         <ChatState>
                             <ChatStateMark $ischatable={isChatable === true ? "true" : "false"}></ChatStateMark>
                             {isChatable === true ? "연락 가능" : "연락 자제"}

@@ -6,7 +6,7 @@ import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "../Bell/Bell";
 import HoverIcon from "./HoverIcon";
 import { useState } from "react";
-import { getRole} from "../../function/common";
+import { getRole } from '../../function/common.js';
 import { getRoomInfo } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
 import img1 from "../../../public/assets/profile.png";
@@ -22,11 +22,13 @@ export const Header = () => {
     const setRoomsState = useSetRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
+    // console.log(role); // 디버깅용 로그
 
     const handleGetRoomInfo = async () => {
         try {
             setIsUpdatingNow(!isUpdatingNow);
             const roomInfos = await getRoomInfo();
+            // console.log(roomInfos); // 디버깅용 로그
             // UI 표현을 위해 억지로 timeout 걸기
             setTimeout(async () => { // 이 부분을 async 함수로 변경
                 setIsUpdatingNow(prevState => !prevState);
@@ -48,18 +50,14 @@ export const Header = () => {
                     }));
                     setRoomsState(newRoomsState);
                 } else if (role === "학부모" && roomInfos.length) {
-                    const newRoomsState = await Promise.all(roomInfos.map(async (roomInfo) => {
-                        let duty = false; // 기본값 설정
-                        let workStart = "";
+                    const newRoomsState = await Promise.all(roomInfos.map(async (roomInfo) => { 
+                        let workStart = ""; // 기본값 설정
                         let workEnd = "";
                         try {
-                            const { duty: fetchedDuty, workStart: fetchedWorkStart, workEnd: fetchedWorkEnd } = await getDutyState(roomInfo.teacherUserId);
+                            const { workStart: fetchedWorkStart, workEnd: fetchedWorkEnd } = await getDutyState(roomInfo.teacherUserId);
                             // 근무 상태 정보가 존재하는 경우에만 업데이트
-                            if (fetchedDuty !== undefined) {
-                                duty = fetchedDuty;
-                                workStart = fetchedWorkStart || "";
-                                workEnd = fetchedWorkEnd || "";
-                            }
+                            workStart = fetchedWorkStart || "";
+                            workEnd = fetchedWorkEnd || "";
                         } catch (err) {
                             console.error("근무 상태 가져오기 오류:", err);
                             // 오류 발생 시 기본값 유지
@@ -72,12 +70,12 @@ export const Header = () => {
                             img: img1,
                             profileImg: defaultImg,
                             // 근무 상태 정보를 속성으로 추가
-                            duty: duty,
                             workStart: workStart,
                             workEnd: workEnd,
                         };
                     }));
                     setRoomsState(newRoomsState);
+                    // console.log(newRoomsState); // 디버깅용 로그
                 }
             }, 1500);
         } catch (error) {
@@ -109,7 +107,7 @@ export const Header = () => {
                         house: false,
                         bell: false
                     }));
-                }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'} role={role} />
+                }} $selected={iconsState["peopleList"] === true ? 'true' : 'false'}/>
                 <StyledIcon className="fas fa-comment" size="30px" onClick={()=> {
                     setIsChatActive(false);
                     setIconsState(()=> ({

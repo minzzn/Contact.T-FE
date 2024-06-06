@@ -17,7 +17,6 @@ export const RequestsContainer = styled.div`
 
     z-index: 5;
 `;
-
 export const RequestContainer = styled.div` 
     width: 260px;
     display: flex;

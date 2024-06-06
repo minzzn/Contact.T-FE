@@ -193,14 +193,6 @@ export const StateBox = styled.div`
     flex: 1;
 
 `;
-export const DutyStateMark = styled.div`
-
-    width: 23px;
-    height: 23px;
-    background-color: ${(props) => (props.$duty === "true" ? '#5CC095' : '#AFB4B7')};
-    margin-right: 10px;
-    border-radius: 50%;
-`;
 
 export const ChatStateMark = styled.div`
 
@@ -211,22 +203,6 @@ export const ChatStateMark = styled.div`
     border-radius: 50%;
 `;
 
-export const DutyState = styled.div`
-
-    box-sizing: border-box;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    width: 20vh;//340px
-    height: 10vh;
-    /* border: 1px solid #000000; */
-
-    font-family: 'Noto Sans KR', sans-serif;
-    font-style: normal;
-    font-size: 2vh;
-    color: var(--bg-original-black);
-
-`;
 export const ChatState = styled.div`
 
     box-sizing: border-box;

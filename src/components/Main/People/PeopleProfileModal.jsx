@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, DutyStateMark, ChatStateMark, ChatButton, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled";
+import { ToastifyError } from "../../../function/toast";
 
 const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn }) => {
     const [isChatable, setIsChatable] = useState(false);
     const [chatState, setChatState] = useState('미설정'); // 채팅 가능 상태
-  
     const parseTimeKST = (timeStr) => {
       const [period, time] = timeStr.split(' ');
       const [hours, minutes, seconds] = time.split(':').map(Number);
@@ -32,11 +32,20 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
         setChatState('연락 자제');
       }
     };
-  
+    // ChatButton 클릭 핸들러
+    const handleChatButtonClick = () => {
+      if (isChatable) {
+        clickEventFn();
+      } else {
+        ToastifyError('현재 채팅이 불가능한 시간입니다.');
+      }
+    };
+
     useEffect(() => {
       if (isOpen) {
         const { workStart, workEnd } = user;
         checkChatable(workStart, workEnd);
+        // console.log(user); // 디버깅용 로그
       }
       // console.log(user.workStart,user.workEnd,isChatable,chatState); // 디버깅용 로그
     }, [isOpen, user]);
@@ -68,7 +77,7 @@ const PeopleProfileModal = ({ isOpen, closeModal, user, peopleRole, clickEventFn
                         </ChatState>
                     </StateBox>
                 )}
-                <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
+                <ChatButton onClick={handleChatButtonClick}>채팅하기</ChatButton>
             </SetBox>
         </Modal>
     );

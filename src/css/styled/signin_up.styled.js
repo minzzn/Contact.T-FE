@@ -5,9 +5,12 @@ export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     /* width, height는 내부 컴포넌트들의 사이즈로 결정 */
+    min-width: 60vh;
+    min-height: 80vh;
     width: 40%;
     height: 60%;
-    margin: auto; margin-top: 5vh;
+    margin: auto;
+    margin-top: 5vh;
     padding: 50px;
     color: var(--bg-original-black);
     background-color: var(--bg-original-white);

@@ -6,7 +6,7 @@ import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "../Bell/Bell";
 import HoverIcon from "./HoverIcon";
 import { useState } from "react";
-import { getRole } from '../../function/common.js';
+import { getRole, getUserId } from '../../function/common.js';
 import { getRoomInfo } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
 import img1 from "../../../public/assets/profile.png";

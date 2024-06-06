@@ -6,7 +6,7 @@ import { ChatActiveState } from "../../hooks/chatActiveState";
 import { Bell } from "../Bell/Bell";
 import HoverIcon from "./HoverIcon";
 import { useState } from "react";
-import { getRole } from '../../function/common.js';
+import { getRole, getUserId } from '../../function/common.js';
 import { getRoomInfo } from "../../function/room.info";
 import { RoomsState } from "../../hooks/roomsState";
 import img1 from "../../../public/assets/profile.png";
@@ -14,6 +14,7 @@ import defaultImg from "../../../public/assets/profile.png";
 import Role from "./Role";
 import { ToastifyError, ToastifySuccess } from "../../function/toast";
 import { getDutyState } from '../../function/setprofile.js';
+import { checkChatable } from "../../function/time.js";
 
 export const Header = () => {
     const [iconsState, setIconsState] = useRecoilState(IconsState);
@@ -22,7 +23,6 @@ export const Header = () => {
     const setRoomsState = useSetRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
-    // console.log(role); // 디버깅용 로그
 
     const handleGetRoomInfo = async () => {
         try {
@@ -41,12 +41,18 @@ export const Header = () => {
 
                 // 역할에 따라서 roomsState 업데이트
                 if (role === "선생님" && roomInfos.length) {
-                    const newRoomsState = roomInfos.map(roomInfo => ({
-                        userId: roomInfo.parentUserId,
-                        name: roomInfo.parentName,
-                        roomId: roomInfo.roomId,
-                        img: img1,
-                        profileImg: defaultImg
+                    const newRoomsState = await Promise.all(roomInfos.map(async (roomInfo) => {
+                        const { workStart = "", workEnd = "" } = await getDutyState(getUserId()); // teacher는 getUserId가 자신의 id
+                        const isChatable = checkChatable(workStart, workEnd);
+
+                        return {
+                            userId: roomInfo.parentUserId,
+                            name: roomInfo.parentName,
+                            roomId: roomInfo.roomId,
+                            img: img1,
+                            profileImg: defaultImg,
+                            isChatable
+                        }
                     }));
                     setRoomsState(newRoomsState);
                 } else if (role === "학부모" && roomInfos.length) {
@@ -62,6 +68,9 @@ export const Header = () => {
                             console.error("근무 상태 가져오기 오류:", err);
                             // 오류 발생 시 기본값 유지
                         }
+
+                        // 채팅 가능시간 계산 -> roomsState 각 객체에 얹어서 주는게 목표
+                        const isChatable = checkChatable(workStart, workEnd);
                         
                         return {
                             userId: roomInfo.teacherUserId,
@@ -72,6 +81,7 @@ export const Header = () => {
                             // 근무 상태 정보를 속성으로 추가
                             workStart: workStart,
                             workEnd: workEnd,
+                            isChatable: isChatable
                         };
                     }));
                     setRoomsState(newRoomsState);

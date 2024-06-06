@@ -22,7 +22,7 @@ export const ViewList = ({ setChoosedUser }) => {
         };
         fetchMyInfo();
     }, []);
-
+    
     return (
         <>
             <div style={{

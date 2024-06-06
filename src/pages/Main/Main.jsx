@@ -115,7 +115,6 @@ export const Main = () => {
                     {/* 톱니바퀴를 클릭하면 차트 페이지 / 유저아이콘이나 카톡 아이콘을 누르면 사람 목록 또는 채팅목록 활성화 */}
                     {
                         Object.keys(iconsState).map((iconName,idx) => {
-                            // todo : userIcon, setProfileIcon, houseIcon은 리턴이 안됨. 아마 setState를 통해 상태갱신을 true로 변환을 안 해줬기 때문인듯 : 해결해야함 - header내부 참고
                             if(iconsState[iconName]) {
                                 switch(iconName) {
                                     case "house":

@@ -38,7 +38,6 @@ export default function Messages({ isClicked }) {
                                         setSseEvents(prevStates => prevStates.filter(state => state["parentId"] !== sseEvent["parentId"]));
                                         setRoomsState(async (prevState) => {
                                             const newData = await createRoom(sseEvent["parentId"]);
-                                            console.log(newData);
 
                                             return [...prevState, newData];
                                         });

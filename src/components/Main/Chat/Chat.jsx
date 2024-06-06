@@ -23,7 +23,10 @@ export const Chat = ({ choosedUserRoomInfo }) => {
 
     // // 해당 방을 구독 : 서버에서 퍼블리시하는 메시지를 받아오는 역할
     function subscribe() {
-        // sub/chat/{roomID}
+        // 초기에 choosedUserRoom 상태가 없으면 구독함수를 실행하지 않고 바로 종료
+        if(choosedUserRoomInfo == null || choosedUserRoomInfo.roomId == null) {
+            return;
+        }
         client.current.subscribe(`/queue/chat/room/${choosedUserRoomInfo.roomId}`, (datafromServer) => {
             // 웹소켓 자체가 비동기적으로 작동하므로 내부에 비동기 함수가 탑재된 라이브러리
             const message = JSON.parse(datafromServer.body);
@@ -59,7 +62,6 @@ export const Chat = ({ choosedUserRoomInfo }) => {
     // // 프로토콜 연결 종료
     function disconnect() {
         client.current.deactivate();
-        console.log('종료');
     }
 
     // 사용자가 입력한 채팅, 채팅 전송 시점 서버로 전송하는 역할
@@ -67,6 +69,7 @@ export const Chat = ({ choosedUserRoomInfo }) => {
         if (!client.current.connected) {
             return;
         }
+
         client.current.publish({
             // sub/chat/{roomID}
             destination: '/pub/chat/sendMessage',
@@ -96,7 +99,11 @@ export const Chat = ({ choosedUserRoomInfo }) => {
     // 초기랜더링될 때, 연결
     useEffect(() => {
         connect();
-    },[]);
+
+        return () => {
+            disconnect();
+        }
+    },[choosedUserRoomInfo]);
 
     // 초기 랜더링때는 경고문구를 안 띄우지만, 메시지의 hidden값이 1이라 accumulatedWarning의 값이 증가하면 경고문구를 띄워줍니다(누적횟수와 함께)
     useEffect(()=> {
@@ -105,7 +112,7 @@ export const Chat = ({ choosedUserRoomInfo }) => {
             // todo : 경고누적횟수 양 사용자 모두에게 전달되는 오류 수정할것
             ToastifyError(`공격적 언행 발견`);
         }
-    }, [accumulatedWarning])
+    }, [accumulatedWarning]);
 
     return (
         <>

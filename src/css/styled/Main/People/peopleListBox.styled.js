@@ -8,7 +8,7 @@ export const MyProfileBox = styled.div`
   flex-direction: column;
   align-items: center;
   /* up - right - bottom - left */
-  margin: 0 0 0.6vh 0;
+  margin: 0 0 1vh 0;
   overflow: hidden;
 
 `

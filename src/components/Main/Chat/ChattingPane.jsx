@@ -8,7 +8,6 @@ import { ChatActiveState } from "../../../hooks/chatActiveState";
 export const ChattingPane = ({ choosedUserRoomInfo }) => {
     const isChatActive = useRecoilValue(ChatActiveState);
 
-    console.log('렌더링 횟수 체크');
     return (
         <> 
             <>

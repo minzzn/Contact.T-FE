@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const ChatContents = styled.div`
     width: 100%;
-    min-height: 50vh;
+    min-height: 52vh; // 이걸 설정해줘야 chattingpane영역이 살아있음
     overflow-y: scroll;
     padding: 0 5px;
 `;

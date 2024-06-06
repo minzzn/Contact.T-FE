@@ -14,6 +14,8 @@ export const RequestsContainer = styled.div`
     opacity: ${props => props.$isVisible ? 1 : 0};
     background-color: var(--bg-main-green);
     border-radius: 10px;
+
+    z-index: 3;
 `;
 
 export const RequestContainer = styled.div` 
@@ -24,10 +26,5 @@ export const RequestContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-
     color: white;
-
-    &:hover {
-        color: var(--bg-deep-green);
-    }
 `;

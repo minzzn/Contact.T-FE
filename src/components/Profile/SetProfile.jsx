@@ -34,7 +34,6 @@ export const SetProfile = ({closeModal}) => {
 
   return (
       <>
-
             <Modal
             $modalIsOpen={modalIsOpen}
             display={displayStyle}

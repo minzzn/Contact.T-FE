@@ -1,4 +1,4 @@
-import { getToken } from "./common";
+import { getToken, getUserId } from "./common";
 
 // findroomid - 방 id, 정보 알아내기
 export async function getRoomInfo() {

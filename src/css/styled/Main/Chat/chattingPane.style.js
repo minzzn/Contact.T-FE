@@ -14,5 +14,6 @@ export const ChatContainer = styled.div`
     box-shadow: 10px 10px 10px #ceced1;
     transition: all 0.3s ease;
 
+    visibility: ${props => props.$isChatActive ? 'visible' : 'hidden'};
     opacity: ${props => props.$isChatActive ? 1 : 0};
 `;

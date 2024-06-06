@@ -5,14 +5,18 @@ import { ToastifyInfo } from '../../../function/toast';
 import { useSetRecoilState } from "recoil";
 import { ChatActiveState } from "../../../hooks/chatActiveState";
 import PeopleProfileModal from './PeopleProfileModal';
+import { getRole } from '../../../function/common.js';
 
-export const PeopleListContainer = ({ user, setChoosedUser, role }) => {
+export const PeopleListContainer = ({ user, setChoosedUser }) => {
     const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const role = getRole() === "TEACHER" ? "선생님" : "학부모";
     const peopleRole = role === "선생님" ? "학부모" : "선생님"; // 사용자의 role값에 따라 상대방의 role을 설정
 
     const openModal = () => {
         setModalIsOpen(true);
+        // console.log(role); // 디버깅용 로그
+        // console.log(peopleRole);
     };
     const closeModal = () => {
         setModalIsOpen(false);
@@ -41,7 +45,6 @@ export const PeopleListContainer = ({ user, setChoosedUser, role }) => {
                 closeModal={closeModal}
                 user={user}
                 clickEventFn={clickEventFn}
-                role={role}
                 peopleRole={peopleRole}
             />
         </>

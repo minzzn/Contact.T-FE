@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useState } from "react";
 import Modal from 'react-modal';
-import { Container, ImgContainer, NameAndContentContainer, SetBox, DeleteIconWrap, ProfileImageBox, ProfileImage, IdentifyName, RealName, StateBox, DutyState, ChatState, StateMark, ChatButton, displayStyle, customStyles, DeleteIcon } from "../../../css/styled/Main/People/peopleListBox.styled"
+import { Container, ImgContainer, NameAndContentContainer } from "../../../css/styled/Main/People/peopleListBox.styled";
 import { ToastifyInfo } from '../../../function/toast';
 import { useSetRecoilState } from "recoil";
 import { ChatActiveState } from "../../../hooks/chatActiveState";
+import PeopleProfileModal from './PeopleProfileModal';
 
-export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 user 객체를 전달
+export const PeopleListContainer = ({ user, setChoosedUser, role }) => {
     const setIsChatActive = useSetRecoilState(ChatActiveState);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const peopleRole = role === "선생님" ? "학부모" : "선생님"; // 사용자의 role값에 따라 상대방의 role을 설정
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -31,41 +33,17 @@ export const PeopleListContainer = ({ user, setChoosedUser }) => { // props로 u
                 </ImgContainer>
                 <NameAndContentContainer>
                     <h2>{user.name}</h2>
+                    <p>{peopleRole}</p>
                 </NameAndContentContainer>
             </Container>
-                {modalIsOpen === true ?
-                    <Modal // 분리하거나 display 바꾸기
-                    $modalIsOpen={modalIsOpen}
-                    display={displayStyle}
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
-                    style={customStyles}
-                    ariaHideApp={false}
-                    contentLabel="Pop up Profile"
-                    shouldCloseOnOverlayClick={false}>
-
-                    <SetBox>
-                        <DeleteIconWrap>
-                            <DeleteIcon className="fa-solid fa-xmark" size="30px" onClick={closeModal}/>
-                        </DeleteIconWrap>
-                        <ProfileImageBox>
-                            <ProfileImage></ProfileImage>
-                        </ProfileImageBox>
-                        <IdentifyName>ㅇㅇ고 0-0 선생님</IdentifyName>
-                        <RealName><p>{user.name}</p></RealName>
-                        <StateBox>
-                            <DutyState>
-                                <StateMark></StateMark>
-                                근무중
-                            </DutyState>
-                            <ChatState>
-                                <StateMark></StateMark>
-                                채팅 가능 시간
-                            </ChatState>
-                        </StateBox>
-                        <ChatButton onClick={clickEventFn}>채팅하기</ChatButton>
-                    </SetBox>
-                </Modal>: null}
+            <PeopleProfileModal
+                isOpen={modalIsOpen}
+                closeModal={closeModal}
+                user={user}
+                clickEventFn={clickEventFn}
+                role={role}
+                peopleRole={peopleRole}
+            />
         </>
     )
 }

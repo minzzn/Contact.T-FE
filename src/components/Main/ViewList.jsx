@@ -4,7 +4,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconsState } from "../../hooks/iconsState";
 import { PeopleListContainer } from "./People/PeopleListContainer";
 import { getUserInfo } from "../../function/user.js";
-// import { UserProfileContainer } from "./common/UserProfileContainer";
 import { RoomsState } from "../../hooks/roomsState";
 import { MyProfileContainer } from './People/MyProfileContainer';
 import { useState, useEffect } from 'react';
@@ -23,7 +22,7 @@ export const ViewList = ({ setChoosedUser }) => {
         };
         fetchMyInfo();
     }, []);
-
+    
     return (
         <>
             <div style={{

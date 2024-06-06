@@ -25,7 +25,7 @@ export const ChatHeader = ({ choosedUserRoomInfo }) => {
                 <HeaderRightContainer>
                     <StyledIcon className="fas fa-bars" size="20px" onClick={() => {
                         setIsClicked(!isClicked);
-                    }} style={{color: "white"}}/>
+                    }} />
                 </HeaderRightContainer>
             </Container>
         </>

@@ -21,7 +21,6 @@ export const Header = () => {
     const [isHovered, setIsHovered] = useState(false);
     const setRoomsState = useSetRecoilState(RoomsState);
     const [isUpdatingNow, setIsUpdatingNow] = useState(false);
-    const [teachersDutyStates, setTeachersDutyStates] = useState([]); // 선생님들의 근무 상태 정보를 저장할 state
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
     // console.log(role); // 디버깅용 로그
 
